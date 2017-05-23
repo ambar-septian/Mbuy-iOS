@@ -1,0 +1,36 @@
+/* 
+  Localize.strings
+  MCommerce
+
+  Created by Ambar Septian on 5/9/17.
+  Copyright © 2017 Ambar Septian. All rights reserved.
+*/
+
+/* Authentication */
+"email" = "Email";
+"password" = "Kata Sandi";
+"firstName" = "Nama Depan";
+"lastName" = "Nama Belakang";
+"repeatPassword" = "Ulangi Kata sandi";
+"login" = "Masuk";
+"register" = "Daftar";
+"doesntHaveAccount" = "Tidak punya akun?";
+"forgetPassword" = "Lupa Kata Sandi";
+"submit" = "Kirim";
+"orSignInWith" = "Atau masuk dengan";
+"instructionForgotPassword" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua";
+
+/* Home */
+"home" = "Beranda";
+
+/* Search */
+"search" = "Cari";
+
+/* Cart */
+"cart" = "Keranjang";
+
+/* Orders */
+"orders" = "Pesanan";
+
+/* Settings */
+"settings" = "Pengaturan";
