@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Iconic
+
 class RatingStarsView: UIView {
     
     // MARK: Properties
@@ -17,7 +19,7 @@ class RatingStarsView: UIView {
         }
     }
     
-    private var starImageView = [UIImageView]()
+    fileprivate var starImageView = [UIImageView]()
     
     var size = CGSize(width: 15, height: 15) {
         didSet {
@@ -25,16 +27,17 @@ class RatingStarsView: UIView {
         }
     }
     
-    private var paddingButton: Int
+    fileprivate var paddingButton: CGFloat {
+        return self.size.width / CGFloat(countStars)
+    }
     
-    private let countStars = 5
+    fileprivate var countStars = 5
     
-    let kMaxRatingStars:Int = 10
+    fileprivate let kMaxRatingStars:Int = 10
     
     // MARK: Initialization
     
     override init(frame: CGRect) {
-        self.paddingButton = Int(self.size.width / 2)
         super.init(frame: frame)
         
     }
@@ -42,45 +45,46 @@ class RatingStarsView: UIView {
     convenience init(frame: CGRect, numberOfStars: Int) {
         self.init(frame: frame)
         self.numberOfStars = numberOfStars
-        self.paddingButton = Int(self.size.width / 2)
+        setupView()
         //        self.createStarsView()
     }
     
     required init?(coder aDecoder: NSCoder) {
-        self.paddingButton = Int(self.size.width / 2)
         super.init(coder: aDecoder)
+        setupView()
         //        self.createStarsView()
         
     }
     
     
-    func changeNumberStars(numberOfStars: Int) {
-        self.numberOfStars = numberOfStars
-        self.createStarsView()
-        //        self.layoutSubviews()
-    }
-    
     // MARK: Override Function
     
     override var intrinsicContentSize: CGSize {
-        let height = Int(frame.size.height)
-        let width = (Int(size.width) + paddingButton) * countStars
+        let height = frame.size.height
+        let width = (size.width + paddingButton) * CGFloat(numberOfStars)
         return CGSize(width: width, height: height)
     }
+
     
-    
-    
+    func setupView(){
+        
+        backgroundColor = .clear
+    }
+}
+
+extension RatingStarsView {
     // MARK: Function
     
-    private func createStarsView(){
+    fileprivate func createStarsView(){
         starImageView.removeAll()
         self.subviews.forEach({ $0.removeFromSuperview() })
         
-        let sub = Double(kMaxRatingStars - numberOfStars)
-        let calc = Double(countStars) - (sub / 2)
+        let sub = Double(kMaxRatingStars - countStars)
+        let calc = Double(numberOfStars) - (sub / 2)
         
+        let size = self.size.width / 2
         for index in 1...self.countStars {
-            let starImage = UIImageView(frame: CGRect(x: 0, y: 0, width: self.size.width , height: self.size.height))
+            let starImage = UIImageView(frame: CGRect(x: 0, y: self.size.height, width: size, height: size))
             
             if index <= Int(floor(calc)) {
                 starImage.image = UIImage(named: "full-star")
@@ -96,16 +100,16 @@ class RatingStarsView: UIView {
         }
         
         print(self.frame.origin.y)
-        var ratingFrame = CGRect(x: 0, y: -(self.size.height * 2), width: size.width, height: size.height)
+        var ratingFrame = CGRect(x: 0, y: 0, width: size, height: size)
         for (index, _) in starImageView.enumerated() {
-            ratingFrame.origin.x = CGFloat(index * (Int(size.width) + paddingButton))
+            ratingFrame.origin.x = CGFloat(index) * (size + paddingButton)
             starImageView[index].frame = ratingFrame
         }
     }
     
     
     
-    private func sizeStarChanged() {
+    fileprivate func sizeStarChanged() {
         starImageView.removeAll()
         self.createStarsView()
         self.layoutSubviews()
@@ -114,8 +118,7 @@ class RatingStarsView: UIView {
     
     
     
-    func ratingButtonTapped(sender: AnyObject) {
+    fileprivate func ratingButtonTapped(sender: AnyObject) {
         
     }
-    
 }

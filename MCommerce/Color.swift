@@ -54,6 +54,9 @@ class Color {
         return UIColor.black
     }
   
+    static var grayShadow: UIColor {
+        return Color.rgbColor(r: 155, g: 155, b: 155, a: 0.3)
+    }
     
     static func hexToColor (_ hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()

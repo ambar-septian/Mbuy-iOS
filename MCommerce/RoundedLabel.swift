@@ -8,14 +8,50 @@
 
 import UIKit
 
-class RoundedLabel: UILabel {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+class RoundedLabel: UILabel, RoundedBorderProtocol {
+    var borderColor: UIColor = UIColor.clear
+    var borderWidth: CGFloat = 0
+    
+    var mainColor: UIColor? {
+        didSet {
+            backgroundColor = mainColor
+        }
     }
-    */
+    var shadeColor: UIColor {
+        return mainColor?.withAlphaComponent(0.5) ?? UIColor.clear
+    }
+    
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupLabel()
+    }
+    
+    init(text:String, color: UIColor){
+        super.init(frame: CGRect.zero)
+        self.text = text
+        backgroundColor = color
+        mainColor = color
+        sizeToFit()
+        
+        setupLabel()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        sizeToFit()
+        
+        setupLabel()
+
+        
+    }
+    
+    func setupLabel(){
+        font = Font.latoRegular.withSize(12)
+        numberOfLines = 0
+        textColor = Color.white
+        setRoundedLayer()
+
+    }
  
 }

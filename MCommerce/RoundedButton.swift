@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RoundedButton: UIButton, RoundedProtocol {
+class RoundedButton: UIButton, RoundedBorderProtocol {
 
    
     var borderColor: UIColor = UIColor.clear {
@@ -66,10 +66,7 @@ class RoundedButton: UIButton, RoundedProtocol {
     
     
     func setupButton(){
-        backgroundColor = mainColor
-        layer.borderWidth = borderWidth
-        layer.borderColor = borderColor.cgColor
-        layer.cornerRadius = Constants.cornerRadius
+        setRoundedLayer()
         titleLabel?.font = Font.latoBold.withSize(17)
         setTitleColor(UIColor.white, for: .normal)
     }

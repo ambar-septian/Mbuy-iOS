@@ -27,7 +27,7 @@ class CircleImageButton: UIButton {
     
     var iconImage: UIImage {
         guard let wIcon = icon else { return UIImage() }
-        return wIcon.image(ofSize: CGSize.zero, color: iconColor)
+        return wIcon.image(ofSize: CGSize(width: 30, height:30), color: iconColor)
     }
     
     var mainColor: UIColor = UIColor.clear {
@@ -48,6 +48,9 @@ class CircleImageButton: UIButton {
         layer.cornerRadius = frame.width / 2
         layer.masksToBounds = true
         clipsToBounds = true
+        
+        backgroundColor = mainColor
+        iconImageView.image = iconImage
     }
     
     override init(frame: CGRect) {
@@ -79,10 +82,12 @@ class CircleImageButton: UIButton {
 extension CircleImageButton: BaseViewProtocol {
     func setupSubviews() {
         addSubview(iconImageView)
+        setTitle(nil, for: .normal)
     }
     
     func setupConstraints() {
         guard let imageSuperView = iconImageView.superview else { return }
         iconImageView.edgeAnchors == imageSuperView.edgeAnchors + 10
+        updateConstraints()
     }
 }

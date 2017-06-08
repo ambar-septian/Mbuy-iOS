@@ -6,7 +6,7 @@
 //  Copyright © 2017 Ambar Septian. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class Product {
     var productID: String
@@ -17,7 +17,19 @@ class Product {
     var description: String
     var price: Double
     var createdDate: Date
+    var rating:Int = 0
     
+    var formattedPrice: String {
+        return price.formattedPrice
+       
+    }
+    
+    var formattedStock: String {
+        let stockDesc = "stock".localize
+        return stockDesc + String(stock)
+    }
+    
+    var imageSize: CGSize?
     
     public init(productID: String, name: String, category: Category, imageURL: String, stock: Int, description: String, price: Double, createdDate: Date) {
         self.productID = productID

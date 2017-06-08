@@ -25,17 +25,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         
        
-        // Override point for customization after application launch.
-        window = UIWindow(frame: UIScreen.main.bounds)
-//        let loginVC = LoginViewController()
-//        let nav = UINavigationController(rootViewController: loginVC)
-        
-        let tabBar = ParantTabBarViewController()
-        
-        window?.rootViewController = tabBar
-        window?.makeKeyAndVisible()
-        
-        BaseViewController.adjustNavigationBar()
+//        // Override point for customization after application launch.
+//        window = UIWindow(frame: UIScreen.main.bounds)
+////        let loginVC = LoginViewController()
+////        let nav = UINavigationController(rootViewController: loginVC)
+//        
+//        let tabBar = ParantTabBarViewController()
+//        
+//        window?.rootViewController = tabBar
+//        window?.makeKeyAndVisible()
+//        
+//        BaseViewController.adjustNavigationBar()
         
         
         return true

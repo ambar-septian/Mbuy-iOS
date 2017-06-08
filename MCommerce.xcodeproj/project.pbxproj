@@ -15,7 +15,10 @@
 		5D4AAD321EC9642000538E2E /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4AAD311EC9642000538E2E /* Font.swift */; };
 		5D4AAD361EC9685400538E2E /* ProductListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4AAD351EC9685400538E2E /* ProductListCollectionViewCell.swift */; };
 		5D542EA21EC96A9E00855EE0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D542EA11EC96A9E00855EE0 /* User.swift */; };
+		5D682E351ED5851A007D628E /* DynamicColllectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D682E341ED5851A007D628E /* DynamicColllectionViewLayout.swift */; };
+		5D682E3D1ED58A87007D628E /* ReuseCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D682E3C1ED58A87007D628E /* ReuseCellProtocol.swift */; };
 		5D764EF21ED44E9700C30FBE /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D764EF11ED44E9700C30FBE /* ProductListViewController.swift */; };
+		5DA4409A1ED6F7BC0093437A /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA440991ED6F7BC0093437A /* Double+Extension.swift */; };
 		5DB4EA281EC96CEA004546CE /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB4EA271EC96CEA004546CE /* UserType.swift */; };
 		5DB4EA2A1EC98251004546CE /* CircleImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB4EA291EC98251004546CE /* CircleImageButton.swift */; };
 		5DB4EA2C1EC98F4D004546CE /* RoundedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB4EA2B1EC98F4D004546CE /* RoundedLabel.swift */; };
@@ -50,6 +53,9 @@
 		5DD8D7B71EC2F5FB00978D68 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD8D7B61EC2F5FB00978D68 /* Color.swift */; };
 		5DD8D7B91EC2FCD100978D68 /* BaseViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD8D7B81EC2FCD100978D68 /* BaseViewProtocol.swift */; };
 		5DD8D7BB1EC304D000978D68 /* BasicButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD8D7BA1EC304D000978D68 /* BasicButton.swift */; };
+		5DF7CFA71EDA8D5A00332E47 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF7CFA51EDA8D5A00332E47 /* ProductCollectionViewCell.swift */; };
+		5DF7CFA81EDA8D5A00332E47 /* ProductCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DF7CFA61EDA8D5A00332E47 /* ProductCollectionViewCell.xib */; };
+		5DF7CFAA1EDA904000332E47 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DF7CFA91EDA904000332E47 /* Home.storyboard */; };
 		B3C0E3C7E4A8CC36997533C8 /* Pods_MCommerce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD77B447D6BF3ACF2CF8C470 /* Pods_MCommerce.framework */; };
 /* End PBXBuildFile section */
 
@@ -79,7 +85,10 @@
 		5D4AAD311EC9642000538E2E /* Font.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		5D4AAD351EC9685400538E2E /* ProductListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductListCollectionViewCell.swift; sourceTree = "<group>"; };
 		5D542EA11EC96A9E00855EE0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		5D682E341ED5851A007D628E /* DynamicColllectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicColllectionViewLayout.swift; sourceTree = "<group>"; };
+		5D682E3C1ED58A87007D628E /* ReuseCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReuseCellProtocol.swift; sourceTree = "<group>"; };
 		5D764EF11ED44E9700C30FBE /* ProductListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductListViewController.swift; sourceTree = "<group>"; };
+		5DA440991ED6F7BC0093437A /* Double+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		5DB4EA271EC96CEA004546CE /* UserType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
 		5DB4EA291EC98251004546CE /* CircleImageButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImageButton.swift; sourceTree = "<group>"; };
 		5DB4EA2B1EC98F4D004546CE /* RoundedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedLabel.swift; sourceTree = "<group>"; };
@@ -121,6 +130,9 @@
 		5DD8D7B61EC2F5FB00978D68 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		5DD8D7B81EC2FCD100978D68 /* BaseViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewProtocol.swift; sourceTree = "<group>"; };
 		5DD8D7BA1EC304D000978D68 /* BasicButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicButton.swift; sourceTree = "<group>"; };
+		5DF7CFA51EDA8D5A00332E47 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
+		5DF7CFA61EDA8D5A00332E47 /* ProductCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductCollectionViewCell.xib; sourceTree = "<group>"; };
+		5DF7CFA91EDA904000332E47 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		A7C8A45735443D9941C8C2A1 /* Pods-MCommerce.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MCommerce.release.xcconfig"; path = "Pods/Target Support Files/Pods-MCommerce/Pods-MCommerce.release.xcconfig"; sourceTree = "<group>"; };
 		BB69502731F32516E696A287 /* Pods-MCommerce.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MCommerce.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MCommerce/Pods-MCommerce.debug.xcconfig"; sourceTree = "<group>"; };
 		DD77B447D6BF3ACF2CF8C470 /* Pods_MCommerce.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MCommerce.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,9 +179,62 @@
 				5DBFBA671EC17B930061FE35 /* LoginViewController.swift */,
 				5DBE11EC1ED2E06300D133EF /* ForgotPasswordViewController.swift */,
 				5D0124BA1EC9BAB6009C0955 /* RegisterViewController.swift */,
-				5DBE11F01ED2EAA500D133EF /* Home */,
 			);
 			name = Authentication;
+			sourceTree = "<group>";
+		};
+		5D682E361ED58534007D628E /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				5DBFBA9E1EC17F5D0061FE35 /* RoundedButton.swift */,
+				5DD8D7BA1EC304D000978D68 /* BasicButton.swift */,
+				5DB4EA291EC98251004546CE /* CircleImageButton.swift */,
+			);
+			name = Button;
+			sourceTree = "<group>";
+		};
+		5D682E371ED5854C007D628E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5DB4EA2D1EC9909D004546CE /* BackgroundLoginView.swift */,
+				5DBFBAB01EC1B67E0061FE35 /* RatingStarsView.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		5D682E381ED58583007D628E /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				5DB4EA2B1EC98F4D004546CE /* RoundedLabel.swift */,
+				5DB4EA381EC9AC34004546CE /* BasicLabel.swift */,
+			);
+			name = Label;
+			sourceTree = "<group>";
+		};
+		5D682E391ED58597007D628E /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+				5DBFBAAC1EC19CCB0061FE35 /* RoundedTextField.swift */,
+			);
+			name = TextField;
+			sourceTree = "<group>";
+		};
+		5D682E3A1ED5859F007D628E /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5D4AAD351EC9685400538E2E /* ProductListCollectionViewCell.swift */,
+				5DF7CFA51EDA8D5A00332E47 /* ProductCollectionViewCell.swift */,
+				5DF7CFA61EDA8D5A00332E47 /* ProductCollectionViewCell.xib */,
+			);
+			name = CollectionViewCell;
+			sourceTree = "<group>";
+		};
+		5D682E3B1ED585E0007D628E /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5D24EF361EC32A6E00B43A71 /* CategoryHomeTableViewCell.swift */,
+			);
+			name = TableViewCell;
 			sourceTree = "<group>";
 		};
 		5DB4EA371EC992F1004546CE /* Fonts */ = {
@@ -253,6 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				5DBFBA691EC17B930061FE35 /* Main.storyboard */,
+				5DF7CFA91EDA904000332E47 /* Home.storyboard */,
 				5DBFBA6E1EC17B930061FE35 /* LaunchScreen.storyboard */,
 			);
 			name = Storyboard;
@@ -263,6 +329,7 @@
 			children = (
 				5DBE11F31ED2EFD700D133EF /* ParentTabBarViewController.swift */,
 				5DD651851ECB0A4300BBC1DD /* BaseViewController.swift */,
+				5DBE11F01ED2EAA500D133EF /* Home */,
 				5D0124BC1EC9BABA009C0955 /* Authentication */,
 			);
 			name = ViewController;
@@ -321,17 +388,15 @@
 		5DBFBA9A1EC17D050061FE35 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
-				5DBFBA9E1EC17F5D0061FE35 /* RoundedButton.swift */,
-				5DB4EA291EC98251004546CE /* CircleImageButton.swift */,
-				5DB4EA381EC9AC34004546CE /* BasicLabel.swift */,
-				5D24EF361EC32A6E00B43A71 /* CategoryHomeTableViewCell.swift */,
-				5D4AAD351EC9685400538E2E /* ProductListCollectionViewCell.swift */,
-				5DD8D7BA1EC304D000978D68 /* BasicButton.swift */,
-				5DBFBAAC1EC19CCB0061FE35 /* RoundedTextField.swift */,
-				5DB4EA2B1EC98F4D004546CE /* RoundedLabel.swift */,
-				5DB4EA2D1EC9909D004546CE /* BackgroundLoginView.swift */,
+				5D682E361ED58534007D628E /* Button */,
+				5D682E3A1ED5859F007D628E /* CollectionViewCell */,
+				5D682E381ED58583007D628E /* Label */,
+				5D682E3B1ED585E0007D628E /* TableViewCell */,
+				5D682E391ED58597007D628E /* TextField */,
+				5D682E371ED5854C007D628E /* View */,
 				5DBFBAAE1EC1B03E0061FE35 /* RoundedProtocol.swift */,
-				5DBFBAB01EC1B67E0061FE35 /* RatingStarsView.swift */,
+				5D682E3C1ED58A87007D628E /* ReuseCellProtocol.swift */,
+				5D682E341ED5851A007D628E /* DynamicColllectionViewLayout.swift */,
 			);
 			name = CustomView;
 			sourceTree = "<group>";
@@ -340,6 +405,7 @@
 			isa = PBXGroup;
 			children = (
 				5DBFBAB81EC1DBD70061FE35 /* String+Extension.swift */,
+				5DA440991ED6F7BC0093437A /* Double+Extension.swift */,
 				5DD651871ECB0B6800BBC1DD /* UIImage+Extension.swift */,
 				5DBE11F11ED2EC8000D133EF /* UIImageView+Extension.swift */,
 			);
@@ -469,7 +535,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DB4EA341EC992ED004546CE /* Lato-Bold.ttf in Resources */,
+				5DF7CFAA1EDA904000332E47 /* Home.storyboard in Resources */,
 				5DBFBAB51EC1C7960061FE35 /* Podfile in Resources */,
+				5DF7CFA81EDA8D5A00332E47 /* ProductCollectionViewCell.xib in Resources */,
 				5DBFBAA41EC195EE0061FE35 /* Localizable.strings in Resources */,
 				5DBFBA701EC17B930061FE35 /* LaunchScreen.storyboard in Resources */,
 				5DB4EA361EC992ED004546CE /* Lato-Regular.ttf in Resources */,
@@ -559,7 +627,9 @@
 				5DD8D7B71EC2F5FB00978D68 /* Color.swift in Sources */,
 				5DB4EA2C1EC98F4D004546CE /* RoundedLabel.swift in Sources */,
 				5DBE11ED1ED2E06300D133EF /* ForgotPasswordViewController.swift in Sources */,
+				5D682E351ED5851A007D628E /* DynamicColllectionViewLayout.swift in Sources */,
 				5DB4EA281EC96CEA004546CE /* UserType.swift in Sources */,
+				5D682E3D1ED58A87007D628E /* ReuseCellProtocol.swift in Sources */,
 				5DBFBAAF1EC1B03E0061FE35 /* RoundedProtocol.swift in Sources */,
 				5DB4EA2E1EC9909D004546CE /* BackgroundLoginView.swift in Sources */,
 				5D24EF371EC32A6E00B43A71 /* CategoryHomeTableViewCell.swift in Sources */,
@@ -570,6 +640,7 @@
 				5DBFBA681EC17B930061FE35 /* LoginViewController.swift in Sources */,
 				5D0124BB1EC9BAB6009C0955 /* RegisterViewController.swift in Sources */,
 				5DBE11EF1ED2EA9C00D133EF /* HomeViewController.swift in Sources */,
+				5DA4409A1ED6F7BC0093437A /* Double+Extension.swift in Sources */,
 				5DBFBAAD1EC19CCB0061FE35 /* RoundedTextField.swift in Sources */,
 				5D764EF21ED44E9700C30FBE /* ProductListViewController.swift in Sources */,
 				5D4AAD321EC9642000538E2E /* Font.swift in Sources */,
@@ -580,6 +651,7 @@
 				5DBFBA661EC17B930061FE35 /* AppDelegate.swift in Sources */,
 				5D24EF391EC32A8500B43A71 /* Category.swift in Sources */,
 				5D542EA21EC96A9E00855EE0 /* User.swift in Sources */,
+				5DF7CFA71EDA8D5A00332E47 /* ProductCollectionViewCell.swift in Sources */,
 				5DBE11F41ED2EFD700D133EF /* ParentTabBarViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

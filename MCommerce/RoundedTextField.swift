@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RoundedTextField: UITextField, RoundedProtocol, TextFieldWithImage {
+class RoundedTextField: UITextField, RoundedBorderProtocol, TextFieldWithImage {
 
     var imagePlaceholder: UIImage? {
         didSet {

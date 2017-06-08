@@ -9,14 +9,15 @@
 import UIKit
 
 extension UIImageView {
-    func setImage(urlString: String, completion: (() -> Void)? = nil) {
+    func setImage(urlString: String, completion: ((_ image:UIImage) -> Void)? = nil) {
         guard let url = URL(string: urlString) else { return }
         
         self.af_setImage(withURL: url, placeholderImage: nil, filter: nil, progress: nil, imageTransition:.crossDissolve(0.5), runImageTransitionIfCached: false) { (result) in
-            guard result.value != nil else { return }
+    
+            guard let wCompletion = completion else { return }
+            guard let image = result.value  else { return }
             
-            guard completion != nil else { return }
-            completion!()
+            wCompletion(image)
         }
     }
 }
