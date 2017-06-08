@@ -47,6 +47,12 @@ class CategoryHomeTableViewCell: UITableViewCell {
         setupConstraints()
     }
     
+    init(){
+        super.init(style: .default, reuseIdentifier: CategoryHomeTableViewCell.identifier)
+        setupSubviews()
+        setupConstraints()
+    }
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -72,5 +78,18 @@ extension CategoryHomeTableViewCell: BaseViewProtocol {
         transparentView.edgeAnchors == contentView.edgeAnchors
         titleLabel.centerYAnchor == contentView.centerYAnchor
         titleLabel.horizontalAnchors == contentView.horizontalAnchors + 20
+    }
+}
+
+extension CategoryHomeTableViewCell: ReuseTableCellProtocol {
+    static func configureCell<T>(tableView: UITableView, indexPath: IndexPath, object: T?) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as!
+        CategoryHomeTableViewCell
+        guard let category = object as? Category else { return cell }
+       
+        cell.backgroundImageView.setImage(urlString: category.imageURL)
+        cell.titleLabel.text = category.name
+        return cell
+        
     }
 }

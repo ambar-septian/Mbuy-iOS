@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="b6b-jP-oUn">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Product List View Controller-->
+        <scene sceneID="gL6-23-3Si">
+            <objects>
+                <viewController id="F2a-iI-RiL" customClass="ProductListViewController" customModule="MCommerce" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DxC-oL-8Z1"/>
+                        <viewControllerLayoutGuide type="bottom" id="S3g-tC-5qf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UWC-Zc-TFL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xB6-0W-IIs">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <collectionViewLayout key="collectionViewLayout" id="RIu-6e-Mjo" customClass="DynamicCollectionViewLayout" customModule="MCommerce" customModuleProvider="target"/>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProductCollectionViewCell" id="UVu-0S-8vq" customClass="ProductCollectionViewCell" customModule="MCommerce" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="F2a-iI-RiL" id="EAO-8e-BBt"/>
+                                    <outlet property="delegate" destination="F2a-iI-RiL" id="fwT-R1-iKX"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="xB6-0W-IIs" secondAttribute="trailing" id="2c7-GI-4lT"/>
+                            <constraint firstItem="xB6-0W-IIs" firstAttribute="top" secondItem="DxC-oL-8Z1" secondAttribute="bottom" id="Ezt-9s-Ae3"/>
+                            <constraint firstItem="xB6-0W-IIs" firstAttribute="leading" secondItem="UWC-Zc-TFL" secondAttribute="leading" id="cTo-qa-iMK"/>
+                            <constraint firstItem="S3g-tC-5qf" firstAttribute="top" secondItem="xB6-0W-IIs" secondAttribute="bottom" id="lOK-5Z-yi7"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="M52-qf-S0D"/>
+                    <connections>
+                        <outlet property="collectionView" destination="xB6-0W-IIs" id="Ch4-Du-rpf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CkJ-mM-gIi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="932" y="156.97151424287858"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="D2D-SH-l6i">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="b6b-jP-oUn" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="0mn-tz-9vi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="F2a-iI-RiL" kind="relationship" relationship="rootViewController" id="GBY-Sk-tlB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KJJ-ci-PoB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-7.2000000000000002" y="156.97151424287858"/>
+        </scene>
+    </scenes>
+</document>

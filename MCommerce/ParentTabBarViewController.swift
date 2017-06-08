@@ -21,7 +21,7 @@ class ParantTabBarViewController: UITabBarController {
     }()
     
     lazy var searchVC: UINavigationController = {
-        let vc = HomeViewController()
+        let vc = ProductListViewController()
         let nav = UINavigationController(rootViewController: vc)
         let size = CGSize(width: 25, height: 25)
         vc.tabBarItem = UITabBarItem(withIcon: FontAwesomeIcon.searchIcon, size: size, title: "search".localize)

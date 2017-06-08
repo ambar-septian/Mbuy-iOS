@@ -19,8 +19,8 @@ class HomeViewController: BaseViewController {
         tableView.backgroundColor = .clear
         tableView.backgroundView =  nil
         
-        let cell = CategoryHomeTableViewCell(style: .default, reuseIdentifier: "Cell")
-        tableView.register(CategoryHomeTableViewCell.self, forCellReuseIdentifier: "Cell")
+        let cell = CategoryHomeTableViewCell()
+        tableView.register(CategoryHomeTableViewCell.self, forCellReuseIdentifier: CategoryHomeTableViewCell.identifier)
         
         return tableView
     }()
@@ -77,12 +77,10 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? CategoryHomeTableViewCell
+       
         let category = categories[indexPath.row]
-        cell?.backgroundImageView.setImage(urlString: category.imageURL)
-        cell?.titleLabel.text = category.name
-        
-        return cell!
+        return CategoryHomeTableViewCell.configureCell(tableView: tableView, indexPath: indexPath, object: category)
+       
     }
 }
 
@@ -99,7 +97,7 @@ extension HomeViewController: UITableViewDelegate {
         return 0.01
     }
     
-    func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
     }
 }
