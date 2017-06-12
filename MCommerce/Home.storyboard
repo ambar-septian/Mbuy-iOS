@@ -12,7 +12,7 @@
         <!--Product List View Controller-->
         <scene sceneID="gL6-23-3Si">
             <objects>
-                <viewController id="F2a-iI-RiL" customClass="ProductListViewController" customModule="MCommerce" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="F2a-iI-RiL" customClass="ProductListViewController" customModule="MCommerce" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DxC-oL-8Z1"/>
                         <viewControllerLayoutGuide type="bottom" id="S3g-tC-5qf"/>
@@ -63,7 +63,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="b6b-jP-oUn" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="0mn-tz-9vi">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0mn-tz-9vi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

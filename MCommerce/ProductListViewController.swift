@@ -89,9 +89,9 @@ extension ProductListViewController: DynamicCollectionViewLayoutDelegate {
 //        let introduceHeight = tagStations[indexPath.item].playlist.introduce.heightBasedFont(width: width, font: font)
 //        return CGFloat(tagNameHeight + introduceHeight + 20)
         guard let cell = collectionView.cellForItem(at: indexPath) as? ProductCollectionViewCell else {
-            return 130
+            return 160
         }
-        let height = cell.frame.height - cell.imageView.frame.height
+        let height = cell.frame.height - cell.imageView.frame.height + 30
         return height
     }
 }

@@ -26,7 +26,7 @@ class Product {
     
     var formattedStock: String {
         let stockDesc = "stock".localize
-        return stockDesc + String(stock)
+        return stockDesc + " : " + String(stock)
     }
     
     var imageSize: CGSize?

@@ -29,20 +29,21 @@ protocol RoundedShadowProtocol {}
 
 extension RoundedShadowProtocol where Self: UIView{
     func setRoundedLayer(view: UIView){
-        let shadowView = UIView(frame: view.bounds)
-        shadowView.backgroundColor = .clear
-        shadowView.layer.shadowColor = Color.grayShadow.cgColor
-        shadowView.layer.shadowOffset = CGSize(width: 0, height: 2)
-        shadowView.layer.shadowRadius = 4
+        let shadowLayer = CALayer()
+        shadowLayer.frame = view.bounds
+        shadowLayer.backgroundColor = Color.clear.cgColor
+        shadowLayer.shadowColor = Color.grayShadow.cgColor
+        shadowLayer.shadowOffset = CGSize(width: 0, height: 2)
+        shadowLayer.shadowRadius = 8
 //        layer.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: 8).cgPath
-        shadowView.layer.shouldRasterize = true
-        shadowView.layer.rasterizationScale = UIScreen.main.scale
+        shadowLayer.shouldRasterize = true
+        shadowLayer.rasterizationScale = UIScreen.main.scale
         
     
         layer.cornerRadius = Constants.cornerRadius
-        layer.masksToBounds = true
+//        layer.masksToBounds = true
 //        layer.backgroundColor = Color.white.cgColor
-        view.insertSubview(shadowView, at: 0)
+        view.layer.insertSublayer(shadowLayer, at: 0)
         
 //        clipsToBounds = true
     }

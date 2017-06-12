@@ -13,7 +13,7 @@ class DynamicCollectionViewLayout: UICollectionViewLayout {
     
     var numberOfColumns = 2
     
-    var cellPadding:CGFloat =  10
+    var cellPadding:CGFloat =  5
     
     private var cache = [DynamicCollectionLayoutAttributes]()
     

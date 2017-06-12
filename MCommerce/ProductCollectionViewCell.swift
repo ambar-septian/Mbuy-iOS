@@ -63,7 +63,11 @@ extension ProductCollectionViewCell: ReuseCollectionCellProtocol {
         guard let product = object as? Product else { return cell }
         
         cell.imageView.setImage(urlString: product.imageURL) { (image) in
-            product.imageSize = image.size
+            if product.imageSize == nil {
+                product.imageSize = image.size
+                collectionView.collectionViewLayout.invalidateLayout()
+            }
+            
         }
         cell.nameLabel.text = product.name
         cell.priceLabel.text = product.formattedPrice
