@@ -33,7 +33,7 @@ class ForgotPasswordViewController: BaseViewController {
     lazy var forgotButton:RoundedButton = {
         let button = RoundedButton(backgroundColor: Color.clear, borderColor: Color.white, borderWidth: 2)
         button.setTitle("login".localize, for: .normal)
-        button.heroID = HeroID.forgotPasswordButton
+        button.heroID = Constants.heroID.forgotPasswordButton
         return button
     }()
     

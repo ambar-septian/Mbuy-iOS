@@ -8,19 +8,33 @@
 
 import UIKit
 
-enum UserDefaultsKey {
-    static let localize = "AppleLanguages"
-}
-
-enum HeroID {
-    static let registerButton = "registerButton"
-    static let forgotPasswordButton = "forgotPasswordButton"
-}
-
 enum Constants {
-    static let cornerRadius:CGFloat = 20
+    static let cornerRadius:CGFloat = 15
+    
+    enum segueID {
+        static let showProductDetail = "ShowProductDetail"
+    }
+    
+    enum viewTag {
+        static let scrollView = 99
+    }
+    
+    
+    enum userDefaultsKey {
+        static let localize = "AppleLanguages"
+    }
+    
+    enum heroID {
+        static let registerButton = "registerButton"
+        static let forgotPasswordButton = "forgotPasswordButton"
+    }
+
+
 }
 
-enum ViewTag {
-    static let scrollView = 99
+
+
+enum DateFormat {
+    case full
 }
+

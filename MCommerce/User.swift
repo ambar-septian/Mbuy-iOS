@@ -12,7 +12,6 @@ class User {
     var email:String
     var firstName:String
     var lastName:String
-    
     var address:String
     var userType: UserType
     
@@ -20,12 +19,15 @@ class User {
         return firstName + " " + lastName
     }
     
-    init(email:String, firstName:String, lastName:String, address:String, userType: UserType) {
+    var profileImageURL: String?
+    
+    init(email:String, firstName:String, lastName:String, address:String, userType: UserType, profileImagePath:String?) {
         self.email = email
         self.firstName = firstName
         self.lastName = lastName
         self.address = address
         self.userType = userType
+        self.profileImageURL = profileImagePath
     }
 }
 

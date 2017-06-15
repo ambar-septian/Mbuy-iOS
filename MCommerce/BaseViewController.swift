@@ -81,7 +81,7 @@ extension BaseViewController {
     }
     
     internal func keyboardWillShow(notification: NSNotification) {
-        guard let scrollView = view.viewWithTag(ViewTag.scrollView) as? UIScrollView else { return }
+        guard let scrollView = view.viewWithTag(Constants.viewTag.scrollView) as? UIScrollView else { return }
         guard let userInfo = notification.userInfo else { return }
         guard var keyboardFrame = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue else { return }
         keyboardFrame = view.convert(keyboardFrame, from: nil)
@@ -97,7 +97,7 @@ extension BaseViewController {
     }
     
     internal func keyboardWillHide(notification: NSNotification){
-        guard let scrollView = view.viewWithTag(ViewTag.scrollView) as? UIScrollView else { return }
+        guard let scrollView = view.viewWithTag(Constants.viewTag.scrollView) as? UIScrollView else { return }
         let contentInset = UIEdgeInsets.zero
         
         UIView.animate(withDuration: 0.5) {

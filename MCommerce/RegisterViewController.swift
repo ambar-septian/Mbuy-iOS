@@ -16,7 +16,7 @@ class RegisterViewController: BaseViewController {
     lazy var registerButton:RoundedButton = {
         let button = RoundedButton(backgroundColor: Color.clear, borderColor: Color.white, borderWidth: 2)
         button.setTitle("register".localize, for: .normal)
-        button.heroID = HeroID.registerButton
+        button.heroID = Constants.heroID.registerButton
         return button
     }()
     

@@ -12,16 +12,26 @@ class Product {
     var productID: String
     var name:String
     var category: Category
-    var imageURL: String
+    
     var stock: Int
     var description: String
     var price: Double
     var createdDate: Date
     var rating:Int = 0
+    var details = [ProductDetail]()
     
     var formattedPrice: String {
         return price.formattedPrice
-       
+    }
+    
+    var formattedCreatedDate: String {
+        return createdDate.formattedDate(dateFormat: .full)
+    }
+    
+    var imageURLs = [String]()
+    
+    var coverURL: String {
+        return imageURLs.first ?? ""
     }
     
     var formattedStock: String {
@@ -31,11 +41,12 @@ class Product {
     
     var imageSize: CGSize?
     
+    
     public init(productID: String, name: String, category: Category, imageURL: String, stock: Int, description: String, price: Double, createdDate: Date) {
         self.productID = productID
         self.name = name
         self.category = category
-        self.imageURL = imageURL
+        self.imageURLs.append(imageURL)
         self.stock = stock
         self.description = description
         self.price = price

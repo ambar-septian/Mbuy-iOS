@@ -14,7 +14,7 @@ class Localize {
     
     var language: Language {
         get {
-            guard let localizes = UserDefaults.standard.value(forKey: UserDefaultsKey.localize) as? [String] else {
+            guard let localizes = UserDefaults.standard.value(forKey: Constants.userDefaultsKey.localize) as? [String] else {
                 return .EN
             }
             
@@ -31,7 +31,7 @@ class Localize {
         }
         
         set {
-            UserDefaults.standard.set([newValue.rawValue], forKey: UserDefaultsKey.localize)
+            UserDefaults.standard.set([newValue.rawValue], forKey: Constants.userDefaultsKey.localize)
         }
     }
     

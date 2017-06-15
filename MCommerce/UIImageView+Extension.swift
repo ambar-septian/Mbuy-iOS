@@ -20,4 +20,12 @@ extension UIImageView {
             wCompletion(image)
         }
     }
+    
+    func circleImageView(){
+        let minSize = min(self.bounds.width, self.bounds.height)
+        let radius = minSize / 2
+        layer.cornerRadius = minSize
+        layer.masksToBounds = true
+        clipsToBounds = true
+    }
 }

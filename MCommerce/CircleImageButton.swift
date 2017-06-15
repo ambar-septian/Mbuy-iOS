@@ -46,6 +46,11 @@ class CircleImageButton: UIButton {
     override func updateConstraints() {
         super.updateConstraints()
         layer.cornerRadius = frame.width / 2
+        layer.shadowColor = Color.grayShadow.cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 2)
+        layer.shadowRadius = 8
+        layer.shouldRasterize = true
+        layer.rasterizationScale = UIScreen.main.scale
         layer.masksToBounds = true
         clipsToBounds = true
         

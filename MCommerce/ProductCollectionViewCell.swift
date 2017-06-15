@@ -62,7 +62,7 @@ extension ProductCollectionViewCell: ReuseCollectionCellProtocol {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! ProductCollectionViewCell
         guard let product = object as? Product else { return cell }
         
-        cell.imageView.setImage(urlString: product.imageURL) { (image) in
+        cell.imageView.setImage(urlString: product.coverURL) { (image) in
             if product.imageSize == nil {
                 product.imageSize = image.size
                 collectionView.collectionViewLayout.invalidateLayout()

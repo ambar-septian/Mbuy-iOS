@@ -38,6 +38,10 @@ class Color {
         return UIColor.lightGray
     }
     
+    static var lightGrayTableCell: UIColor {
+        return UIColor.groupTableViewBackground
+    }
+    
     static var darkGray: UIColor {
         return UIColor.darkGray
     }

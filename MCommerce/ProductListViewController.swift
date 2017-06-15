@@ -46,6 +46,14 @@ class ProductListViewController: BaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.segueID.showProductDetail {
+            guard let vc = segue.destination as? ProductDetailViewController else { return }
+            guard let index = sender as? Int else { return }
+            vc.passedProduct = products[index]
+        }
+    }
 
 }
 
@@ -62,9 +70,9 @@ extension ProductListViewController: UICollectionViewDataSource {
 
 extension ProductListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+         performSegue(withIdentifier: Constants.segueID.showProductDetail, sender: indexPath.item)
         print("select")
     }
-    
 }
 
 

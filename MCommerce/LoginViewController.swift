@@ -57,14 +57,14 @@ class LoginViewController: BaseViewController {
     
     lazy var registerButton: BasicButton = {
         let button = BasicButton(title: "doesntHaveAccount".localize, color: Color.white)
-        button.heroID = HeroID.registerButton
+        button.heroID = Constants.heroID.registerButton
         button.addTarget(self, action: #selector(registerDidTapped(sender:)), for: .touchUpInside)
         return button
     }()
     
     lazy var forgetPasswordButton: BasicButton = {
         let button = BasicButton(title: "forgetPassword".localize, color: Color.white)
-        button.heroID = HeroID.forgotPasswordButton
+        button.heroID = Constants.heroID.forgotPasswordButton
         button.addTarget(self, action: #selector(forgotPasswordDidTapped(sender:)), for: .touchUpInside)
         return button
     }()
@@ -78,7 +78,7 @@ class LoginViewController: BaseViewController {
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsHorizontalScrollIndicator = false
-        scrollView.tag = ViewTag.scrollView
+        scrollView.tag = Constants.viewTag.scrollView
         return scrollView
     }()
     
