@@ -254,12 +254,12 @@ extension ProductDetailViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: Constants.storyboard.product, bundle: nil)
         if collectionView == productsCollectionView {
-            guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.viewController.productPreview) as? ProductPreviewViewController else { return }
+            guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.viewController.product.preview) as? ProductPreviewViewController else { return }
             guard let cell = collectionView.cellForItem(at: indexPath) as? ProductImageCollectionViewCell else { return }
             vc.passedImage = cell.productImageView.image
             present(vc, animated: true, completion: nil)
         } else {
-            guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.viewController.productDetail) as? ProductDetailViewController else { return }
+            guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.viewController.product.detail) as? ProductDetailViewController else { return }
             pushNavigation(targetVC: vc)
         }
     }

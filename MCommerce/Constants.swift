@@ -33,11 +33,16 @@ enum Constants {
     
     enum storyboard {
         static let product = "Product"
+        static let search = "Search"
     }
     
     enum viewController {
-        static let productDetail = "ProductDetailViewControllerID"
-        static let productPreview = "ProductPreviewViewControllerID"
+        enum product {
+            static let detail = "ProductDetailViewControllerID"
+            static let preview = "ProductPreviewViewControllerID"
+            static let list = "ProductListViewControllerID"
+
+        }
     }
 
 

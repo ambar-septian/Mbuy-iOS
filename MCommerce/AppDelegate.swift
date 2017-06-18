@@ -34,7 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        
 //        window?.rootViewController = tabBar
 //        window?.makeKeyAndVisible()
-//        
+     
+        (UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self])).tintColor = Color.white
+        self.window?.tintColor = Color.orange
         BaseViewController.adjustNavigationBar()
         
         

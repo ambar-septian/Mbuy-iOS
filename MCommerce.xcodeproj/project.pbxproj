@@ -21,6 +21,7 @@
 		5D542EA21EC96A9E00855EE0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D542EA11EC96A9E00855EE0 /* User.swift */; };
 		5D5875521EF6FD1C00D31A9F /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D5875511EF6FD1C00D31A9F /* Storyboard.storyboard */; };
 		5D5875551EF6FD3600D31A9F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5875541EF6FD3600D31A9F /* SearchViewController.swift */; };
+		5D5875571EF6FFE400D31A9F /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D5875561EF6FFE400D31A9F /* Search.storyboard */; };
 		5D682E351ED5851A007D628E /* DynamicColllectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D682E341ED5851A007D628E /* DynamicColllectionViewLayout.swift */; };
 		5D682E3D1ED58A87007D628E /* ReuseCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D682E3C1ED58A87007D628E /* ReuseCellProtocol.swift */; };
 		5D69071B1EEF3BAE00F0A6B9 /* ReviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D69071A1EEF3BAE00F0A6B9 /* ReviewTableViewCell.xib */; };
@@ -111,6 +112,7 @@
 		5D542EA11EC96A9E00855EE0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5D5875511EF6FD1C00D31A9F /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		5D5875541EF6FD3600D31A9F /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		5D5875561EF6FFE400D31A9F /* Search.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		5D682E341ED5851A007D628E /* DynamicColllectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicColllectionViewLayout.swift; sourceTree = "<group>"; };
 		5D682E3C1ED58A87007D628E /* ReuseCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReuseCellProtocol.swift; sourceTree = "<group>"; };
 		5D69071A1EEF3BAE00F0A6B9 /* ReviewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReviewTableViewCell.xib; sourceTree = "<group>"; };
@@ -384,6 +386,7 @@
 			children = (
 				5DBFBA691EC17B930061FE35 /* Main.storyboard */,
 				5DF7CFA91EDA904000332E47 /* Product.storyboard */,
+				5D5875561EF6FFE400D31A9F /* Search.storyboard */,
 				5DBFBA6E1EC17B930061FE35 /* LaunchScreen.storyboard */,
 				5D5875511EF6FD1C00D31A9F /* Storyboard.storyboard */,
 			);
@@ -635,6 +638,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DB4EA341EC992ED004546CE /* Lato-Bold.ttf in Resources */,
+				5D5875571EF6FFE400D31A9F /* Search.storyboard in Resources */,
 				5DF7CFAA1EDA904000332E47 /* Product.storyboard in Resources */,
 				5DBFBAB51EC1C7960061FE35 /* Podfile in Resources */,
 				5DD0D9C41EF1196C00E5D2C4 /* TagCollectionViewCell.xib in Resources */,
