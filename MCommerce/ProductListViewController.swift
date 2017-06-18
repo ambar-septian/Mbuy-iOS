@@ -23,7 +23,7 @@ class ProductListViewController: BaseViewController {
     var products = [Product]() {
         didSet {
             collectionView.reloadData()
-            collectionView.collectionViewLayout.invalidateLayout()
+//            collectionView.collectionViewLayout.invalidateLayout()
         }
     }
     
@@ -73,6 +73,7 @@ extension ProductListViewController: UICollectionViewDelegate {
          performSegue(withIdentifier: Constants.segueID.showProductDetail, sender: indexPath.item)
         print("select")
     }
+    
 }
 
 
@@ -99,7 +100,7 @@ extension ProductListViewController: DynamicCollectionViewLayoutDelegate {
         guard let cell = collectionView.cellForItem(at: indexPath) as? ProductCollectionViewCell else {
             return 160
         }
-        let height = cell.frame.height - cell.imageView.frame.height + 30
+        let height = cell.frame.height - cell.imageView.frame.height
         return height
     }
 }

@@ -11,6 +11,8 @@ import UIKit
 class RoundedLabel: UILabel, RoundedBorderProtocol {
     var borderColor: UIColor = UIColor.clear
     var borderWidth: CGFloat = 0
+    fileprivate let inset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+
     
     var mainColor: UIColor? {
         didSet {
@@ -21,8 +23,9 @@ class RoundedLabel: UILabel, RoundedBorderProtocol {
         return mainColor?.withAlphaComponent(0.5) ?? UIColor.clear
     }
     
+    
+    
     override func drawText(in rect: CGRect) {
-        let inset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         super.drawText(in: UIEdgeInsetsInsetRect(rect, inset))
     }
     
@@ -30,6 +33,7 @@ class RoundedLabel: UILabel, RoundedBorderProtocol {
         super.init(frame: frame)
         setupLabel()
     }
+
     
     
     init(text:String, color: UIColor){
@@ -42,6 +46,13 @@ class RoundedLabel: UILabel, RoundedBorderProtocol {
         setupLabel()
     }
     
+    override var intrinsicContentSize: CGSize {
+        var intrinsicSuperViewContentSize = super.intrinsicContentSize
+        intrinsicSuperViewContentSize.height += inset.top + inset.bottom
+        intrinsicSuperViewContentSize.width += inset.left + inset.right
+        return intrinsicSuperViewContentSize
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         sizeToFit()
@@ -50,7 +61,9 @@ class RoundedLabel: UILabel, RoundedBorderProtocol {
     }
     
     func setupLabel(){
-        font = Font.latoRegular.withSize(12)
+        
+        let fontSize = font.pointSize
+        font = Font.latoRegular.withSize(fontSize)
         numberOfLines = 0
         textColor = Color.white
         clipsToBounds = true

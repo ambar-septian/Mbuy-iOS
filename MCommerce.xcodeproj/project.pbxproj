@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5D0124BB1EC9BAB6009C0955 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0124BA1EC9BAB6009C0955 /* RegisterViewController.swift */; };
+		5D1622891EF5C3EA005D1546 /* ProductPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1622881EF5C3EA005D1546 /* ProductPreviewViewController.swift */; };
 		5D24EF371EC32A6E00B43A71 /* CategoryHomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D24EF361EC32A6E00B43A71 /* CategoryHomeTableViewCell.swift */; };
 		5D24EF391EC32A8500B43A71 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D24EF381EC32A8500B43A71 /* Category.swift */; };
 		5D24EF3B1EC32A8D00B43A71 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D24EF3A1EC32A8D00B43A71 /* Product.swift */; };
@@ -23,6 +24,9 @@
 		5D69071B1EEF3BAE00F0A6B9 /* ReviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D69071A1EEF3BAE00F0A6B9 /* ReviewTableViewCell.xib */; };
 		5D69071D1EEF3C0200F0A6B9 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69071C1EEF3C0200F0A6B9 /* ReviewTableViewCell.swift */; };
 		5D764EF21ED44E9700C30FBE /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D764EF11ED44E9700C30FBE /* ProductListViewController.swift */; };
+		5D7E783E1EF23799000598BE /* TagCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7E783D1EF23799000598BE /* TagCollectionView.swift */; };
+		5D7E78401EF23A31000598BE /* ProductTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7E783F1EF23A31000598BE /* ProductTag.swift */; };
+		5D7E78421EF23D52000598BE /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7E78411EF23D52000598BE /* TagViewController.swift */; };
 		5DA4409A1ED6F7BC0093437A /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA440991ED6F7BC0093437A /* Double+Extension.swift */; };
 		5DB4EA281EC96CEA004546CE /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB4EA271EC96CEA004546CE /* UserType.swift */; };
 		5DB4EA2A1EC98251004546CE /* CircleImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB4EA291EC98251004546CE /* CircleImageButton.swift */; };
@@ -69,7 +73,7 @@
 		5DD8D7BB1EC304D000978D68 /* BasicButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD8D7BA1EC304D000978D68 /* BasicButton.swift */; };
 		5DF7CFA71EDA8D5A00332E47 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF7CFA51EDA8D5A00332E47 /* ProductCollectionViewCell.swift */; };
 		5DF7CFA81EDA8D5A00332E47 /* ProductCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DF7CFA61EDA8D5A00332E47 /* ProductCollectionViewCell.xib */; };
-		5DF7CFAA1EDA904000332E47 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DF7CFA91EDA904000332E47 /* Home.storyboard */; };
+		5DF7CFAA1EDA904000332E47 /* Product.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DF7CFA91EDA904000332E47 /* Product.storyboard */; };
 		B3C0E3C7E4A8CC36997533C8 /* Pods_MCommerce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD77B447D6BF3ACF2CF8C470 /* Pods_MCommerce.framework */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +96,7 @@
 
 /* Begin PBXFileReference section */
 		5D0124BA1EC9BAB6009C0955 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		5D1622881EF5C3EA005D1546 /* ProductPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductPreviewViewController.swift; sourceTree = "<group>"; };
 		5D24EF361EC32A6E00B43A71 /* CategoryHomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryHomeTableViewCell.swift; sourceTree = "<group>"; };
 		5D24EF381EC32A8500B43A71 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		5D24EF3A1EC32A8D00B43A71 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
@@ -107,6 +112,9 @@
 		5D69071A1EEF3BAE00F0A6B9 /* ReviewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReviewTableViewCell.xib; sourceTree = "<group>"; };
 		5D69071C1EEF3C0200F0A6B9 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		5D764EF11ED44E9700C30FBE /* ProductListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductListViewController.swift; sourceTree = "<group>"; };
+		5D7E783D1EF23799000598BE /* TagCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCollectionView.swift; sourceTree = "<group>"; };
+		5D7E783F1EF23A31000598BE /* ProductTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTag.swift; sourceTree = "<group>"; };
+		5D7E78411EF23D52000598BE /* TagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
 		5DA440991ED6F7BC0093437A /* Double+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		5DB4EA271EC96CEA004546CE /* UserType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
 		5DB4EA291EC98251004546CE /* CircleImageButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImageButton.swift; sourceTree = "<group>"; };
@@ -160,7 +168,7 @@
 		5DD8D7BA1EC304D000978D68 /* BasicButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicButton.swift; sourceTree = "<group>"; };
 		5DF7CFA51EDA8D5A00332E47 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
 		5DF7CFA61EDA8D5A00332E47 /* ProductCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductCollectionViewCell.xib; sourceTree = "<group>"; };
-		5DF7CFA91EDA904000332E47 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		5DF7CFA91EDA904000332E47 /* Product.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Product.storyboard; sourceTree = "<group>"; };
 		A7C8A45735443D9941C8C2A1 /* Pods-MCommerce.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MCommerce.release.xcconfig"; path = "Pods/Target Support Files/Pods-MCommerce/Pods-MCommerce.release.xcconfig"; sourceTree = "<group>"; };
 		BB69502731F32516E696A287 /* Pods-MCommerce.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MCommerce.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MCommerce/Pods-MCommerce.debug.xcconfig"; sourceTree = "<group>"; };
 		DD77B447D6BF3ACF2CF8C470 /* Pods_MCommerce.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MCommerce.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -289,14 +297,16 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
-		5DBE11F01ED2EAA500D133EF /* Home */ = {
+		5DBE11F01ED2EAA500D133EF /* Product */ = {
 			isa = PBXGroup;
 			children = (
 				5DBE11EE1ED2EA9B00D133EF /* HomeViewController.swift */,
+				5D7E78411EF23D52000598BE /* TagViewController.swift */,
+				5D1622881EF5C3EA005D1546 /* ProductPreviewViewController.swift */,
 				5D764EF11ED44E9700C30FBE /* ProductListViewController.swift */,
 				5DCC92DD1EEF9A81001C6F42 /* ProductDetailViewController.swift */,
 			);
-			name = Home;
+			name = Product;
 			sourceTree = "<group>";
 		};
 		5DBFBA591EC17B930061FE35 = {
@@ -361,7 +371,7 @@
 			isa = PBXGroup;
 			children = (
 				5DBFBA691EC17B930061FE35 /* Main.storyboard */,
-				5DF7CFA91EDA904000332E47 /* Home.storyboard */,
+				5DF7CFA91EDA904000332E47 /* Product.storyboard */,
 				5DBFBA6E1EC17B930061FE35 /* LaunchScreen.storyboard */,
 			);
 			name = Storyboard;
@@ -372,7 +382,7 @@
 			children = (
 				5DBE11F31ED2EFD700D133EF /* ParentTabBarViewController.swift */,
 				5DD651851ECB0A4300BBC1DD /* BaseViewController.swift */,
-				5DBE11F01ED2EAA500D133EF /* Home */,
+				5DBE11F01ED2EAA500D133EF /* Product */,
 				5D0124BC1EC9BABA009C0955 /* Authentication */,
 			);
 			name = ViewController;
@@ -398,6 +408,7 @@
 			isa = PBXGroup;
 			children = (
 				5D24EF381EC32A8500B43A71 /* Category.swift */,
+				5D7E783F1EF23A31000598BE /* ProductTag.swift */,
 				5D24EF3A1EC32A8D00B43A71 /* Product.swift */,
 				5D46A21C1EEF368600B7C269 /* ProductDetail.swift */,
 				5D24EF3C1EC32A9800B43A71 /* Review.swift */,
@@ -439,6 +450,7 @@
 				5D682E391ED58597007D628E /* TextField */,
 				5D682E371ED5854C007D628E /* View */,
 				5DBFBAAE1EC1B03E0061FE35 /* RoundedProtocol.swift */,
+				5D7E783D1EF23799000598BE /* TagCollectionView.swift */,
 				5DD0D9BF1EF116FE00E5D2C4 /* RoundedStepper.swift */,
 				5D682E3C1ED58A87007D628E /* ReuseCellProtocol.swift */,
 				5D682E341ED5851A007D628E /* DynamicColllectionViewLayout.swift */,
@@ -609,7 +621,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DB4EA341EC992ED004546CE /* Lato-Bold.ttf in Resources */,
-				5DF7CFAA1EDA904000332E47 /* Home.storyboard in Resources */,
+				5DF7CFAA1EDA904000332E47 /* Product.storyboard in Resources */,
 				5DBFBAB51EC1C7960061FE35 /* Podfile in Resources */,
 				5DD0D9C41EF1196C00E5D2C4 /* TagCollectionViewCell.xib in Resources */,
 				5DF7CFA81EDA8D5A00332E47 /* ProductCollectionViewCell.xib in Resources */,
@@ -708,6 +720,7 @@
 				5DD8D7B71EC2F5FB00978D68 /* Color.swift in Sources */,
 				5DB4EA2C1EC98F4D004546CE /* RoundedLabel.swift in Sources */,
 				5DCC92DA1EEF9187001C6F42 /* SimpleProductCollectionViewCell.swift in Sources */,
+				5D7E78421EF23D52000598BE /* TagViewController.swift in Sources */,
 				5DBE11ED1ED2E06300D133EF /* ForgotPasswordViewController.swift in Sources */,
 				5D682E351ED5851A007D628E /* DynamicColllectionViewLayout.swift in Sources */,
 				5D46A21D1EEF368600B7C269 /* ProductDetail.swift in Sources */,
@@ -719,15 +732,18 @@
 				5DB4EA2E1EC9909D004546CE /* BackgroundLoginView.swift in Sources */,
 				5DD0D9BE1EF0DD9B00E5D2C4 /* RoundedView.swift in Sources */,
 				5D24EF371EC32A6E00B43A71 /* CategoryHomeTableViewCell.swift in Sources */,
+				5D7E78401EF23A31000598BE /* ProductTag.swift in Sources */,
 				5DD8D7BB1EC304D000978D68 /* BasicButton.swift in Sources */,
 				5D24EF3D1EC32A9800B43A71 /* Review.swift in Sources */,
 				5DB4EA391EC9AC34004546CE /* BasicLabel.swift in Sources */,
+				5D1622891EF5C3EA005D1546 /* ProductPreviewViewController.swift in Sources */,
 				5DCC92DE1EEF9A81001C6F42 /* ProductDetailViewController.swift in Sources */,
 				5D4AAD361EC9685400538E2E /* ProductListCollectionViewCell.swift in Sources */,
 				5D69071D1EEF3C0200F0A6B9 /* ReviewTableViewCell.swift in Sources */,
 				5DBFBA681EC17B930061FE35 /* LoginViewController.swift in Sources */,
 				5D0124BB1EC9BAB6009C0955 /* RegisterViewController.swift in Sources */,
 				5DBE11EF1ED2EA9C00D133EF /* HomeViewController.swift in Sources */,
+				5D7E783E1EF23799000598BE /* TagCollectionView.swift in Sources */,
 				5DA4409A1ED6F7BC0093437A /* Double+Extension.swift in Sources */,
 				5DBFBAAD1EC19CCB0061FE35 /* RoundedTextField.swift in Sources */,
 				5D764EF21ED44E9700C30FBE /* ProductListViewController.swift in Sources */,

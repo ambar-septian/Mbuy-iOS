@@ -14,6 +14,7 @@ class ProductImageCollectionViewCell: UICollectionViewCell {
     lazy var productImageView:UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        imageView.heroID = Constants.heroID.productPreview
         
         return imageView
     }()

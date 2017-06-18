@@ -30,7 +30,6 @@ class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setNavigationControllerBackground(color: Color.orange)
         title = "home".localize
         
         setupSubviews()

@@ -9,7 +9,7 @@
 import UIKit
 
 enum Constants {
-    static let cornerRadius:CGFloat = 15
+    static let cornerRadius:CGFloat = 12
     
     enum segueID {
         static let showProductDetail = "ShowProductDetail"
@@ -27,6 +27,17 @@ enum Constants {
     enum heroID {
         static let registerButton = "registerButton"
         static let forgotPasswordButton = "forgotPasswordButton"
+        static let productThumbnail = "productThumbnail"
+        static let productPreview = "productPreview"
+    }
+    
+    enum storyboard {
+        static let product = "Product"
+    }
+    
+    enum viewController {
+        static let productDetail = "ProductDetailViewControllerID"
+        static let productPreview = "ProductPreviewViewControllerID"
     }
 
 

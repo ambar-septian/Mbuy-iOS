@@ -32,7 +32,7 @@ class CircleImageButton: UIButton {
     
     var mainColor: UIColor = UIColor.clear {
         didSet {
-            backgroundColor = mainColor
+            circleView.backgroundColor = mainColor
         }
     }
     
@@ -42,20 +42,37 @@ class CircleImageButton: UIButton {
         return imageView
     }()
     
+    lazy var shadowView: UIView = {
+        let view = UIView(frame: self.bounds)
+        view.layer.shadowColor = Color.grayShadow.cgColor
+        view.layer.shadowOffset = CGSize(width: 0, height: 2)
+        view.layer.shadowRadius = 8
+        view.layer.shouldRasterize = true
+        view.layer.rasterizationScale = UIScreen.main.scale
+        view.layer.masksToBounds = true
+        
+        return view
+    }()
+    
+    lazy var circleView: UIView = {
+        let view = UIView(frame: self.bounds)
+        view.backgroundColor = .clear
+        view.layer.cornerRadius = self.bounds.width / 2
+        view.layer.masksToBounds = true
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        return view
+    }()
+    
     
     override func updateConstraints() {
         super.updateConstraints()
-        layer.cornerRadius = frame.width / 2
-        layer.shadowColor = Color.grayShadow.cgColor
-        layer.shadowOffset = CGSize(width: 0, height: 2)
-        layer.shadowRadius = 8
-        layer.shouldRasterize = true
-        layer.rasterizationScale = UIScreen.main.scale
-        layer.masksToBounds = true
-        clipsToBounds = true
+//        circleView.layer.cornerRadius = frame.width / 2
         
-        backgroundColor = mainColor
-        iconImageView.image = iconImage
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        circleView.layer.cornerRadius = frame.width / 2
     }
     
     override init(frame: CGRect) {
@@ -70,7 +87,7 @@ class CircleImageButton: UIButton {
     
     init(backgroundColor:UIColor, icon:FontAwesomeIcon) {
         super.init(frame: CGRect.zero)
-        self.mainColor = backgroundColor
+        self.circleView.backgroundColor = backgroundColor
         self.icon = icon
         
         setupButton()
@@ -86,7 +103,15 @@ class CircleImageButton: UIButton {
 
 extension CircleImageButton: BaseViewProtocol {
     func setupSubviews() {
-        addSubview(iconImageView)
+        layer.shadowColor = Color.grayShadow.cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 2)
+        layer.shadowRadius = 8
+//        layer.shouldRasterize = true
+//        layer.rasterizationScale = UIScreen.main.scale
+        layer.masksToBounds = true
+        
+        addSubview(circleView)
+        circleView.addSubview(iconImageView)
         setTitle(nil, for: .normal)
     }
     

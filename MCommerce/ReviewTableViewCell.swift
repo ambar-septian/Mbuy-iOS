@@ -25,14 +25,29 @@ class ReviewTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        userImageView.circleImageView()
+//        userImageView.circleImageView()
         // Initialization code
+        
+        addObserver(self, forKeyPath: "frame", options: [], context: nil)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    override func updateConstraints() {
+        super.updateConstraints()
+    }
+    
+    deinit {
+        removeObserver(self, forKeyPath: "frame")
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        guard keyPath == "frame" else { return }
+        userImageView.circleImageView()
     }
     
 }
@@ -47,9 +62,11 @@ extension ReviewTableViewCell: ReuseTableCellProtocol {
         cell.dateLabel.text = review.formattedDate
         cell.descriptionLabel.text = review.description
         cell.ratingView.numberOfStars = review.rating
+        cell.userImageView.circleImageView()
         
         guard let imageURL = review.user.profileImageURL else { return cell }
         cell.userImageView.setImage(urlString:imageURL)
+        
         
         return cell
         

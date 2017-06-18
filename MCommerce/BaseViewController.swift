@@ -14,10 +14,12 @@ class BaseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        automaticallyAdjustsScrollViewInsets = true
+        automaticallyAdjustsScrollViewInsets = false
         addKeyboardGesture()
         setupNotificationHideKeyboard()
         view.backgroundColor = Color.cream
+        navigationController?.isHeroEnabled = true
+        isHeroEnabled = true
         
         guard let nav = navigationController else { return }
         guard let rootVC = nav.viewControllers.first else { return }
@@ -40,6 +42,7 @@ extension BaseViewController {
     
     func addKeyboardGesture(){
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
     
@@ -56,9 +59,10 @@ extension BaseViewController {
     }
     
     func addBackButton(){
-        let size = CGSize(width: 40, height: 40)
+        let size = CGSize(width: 1, height: 1)
         let image = FontAwesomeIcon.angleLeftIcon.image(ofSize: size, color: Color.white).withRenderingMode(.alwaysOriginal)
         let barButton =  UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(self.popBack))
+
         navigationController?.interactivePopGestureRecognizer?.delegate = self
         navigationItem.leftBarButtonItem = barButton
     }
@@ -119,9 +123,10 @@ extension BaseViewController {
     }
     
     func pushNavigation(targetVC: UIViewController){
-        Hero.shared.setDefaultAnimationForNextTransition(.slide(direction: .right))
-        Hero.shared.setContainerColorForNextTransition(.lightGray)
-        hero_replaceViewController(with: targetVC)
+//        Hero.shared.setDefaultAnimationForNextTransition(.slide(direction: .right))
+//        Hero.shared.setContainerColorForNextTransition(.lightGray)
+//        hero_replaceViewController(with: targetVC)
+        navigationController?.pushViewController(targetVC, animated: true)
         
     }
     
@@ -135,12 +140,14 @@ extension BaseViewController {
     
     static func adjustNavigationBar(){
         let navigationBarAppearance = UINavigationBar.appearance()
-        
-        navigationBarAppearance.tintColor = .white
+       
+        navigationBarAppearance.barTintColor = Color.orange
+        navigationBarAppearance.isTranslucent = false
         navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName: Color.white, NSFontAttributeName: Font.latoBold]
-        
+
         UIApplication.shared.statusBarStyle = .lightContent
     }
+    
 
 }
 

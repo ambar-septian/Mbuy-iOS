@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Stars Copy 4.png",
+      "filename" : "empty-star.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Stars Copy 4@2x.png",
+      "filename" : "empty-star@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Stars Copy 4@3x.png",
+      "filename" : "empty-star@3x.png",
       "scale" : "3x"
     }
   ],

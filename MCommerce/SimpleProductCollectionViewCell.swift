@@ -10,7 +10,11 @@ import UIKit
 
 class SimpleProductCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageView: UIImageView! {
+        didSet {
+            imageView.heroID = Constants.heroID.productThumbnail
+        }
+    }
     
     @IBOutlet weak var nameLabel: UILabel!
     

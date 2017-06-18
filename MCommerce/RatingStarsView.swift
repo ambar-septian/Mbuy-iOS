@@ -19,21 +19,23 @@ class RatingStarsView: UIView {
         }
     }
     
-    fileprivate var starImageView = [UIImageView]()
+    fileprivate var starImageViews = [UIImageView]()
     
-    var size = CGSize(width: 15, height: 15) {
-        didSet {
-            sizeStarChanged()
-        }
-    }
-    
-    fileprivate var paddingButton: CGFloat {
-        return self.size.width / CGFloat(countStars)
-    }
     
     fileprivate var countStars = 5
     
     fileprivate let kMaxRatingStars:Int = 10
+    
+    fileprivate lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.frame = self.bounds
+        stackView.alignment = .fill
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        return stackView
+    }()
     
     // MARK: Initialization
     
@@ -59,16 +61,17 @@ class RatingStarsView: UIView {
     
     // MARK: Override Function
     
-    override var intrinsicContentSize: CGSize {
-        let height = frame.size.height
-        let width = (size.width + paddingButton) * CGFloat(numberOfStars)
-        return CGSize(width: width, height: height)
-    }
+//    override var intrinsicContentSize: CGSize {
+////        let height = frame.size.height
+////        let width = (size.width + padding) * CGFloat(numberOfStars)
+////        return CGSize(width: width, height: height)
+//    }
 
     
     func setupView(){
-        
+        addSubview(stackView)
         backgroundColor = .clear
+        clipsToBounds = true
     }
 }
 
@@ -76,44 +79,28 @@ extension RatingStarsView {
     // MARK: Function
     
     fileprivate func createStarsView(){
-        starImageView.removeAll()
-        self.subviews.forEach({ $0.removeFromSuperview() })
+        starImageViews.removeAll()
+        self.stackView.subviews.forEach({ $0.removeFromSuperview() })
         
         let sub = Double(kMaxRatingStars - countStars)
         let calc = Double(numberOfStars) - (sub / 2)
         
-        let size = self.size.width / 2
         for index in 1...self.countStars {
-            let starImage = UIImageView(frame: CGRect(x: 0, y: self.size.height, width: size, height: size))
+            let starImage = UIImageView()
+            starImage.contentMode = .scaleAspectFit
             
             if index <= Int(floor(calc)) {
-                starImage.image = UIImage(named: "full-star")
+                starImage.image = #imageLiteral(resourceName: "full-star")
             } else if (index == Int(ceil(calc)) && (numberOfStars % 2 == 1)) {
-                starImage.image = UIImage(named: "half-star")
+                starImage.image = #imageLiteral(resourceName: "half-star")
             } else {
-                starImage.image = UIImage(named: "empty-star")
+                starImage.image = #imageLiteral(resourceName: "empty-star")
             }
             
             
-            starImageView += [starImage]
-            addSubview(starImage)
+            starImageViews += [starImage]
+            stackView.addArrangedSubview(starImage)
         }
-        
-        print(self.frame.origin.y)
-        var ratingFrame = CGRect(x: 0, y: 0, width: size, height: size)
-        for (index, _) in starImageView.enumerated() {
-            ratingFrame.origin.x = CGFloat(index) * (size + paddingButton)
-            starImageView[index].frame = ratingFrame
-        }
-    }
-    
-    
-    
-    fileprivate func sizeStarChanged() {
-        starImageView.removeAll()
-        self.createStarsView()
-        self.layoutSubviews()
-        
     }
     
     

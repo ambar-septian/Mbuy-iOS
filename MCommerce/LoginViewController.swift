@@ -99,7 +99,7 @@ class LoginViewController: BaseViewController {
         setupSubviews()
         
         navigationController?.isHeroEnabled = true
-        setNavigationControllerBackground(color: Color.clear, isTranslucent: true)
+//        setNavigationControllerBackground(color: Color.clear, isTranslucent: true)
         
     }
 

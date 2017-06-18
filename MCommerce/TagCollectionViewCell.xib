@@ -16,7 +16,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="TagCellCollectionViewCell" customModule="MCommerce" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="TagCollectionViewCell" customModule="MCommerce" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="325" height="59"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -24,7 +24,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tag" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="868-hY-dzw">
-                        <rect key="frame" x="152" y="20.5" width="22.5" height="18"/>
+                        <rect key="frame" x="151.5" y="20.5" width="22.5" height="18"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="304" id="Cjn-zC-ct5"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="IgB-AO-tvz"/>
@@ -41,8 +41,8 @@
             </constraints>
             <size key="customSize" width="325" height="59"/>
             <connections>
-                <outlet property="maxWidthConstraint" destination="Cjn-zC-ct5" id="oF1-9v-26S"/>
-                <outlet property="tagLabel" destination="868-hY-dzw" id="Gvd-YP-GPh"/>
+                <outlet property="maxWidthConstraint" destination="Cjn-zC-ct5" id="KGG-gb-0pN"/>
+                <outlet property="tagLabel" destination="868-hY-dzw" id="20o-v7-UZu"/>
             </connections>
             <point key="canvasLocation" x="184.5" y="58.5"/>
         </collectionViewCell>

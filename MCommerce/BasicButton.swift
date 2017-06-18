@@ -18,12 +18,29 @@ class BasicButton: UIButton {
     }
     */
     
-   
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupButton()
+    }
+    
     convenience init(title:String, color: UIColor = Color.orange, fontSize: CGFloat = 14) {
         self.init(frame: CGRect.zero)
         setTitle(title, for: .normal)
         setTitleColor(color, for: .normal)
         titleLabel?.font = Font.latoBold.withSize(fontSize)
     }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupButton()
+        
+    }
+}
 
+extension BasicButton {
+    fileprivate func setupButton(){
+        setTitleColor(Color.orange, for: .normal)
+        let pointSize = titleLabel?.font.pointSize ?? Font.defaultSize
+        titleLabel?.font = Font.latoBold.withSize(pointSize)
+    }
 }

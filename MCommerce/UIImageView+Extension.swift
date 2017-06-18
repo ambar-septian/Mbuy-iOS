@@ -24,7 +24,7 @@ extension UIImageView {
     func circleImageView(){
         let minSize = min(self.bounds.width, self.bounds.height)
         let radius = minSize / 2
-        layer.cornerRadius = minSize
+        layer.cornerRadius = radius
         layer.masksToBounds = true
         clipsToBounds = true
     }

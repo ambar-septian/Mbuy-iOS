@@ -29,7 +29,7 @@ class RoundedView: UIView {
         
         let roundedPath = UIBezierPath(roundedRect: contentRect, cornerRadius: Constants.cornerRadius)
         context?.setFillColor(Color.white.cgColor)
-        context?.setShadow(offset: CGSize(width:0, height:2), blur: 5, color: Color.lightGrayTableCell.cgColor)
+        context?.setShadow(offset: CGSize(width:0, height:3), blur: 5, color: Color.lightGrayTableCell.cgColor)
         roundedPath.fill()
         
         roundedPath.addClip()

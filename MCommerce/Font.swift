@@ -10,7 +10,7 @@ import UIKit
 import Iconic
 
 struct Font {
-    private static let defaultSize:CGFloat = 16
+    static let defaultSize:CGFloat = 16
     
     private static var defaultFont: UIFont {
         return UIFont().withSize(Font.defaultSize)

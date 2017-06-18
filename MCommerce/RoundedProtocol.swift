@@ -20,7 +20,7 @@ extension RoundedBorderProtocol where Self: UIView {
         backgroundColor = mainColor
         layer.borderWidth = borderWidth
         layer.borderColor = borderColor.cgColor
-        layer.cornerRadius = Constants.cornerRadius
+        layer.cornerRadius = bounds.width / bounds.height * 2
         layer.masksToBounds = true
     }
 }

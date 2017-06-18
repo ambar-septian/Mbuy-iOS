@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        window?.rootViewController = tabBar
 //        window?.makeKeyAndVisible()
 //        
-//        BaseViewController.adjustNavigationBar()
+        BaseViewController.adjustNavigationBar()
         
         
         return true

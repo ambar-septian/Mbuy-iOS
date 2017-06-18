@@ -11,13 +11,19 @@ import Iconic
 
 class ProductCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageView: UIImageView! {
+        didSet {
+            imageView.heroID = Constants.heroID.productThumbnail
+        }
+    }
 
     @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var priceLabel: UILabel!
     
     @IBOutlet weak var ratingView: RatingStarsView!
+    
+    @IBOutlet weak var ratingCount: UILabel!
     
     @IBOutlet weak var stockLabel: RoundedLabel! {
         didSet {
@@ -29,6 +35,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         didSet {
             cartButton.mainColor = Color.orange
             cartButton.icon = FontAwesomeIcon.shoppingCartIcon
+            cartButton.addTarget(self, action: #selector(self.cartButtonTapped(sender:)), for: .touchUpInside)
         }
     }
     
@@ -37,6 +44,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)
@@ -45,15 +53,12 @@ class ProductCollectionViewCell: UICollectionViewCell {
         }
         
         constraintHeight.constant = attributes.imageHeight
-        setupView()
     }
-    
 }
 
-extension ProductCollectionViewCell: RoundedShadowProtocol {
-    func setupView(){
-        self.backgroundColor = Color.white
-        setRoundedLayer(view: self)
+extension ProductCollectionViewCell {
+    func cartButtonTapped(sender: UIButton) {
+        print("button tapped")
     }
 }
 

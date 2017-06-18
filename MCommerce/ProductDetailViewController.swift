@@ -15,6 +15,7 @@ class ProductDetailViewController: BaseViewController {
         didSet {
             let cell = ProductImageCollectionViewCell.self
             productsCollectionView.register(cell, forCellWithReuseIdentifier: cell.identifier)
+            productsCollectionView.heroID = Constants.heroID.productThumbnail
         }
     }
     
@@ -36,6 +37,7 @@ class ProductDetailViewController: BaseViewController {
         didSet {
             let cell = ReviewTableViewCell.self
             reviewTableView.register(cell.nib, forCellReuseIdentifier: cell.identifier)
+            
         }
     }
     
@@ -48,7 +50,7 @@ class ProductDetailViewController: BaseViewController {
     
     @IBOutlet weak var shareButton: CircleImageButton! {
         didSet {
-            shareButton.icon = .shareAltIcon
+            shareButton.icon = .uniF1E0Icon
             shareButton.mainColor = Color.orange
         }
     }
@@ -67,6 +69,12 @@ class ProductDetailViewController: BaseViewController {
     @IBOutlet weak var dateLabel: UILabel!
     
     @IBOutlet weak var nameLabel: UILabel!
+    
+    @IBOutlet weak var stockLabel: RoundedLabel! {
+        didSet {
+            stockLabel.mainColor = Color.green
+        }
+    }
     
     @IBOutlet weak var priceLabel: UILabel!
     
@@ -91,6 +99,7 @@ class ProductDetailViewController: BaseViewController {
             dateLabel.text = product.formattedCreatedDate
             ratingView.numberOfStars = product.rating
             descriptionLabel.text = product.description
+            stockLabel.text = product.formattedStock
             passedProduct = nil
         }
     }
@@ -114,7 +123,8 @@ class ProductDetailViewController: BaseViewController {
         }
         
         set {
-            product?.imageURLs = productImageURLs
+            pageControl.numberOfPages = newValue.count
+            product?.imageURLs = newValue
             productsCollectionView.reloadData()
         }
     }
@@ -141,7 +151,7 @@ class ProductDetailViewController: BaseViewController {
         product = Product(productID: "1", name: "Sepatu Nike", category: category, imageURL: "https://images-eu.ssl-images-amazon.com/images/G/31/img15/Shoes/CatNav/k._V293117556_.jpg", stock: 30, description: "In a storyboard-based application, you will often want to do a", price: 50000, createdDate: Date())
         
         let user = User(email: "", firstName: "Ponim", lastName: "Kirun", address: "Tomang", userType: .email, profileImagePath: "https://dummyimage.com/600x400/000/fff")
-        let user2 = User(email: "", firstName: "Riri", lastName: "Tamam", address: "Tebet", userType: .email, profileImagePath: "https://dummyimage.com/600x400/000/fff")
+        let user2 = User(email: "", firstName: "Riri", lastName: "Tamam", address: "Tebet", userType: .email, profileImagePath: "https://api.adorable.io/avatars/114/happy@adorable.io.png")
         let user3 = User(email: "", firstName: "Ires", lastName: "Pitri", address: "Palmerah", userType: .email, profileImagePath: "https://dummyimage.com/600x400/000/fff")
         let review = Review(reviewID: "1", title: "Good", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua", rating: 5, product: product!, user: user, date: Date())
         let review2 = Review(reviewID: "1", title: "Good", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua", rating: 4, product: product!, user: user2, date: Date())
@@ -197,7 +207,7 @@ extension ProductDetailViewController : UITableViewDelegate {
         if tableView == detailTableView {
             return 44
         } else {
-            return 150
+            return 170
         }
     }
     
@@ -242,10 +252,15 @@ extension ProductDetailViewController: UICollectionViewDataSource {
 
 extension ProductDetailViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: Constants.storyboard.product, bundle: nil)
         if collectionView == productsCollectionView {
-            print("")
+            guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.viewController.productPreview) as? ProductPreviewViewController else { return }
+            guard let cell = collectionView.cellForItem(at: indexPath) as? ProductImageCollectionViewCell else { return }
+            vc.passedImage = cell.productImageView.image
+            present(vc, animated: true, completion: nil)
         } else {
-            print("")
+            guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.viewController.productDetail) as? ProductDetailViewController else { return }
+            pushNavigation(targetVC: vc)
         }
     }
 }
@@ -265,7 +280,7 @@ extension ProductDetailViewController: UICollectionViewDelegateFlowLayout {
         if collectionView == productsCollectionView {
             return 1
         } else {
-            return collectionView.bounds.width * 0.15
+            return 1
         }
     }
     
@@ -273,7 +288,7 @@ extension ProductDetailViewController: UICollectionViewDelegateFlowLayout {
         if collectionView == productsCollectionView {
             return 1
         } else {
-            return collectionView.bounds.width * 0.15
+            return 1
         }
     }
     
