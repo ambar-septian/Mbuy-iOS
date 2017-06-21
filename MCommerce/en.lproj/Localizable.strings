@@ -34,6 +34,12 @@
 /* Orders */
 "orders" = "Orders";
 
+/* Order Status */
+"onDelivery" = "On Delivery";
+"complete" = "Complete";
+"waitingPayment" = "Waiting Payment";
+"cancel" = "Cancel";
+
 /* Settings */
 "settings" = "Settings";
 

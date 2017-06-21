@@ -17,8 +17,11 @@ extension Date {
         let date = DateInRegion(absoluteDate: self, in: region)
         
         switch dateFormat {
-        case .full:
+        case .dateLong:
             return date.string(dateStyle: .long, timeStyle: .none)
+        case .timeMedium:
+            return date.string(dateStyle: .none, timeStyle: .medium)
+            
 //        default:
 //            return date.string(dateStyle: .short, timeStyle: .short)
         }

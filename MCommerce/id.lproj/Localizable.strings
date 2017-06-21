@@ -33,6 +33,13 @@
 /* Orders */
 "orders" = "Pesanan";
 
+/* Order Status */
+"onDelivery" = "Sedang Dalam Pengiriman";
+"complete" = "Selesai";
+"waitingPayment" = "Menunggu Pembayaran";
+"cancel" = "Batal";
+
+
 /* Settings */
 "settings" = "Pengaturan";
 

@@ -55,6 +55,7 @@ enum Constants {
 
 
 enum DateFormat {
-    case full
+    case dateLong
+    case timeMedium
 }
 

@@ -16,7 +16,7 @@ class Review {
     var product: Product
     var date: Date
     var formattedDate: String{
-        return date.formattedDate(dateFormat: .full)
+        return date.formattedDate(dateFormat: .dateLong)
     }
     var user: User
     

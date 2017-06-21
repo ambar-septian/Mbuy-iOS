@@ -25,7 +25,7 @@ class Product {
     }
     
     var formattedCreatedDate: String {
-        return createdDate.formattedDate(dateFormat: .full)
+        return createdDate.formattedDate(dateFormat: .dateLong)
     }
     
     var imageURLs = [String]()
