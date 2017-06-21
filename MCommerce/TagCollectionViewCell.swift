@@ -16,8 +16,8 @@ class TagCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        backgroundColor = Color.white
-        tagLabel.textColor = Color.darkGray
+//        backgroundColor = Color.white
+//        tagLabel.textColor = Color.darkGray
         maxWidthConstraint.constant = UIScreen.main.bounds.width - 8 * 2 - 8 * 2
     }
 }

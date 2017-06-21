@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Zd4-6o-Mpn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="uvT-3T-8ip">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -32,7 +32,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cb4-mp-mGF">
-                                <rect key="frame" x="0.0" y="20" width="375" height="513.5"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="469.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="EEe-JH-u6D">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="682"/>
@@ -160,6 +160,7 @@
                             <constraint firstItem="SuT-oD-m6g" firstAttribute="height" secondItem="9oj-ox-6ur" secondAttribute="height" multiplier="0.2" id="vzF-Vf-UI3"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="A0W-Cd-4Kt"/>
                     <connections>
                         <outlet property="quantityHeadingLabel" destination="sl2-cr-wsG" id="phV-UN-Q2B"/>
                         <outlet property="quantityLabel" destination="RP7-2h-Ho6" id="puj-YV-Vfx"/>
@@ -172,7 +173,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aWV-Lh-KWL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="270" y="98"/>
+            <point key="canvasLocation" x="1208.8" y="97.601199400299862"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="fMP-mX-cLm">
@@ -204,7 +205,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1o4-zn-o2B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1062" y="15"/>
+            <point key="canvasLocation" x="2000.8" y="14.842578710644679"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Jww-MP-TnA">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uvT-3T-8ip" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="csd-te-H76">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Zd4-6o-Mpn" kind="relationship" relationship="rootViewController" id="s9s-9g-Rqr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7dc-2I-brb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="269.60000000000002" y="97.601199400299862"/>
         </scene>
     </scenes>
 </document>

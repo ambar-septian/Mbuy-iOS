@@ -11,6 +11,9 @@ import UIKit
 class TagViewController: UIViewController {
 
     @IBOutlet weak var collectionView: TagCollectionView!
+    
+    var dataSource: TagCollectionViewDataSource?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,9 +26,8 @@ class TagViewController: UIViewController {
         let tag7 = ProductTag(name: "Black 38", tagID: "1")
         let tag8 = ProductTag(name: "Blue 38", tagID: "1")
         let tags = [tag1, tag2, tag3, tag4, tag5, tag6, tag7, tag8]
-        let dataSource = TagCollectionViewDataSource(tags: tags)
-        collectionView.dataSource = dataSource
-        collectionView.reloadData()
+        dataSource = TagCollectionViewDataSource(tags: tags)
+      
         // Do any additional setup after loading the view.
     }
 
@@ -36,6 +38,7 @@ class TagViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        collectionView.dataSource = dataSource
         collectionView.reloadData()
     }
     

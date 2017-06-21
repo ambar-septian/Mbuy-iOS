@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -23,21 +24,29 @@
                 <rect key="frame" x="0.0" y="0.0" width="325" height="59"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VIJ-iJ-lQq" customClass="RoundedView" customModule="MCommerce" customModuleProvider="target">
+                        <rect key="frame" x="42" y="-35" width="240" height="128"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tag" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="868-hY-dzw">
-                        <rect key="frame" x="151.5" y="20.5" width="22.5" height="18"/>
+                        <rect key="frame" x="152" y="20.5" width="22.5" height="18"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="304" id="Cjn-zC-ct5"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="IgB-AO-tvz"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="868-hY-dzw" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="9cU-VI-C8e"/>
+                <constraint firstItem="VIJ-iJ-lQq" firstAttribute="height" secondItem="868-hY-dzw" secondAttribute="height" multiplier="1.1" id="OvF-pq-rYs"/>
+                <constraint firstItem="VIJ-iJ-lQq" firstAttribute="centerX" secondItem="868-hY-dzw" secondAttribute="centerX" id="QSc-UG-PN0"/>
+                <constraint firstItem="VIJ-iJ-lQq" firstAttribute="width" secondItem="868-hY-dzw" secondAttribute="width" multiplier="1.1" id="e3c-UL-eOH"/>
                 <constraint firstItem="868-hY-dzw" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="i1W-Em-UmD"/>
+                <constraint firstItem="VIJ-iJ-lQq" firstAttribute="centerY" secondItem="868-hY-dzw" secondAttribute="centerY" id="t4y-MC-bTD"/>
             </constraints>
             <size key="customSize" width="325" height="59"/>
             <connections>
