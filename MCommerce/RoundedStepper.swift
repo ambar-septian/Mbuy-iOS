@@ -7,55 +7,56 @@
 //
 
 import UIKit
+import Anchorage
+
+protocol RoundedStepperDelegate: class {
+    func stepperValueDidUpdate(value:Int)
+}
 
 class RoundedStepper: UIView {
     fileprivate lazy var incrementButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .custom)
         button.setTitle("+", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.frame.size = CGSize(width: self.frame.width / 3, height: self.frame.height)
+        button.frame.size = CGSize(width: self.bounds.width * 0.25, height: self.frame.height)
         button.frame.origin.y = self.bounds.origin.y
-        button.frame.origin.x = (self.bounds.width * 0.7)
+        button.frame.origin.x = self.bounds.width  - button.frame.width
         button.titleLabel?.numberOfLines = 1
-        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.titleLabel?.font = Font.latoBold.withSize(self.fontSize)
+//        button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.addTarget(self, action: #selector(self.incrementCounter(sender:)), for: .touchUpInside)
+        button.backgroundColor = Color.orange
+        button.layer.cornerRadius = 8
         
         return button
     }()
     
     fileprivate lazy var decrementButton:UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .custom)
         button.setTitle("-", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.frame.size = CGSize(width: self.frame.width / 3, height: self.frame.height)
-        button.frame.origin.x = (self.bounds.width * 0.3) - (button.frame.size.width)
+        button.frame.size = CGSize(width: self.bounds.width *  0.25, height: self.frame.height)
+        button.frame.origin.x = 0
         button.frame.origin.y = self.bounds.origin.y
         button.titleLabel?.numberOfLines = 1
-        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.titleLabel?.font = Font.latoBold.withSize(self.fontSize)
+//        button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.addTarget(self, action: #selector(self.decrementCounter(sender:)), for: .touchUpInside)
+        button.backgroundColor = Color.orange
+        button.layer.cornerRadius = 8
         
         return button
         
-    }()
-    
-    fileprivate lazy var counterView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.white
-        view.frame.size = CGSize(width: self.bounds.width / 3, height: self.bounds.height)
-        view.center.x = self.center.x
-        view.frame.origin.y = self.frame.origin.y
-        return view
     }()
     
     fileprivate lazy var counterLabel: UILabel = {
         let label = UILabel()
         label.text = "0"
         label.textAlignment = .center
-        label.frame.size = CGSize(width:self.bounds.size.width / 3, height: self.bounds.size.height)
-        label.center = self.center
-        label.center.x -= label.frame.size.width
-        label.font = UIFont.systemFont(ofSize: 72)
-        label.textColor = .red
+        label.frame = self.bounds
+//        label.center.x -= label.frame.size.width
+        label.font = Font.latoBold.withSize(self.fontSize)
+        label.textColor = Color.orange
         label.numberOfLines = 1
         label.adjustsFontSizeToFitWidth = true
         
@@ -70,6 +71,12 @@ class RoundedStepper: UIView {
         }
     }
     
+    var fontSize: CGFloat {
+        return max(self.bounds.width, self.bounds.height) / min(self.bounds.width, self.bounds.height) * 4
+    }
+    
+    weak var delegate: RoundedStepperDelegate?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -81,22 +88,32 @@ class RoundedStepper: UIView {
     }
     
     func setup(){
-        addSubview(counterView)
+        addSubview(counterLabel)
         addSubview(incrementButton)
         addSubview(decrementButton)
-        counterView.addSubview(counterLabel)
         
-        backgroundColor = Color.orange
-        layer.cornerRadius = 8
+        counterLabel.edgeAnchors == self.edgeAnchors
+        decrementButton.leadingAnchor == self.leadingAnchor
+        decrementButton.verticalAnchors == self.verticalAnchors
+        decrementButton.widthAnchor == self.widthAnchor * 0.25
+        
+        incrementButton.trailingAnchor == self.trailingAnchor
+        incrementButton.verticalAnchors == self.verticalAnchors
+        incrementButton.widthAnchor == self.widthAnchor * 0.25
+        
     }
+
     
     func incrementCounter(sender: UIButton) {
         guard counter >= 0 else { return }
         counter += 1
+        delegate?.stepperValueDidUpdate(value: counter)
     }
     
     func decrementCounter(sender: UIButton) {
         guard counter >= 1 else { return }
         counter -= 1
+        delegate?.stepperValueDidUpdate(value: counter)
+       
     }
 }

@@ -28,6 +28,7 @@
 
 /* Cart */
 "cart" = "Keranjang";
+"delete" = "Hapus";
 
 /* Orders */
 "orders" = "Pesanan";

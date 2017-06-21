@@ -9,7 +9,7 @@
 import UIKit
 
 enum Constants {
-    static let cornerRadius:CGFloat = 12
+    static let cornerRadius:CGFloat = 10
     
     enum segueID {
         static let showProductDetail = "ShowProductDetail"
@@ -43,6 +43,10 @@ enum Constants {
             static let list = "ProductListViewControllerID"
 
         }
+    }
+    
+    enum notification {
+        static let updateStepper = Notification.Name(rawValue: "updateStepperNotification")
     }
 
 

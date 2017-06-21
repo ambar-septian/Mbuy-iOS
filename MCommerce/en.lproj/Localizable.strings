@@ -29,6 +29,7 @@
 
 /* Cart */
 "cart" = "Cart";
+"delete" = "Delete";
 
 /* Orders */
 "orders" = "Orders";

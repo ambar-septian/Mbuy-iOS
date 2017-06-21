@@ -147,6 +147,7 @@ extension BaseViewController {
 
         UIApplication.shared.statusBarStyle = .lightContent
     }
+
     
 
 }

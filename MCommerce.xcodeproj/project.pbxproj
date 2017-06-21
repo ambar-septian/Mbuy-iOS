@@ -30,6 +30,11 @@
 		5D7E783E1EF23799000598BE /* TagCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7E783D1EF23799000598BE /* TagCollectionView.swift */; };
 		5D7E78401EF23A31000598BE /* ProductTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7E783F1EF23A31000598BE /* ProductTag.swift */; };
 		5D7E78421EF23D52000598BE /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7E78411EF23D52000598BE /* TagViewController.swift */; };
+		5D8153621EFA20DE0064B622 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8153601EFA20DE0064B622 /* CartTableViewCell.swift */; };
+		5D8153631EFA20DE0064B622 /* CartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D8153611EFA20DE0064B622 /* CartTableViewCell.xib */; };
+		5D8153651EFA24090064B622 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8153641EFA24090064B622 /* Cart.swift */; };
+		5D8153671EFA26C20064B622 /* Cart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D8153661EFA26C20064B622 /* Cart.storyboard */; };
+		5D8153691EFA2ADA0064B622 /* CartListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8153681EFA2ADA0064B622 /* CartListViewController.swift */; };
 		5DA4409A1ED6F7BC0093437A /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA440991ED6F7BC0093437A /* Double+Extension.swift */; };
 		5DB4EA281EC96CEA004546CE /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB4EA271EC96CEA004546CE /* UserType.swift */; };
 		5DB4EA2A1EC98251004546CE /* CircleImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB4EA291EC98251004546CE /* CircleImageButton.swift */; };
@@ -121,6 +126,11 @@
 		5D7E783D1EF23799000598BE /* TagCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCollectionView.swift; sourceTree = "<group>"; };
 		5D7E783F1EF23A31000598BE /* ProductTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTag.swift; sourceTree = "<group>"; };
 		5D7E78411EF23D52000598BE /* TagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
+		5D8153601EFA20DE0064B622 /* CartTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
+		5D8153611EFA20DE0064B622 /* CartTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CartTableViewCell.xib; sourceTree = "<group>"; };
+		5D8153641EFA24090064B622 /* Cart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
+		5D8153661EFA26C20064B622 /* Cart.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Cart.storyboard; sourceTree = "<group>"; };
+		5D8153681EFA2ADA0064B622 /* CartListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartListViewController.swift; sourceTree = "<group>"; };
 		5DA440991ED6F7BC0093437A /* Double+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		5DB4EA271EC96CEA004546CE /* UserType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
 		5DB4EA291EC98251004546CE /* CircleImageButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImageButton.swift; sourceTree = "<group>"; };
@@ -282,9 +292,10 @@
 			isa = PBXGroup;
 			children = (
 				5D4AAD351EC9685400538E2E /* ProductListCollectionViewCell.swift */,
-				5DD0D9C11EF1196C00E5D2C4 /* TagCollectionViewCell.swift */,
-				5DD0D9C21EF1196C00E5D2C4 /* TagCollectionViewCell.xib */,
 				5DD0D9BB1EF0D3BD00E5D2C4 /* ProductImageCollectionViewCell.swift */,
+				5D8153601EFA20DE0064B622 /* CartTableViewCell.swift */,
+				5D8153611EFA20DE0064B622 /* CartTableViewCell.xib */,
+				5D8153591EFA206D0064B622 /* TagCollectionViewCell */,
 				5DCC92DC1EEF93DE001C6F42 /* SimpleProductCollectionViewCell */,
 				5DC9BB441EEE999400BDBF13 /* ProductCollectionViewCell */,
 			);
@@ -299,6 +310,15 @@
 				5D46A21E1EEF38B800B7C269 /* ProductDetailTableViewCell */,
 			);
 			name = TableViewCell;
+			sourceTree = "<group>";
+		};
+		5D8153591EFA206D0064B622 /* TagCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5DD0D9C11EF1196C00E5D2C4 /* TagCollectionViewCell.swift */,
+				5DD0D9C21EF1196C00E5D2C4 /* TagCollectionViewCell.xib */,
+			);
+			name = TagCollectionViewCell;
 			sourceTree = "<group>";
 		};
 		5DB4EA371EC992F1004546CE /* Fonts */ = {
@@ -389,6 +409,7 @@
 				5D5875561EF6FFE400D31A9F /* Search.storyboard */,
 				5DBFBA6E1EC17B930061FE35 /* LaunchScreen.storyboard */,
 				5D5875511EF6FD1C00D31A9F /* Storyboard.storyboard */,
+				5D8153661EFA26C20064B622 /* Cart.storyboard */,
 			);
 			name = Storyboard;
 			sourceTree = "<group>";
@@ -398,6 +419,7 @@
 			children = (
 				5DBE11F31ED2EFD700D133EF /* ParentTabBarViewController.swift */,
 				5DD651851ECB0A4300BBC1DD /* BaseViewController.swift */,
+				5D8153681EFA2ADA0064B622 /* CartListViewController.swift */,
 				5D5875531EF6FD2500D31A9F /* Search */,
 				5DBE11F01ED2EAA500D133EF /* Product */,
 				5D0124BC1EC9BABA009C0955 /* Authentication */,
@@ -430,6 +452,7 @@
 				5D46A21C1EEF368600B7C269 /* ProductDetail.swift */,
 				5D24EF3C1EC32A9800B43A71 /* Review.swift */,
 				5D542EA11EC96A9E00855EE0 /* User.swift */,
+				5D8153641EFA24090064B622 /* Cart.swift */,
 				5DB4EA271EC96CEA004546CE /* UserType.swift */,
 			);
 			name = Model;
@@ -638,6 +661,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DB4EA341EC992ED004546CE /* Lato-Bold.ttf in Resources */,
+				5D8153671EFA26C20064B622 /* Cart.storyboard in Resources */,
 				5D5875571EF6FFE400D31A9F /* Search.storyboard in Resources */,
 				5DF7CFAA1EDA904000332E47 /* Product.storyboard in Resources */,
 				5DBFBAB51EC1C7960061FE35 /* Podfile in Resources */,
@@ -646,6 +670,7 @@
 				5D5875521EF6FD1C00D31A9F /* Storyboard.storyboard in Resources */,
 				5DCC92DB1EEF9187001C6F42 /* SimpleProductCollectionViewCell.xib in Resources */,
 				5DBFBAA41EC195EE0061FE35 /* Localizable.strings in Resources */,
+				5D8153631EFA20DE0064B622 /* CartTableViewCell.xib in Resources */,
 				5DBFBA701EC17B930061FE35 /* LaunchScreen.storyboard in Resources */,
 				5DB4EA361EC992ED004546CE /* Lato-Regular.ttf in Resources */,
 				5DBFBA6D1EC17B930061FE35 /* Assets.xcassets in Resources */,
@@ -732,6 +757,7 @@
 				5D5875551EF6FD3600D31A9F /* SearchViewController.swift in Sources */,
 				5D24EF3B1EC32A8D00B43A71 /* Product.swift in Sources */,
 				5DD8D7B91EC2FCD100978D68 /* BaseViewProtocol.swift in Sources */,
+				5D8153691EFA2ADA0064B622 /* CartListViewController.swift in Sources */,
 				5DD0D9C31EF1196C00E5D2C4 /* TagCollectionViewCell.swift in Sources */,
 				5DCC92D71EEF8CDD001C6F42 /* Date+Extension.swift in Sources */,
 				5DD0D9C01EF116FE00E5D2C4 /* RoundedStepper.swift in Sources */,
@@ -751,6 +777,7 @@
 				5DD0D9BC1EF0D3BD00E5D2C4 /* ProductImageCollectionViewCell.swift in Sources */,
 				5DB4EA2E1EC9909D004546CE /* BackgroundLoginView.swift in Sources */,
 				5DD0D9BE1EF0DD9B00E5D2C4 /* RoundedView.swift in Sources */,
+				5D8153651EFA24090064B622 /* Cart.swift in Sources */,
 				5D24EF371EC32A6E00B43A71 /* CategoryHomeTableViewCell.swift in Sources */,
 				5D7E78401EF23A31000598BE /* ProductTag.swift in Sources */,
 				5DD8D7BB1EC304D000978D68 /* BasicButton.swift in Sources */,
@@ -761,6 +788,7 @@
 				5D4AAD361EC9685400538E2E /* ProductListCollectionViewCell.swift in Sources */,
 				5D69071D1EEF3C0200F0A6B9 /* ReviewTableViewCell.swift in Sources */,
 				5DBFBA681EC17B930061FE35 /* LoginViewController.swift in Sources */,
+				5D8153621EFA20DE0064B622 /* CartTableViewCell.swift in Sources */,
 				5D0124BB1EC9BAB6009C0955 /* RegisterViewController.swift in Sources */,
 				5DBE11EF1ED2EA9C00D133EF /* HomeViewController.swift in Sources */,
 				5D7E783E1EF23799000598BE /* TagCollectionView.swift in Sources */,
