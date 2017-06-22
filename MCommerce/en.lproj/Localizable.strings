@@ -33,6 +33,7 @@
 
 /* Orders */
 "orders" = "Orders";
+"orderID" = "Order ID : ";
 
 /* Order Status */
 "onDelivery" = "On Delivery";

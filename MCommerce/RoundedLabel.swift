@@ -63,10 +63,11 @@ class RoundedLabel: UILabel, RoundedBorderProtocol {
     func setupLabel(){
         
         let fontSize = font.pointSize
-        font = Font.latoRegular.withSize(fontSize)
+        font = Font.latoBold.withSize(fontSize)
         numberOfLines = 0
         textColor = Color.white
         clipsToBounds = true
+        textAlignment = .center
         setRoundedLayer()
     }
     

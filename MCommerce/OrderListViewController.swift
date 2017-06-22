@@ -2,74 +2,86 @@
 //  OrderListViewController.swift
 //  MCommerce
 //
-//  Created by Ambar Septian on 6/21/17.
+//  Created by Ambar Septian on 6/22/17.
 //  Copyright © 2017 Ambar Septian. All rights reserved.
 //
 
 import UIKit
+import Anchorage
+
+protocol OrderParentProtocol: class {
+    func didChildPageChange(index:Int)
+}
 
 class OrderListViewController: BaseViewController {
 
-    var passedOrder: Order?
+    @IBOutlet weak var processButton: BasicButton!
     
-    var orderHistories: [OrderHistory] {
-        get {
-            return passedOrder?.histories ?? [OrderHistory]()
-        }
-        
-        set {
-            passedOrder?.histories = newValue
-            tableView.reloadData()
-            tableViewConstraint.constant = tableView.contentSize.height
-        }
+    @IBOutlet weak var completeButton: BasicButton!
+    
+    @IBOutlet weak var tabView: UIView!
+    
+    @IBOutlet weak var childView: UIView!
+    
+    @IBOutlet weak var lineIndicatorView: UIView!
+    
+    fileprivate var lineLeadingConstraint: NSLayoutConstraint? {
+        return tabView.constraints.filter({ $0.identifier == "leadingConstraint"}).first
     }
     
-    @IBOutlet weak var tableView: UITableView! {
-        didSet {
-            let cell = OrderHistoryTableViewCell.self
-            tableView.register(cell.nib, forCellReuseIdentifier: cell.identifier)
-        }
-    }
+    weak var delegate: OrderParentProtocol?
     
-    @IBOutlet weak var tableViewConstraint: NSLayoutConstraint!
+    fileprivate var activePageIndex = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        passedOrder = Order(orderID: "1")
-        let history1 = OrderHistory(date: Date(), status: .complete)
-        let history2 = OrderHistory(date: Date(), status: .complete)
-        let history3 = OrderHistory(date: Date(), status: .complete)
-        passedOrder?.histories = [history1, history2, history3]
-        // Do any additional setup after loading the view.
+
+        setupChildView()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
 }
 
+extension OrderListViewController {
+    @IBAction func changeButtonDidTapped(_ sender: Any) {
+        guard let row = (sender as? UIButton)?.tag else { return }
+        didChangeChildPage(row: row)
+    }
 
-extension OrderListViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return orderHistories.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let history = orderHistories[indexPath.row]
-        return OrderHistoryTableViewCell.configureCell(tableView: tableView, indexPath: indexPath, object: history)
-    }
 }
 
-extension OrderListViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+extension OrderListViewController {
+    fileprivate func setupChildView(){
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: Constants.viewController.order.page) as? OrderPageViewController else { return }
+//        vc.childDelegate = self
+        addChildViewController(vc)
+        vc.view.frame = childView.bounds
+        childView.addSubview(vc.view)
+        vc.didMove(toParentViewController: self)
     }
     
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.1
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0.1
+    func didChangeChildPage(row:Int){
+        let tabButtons = [processButton, completeButton]
+        for (index, button) in tabButtons.enumerated() {
+            if index == row  {
+                guard activePageIndex != index else { return }
+                
+                button?.setTitleColor(Color.orange, for: .normal)
+                self.lineLeadingConstraint?.constant = index == tabButtons.count - 1 ? self.view.bounds.width * 0.5 : 0
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
+                    self.view.layoutIfNeeded()
+                    
+                }, completion: nil)
+                delegate?.didChildPageChange(index: index)
+                activePageIndex = index
+            } else {
+                button?.setTitleColor(Color.lightGray, for: .normal)
+            }
+        }
+        
     }
 }

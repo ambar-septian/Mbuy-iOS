@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class OrderHistory {
     var date: Date
@@ -27,5 +28,18 @@ enum OrderStatus: String {
     case complete = "complete"
     case waitingPayment = "waitingPayment"
     case cancel = "cancel"
+    
+    var color:UIColor {
+        switch self {
+        case .waitingPayment:
+            return Color.darkGray
+        case .complete:
+            return Color.green
+        case .onDelivery:
+            return Color.orange
+        case .cancel:
+            return Color.red
+        }
+    }
     
 }

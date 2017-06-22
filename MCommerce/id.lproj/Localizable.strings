@@ -32,6 +32,7 @@
 
 /* Orders */
 "orders" = "Pesanan";
+"orderID" = "ID Pesanan : ";
 
 /* Order Status */
 "onDelivery" = "Sedang Dalam Pengiriman";

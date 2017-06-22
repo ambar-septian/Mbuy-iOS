@@ -9,7 +9,7 @@
 import UIKit
 
 enum Constants {
-    static let cornerRadius:CGFloat = 10
+    static let cornerRadius:CGFloat = 6
     
     enum segueID {
         static let showProductDetail = "ShowProductDetail"
@@ -41,7 +41,13 @@ enum Constants {
             static let detail = "ProductDetailViewControllerID"
             static let preview = "ProductPreviewViewControllerID"
             static let list = "ProductListViewControllerID"
-
+        }
+        
+        enum order {
+            static let main = "OrderListViewControllerID"
+            static let page = "OrderPageViewControllerID"
+            static let child = "OrderListChildViewControllerID"
+            static let history = "OrderHistoryViewControllerID"
         }
     }
     
@@ -57,5 +63,6 @@ enum Constants {
 enum DateFormat {
     case dateLong
     case timeMedium
+    case dateTime
 }
 

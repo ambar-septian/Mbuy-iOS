@@ -21,9 +21,8 @@ extension Date {
             return date.string(dateStyle: .long, timeStyle: .none)
         case .timeMedium:
             return date.string(dateStyle: .none, timeStyle: .medium)
-            
-//        default:
-//            return date.string(dateStyle: .short, timeStyle: .short)
+        case .dateTime:
+            return date.string(dateStyle: .long, timeStyle: .medium)
         }
     }
 }
