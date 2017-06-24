@@ -18,6 +18,12 @@ class CartTableViewCell: UITableViewCell {
     
     @IBOutlet weak var variantLabel: UILabel!
     
+    @IBOutlet weak var quantityLabel: UILabel!
+    
+    fileprivate var quantityString: String {
+        return "Quantity: \(cart?.quantity ?? 0)"
+    }
+    
     var cart: Cart?
     
     override func awakeFromNib() {
@@ -27,6 +33,15 @@ class CartTableViewCell: UITableViewCell {
     }
     @IBOutlet weak var stepper: RoundedStepper!
 
+    @IBOutlet weak var stepperParentView: UIView!
+    
+    var isStepperHidden:Bool = false{
+        didSet {
+            stepperParentView.isHidden = true
+        }
+        
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -42,16 +57,19 @@ extension CartTableViewCell: ReuseTableCellProtocol {
         cell.cart = cart
         cell.productImageView.setImage(urlString: cart.product.coverURL)
         cell.nameLabel.text = cart.product.name
-        cell.priceLabel.text = cart.formattedPrice
+        cell.priceLabel.text = (cart.price * Double(cart.quantity)).formattedPrice
         cell.stepper.counter = cart.quantity
-        
+        cell.quantityLabel.text = cell.quantityString
         return cell
     }
 }
 
 extension CartTableViewCell:RoundedStepperDelegate {
     func stepperValueDidUpdate(value: Int) {
-        cart?.quantity = value
+        guard let cart = self.cart else { return }
+        cart.quantity = value
+        quantityLabel.text = quantityString
+        priceLabel.text = (cart.price * Double(cart.quantity)).formattedPrice
         NotificationCenter.default.post(name: Constants.notification.updateStepper, object: nil, userInfo: nil)
     }
 }

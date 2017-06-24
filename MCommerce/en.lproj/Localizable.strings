@@ -34,6 +34,9 @@
 /* Orders */
 "orders" = "Orders";
 "orderID" = "Order ID : ";
+"cancel" = "Cancel";
+"history" = "History";
+"note" = "Note";
 
 /* Order Status */
 "onDelivery" = "On Delivery";

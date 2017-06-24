@@ -13,6 +13,11 @@ enum Constants {
     
     enum segueID {
         static let showProductDetail = "ShowProductDetail"
+        enum order {
+            static let note = "orderNote"
+            static let history = "orderHistory"
+            static let detail = "orderDetail"
+        }
     }
     
     enum viewTag {

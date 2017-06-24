@@ -33,6 +33,9 @@
 /* Orders */
 "orders" = "Pesanan";
 "orderID" = "ID Pesanan : ";
+"cancel" = "Batal";
+"history" = "Riwayat";
+"note" = "Nota";
 
 /* Order Status */
 "onDelivery" = "Sedang Dalam Pengiriman";

@@ -3,6 +3,7 @@ PODS:
   - AlamofireImage (3.2.0):
     - Alamofire (~> 4.1)
   - Anchorage (3.3.0)
+  - BGTableViewRowActionWithImage (0.4.1)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -76,6 +77,7 @@ DEPENDENCIES:
   - Alamofire
   - AlamofireImage
   - Anchorage
+  - BGTableViewRowActionWithImage
   - Bolts
   - FacebookCore
   - FacebookLogin
@@ -103,6 +105,7 @@ SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   Anchorage: 1444bbd32c4495b32d41c0be9f66efcb0862fe8a
+  BGTableViewRowActionWithImage: 6a0731a84662735f5ec28dc253e3fba6a73ebc5b
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
   FacebookLogin: c9d606504735780a9e3002465a615512e0a691a5
@@ -124,6 +127,6 @@ SPEC CHECKSUMS:
   SwiftDate: ae615078806a322183e5f64e02e80ca8d939bf48
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 5e8c84f3b41c98241b91bded7181fb718091b391
+PODFILE CHECKSUM: 281cfb93e917de77fb8d9da2207ca9471401274c
 
 COCOAPODS: 1.2.1
