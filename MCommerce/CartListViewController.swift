@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import BGTableViewRowActionWithImage
+import Iconic
 
 class CartListViewController: BaseViewController {
 
@@ -47,6 +49,7 @@ class CartListViewController: BaseViewController {
         return carts.reduce(0, { $0 + ($1.product.price * Double($1.quantity)) })
     }
     
+    fileprivate let heightCell:CGFloat = 120
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,6 +84,7 @@ extension CartListViewController {
 
 extension CartListViewController {
     @IBAction func checkoutDidTapped(_ sender: Any) {
+        performSegue(withIdentifier: Constants.segueID.checkout.main, sender: nil)
     }
 }
 
@@ -91,7 +95,10 @@ extension CartListViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cart = carts[indexPath.row]
-        return CartTableViewCell.configureCell(tableView: tableView, indexPath: indexPath, object: cart)
+        let cell =  CartTableViewCell.configureCell(tableView: tableView, indexPath: indexPath, object: cart) as! CartTableViewCell
+        cell.quantityLabel.isHidden = true
+        
+        return cell
     }
 }
 
@@ -103,7 +110,7 @@ extension CartListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+        return heightCell
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -123,10 +130,15 @@ extension CartListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let deleteButton = UITableViewRowAction(style: .default, title: "delete".localize) { (action, indexPath) in
+
+        let size = heightCell / 6
+        let imageSize = CGSize(width:size, height: size)
+        let icon = FontAwesomeIcon.trashIcon.image(ofSize: imageSize, color: Color.white)
+        let deleteButton = BGTableViewRowActionWithImage.rowAction(with: .default, title: "delete".localize, backgroundColor: Color.red, image: icon, forCellHeight: UInt(heightCell), andFittedWidth: true) { (action, indexPath) in
             //
         }
-        deleteButton.backgroundColor = Color.red
-        return [deleteButton]
+        
+        guard deleteButton != nil else { return nil }
+        return [deleteButton!]
     }
 }

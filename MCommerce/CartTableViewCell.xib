@@ -34,7 +34,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pKY-Vi-7zM">
                                 <rect key="frame" x="8" y="8" width="126" height="157"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gKt-e9-0Ry">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gKt-e9-0Ry">
                                         <rect key="frame" x="0.0" y="-0.5" width="126" height="126"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="gKt-e9-0Ry" secondAttribute="height" multiplier="1:1" id="Icz-mn-0n1"/>

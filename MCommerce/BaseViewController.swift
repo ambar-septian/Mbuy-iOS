@@ -47,7 +47,8 @@ extension BaseViewController {
     }
     
     func addDismissBarButton(rightPosition: Bool = true){
-        let image = #imageLiteral(resourceName: "btnClose").withRenderingMode(.alwaysOriginal)
+        let size = CGSize(width: 20, height: 20)
+        let image = FontAwesomeIcon.removeIcon.image(ofSize: size, color: Color.white).withRenderingMode(.alwaysOriginal)
         let barButton =  UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(self.dismissVC))
         
         if rightPosition {

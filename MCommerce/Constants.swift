@@ -18,6 +18,10 @@ enum Constants {
             static let history = "orderHistory"
             static let detail = "orderDetail"
         }
+        
+        enum checkout {
+            static let main = "checkOutMain"
+        }
     }
     
     enum viewTag {
@@ -39,6 +43,7 @@ enum Constants {
     enum storyboard {
         static let product = "Product"
         static let search = "Search"
+        static let cart = "Cart"
     }
     
     enum viewController {
@@ -53,6 +58,14 @@ enum Constants {
             static let page = "OrderPageViewControllerID"
             static let child = "OrderListChildViewControllerID"
             static let history = "OrderHistoryViewControllerID"
+        }
+        
+        enum checkout {
+            static let main = "CheckOutMainViewControllerID"
+            static let page = "CheckOutPageViewControllerID"
+            static let profile = "CheckOutProfileViewControllerID"
+            static let address = "CheckOutAddressViewControllerID"
+            static let summary = "CheckOutSummaryViewControllerID"
         }
     }
     

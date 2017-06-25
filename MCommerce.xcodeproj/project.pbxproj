@@ -63,6 +63,12 @@
 		5DBE11F21ED2EC8000D133EF /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBE11F11ED2EC8000D133EF /* UIImageView+Extension.swift */; };
 		5DBE11F41ED2EFD700D133EF /* ParentTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBE11F31ED2EFD700D133EF /* ParentTabBarViewController.swift */; };
 		5DBE85041EFEE4A300341A07 /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBE85031EFEE4A300341A07 /* OrderDetailViewController.swift */; };
+		5DBE85061EFEFF6300341A07 /* CheckOutMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBE85051EFEFF6300341A07 /* CheckOutMainViewController.swift */; };
+		5DBE85081EFEFF7800341A07 /* CheckOutPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBE85071EFEFF7800341A07 /* CheckOutPageViewController.swift */; };
+		5DBE850A1EFEFFAD00341A07 /* CheckOutProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBE85091EFEFFAD00341A07 /* CheckOutProfileViewController.swift */; };
+		5DBE850C1EFEFFBE00341A07 /* CheckOutAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBE850B1EFEFFBE00341A07 /* CheckOutAddressViewController.swift */; };
+		5DBE850E1EFEFFD400341A07 /* CheckOutSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBE850D1EFEFFD400341A07 /* CheckOutSummaryViewController.swift */; };
+		5DBE85131EFF0A1400341A07 /* HorizontalTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBE85121EFF0A1400341A07 /* HorizontalTimelineView.swift */; };
 		5DBFBA661EC17B930061FE35 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBFBA651EC17B930061FE35 /* AppDelegate.swift */; };
 		5DBFBA681EC17B930061FE35 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBFBA671EC17B930061FE35 /* LoginViewController.swift */; };
 		5DBFBA6B1EC17B930061FE35 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DBFBA691EC17B930061FE35 /* Main.storyboard */; };
@@ -93,6 +99,9 @@
 		5DD8D7B71EC2F5FB00978D68 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD8D7B61EC2F5FB00978D68 /* Color.swift */; };
 		5DD8D7B91EC2FCD100978D68 /* BaseViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD8D7B81EC2FCD100978D68 /* BaseViewProtocol.swift */; };
 		5DD8D7BB1EC304D000978D68 /* BasicButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD8D7BA1EC304D000978D68 /* BasicButton.swift */; };
+		5DE5FE3C1EFFCD1B0089BE25 /* IconLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5FE3B1EFFCD1B0089BE25 /* IconLabel.swift */; };
+		5DE5FE3E1EFFD67A0089BE25 /* BorderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5FE3D1EFFD67A0089BE25 /* BorderTextField.swift */; };
+		5DE5FE401EFFDE390089BE25 /* BorderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5FE3F1EFFDE390089BE25 /* BorderTextView.swift */; };
 		5DF000711EFCBDE700764B33 /* ImageTableViewRowAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF000701EFCBDE700764B33 /* ImageTableViewRowAction.swift */; };
 		5DF000731EFCCB7100764B33 /* OrderPayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF000721EFCCB7100764B33 /* OrderPayment.swift */; };
 		5DF000751EFCCE4000764B33 /* OrderNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF000741EFCCE4000764B33 /* OrderNoteViewController.swift */; };
@@ -176,6 +185,12 @@
 		5DBE11F11ED2EC8000D133EF /* UIImageView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		5DBE11F31ED2EFD700D133EF /* ParentTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentTabBarViewController.swift; sourceTree = "<group>"; };
 		5DBE85031EFEE4A300341A07 /* OrderDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailViewController.swift; sourceTree = "<group>"; };
+		5DBE85051EFEFF6300341A07 /* CheckOutMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckOutMainViewController.swift; sourceTree = "<group>"; };
+		5DBE85071EFEFF7800341A07 /* CheckOutPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckOutPageViewController.swift; sourceTree = "<group>"; };
+		5DBE85091EFEFFAD00341A07 /* CheckOutProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckOutProfileViewController.swift; sourceTree = "<group>"; };
+		5DBE850B1EFEFFBE00341A07 /* CheckOutAddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckOutAddressViewController.swift; sourceTree = "<group>"; };
+		5DBE850D1EFEFFD400341A07 /* CheckOutSummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckOutSummaryViewController.swift; sourceTree = "<group>"; };
+		5DBE85121EFF0A1400341A07 /* HorizontalTimelineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalTimelineView.swift; sourceTree = "<group>"; };
 		5DBFBA621EC17B930061FE35 /* MCommerce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MCommerce.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DBFBA651EC17B930061FE35 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = MCommerce/AppDelegate.swift; sourceTree = "<group>"; };
 		5DBFBA671EC17B930061FE35 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -213,6 +228,9 @@
 		5DD8D7B61EC2F5FB00978D68 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		5DD8D7B81EC2FCD100978D68 /* BaseViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewProtocol.swift; sourceTree = "<group>"; };
 		5DD8D7BA1EC304D000978D68 /* BasicButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicButton.swift; sourceTree = "<group>"; };
+		5DE5FE3B1EFFCD1B0089BE25 /* IconLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconLabel.swift; sourceTree = "<group>"; };
+		5DE5FE3D1EFFD67A0089BE25 /* BorderTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderTextField.swift; sourceTree = "<group>"; };
+		5DE5FE3F1EFFDE390089BE25 /* BorderTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderTextView.swift; sourceTree = "<group>"; };
 		5DF000701EFCBDE700764B33 /* ImageTableViewRowAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTableViewRowAction.swift; sourceTree = "<group>"; };
 		5DF000721EFCCB7100764B33 /* OrderPayment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderPayment.swift; sourceTree = "<group>"; };
 		5DF000741EFCCE4000764B33 /* OrderNoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderNoteViewController.swift; sourceTree = "<group>"; };
@@ -284,6 +302,7 @@
 			isa = PBXGroup;
 			children = (
 				5D8153681EFA2ADA0064B622 /* CartListViewController.swift */,
+				5DBE85101EFEFFFB00341A07 /* CheckOut */,
 			);
 			name = Cart;
 			sourceTree = "<group>";
@@ -348,6 +367,8 @@
 			children = (
 				5DB4EA2D1EC9909D004546CE /* BackgroundLoginView.swift */,
 				5DBFBAB01EC1B67E0061FE35 /* RatingStarsView.swift */,
+				5DD0D9BD1EF0DD9B00E5D2C4 /* RoundedView.swift */,
+				5DBE85121EFF0A1400341A07 /* HorizontalTimelineView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -357,6 +378,7 @@
 			children = (
 				5DB4EA2B1EC98F4D004546CE /* RoundedLabel.swift */,
 				5DB4EA381EC9AC34004546CE /* BasicLabel.swift */,
+				5DE5FE3B1EFFCD1B0089BE25 /* IconLabel.swift */,
 			);
 			name = Label;
 			sourceTree = "<group>";
@@ -365,6 +387,7 @@
 			isa = PBXGroup;
 			children = (
 				5DBFBAAC1EC19CCB0061FE35 /* RoundedTextField.swift */,
+				5DE5FE3D1EFFD67A0089BE25 /* BorderTextField.swift */,
 			);
 			name = TextField;
 			sourceTree = "<group>";
@@ -374,8 +397,7 @@
 			children = (
 				5D4AAD351EC9685400538E2E /* ProductListCollectionViewCell.swift */,
 				5DD0D9BB1EF0D3BD00E5D2C4 /* ProductImageCollectionViewCell.swift */,
-				5DA809F91EFBD7780004B96A /* OrderPaymentCollectionViewCell.swift */,
-				5DA809FA1EFBD7780004B96A /* OrderPaymentCollectionViewCell.xib */,
+				5DBE85111EFF088800341A07 /* OrderPayment */,
 				5D8153591EFA206D0064B622 /* TagCollectionViewCell */,
 				5DCC92DC1EEF93DE001C6F42 /* SimpleProductCollectionViewCell */,
 				5DC9BB441EEE999400BDBF13 /* ProductCollectionViewCell */,
@@ -426,6 +448,35 @@
 				5DCC92DD1EEF9A81001C6F42 /* ProductDetailViewController.swift */,
 			);
 			name = Product;
+			sourceTree = "<group>";
+		};
+		5DBE850F1EFEFFD900341A07 /* Child */ = {
+			isa = PBXGroup;
+			children = (
+				5DBE85091EFEFFAD00341A07 /* CheckOutProfileViewController.swift */,
+				5DBE850B1EFEFFBE00341A07 /* CheckOutAddressViewController.swift */,
+				5DBE850D1EFEFFD400341A07 /* CheckOutSummaryViewController.swift */,
+			);
+			name = Child;
+			sourceTree = "<group>";
+		};
+		5DBE85101EFEFFFB00341A07 /* CheckOut */ = {
+			isa = PBXGroup;
+			children = (
+				5DBE850F1EFEFFD900341A07 /* Child */,
+				5DBE85051EFEFF6300341A07 /* CheckOutMainViewController.swift */,
+				5DBE85071EFEFF7800341A07 /* CheckOutPageViewController.swift */,
+			);
+			name = CheckOut;
+			sourceTree = "<group>";
+		};
+		5DBE85111EFF088800341A07 /* OrderPayment */ = {
+			isa = PBXGroup;
+			children = (
+				5DA809F91EFBD7780004B96A /* OrderPaymentCollectionViewCell.swift */,
+				5DA809FA1EFBD7780004B96A /* OrderPaymentCollectionViewCell.xib */,
+			);
+			name = OrderPayment;
 			sourceTree = "<group>";
 		};
 		5DBFBA591EC17B930061FE35 = {
@@ -580,12 +631,12 @@
 				5D682E391ED58597007D628E /* TextField */,
 				5D682E371ED5854C007D628E /* View */,
 				5DBFBAAE1EC1B03E0061FE35 /* RoundedProtocol.swift */,
+				5DE5FE3F1EFFDE390089BE25 /* BorderTextView.swift */,
 				5DF000701EFCBDE700764B33 /* ImageTableViewRowAction.swift */,
 				5D7E783D1EF23799000598BE /* TagCollectionView.swift */,
 				5DD0D9BF1EF116FE00E5D2C4 /* RoundedStepper.swift */,
 				5D682E3C1ED58A87007D628E /* ReuseCellProtocol.swift */,
 				5D682E341ED5851A007D628E /* DynamicColllectionViewLayout.swift */,
-				5DD0D9BD1EF0DD9B00E5D2C4 /* RoundedView.swift */,
 			);
 			name = CustomView;
 			sourceTree = "<group>";
@@ -852,8 +903,10 @@
 				5D0CDA381EFA7C4D0004513F /* Order.swift in Sources */,
 				5D5875551EF6FD3600D31A9F /* SearchViewController.swift in Sources */,
 				5D24EF3B1EC32A8D00B43A71 /* Product.swift in Sources */,
+				5DBE850E1EFEFFD400341A07 /* CheckOutSummaryViewController.swift in Sources */,
 				5DD8D7B91EC2FCD100978D68 /* BaseViewProtocol.swift in Sources */,
 				5D8153691EFA2ADA0064B622 /* CartListViewController.swift in Sources */,
+				5DBE850C1EFEFFBE00341A07 /* CheckOutAddressViewController.swift in Sources */,
 				5DD0D9C31EF1196C00E5D2C4 /* TagCollectionViewCell.swift in Sources */,
 				5DCC92D71EEF8CDD001C6F42 /* Date+Extension.swift in Sources */,
 				5DD0D9C01EF116FE00E5D2C4 /* RoundedStepper.swift in Sources */,
@@ -863,6 +916,7 @@
 				5DD8D7B71EC2F5FB00978D68 /* Color.swift in Sources */,
 				5DB4EA2C1EC98F4D004546CE /* RoundedLabel.swift in Sources */,
 				5DCC92DA1EEF9187001C6F42 /* SimpleProductCollectionViewCell.swift in Sources */,
+				5DBE85081EFEFF7800341A07 /* CheckOutPageViewController.swift in Sources */,
 				5D7E78421EF23D52000598BE /* TagViewController.swift in Sources */,
 				5DBE11ED1ED2E06300D133EF /* ForgotPasswordViewController.swift in Sources */,
 				5D682E351ED5851A007D628E /* DynamicColllectionViewLayout.swift in Sources */,
@@ -873,6 +927,7 @@
 				5DBFBAAF1EC1B03E0061FE35 /* RoundedProtocol.swift in Sources */,
 				5D46A21A1EEF34B600B7C269 /* ProductDetailTableViewCell.swift in Sources */,
 				5DD0D9BC1EF0D3BD00E5D2C4 /* ProductImageCollectionViewCell.swift in Sources */,
+				5DBE85131EFF0A1400341A07 /* HorizontalTimelineView.swift in Sources */,
 				5DB4EA2E1EC9909D004546CE /* BackgroundLoginView.swift in Sources */,
 				5D0BBA9A1EFB7D0E00C40767 /* OrderProfile.swift in Sources */,
 				5D0BBA921EFB758E00C40767 /* OrderPageViewController.swift in Sources */,
@@ -883,6 +938,7 @@
 				5DD8D7BB1EC304D000978D68 /* BasicButton.swift in Sources */,
 				5D24EF3D1EC32A9800B43A71 /* Review.swift in Sources */,
 				5DB4EA391EC9AC34004546CE /* BasicLabel.swift in Sources */,
+				5DE5FE401EFFDE390089BE25 /* BorderTextView.swift in Sources */,
 				5D1622891EF5C3EA005D1546 /* ProductPreviewViewController.swift in Sources */,
 				5DCC92DE1EEF9A81001C6F42 /* ProductDetailViewController.swift in Sources */,
 				5D4AAD361EC9685400538E2E /* ProductListCollectionViewCell.swift in Sources */,
@@ -890,20 +946,24 @@
 				5DBFBA681EC17B930061FE35 /* LoginViewController.swift in Sources */,
 				5D8153621EFA20DE0064B622 /* CartTableViewCell.swift in Sources */,
 				5D0124BB1EC9BAB6009C0955 /* RegisterViewController.swift in Sources */,
+				5DBE850A1EFEFFAD00341A07 /* CheckOutProfileViewController.swift in Sources */,
 				5DBE11EF1ED2EA9C00D133EF /* HomeViewController.swift in Sources */,
 				5D7E783E1EF23799000598BE /* TagCollectionView.swift in Sources */,
 				5DA4409A1ED6F7BC0093437A /* Double+Extension.swift in Sources */,
 				5DF000711EFCBDE700764B33 /* ImageTableViewRowAction.swift in Sources */,
 				5DBFBAAD1EC19CCB0061FE35 /* RoundedTextField.swift in Sources */,
+				5DE5FE3E1EFFD67A0089BE25 /* BorderTextField.swift in Sources */,
 				5D764EF21ED44E9700C30FBE /* ProductListViewController.swift in Sources */,
 				5D0BBA941EFB760700C40767 /* OrderListChildViewController.swift in Sources */,
 				5DF000751EFCCE4000764B33 /* OrderNoteViewController.swift in Sources */,
 				5D4AAD321EC9642000538E2E /* Font.swift in Sources */,
+				5DE5FE3C1EFFCD1B0089BE25 /* IconLabel.swift in Sources */,
 				5DBFBAB11EC1B67E0061FE35 /* RatingStarsView.swift in Sources */,
 				5DD651881ECB0B6800BBC1DD /* UIImage+Extension.swift in Sources */,
 				5D0CDA3A1EFA7DFE0004513F /* OrderHistoryViewController.swift in Sources */,
 				5DB4EA2A1EC98251004546CE /* CircleImageButton.swift in Sources */,
 				5DBFBA9F1EC17F5D0061FE35 /* RoundedButton.swift in Sources */,
+				5DBE85061EFEFF6300341A07 /* CheckOutMainViewController.swift in Sources */,
 				5DBFBA661EC17B930061FE35 /* AppDelegate.swift in Sources */,
 				5DBE85041EFEE4A300341A07 /* OrderDetailViewController.swift in Sources */,
 				5D0CDA301EFA77940004513F /* OrderHistory.swift in Sources */,

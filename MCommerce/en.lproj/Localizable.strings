@@ -7,7 +7,7 @@
 */
 
 /* Authentication */
-"email" = "Email";
+"email" = "E-mail";
 "password" = "Password";
 "firstName" = "First Name";
 "lastName" = "Last Name";
@@ -30,6 +30,13 @@
 /* Cart */
 "cart" = "Cart";
 "delete" = "Delete";
+"next"  = "Next";
+"back" = "Back";
+"finish" = "Finish";
+"customerProfile" = "Customer Profile";
+"deliveryAddress"= "Delivery Address";
+"summary" = "Summary";
+"phone" = "Phone Number";
 
 /* Orders */
 "orders" = "Orders";

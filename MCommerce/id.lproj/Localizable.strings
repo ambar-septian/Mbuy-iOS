@@ -7,7 +7,7 @@
 */
 
 /* Authentication */
-"email" = "Email";
+"email" = "E-mail";
 "password" = "Kata Sandi";
 "firstName" = "Nama Depan";
 "lastName" = "Nama Belakang";
@@ -29,6 +29,13 @@
 /* Cart */
 "cart" = "Keranjang";
 "delete" = "Hapus";
+"next"  = "Selanjutnya";
+"back" = "Kembali";
+"finish" = "Selesai";
+"customerProfile" = "Profil Pemesan";
+"deliveryAddress"= "Alamat Pengiriman";
+"summary" = "Ringkasan";
+"phone" = "Nomor Telepon";
 
 /* Orders */
 "orders" = "Pesanan";
