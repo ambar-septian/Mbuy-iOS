@@ -20,13 +20,20 @@ class CheckOutPageViewController: UIPageViewController {
     
     fileprivate var currentIndex: Int = 0
     
+    fileprivate var headingView: UIView? {
+        guard let parent = parent as? CheckOutMainViewController else { return nil }
+        return parent.headerView
+    }
+    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.dataSource = self
         
-        if let initialVC = listViewControllers.first {
+        if let initialVC = listViewControllers.first as? CheckOutProfileViewController {
             setViewControllers([initialVC], direction: .forward, animated: false, completion: nil)
+            initialVC.childDelegate = self
         }
         
         if let scrollView = view.subviews.filter({ $0.isKind(of: UIScrollView.self)}).first as? UIScrollView {
@@ -41,6 +48,18 @@ class CheckOutPageViewController: UIPageViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+}
+
+extension CheckOutPageViewController {
+    func toggleHideHeadingView(){
+        guard let headingView = self.headingView else { return }
+        let isHidden = headingView.isHidden
+        let animation: UIViewAnimationOptions = isHidden  == true ? .curveEaseOut : .curveEaseOut
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: animation, animations: {
+            headingView.isHidden = !(isHidden)
+        }, completion: nil)
     }
 }
 
@@ -85,7 +104,63 @@ extension CheckOutPageViewController: CheckOutParentProtocol {
             setViewControllers([listViewControllers[index]], direction: .reverse, animated: true, completion: nil)
         }
         
-        currentIndex = index
+        switch index {
+        case 0:
+            guard let vc = listViewControllers[index] as? CheckOutProfileViewController else { return }
+            vc.childDelegate = self
+        case 1:
+            guard let vc = listViewControllers[index] as? CheckOutAddressViewController else { return }
+            vc.childDelegate = self
 
+        default: break
+        
+        }
+        currentIndex = index
+    }
+    
+    func didFormIsValid() -> (isValid:Bool, message: String?) {
+        switch currentIndex {
+        case 0:
+            guard let vc = listViewControllers[currentIndex] as? CheckOutProfileViewController else {  return (isValid:false, message: nil) }
+            return vc.validateForm()
+        case 1:
+            guard let vc = listViewControllers[currentIndex] as? CheckOutAddressViewController else { return (isValid:false, message: nil) }
+            return vc.validateForm()
+        default:
+            return (isValid:true, message: nil)
+        }
+    }
+    
+    func updateOrderProfile() {
+        guard let parent = parent as? CheckOutMainViewController else { return }
+        let profile = parent.profile
+        
+        switch currentIndex {
+        case 0:
+            guard let vc = listViewControllers[currentIndex] as? CheckOutProfileViewController else { return }
+            profile.email = vc.emailTextField.text ?? ""
+            profile.firstName = vc.firstNameTextField.text ?? ""
+            profile.lastName = vc.lastNameTextField.text ?? ""
+            profile.phone = vc.phoneTextField.text ?? ""
+            
+        case 1:
+            guard let vc = listViewControllers[currentIndex] as? CheckOutAddressViewController else {  return }
+            profile.address = vc.addressTextView.text
+            parent.currentDeliveryCost = vc.deliveryCost
+            guard let place = vc.selectedPlace else { return }
+            profile.coordinate = place.coordinate
+        default:
+            break
+        }
+    }
+}
+
+extension CheckOutPageViewController: CheckOutChildProtocol {
+    func didBeginTypingComponent() {
+        toggleHideHeadingView()
+    }
+    
+    func didEndTypingComponent() {
+        toggleHideHeadingView()
     }
 }

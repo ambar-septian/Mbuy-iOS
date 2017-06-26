@@ -31,7 +31,7 @@ class HorizontalTimelineView: UIView {
     fileprivate var spacing: CGFloat {
         return self.bounds.width / CGFloat(stepCount)
     }
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -41,6 +41,7 @@ class HorizontalTimelineView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupView()
+        
     }
     
     override func layoutSubviews() {
@@ -54,7 +55,6 @@ extension HorizontalTimelineView {
     fileprivate func setupView(){
         for i in 0 ..< stepCount {
             let circleView = UIView()
-            circleView.tag = i
             circleView.backgroundColor = Color.white
             addSubview(circleView)
             
@@ -80,7 +80,7 @@ extension HorizontalTimelineView {
         
         
         addSubview(activeCircleView)
-        activeCircleView.centerXAnchor == circleViews[0].centerXAnchor
+        activeCircleView.centerXAnchor == self.circleViews[0].centerXAnchor
         activeCircleView.widthAnchor == self.heightAnchor * 0.7
         activeCircleView.heightAnchor == activeCircleView.widthAnchor
         activeCircleView.centerYAnchor == self.centerYAnchor
@@ -89,26 +89,32 @@ extension HorizontalTimelineView {
         insertSubview(lineView, at: 0)
         
         lineView.backgroundColor = Color.green
-        lineView.leadingAnchor == activeCircleView.leadingAnchor
+        lineView.leadingAnchor == circleViews[0].leadingAnchor
         lineView.trailingAnchor == circleViews[stepCount - 1].trailingAnchor
         lineView.heightAnchor == self.heightAnchor * 0.1
         lineView.centerYAnchor == self.centerYAnchor
         
         
         backgroundColor = Color.clear
+        
     }
     
-    func moveActiveCircleView(index: Int){
-        guard circleViews.count >= index  else { return }
-        if index == 0 {
-            activeCircleView.leadingAnchor == self.leadingAnchor
+    func moveActiveCircleView(index: Int, withAnimation:Bool = true){
+        
+        guard circleViews.count - 1 >= index  else { return }
+        self.translatesAutoresizingMaskIntoConstraints = true
+    
+        let centerX = circleViews[index].center.x
+    
+        if withAnimation {
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
+                self.activeCircleView.center.x = centerX
+                
+            })
         } else {
-            activeCircleView.centerXAnchor == circleViews[index - 1].centerXAnchor
+            self.activeCircleView.center.x = centerX
         }
         
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
-            self.layoutIfNeeded()
-        })
         
         
     }

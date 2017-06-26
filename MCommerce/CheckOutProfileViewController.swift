@@ -64,10 +64,12 @@ class CheckOutProfileViewController: BaseViewController {
         }
     }
     
+    weak var childDelegate: CheckOutChildProtocol?
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -76,8 +78,50 @@ class CheckOutProfileViewController: BaseViewController {
     }
 }
 
+extension CheckOutProfileViewController {
+    func validateForm() -> (isValid:Bool, message:String?) {
+        let firstName = firstNameTextField.text
+        let lastName = lastNameTextField.text
+        let email = emailTextField.text
+        let phone = phoneTextField.text
+        
+        let texts = [firstName, lastName, email, phone]
+      
+        for (index,text) in texts.enumerated() {
+            guard let wText = text, wText != "" else {
+                return (isValid: false, message: "validEmptyForm".localize)
+            }
+            
+            switch index {
+            case 2: // email
+                guard wText.isValidEmail else {
+                   return (isValid: false, message: "validEmail".localize)
+                }
+            case 3: // phone
+                guard wText.isValidNumeric else {
+                    return (isValid: false, message: "validPhone".localize)
+                }
+            default:
+                break
+            }
+        }
+        
+        return (isValid: true, message: nil)
+    }
+}
+
 extension CheckOutProfileViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return handleTextFieldShouldReturn(textField)
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        childDelegate?.didBeginTypingComponent()
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        childDelegate?.didEndTypingComponent()
+        return true
     }
 }

@@ -10,7 +10,15 @@ import UIKit
 
 protocol CheckOutParentProtocol: class {
     func didChildPageChange(index:Int)
+    func didFormIsValid() -> (isValid:Bool, message: String?)
+    func updateOrderProfile()
 }
+
+protocol CheckOutChildProtocol: class {
+    func didBeginTypingComponent()
+    func didEndTypingComponent()
+}
+
 class CheckOutMainViewController: BaseViewController {
     
     @IBOutlet weak var childView: UIView!
@@ -24,7 +32,8 @@ class CheckOutMainViewController: BaseViewController {
     
     @IBOutlet weak var nextButton: BasicButton! {
         didSet {
-             nextButton.setTitle("next".localize, for: .normal)
+            nextButton.setTitle("next".localize, for: .normal)
+            nextButton.titleLabel?.adjustsFontSizeToFitWidth = true
         }
     }
     
@@ -34,12 +43,11 @@ class CheckOutMainViewController: BaseViewController {
     
     @IBOutlet weak var headingLabel: UILabel!
     
+    @IBOutlet weak var headerView: UIView!
+    
     var currentPage: Int = 0 {
         didSet {
-            timelineView.moveActiveCircleView(index: currentPage)
-            delegate?.didChildPageChange(index: currentPage)
-            
-            var title = "";
+                        var title = "";
             switch currentPage {
             case 0:
                 previousButton.isHidden = true
@@ -51,16 +59,24 @@ class CheckOutMainViewController: BaseViewController {
                  title = "deliveryAddress".localize
             case 2:
                 nextButton.setTitle("finish".localize, for: .normal)
+                nextButton.setNeedsLayout()
                 title = "summary".localize
             default:
                 break
             
             }
-            
             headingLabel.text =  title
+            timelineView.moveActiveCircleView(index: currentPage)
+            delegate?.didChildPageChange(index: currentPage)
             
         }
     }
+    
+    var passedCarts = [Cart]()
+    
+    var profile = OrderProfile()
+    
+    var currentDeliveryCost:Double = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +95,11 @@ class CheckOutMainViewController: BaseViewController {
      
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        timelineView.moveActiveCircleView(index: 0, withAnimation: false)
+    }
+    
     @IBAction func previousButtonTapped(_ sender: Any) {
         guard currentPage != 0 else { return }
         currentPage -= 1
@@ -86,15 +107,23 @@ class CheckOutMainViewController: BaseViewController {
     
     @IBAction func nextButtonTapped(_ sender: Any) {
         guard currentPage < 3 else { return }
+        guard delegate != nil else { return }
+        
+        let formValid = delegate!.didFormIsValid()
+//        if formValid.isValid {
+//            delegate?.updateOrderProfile()
+//            currentPage += 1
+//        } else {
+//            guard let message = formValid.message else { return }
+//            Alert.showAlert(message: message, alertType: .okOnly, header: nil, viewController: self)
+//        }
+        
         currentPage += 1
 
     }
     
 }
 
-extension CheckOutMainViewController {
-    
-}
 
 extension CheckOutMainViewController {
     fileprivate func setupChildView(){
@@ -105,25 +134,4 @@ extension CheckOutMainViewController {
         childView.addSubview(vc.view)
         vc.didMove(toParentViewController: self)
     }
-    
-//    func didChangeChildPage(row:Int){
-//        let tabButtons = [processButton, completeButton]
-//        for (index, button) in tabButtons.enumerated() {
-//            if index == row  {
-//                guard activePageIndex != index else { return }
-//                
-//                button?.setTitleColor(Color.orange, for: .normal)
-//                self.lineLeadingConstraint?.constant = index == tabButtons.count - 1 ? self.view.bounds.width * 0.5 : 0
-//                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
-//                    self.view.layoutIfNeeded()
-//                    
-//                }, completion: nil)
-//                delegate?.didChildPageChange(index: index)
-//                activePageIndex = index
-//            } else {
-//                button?.setTitleColor(Color.lightGray, for: .normal)
-//            }
-//        }
-//        
-//    }
 }

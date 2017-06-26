@@ -38,6 +38,12 @@
 "summary" = "Summary";
 "phone" = "Phone Number";
 
+/* Validation Form */
+"validEmptyForm" = "Please fill all field";
+"validEmail" = "Email is not valid";
+"validPhone" = "Phone number must not contain non numeric character";
+"validAddress" = "Address must not empty";
+
 /* Orders */
 "orders" = "Orders";
 "orderID" = "Order ID : ";

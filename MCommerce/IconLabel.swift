@@ -24,7 +24,7 @@ class IconLabel: UILabel {
     var icon: FontAwesomeIcon? {
         didSet {
             guard let iconString = icon?.attributedString(ofSize: font.pointSize, color: textColor) else { return }
-            let titleString = NSAttributedString(string: " " + (text ?? ""), attributes: [NSForegroundColorAttributeName: textColor, NSFontAttributeName: font])
+            let titleString = NSAttributedString(string: "   " + (text ?? ""), attributes: [NSForegroundColorAttributeName: textColor, NSFontAttributeName: font])
             let mutableString = NSMutableAttributedString(attributedString: iconString)
             mutableString.append(titleString)
             attributedText = mutableString

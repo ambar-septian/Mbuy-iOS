@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 enum Constants {
     static let cornerRadius:CGFloat = 6
@@ -73,7 +74,15 @@ enum Constants {
         static let updateStepper = Notification.Name(rawValue: "updateStepperNotification")
     }
 
-
+    enum GMAP {
+        static let mapKey = "AIzaSyCtSih3Yy8B6Fmf2bcQquXn3OTNNGEpHaA"
+        static let placeKey = "AIzaSyCpRajf4X6Bn7YtFTVngve-Kto9J96t7uQ"
+        static let defaultCoordinate = CLLocationCoordinate2D(latitude: -6.121435, longitude: 106.774124)
+        static let indonesiaFarLeftCoordinate = CLLocationCoordinate2D(latitude: -10.1718, longitude: 95.31644)
+        static let indonesiaFarRightCoordinate = CLLocationCoordinate2D(latitude: 5.88969, longitude: 140.71813)
+    }
+    
+    static let deliveryPrice:Double = 5000
 }
 
 

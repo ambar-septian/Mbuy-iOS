@@ -37,6 +37,12 @@
 "summary" = "Ringkasan";
 "phone" = "Nomor Telepon";
 
+/* Validation Form */
+"validEmptyForm" = "Harap semua field diisi";
+"validEmail" = "Email yang diisi tidak valid";
+"validPhone" = "Nomor Telepon harus menggunakan angka";
+"validAddress" = "Alamat tidak boleh kosong";
+
 /* Orders */
 "orders" = "Pesanan";
 "orderID" = "ID Pesanan : ";

@@ -73,6 +73,14 @@ class CartListViewController: BaseViewController {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.segueID.checkout.main {
+            guard let nav = segue.destination as? UINavigationController else { return }
+            guard let vc = nav.topViewController as? CheckOutMainViewController else { return }
+            vc.passedCarts = carts
+        }
+    }
 }
 
 extension CartListViewController {
