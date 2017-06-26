@@ -110,15 +110,14 @@ class CheckOutMainViewController: BaseViewController {
         guard delegate != nil else { return }
         
         let formValid = delegate!.didFormIsValid()
-//        if formValid.isValid {
-//            delegate?.updateOrderProfile()
-//            currentPage += 1
-//        } else {
-//            guard let message = formValid.message else { return }
-//            Alert.showAlert(message: message, alertType: .okOnly, header: nil, viewController: self)
-//        }
+        if formValid.isValid {
+            delegate?.updateOrderProfile()
+            currentPage += 1
+        } else {
+            guard let message = formValid.message else { return }
+            Alert.showAlert(message: message, alertType: .okOnly, header: nil, viewController: self)
+        }
         
-        currentPage += 1
 
     }
     

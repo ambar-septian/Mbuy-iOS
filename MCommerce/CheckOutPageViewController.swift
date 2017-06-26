@@ -25,6 +25,11 @@ class CheckOutPageViewController: UIPageViewController {
         return parent.headerView
     }
     
+    fileprivate var timelineView: HorizontalTimelineView? {
+        guard let parent = parent as? CheckOutMainViewController else { return nil }
+        return parent.timelineView
+    }
+    
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,10 +61,13 @@ extension CheckOutPageViewController {
         guard let headingView = self.headingView else { return }
         let isHidden = headingView.isHidden
         let animation: UIViewAnimationOptions = isHidden  == true ? .curveEaseOut : .curveEaseOut
-        
-        UIView.animate(withDuration: 0.3, delay: 0, options: animation, animations: {
+    
+        UIView.animate(withDuration: 0.3, delay: 0, options: animation, animations: { 
             headingView.isHidden = !(isHidden)
-        }, completion: nil)
+        }) { (completed) in
+            guard completed else { return }
+            self.timelineView?.moveActiveCircleView(index: self.currentIndex, withAnimation: true)
+        }
     }
 }
 
