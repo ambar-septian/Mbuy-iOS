@@ -10,6 +10,9 @@ import Foundation
 import FirebaseDatabase
 
 typealias categoriesCompletion = ((_ categories: [Category]) -> Void)
+
+var CurrentCategories = [Category]()
+
 class CategoryController {
     
     fileprivate let ref = FIRDatabase.database().reference(withPath: "categories")

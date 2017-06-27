@@ -148,7 +148,7 @@ class ProductDetailViewController: BaseViewController {
         passedProduct = nil
         
         let category = Category(nameID: "1", nameEN: "a", imageURL: "", orderNumber: 0)
-        product = Product(productID: "1", name: "Sepatu Nike", category: category, imageURL: "https://images-eu.ssl-images-amazon.com/images/G/31/img15/Shoes/CatNav/k._V293117556_.jpg", stock: 30, description: "In a storyboard-based application, you will often want to do a", price: 50000, createdDate: Date())
+        product = Product(name: "Sepatu Nike", category: category, imageURL: "https://images-eu.ssl-images-amazon.com/images/G/31/img15/Shoes/CatNav/k._V293117556_.jpg", stock: 30, description: "In a storyboard-based application, you will often want to do a", price: 50000, createdDate: Date())
         
         let user = User(email: "", firstName: "Ponim", lastName: "Kirun", address: "Tomang", userType: .email, profileImagePath: "https://dummyimage.com/600x400/000/fff")
         let user2 = User(email: "", firstName: "Riri", lastName: "Tamam", address: "Tebet", userType: .email, profileImagePath: "https://api.adorable.io/avatars/114/happy@adorable.io.png")
@@ -166,10 +166,10 @@ class ProductDetailViewController: BaseViewController {
         
         productDetails = [detail, detail2, detail3, detail4]
         
-        let product1 = Product(productID: "1", name: "Sepatu Nike", category: category, imageURL: "https://images-eu.ssl-images-amazon.com/images/G/31/img15/Shoes/CatNav/k._V293117556_.jpg", stock: 30, description: "In a storyboard-based application, you will often want to do a", price: 50000, createdDate: Date())
-        let product2 = Product(productID: "1", name: "Jacket Nike", category: category, imageURL: "http://www.thinkgeek.com/images/products/zoom/jouj_sw_tie_pilot_leather_ladies_jacket_jacket.jpg", stock: 30, description: "In a storyboard-based application, you will often want to do a", price: 50000, createdDate: Date())
-        let product3 = Product(productID: "1", name: "Watch", category: category, imageURL: "https://cdn.shopify.com/s/files/1/0377/2037/products/WhiteGoldLeather.Front_large.jpg?v=1490307659", stock: 30, description: "In a storyboard-based application, you will often want to do a", price: 50000, createdDate: Date())
-        let product4 = Product(productID: "1", name: "Tas", category: category, imageURL: "http://id-live-02.slatic.net/p/7/quincy-label-eve-tote-bag-bonus-tas-kecil-hitam-1729-6012889-7f0b3d99fef9dd3faa34c604c29407ce.jpg", stock: 30, description: "In a storyboard-based application, you will often want to do a", price: 50000, createdDate: Date())
+        let product1 = Product(name: "Sepatu Nike", category: category, imageURL: "https://images-eu.ssl-images-amazon.com/images/G/31/img15/Shoes/CatNav/k._V293117556_.jpg", stock: 30, description: "In a storyboard-based application, you will often want to do a", price: 50000, createdDate: Date())
+        let product2 = Product(name: "Jacket Nike", category: category, imageURL: "http://www.thinkgeek.com/images/products/zoom/jouj_sw_tie_pilot_leather_ladies_jacket_jacket.jpg", stock: 30, description: "In a storyboard-based application, you will often want to do a", price: 50000, createdDate: Date())
+        let product3 = Product(name: "Watch", category: category, imageURL: "https://cdn.shopify.com/s/files/1/0377/2037/products/WhiteGoldLeather.Front_large.jpg?v=1490307659", stock: 30, description: "In a storyboard-based application, you will often want to do a", price: 50000, createdDate: Date())
+        let product4 = Product(name: "Tas", category: category, imageURL: "http://id-live-02.slatic.net/p/7/quincy-label-eve-tote-bag-bonus-tas-kecil-hitam-1729-6012889-7f0b3d99fef9dd3faa34c604c29407ce.jpg", stock: 30, description: "In a storyboard-based application, you will often want to do a", price: 50000, createdDate: Date())
         
         relatedProducts = [product1, product2, product3, product4, product1, product2, product3, product4]
         productImageURLs = ["http://id-live-02.slatic.net/p/7/quincy-label-eve-tote-bag-bonus-tas-kecil-hitam-1729-6012889-7f0b3d99fef9dd3faa34c604c29407ce.jpg", "https://cdn.shopify.com/s/files/1/0377/2037/products/WhiteGoldLeather.Front_large.jpg?v=1490307659"]

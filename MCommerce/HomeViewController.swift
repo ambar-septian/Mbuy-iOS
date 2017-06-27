@@ -52,7 +52,8 @@ class HomeViewController: BaseViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.segueID.product.list {
             guard let vc = segue.destination as? ProductListViewController else { return }
-            
+            guard let index = sender as? Int else { return }
+            vc.passedCategory = self.categories[index]
         }
     }
 }
@@ -63,6 +64,8 @@ extension HomeViewController {
         DispatchQueue.global().async {
             self.controller.loadCategories { (categories) in
                 self.hideProgressHUD()
+                CurrentCategories.removeAll()
+                CurrentCategories = categories
                 self.categories = categories
             }
         }

@@ -25,11 +25,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var ratingCount: UILabel!
     
-    @IBOutlet weak var stockLabel: RoundedLabel! {
-        didSet {
-            stockLabel.mainColor = Color.green
-        }
-    }
+    @IBOutlet weak var stockLabel: RoundedLabel!
     
     @IBOutlet weak var cartButton: CircleImageButton! {
         didSet {
@@ -79,6 +75,8 @@ extension ProductCollectionViewCell: ReuseCollectionCellProtocol {
         cell.stockLabel.text = product.formattedStock
         cell.ratingView.numberOfStars = product.rating
         
+        cell.stockLabel.mainColor = product.stock > 0 ? Color.green : Color.red
+        cell.stockLabel.updateConstraints()
         return cell
     }
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2017 Ambar Septian. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension String {
     var localize: String {
@@ -33,6 +33,12 @@ extension String {
     
     var isValidNumeric:Bool {
         return CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: self))
+    }
+    
+    
+    func heightBasedFont(width: CGFloat, font: UIFont) -> CGFloat{
+        let rect = self.boundingRect(with: CGSize(width: width, height: CGFloat(MAXFLOAT)), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        return ceil(rect.height)
     }
     
     

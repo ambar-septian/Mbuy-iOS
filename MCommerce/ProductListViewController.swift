@@ -27,19 +27,14 @@ class ProductListViewController: BaseViewController {
         }
     }
     
-
-
+    fileprivate let controller = ProductController()
+    
+    var passedCategory: Category?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let category = Category(nameID: "1", nameEN: "a", imageURL: "", orderNumber: 0)
-        let product1 = Product(productID: "1", name: "Sepatu Nike", category: category, imageURL: "https://images-eu.ssl-images-amazon.com/images/G/31/img15/Shoes/CatNav/k._V293117556_.jpg", stock: 30, description: "In a storyboard-based application, you will often want to do a", price: 50000, createdDate: Date())
-        let product2 = Product(productID: "1", name: "Jacket Nike", category: category, imageURL: "http://www.thinkgeek.com/images/products/zoom/jouj_sw_tie_pilot_leather_ladies_jacket_jacket.jpg", stock: 30, description: "In a storyboard-based application, you will often want to do a", price: 50000, createdDate: Date())
-        let product3 = Product(productID: "1", name: "Watch", category: category, imageURL: "https://cdn.shopify.com/s/files/1/0377/2037/products/WhiteGoldLeather.Front_large.jpg?v=1490307659", stock: 30, description: "In a storyboard-based application, you will often want to do a", price: 50000, createdDate: Date())
-        let product4 = Product(productID: "1", name: "Tas", category: category, imageURL: "http://id-live-02.slatic.net/p/7/quincy-label-eve-tote-bag-bonus-tas-kecil-hitam-1729-6012889-7f0b3d99fef9dd3faa34c604c29407ce.jpg", stock: 30, description: "In a storyboard-based application, you will often want to do a", price: 50000, createdDate: Date())
         
-        products = [product1, product2, product3, product4, product1, product2, product3, product4]
-        // Do any additional setup after loading the view.
+        loadProducts()
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,6 +50,30 @@ class ProductListViewController: BaseViewController {
         }
     }
 
+}
+
+extension ProductListViewController {
+    func loadProducts(){
+        if passedCategory != nil {
+            loadProductByCategories()
+        }
+    }
+    
+    fileprivate func loadProductByCategories(){
+        guard let category = passedCategory else { return }
+        self.navigationItem.title = category.name
+        showProgressHUD()
+        DispatchQueue.global().async {
+            self.controller.loadProductByCategory(categoryID: category.categoryID, completion: { (products) in
+                DispatchQueue.main.async {
+                    self.hideProgressHUD()
+                    self.products = products
+                }
+            })
+           
+            
+        }
+    }
 }
 
 extension ProductListViewController: UICollectionViewDataSource {
@@ -97,11 +116,20 @@ extension ProductListViewController: DynamicCollectionViewLayoutDelegate {
 //        let tagNameHeight = tagStations[indexPath.item].tagName.heightBasedFont(width: width, font: font)
 //        let introduceHeight = tagStations[indexPath.item].playlist.introduce.heightBasedFont(width: width, font: font)
 //        return CGFloat(tagNameHeight + introduceHeight + 20)
-        guard let cell = collectionView.cellForItem(at: indexPath) as? ProductCollectionViewCell else {
-            return 160
-        }
-        let height = cell.frame.height - cell.imageView.frame.height
-        return height
+//        guard let cell = collectionView.cellForItem(at: indexPath) as? ProductCollectionViewCell else {
+//            return 150
+//        }
+//        let fontHeight = (cell.nameLabel.text ?? "").heightBasedFont(width: width, font: cell.nameLabel.font)
+//        let height = cell.frame.height - cell.imageView.frame.height + (fontHeight - cell.nameLabel.bounds.height)
+//        return height
+        
+        let padding:CGFloat = 120
+        let product = products[indexPath.row]
+        let nameHeight = product.name.heightBasedFont(width: width, font: Font.latoRegular.withSize(17))
+        let priceHeight = product.formattedPrice.heightBasedFont(width: width, font: Font.latoBold.withSize(16))
+        
+        return nameHeight + priceHeight + padding
     }
+    
 }
 

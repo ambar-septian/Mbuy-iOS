@@ -17,6 +17,7 @@ extension Double {
         formater.locale = Locale(identifier: "id")
         formater.numberStyle = .currency
         formater.currencySymbol = "Rp"
+        formater.minimumFractionDigits = 0
         
         return formater.string(from: NSNumber(value: self)) ?? String(self)
         

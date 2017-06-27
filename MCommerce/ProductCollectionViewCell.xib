@@ -56,7 +56,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="kZy-JW-QnJ">
                                                         <rect key="frame" x="0.0" y="0.0" width="178" height="5"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tgY-GZ-R8F">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tgY-GZ-R8F">
                                                                 <rect key="frame" x="0.0" y="0.0" width="178" height="0.0"/>
                                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                                                 <color key="textColor" red="0.42352941176470588" green="0.42352941176470588" blue="0.42352941176470588" alpha="1" colorSpace="calibratedRGB"/>
@@ -76,11 +76,11 @@
                                                 <rect key="frame" x="10" y="26" width="178" height="113"/>
                                                 <subviews>
                                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ULh-o8-lUn" customClass="RatingStarsView" customModule="MCommerce" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="111.5" height="113"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="140" height="113"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(150)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UIw-Xe-qhq">
-                                                        <rect key="frame" x="121.5" y="0.0" width="28.5" height="113"/>
+                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(150)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UIw-Xe-qhq">
+                                                        <rect key="frame" x="150" y="0.0" width="0.0" height="113"/>
                                                         <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="12"/>
                                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
@@ -105,7 +105,7 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="Bat-Ut-6ci" secondAttribute="height" multiplier="3:1" id="hwb-NU-1Hu"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>

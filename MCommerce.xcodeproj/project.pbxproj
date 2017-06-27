@@ -108,6 +108,8 @@
 		5DE5FE401EFFDE390089BE25 /* BorderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5FE3F1EFFDE390089BE25 /* BorderTextView.swift */; };
 		5DE9808E1F02446A007685F5 /* FirebaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE9808D1F02446A007685F5 /* FirebaseProtocol.swift */; };
 		5DE980901F02455D007685F5 /* CategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE9808F1F02455D007685F5 /* CategoryController.swift */; };
+		5DE980921F02C4A6007685F5 /* ProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE980911F02C4A6007685F5 /* ProductController.swift */; };
+		5DE980941F02C996007685F5 /* ProductVariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE980931F02C996007685F5 /* ProductVariant.swift */; };
 		5DF000711EFCBDE700764B33 /* ImageTableViewRowAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF000701EFCBDE700764B33 /* ImageTableViewRowAction.swift */; };
 		5DF000731EFCCB7100764B33 /* OrderPayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF000721EFCCB7100764B33 /* OrderPayment.swift */; };
 		5DF000751EFCCE4000764B33 /* OrderNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF000741EFCCE4000764B33 /* OrderNoteViewController.swift */; };
@@ -243,6 +245,8 @@
 		5DE5FE3F1EFFDE390089BE25 /* BorderTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderTextView.swift; sourceTree = "<group>"; };
 		5DE9808D1F02446A007685F5 /* FirebaseProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseProtocol.swift; sourceTree = "<group>"; };
 		5DE9808F1F02455D007685F5 /* CategoryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryController.swift; sourceTree = "<group>"; };
+		5DE980911F02C4A6007685F5 /* ProductController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductController.swift; sourceTree = "<group>"; };
+		5DE980931F02C996007685F5 /* ProductVariant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductVariant.swift; sourceTree = "<group>"; };
 		5DF000701EFCBDE700764B33 /* ImageTableViewRowAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTableViewRowAction.swift; sourceTree = "<group>"; };
 		5DF000721EFCCB7100764B33 /* OrderPayment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderPayment.swift; sourceTree = "<group>"; };
 		5DF000741EFCCE4000764B33 /* OrderNoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderNoteViewController.swift; sourceTree = "<group>"; };
@@ -590,6 +594,7 @@
 			children = (
 				5D5490301F00531C00E8C878 /* SearchPlaceController.swift */,
 				5DE9808F1F02455D007685F5 /* CategoryController.swift */,
+				5DE980911F02C4A6007685F5 /* ProductController.swift */,
 			);
 			name = GeneralController;
 			sourceTree = "<group>";
@@ -612,6 +617,7 @@
 				5D7E783F1EF23A31000598BE /* ProductTag.swift */,
 				5D24EF3A1EC32A8D00B43A71 /* Product.swift */,
 				5D46A21C1EEF368600B7C269 /* ProductDetail.swift */,
+				5DE980931F02C996007685F5 /* ProductVariant.swift */,
 				5D24EF3C1EC32A9800B43A71 /* Review.swift */,
 				5D542EA11EC96A9E00855EE0 /* User.swift */,
 				5D8153641EFA24090064B622 /* Cart.swift */,
@@ -936,6 +942,7 @@
 				5D8153691EFA2ADA0064B622 /* CartListViewController.swift in Sources */,
 				5DBE850C1EFEFFBE00341A07 /* CheckOutAddressViewController.swift in Sources */,
 				5DD0D9C31EF1196C00E5D2C4 /* TagCollectionViewCell.swift in Sources */,
+				5DE980941F02C996007685F5 /* ProductVariant.swift in Sources */,
 				5DCC92D71EEF8CDD001C6F42 /* Date+Extension.swift in Sources */,
 				5DD0D9C01EF116FE00E5D2C4 /* RoundedStepper.swift in Sources */,
 				5DBFBAA91EC1984C0061FE35 /* Localize.swift in Sources */,
@@ -951,6 +958,7 @@
 				5DBE11ED1ED2E06300D133EF /* ForgotPasswordViewController.swift in Sources */,
 				5D682E351ED5851A007D628E /* DynamicColllectionViewLayout.swift in Sources */,
 				5D46A21D1EEF368600B7C269 /* ProductDetail.swift in Sources */,
+				5DE980921F02C4A6007685F5 /* ProductController.swift in Sources */,
 				5D0BBA8F1EFB6FEF00C40767 /* OrderListViewController.swift in Sources */,
 				5DB4EA281EC96CEA004546CE /* UserType.swift in Sources */,
 				5D682E3D1ED58A87007D628E /* ReuseCellProtocol.swift in Sources */,
