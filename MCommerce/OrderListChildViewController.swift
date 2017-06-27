@@ -34,7 +34,7 @@ class OrderListChildViewController: BaseViewController {
 
         let profile = OrderProfile(firstName: "Ambuy", lastName: "Septian", address: "Jl. Letjen Sparaman No.3 Jakarta Selatan", coordinate: CLLocationCoordinate2DMake(-6, 102), phone: "032423423", email: "asdfds@gmail.com", note: "")
         
-        let category = Category(categoryID: "1", name: "a", imageURL: "")
+        let category = Category(nameID: "1", nameEN: "a", imageURL: "", orderNumber: 0)
         let product1 = Product(productID: "1", name: "Sepatu Nike", category: category, imageURL: "https://images-eu.ssl-images-amazon.com/images/G/31/img15/Shoes/CatNav/k._V293117556_.jpg", stock: 30, description: "In a storyboard-based application, you will often want to do a", price: 50000, createdDate: Date())
         let cart1 = Cart(product: product1, price: product1.price, quantity: 4)
         let cart2 = Cart(product: product1, price: product1.price, quantity: 20)

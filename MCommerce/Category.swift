@@ -7,15 +7,48 @@
 //
 
 import Foundation
+import Firebase
 
-class Category {
-    var categoryID: String
-    var name: String
+class Category: FirebaseProtocol {
+    var name: String {
+        return Localize.shared.language == .ID ? nameID : nameEN
+    }
     var imageURL: String
     
-    public init(categoryID: String, name: String, imageURL: String) {
-        self.categoryID = categoryID
-        self.name = name
-        self.imageURL = imageURL
+    var key: String
+    var ref: FIRDatabaseReference?
+    
+    var categoryID:String {
+        return key
     }
+    
+    fileprivate var nameID:String
+    
+    fileprivate var nameEN:String
+    
+    var orderNumber: Int
+    
+    static let jsonKeys:(nameEN:String, nameID:String, imageURL: String, orderNumber : String) =
+        (nameEN: "nameEN", nameID:"nameID", imageURL: "imageURL", orderNumber : "orderNumber")
+    
+    public init(nameID: String, nameEN:String, imageURL: String, orderNumber:Int,key:String = "") {
+        self.nameID = nameID
+        self.nameEN = nameEN
+        self.imageURL = imageURL
+        self.orderNumber = orderNumber
+        self.key = key
+    }
+    
+    init(snapshot: FIRDataSnapshot) {
+        self.key = snapshot.key
+        let jsonKeys = Category.jsonKeys
+        
+        let snapshotValue = snapshot.value as! [String: AnyObject]
+        self.nameEN  = snapshotValue[jsonKeys.nameEN] as? String ?? ""
+        self.nameID  = snapshotValue[jsonKeys.nameID] as? String ?? ""
+        self.imageURL = snapshotValue[jsonKeys.imageURL] as? String ?? ""
+        self.orderNumber = snapshotValue[jsonKeys.orderNumber] as? Int ?? 0
+        ref = snapshot.ref
+    }
+    
 }

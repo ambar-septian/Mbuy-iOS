@@ -32,7 +32,7 @@ class ProductListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let category = Category(categoryID: "1", name: "a", imageURL: "")
+        let category = Category(nameID: "1", nameEN: "a", imageURL: "", orderNumber: 0)
         let product1 = Product(productID: "1", name: "Sepatu Nike", category: category, imageURL: "https://images-eu.ssl-images-amazon.com/images/G/31/img15/Shoes/CatNav/k._V293117556_.jpg", stock: 30, description: "In a storyboard-based application, you will often want to do a", price: 50000, createdDate: Date())
         let product2 = Product(productID: "1", name: "Jacket Nike", category: category, imageURL: "http://www.thinkgeek.com/images/products/zoom/jouj_sw_tie_pilot_leather_ladies_jacket_jacket.jpg", stock: 30, description: "In a storyboard-based application, you will often want to do a", price: 50000, createdDate: Date())
         let product3 = Product(productID: "1", name: "Watch", category: category, imageURL: "https://cdn.shopify.com/s/files/1/0377/2037/products/WhiteGoldLeather.Front_large.jpg?v=1490307659", stock: 30, description: "In a storyboard-based application, you will often want to do a", price: 50000, createdDate: Date())

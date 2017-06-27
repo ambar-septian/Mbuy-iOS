@@ -54,7 +54,7 @@ class CartListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let category = Category(categoryID: "1", name: "a", imageURL: "")
+        let category = Category(nameID: "1", nameEN: "a", imageURL: "", orderNumber: 0)
         let product1 = Product(productID: "1", name: "Sepatu Nike", category: category, imageURL: "https://images-eu.ssl-images-amazon.com/images/G/31/img15/Shoes/CatNav/k._V293117556_.jpg", stock: 30, description: "In a storyboard-based application, you will often want to do a", price: 50000, createdDate: Date())
         let cart1 = Cart(product: product1, price: product1.price, quantity: 4)
         let cart2 = Cart(product: product1, price: product1.price, quantity: 20)
@@ -62,12 +62,17 @@ class CartListViewController: BaseViewController {
         
         carts = [cart1, cart2, cart3]
         NotificationCenter.default.addObserver(self, selector: #selector(updateFooterLabel), name: Constants.notification.updateStepper, object: nil)
-        // Do any additional setup after loading the view.
+    
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        title = "cart".localize
     }
     
     deinit {
@@ -112,6 +117,7 @@ extension CartListViewController: UITableViewDataSource {
 
 extension CartListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let storyboard = UIStoryboard(name: Constants.storyboard.product, bundle: nil)
         guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.viewController.product.detail) as? ProductDetailViewController else { return }
         navigationController?.pushViewController(vc, animated: true)

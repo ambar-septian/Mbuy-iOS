@@ -147,7 +147,7 @@ class ProductDetailViewController: BaseViewController {
 //        product = passedProduct
         passedProduct = nil
         
-        let category = Category(categoryID: "1", name: "a", imageURL: "")
+        let category = Category(nameID: "1", nameEN: "a", imageURL: "", orderNumber: 0)
         product = Product(productID: "1", name: "Sepatu Nike", category: category, imageURL: "https://images-eu.ssl-images-amazon.com/images/G/31/img15/Shoes/CatNav/k._V293117556_.jpg", stock: 30, description: "In a storyboard-based application, you will often want to do a", price: 50000, createdDate: Date())
         
         let user = User(email: "", firstName: "Ponim", lastName: "Kirun", address: "Tomang", userType: .email, profileImagePath: "https://dummyimage.com/600x400/000/fff")

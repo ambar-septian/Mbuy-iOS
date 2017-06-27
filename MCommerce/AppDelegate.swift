@@ -23,9 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Register Fontawesome
         FontAwesomeIcon.register()
         
-        // Configure Firebase
-        FIRApp.configure()
-        
         GMSServices.provideAPIKey(Constants.GMAP.mapKey)
         GMSPlacesClient.provideAPIKey(Constants.GMAP.placeKey)
         
@@ -47,6 +44,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         return true
+    }
+    
+    override init(){
+        super.init()
+        // Configure Firebase
+        FIRApp.configure()
+        FIRDatabase.database().persistenceEnabled = true
+        
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

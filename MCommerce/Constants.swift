@@ -23,6 +23,10 @@ enum Constants {
         enum checkout {
             static let main = "checkOutMain"
         }
+        
+        enum product {
+            static let list = "productList"
+        }
     }
     
     enum viewTag {

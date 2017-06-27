@@ -53,6 +53,7 @@ class SearchViewController: BaseViewController {
         setupChildView()
         
         trendingResults = ["Jaket", "Tas", "Jam Tangan"]
+        
     }
 
     override func didReceiveMemoryWarning() {

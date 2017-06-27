@@ -20,7 +20,7 @@ class CategoryHomeTableViewCell: UITableViewCell {
     
     fileprivate lazy var transparentView: UIView = {
         let view = UIView()
-        view.backgroundColor = Color.black.withAlphaComponent(0.5)
+        view.backgroundColor = Color.black.withAlphaComponent(0.2)
         return view
     }()
     

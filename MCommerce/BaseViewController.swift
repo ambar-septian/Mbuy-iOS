@@ -9,9 +9,19 @@
 import UIKit
 import Iconic
 import Hero
+import NVActivityIndicatorView
 
 class BaseViewController: UIViewController {
+    
+    fileprivate var iconNavHeight: CGFloat {
+        guard let navHeight = self.navigationController?.navigationBar.frame.size.height else {
+            return 30
+        }
+        return navHeight * 0.75
+    }
 
+    var hudView: NVActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         automaticallyAdjustsScrollViewInsets = false
@@ -47,7 +57,7 @@ extension BaseViewController {
     }
     
     func addDismissBarButton(rightPosition: Bool = true){
-        let size = CGSize(width: 20, height: 20)
+        let size = CGSize(width: iconNavHeight, height: iconNavHeight)
         let image = FontAwesomeIcon.removeIcon.image(ofSize: size, color: Color.white).withRenderingMode(.alwaysOriginal)
         let barButton =  UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(self.dismissVC))
         
@@ -60,7 +70,8 @@ extension BaseViewController {
     }
     
     func addBackButton(){
-        let size = CGSize(width: 1, height: 1)
+       
+        let size = CGSize(width: iconNavHeight, height: iconNavHeight)
         let image = FontAwesomeIcon.angleLeftIcon.image(ofSize: size, color: Color.white).withRenderingMode(.alwaysOriginal)
         let barButton =  UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(self.popBack))
 
@@ -148,6 +159,41 @@ extension BaseViewController {
 
         UIApplication.shared.statusBarStyle = .lightContent
     }
+    
+    func setupTabBar(){
+        let size = CGSize(width: 25, height: 25)
+        guard let tabBars = self.tabBarController?.tabBar.items else { return }
+
+        let homeIcon = FontAwesomeIcon.homeIcon
+        let searchIcon = FontAwesomeIcon.searchIcon
+        let cartIcon = FontAwesomeIcon.shoppingCartIcon
+        let orderIcon = FontAwesomeIcon.truckIcon
+        let settingIcon = FontAwesomeIcon.cogsIcon
+        
+        let icons = [homeIcon, searchIcon, cartIcon, orderIcon, settingIcon]
+        
+        for (index, tabBar) in tabBars.enumerated() {
+            guard icons.count - 1 >= index else { continue }
+            let icon = icons[index]
+            let image = icon.image(ofSize: size, color: Color.darkGray)
+            let selectedImage = icon.image(ofSize: size, color: Color.orange)
+            
+            tabBar.selectedImage = selectedImage
+            tabBar.image = image
+        }
+        
+
+        setupTitleTabBar()
+    }
+    
+    func setupTitleTabBar(){
+        guard let tabBars = self.tabBarController?.tabBar.items else { return }
+        let titles = [ "home".localize, "search".localize, "cart".localize, "orders".localize, "settings".localize]
+        for (index, tabBar) in tabBars.enumerated() {
+            guard titles.count - 1 >= index else { continue }
+            tabBar.title = titles[index]
+        }
+    }
 
     
 
@@ -158,6 +204,51 @@ extension BaseViewController: UIGestureRecognizerDelegate {
         return true
     }
 }
+
+
+extension BaseViewController {
+    func initHUD(){
+        let screenHeight = self.view.bounds.height
+        var padding = max(self.view.frame.width / 5, self.view.frame.height  / 5)
+        if UIDevice.current.userInterfaceIdiom == .pad                                                                                                                                                                                                                                             {
+            padding =  max(self.view.frame.width / 4, self.view.frame.height  / 4)
+        }else if screenHeight <= 480{ //for IPhone 4s
+            padding =  max(self.view.frame.width / 3.8, self.view.frame.height  / 3.8)
+        }
+        print("hud padding:\(padding)")
+        hudView = NVActivityIndicatorView(frame: self.view.frame, type: .ballClipRotate, color: Color.orange, padding: padding)
+        hudView.backgroundColor  = Color.cream
+    }
+    
+    
+    func showProgressHUD(isTransparent: Bool = true, frame:CGRect? = nil){
+        if hudView == nil {
+            initHUD()
+        }
+        
+        
+        hudView.backgroundColor = isTransparent ? Color.cream.withAlphaComponent(0.5): Color.cream
+        
+        if !(view.subviews.contains(hudView)) {
+            view.addSubview(hudView)
+        }
+        hudView.alpha = 1
+        self.hudView.startAnimating()
+    }
+    
+    func hideProgressHUD(){
+        guard view.subviews.contains(hudView) else { return }
+        
+        UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
+            self.hudView.alpha = 0
+        }) { (completed) in
+            guard completed else { return }
+            self.hudView.stopAnimating()
+            self.hudView.removeFromSuperview()
+        }
+    }
+}
+
 
 
 extension BaseViewController {
