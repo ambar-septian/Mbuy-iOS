@@ -23,7 +23,6 @@ class RoundedStepper: UIView {
         button.frame.origin.x = self.bounds.width  - button.frame.width
         button.titleLabel?.numberOfLines = 1
         button.titleLabel?.font = Font.latoBold.withSize(self.fontSize)
-//        button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.addTarget(self, action: #selector(self.incrementCounter(sender:)), for: .touchUpInside)
         button.backgroundColor = Color.orange
         button.layer.cornerRadius = 8
@@ -40,7 +39,6 @@ class RoundedStepper: UIView {
         button.frame.origin.y = self.bounds.origin.y
         button.titleLabel?.numberOfLines = 1
         button.titleLabel?.font = Font.latoBold.withSize(self.fontSize)
-//        button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.addTarget(self, action: #selector(self.decrementCounter(sender:)), for: .touchUpInside)
         button.backgroundColor = Color.orange
         button.layer.cornerRadius = 8
@@ -54,7 +52,6 @@ class RoundedStepper: UIView {
         label.text = "0"
         label.textAlignment = .center
         label.frame = self.bounds
-//        label.center.x -= label.frame.size.width
         label.font = Font.latoBold.withSize(self.fontSize)
         label.textColor = Color.orange
         label.numberOfLines = 1
@@ -76,6 +73,10 @@ class RoundedStepper: UIView {
     }
     
     weak var delegate: RoundedStepperDelegate?
+    
+    var minimumValue = 1
+    
+    var stepper = 1
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -105,14 +106,14 @@ class RoundedStepper: UIView {
 
     
     func incrementCounter(sender: UIButton) {
-        guard counter >= 0 else { return }
-        counter += 1
+        guard counter >= minimumValue else { return }
+        counter += stepper
         delegate?.stepperValueDidUpdate(value: counter)
     }
     
     func decrementCounter(sender: UIButton) {
-        guard counter >= 1 else { return }
-        counter -= 1
+        guard counter > minimumValue else { return }
+        counter -= stepper
         delegate?.stepperValueDidUpdate(value: counter)
        
     }

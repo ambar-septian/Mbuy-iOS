@@ -32,6 +32,7 @@ class TagCollectionView: UICollectionView {
         backgroundColor = Color.cream
         layer.cornerRadius = Constants.cornerRadius
         
+        
     }
 }
 
@@ -43,6 +44,22 @@ extension TagCollectionView: UICollectionViewDelegateFlowLayout {
 }
 
 class TagFlowLayout: UICollectionViewFlowLayout {
+    fileprivate let insetValue:CGFloat = 8
+    
+    override init() {
+        super.init()
+        setupCollectionFlowLayout()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupCollectionFlowLayout()
+    }
+    
+    func setupCollectionFlowLayout(){
+        sectionInset = UIEdgeInsets(top: insetValue, left: insetValue, bottom: insetValue, right: insetValue)
+    }
+    
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         var newAttributesForElementsInRect = [UICollectionViewLayoutAttributes]()
         
@@ -63,7 +80,7 @@ class TagFlowLayout: UICollectionViewFlowLayout {
                 refAttributes.frame = newLeftAlignedFrame
             }
             // calculate new value for current margin
-            leftMargin += refAttributes.frame.size.width
+            leftMargin += refAttributes.frame.size.width + insetValue
             newAttributesForElementsInRect.append(refAttributes)
         }
         return newAttributesForElementsInRect

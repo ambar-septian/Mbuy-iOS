@@ -24,6 +24,10 @@
 /* Home */
 "home" = "Home";
 
+/* Product */
+"addToCart" = "Add to cart";
+"quantity" = "Quantity";
+
 /* Search */
 "search" = "Search";
 

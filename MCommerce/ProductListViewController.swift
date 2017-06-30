@@ -70,10 +70,10 @@ extension ProductListViewController {
                     self.products = products
                 }
             })
-           
-            
         }
     }
+    
+  
 }
 
 extension ProductListViewController: UICollectionViewDataSource {
@@ -83,7 +83,10 @@ extension ProductListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let product = products[indexPath.item]
-        return ProductCollectionViewCell.configureCell(collectionView: collectionView, indexPath: indexPath, object: product)
+        let cell =  ProductCollectionViewCell.configureCell(collectionView: collectionView, indexPath: indexPath, object: product) as! ProductCollectionViewCell
+        cell.currentVC = self
+        
+        return cell
     }
 }
 
@@ -93,6 +96,9 @@ extension ProductListViewController: UICollectionViewDelegate {
         print("select")
     }
     
+    func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
+        return false
+    }
 }
 
 
@@ -111,18 +117,6 @@ extension ProductListViewController: DynamicCollectionViewLayoutDelegate {
     }
     
     func collectionView(collectionView: UICollectionView, heightForAnnotationAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
-//        let font = Font.semiBold.withSize(15)
-//        
-//        let tagNameHeight = tagStations[indexPath.item].tagName.heightBasedFont(width: width, font: font)
-//        let introduceHeight = tagStations[indexPath.item].playlist.introduce.heightBasedFont(width: width, font: font)
-//        return CGFloat(tagNameHeight + introduceHeight + 20)
-//        guard let cell = collectionView.cellForItem(at: indexPath) as? ProductCollectionViewCell else {
-//            return 150
-//        }
-//        let fontHeight = (cell.nameLabel.text ?? "").heightBasedFont(width: width, font: cell.nameLabel.font)
-//        let height = cell.frame.height - cell.imageView.frame.height + (fontHeight - cell.nameLabel.bounds.height)
-//        return height
-        
         let padding:CGFloat = 120
         let product = products[indexPath.row]
         let nameHeight = product.name.heightBasedFont(width: width, font: Font.latoRegular.withSize(17))

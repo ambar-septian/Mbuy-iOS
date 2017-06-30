@@ -56,6 +56,7 @@ enum Constants {
             static let detail = "ProductDetailViewControllerID"
             static let preview = "ProductPreviewViewControllerID"
             static let list = "ProductListViewControllerID"
+            static let confirmation = "ProductConfirmationViewControllerID"
         }
         
         enum order {

@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Iconic
 
-class ProductPreviewViewController: BaseViewController {
+class ProductPreviewViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -16,7 +17,15 @@ class ProductPreviewViewController: BaseViewController {
         didSet {
             imageView.image = nil
             imageView.contentMode = .scaleAspectFit
-            imageView.heroID = Constants.heroID.productPreview
+            //imageView.heroID = Constants.heroID.productPreview
+        }
+    }
+    
+    
+    @IBOutlet weak var closeButton: BasicButton! {
+        didSet {
+            let iconString = FontAwesomeIcon.removeIcon.attributedString(ofSize: 25 , color: Color.orange)
+            closeButton.setAttributedTitle(iconString, for: .normal)
         }
     }
     @IBOutlet weak var leadingConstraint: NSLayoutConstraint!
@@ -28,6 +37,9 @@ class ProductPreviewViewController: BaseViewController {
     
     @IBOutlet weak var trailingConstraint: NSLayoutConstraint!
     
+    fileprivate var presentingNavigationController: UINavigationController? {
+        return presentingViewController?.navigationController
+    }
     
     var passedImage: UIImage?
     
@@ -44,7 +56,20 @@ class ProductPreviewViewController: BaseViewController {
         super.viewDidLayoutSubviews()
         updateMinZoomScaleForSize(size: view.bounds.size)
     }
- 
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presentingNavigationController?.setNavigationBarHidden(true, animated: true)
+        presentingNavigationController?.navigationBar.isUserInteractionEnabled = false
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -69,13 +94,19 @@ extension ProductPreviewViewController {
         let widthScale = size.width / imageView.bounds.width
         let heightScale = size.height / imageView.bounds.height
         let minScale = min(widthScale, heightScale)
-        scrollView.minimumZoomScale = minScale
-        scrollView.zoomScale = minScale
+        
+        UIView.animate(withDuration: 0.3) { 
+            self.scrollView.minimumZoomScale = minScale
+            self.scrollView.zoomScale = minScale
+        }
+        
     }
 }
 
 extension ProductPreviewViewController {
     @IBAction func closeButtonTapped(_ sender: Any) {
+        presentingNavigationController?.setNavigationBarHidden(false, animated: true)
+        presentingNavigationController?.navigationBar.isUserInteractionEnabled = true
         dismiss(animated: true, completion: nil)
     }
 

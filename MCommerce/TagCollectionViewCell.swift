@@ -16,18 +16,34 @@ class TagCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-//        backgroundColor = Color.white
-//        tagLabel.textColor = Color.darkGray
+
         maxWidthConstraint.constant = UIScreen.main.bounds.width - 8 * 2 - 8 * 2
+        self.layer.cornerRadius = 4
+        self.backgroundColor = Color.white
+    }
+    
+    
+}
+
+extension TagCollectionViewCell {
+    func setAppreanceCell(isActive: Bool){
+        if isActive {
+            backgroundColor = Color.green
+            tagLabel.textColor = Color.white
+        } else {
+            backgroundColor = Color.white
+            tagLabel.textColor = Color.darkGray
+        }
+        
     }
 }
 
 extension TagCollectionViewCell: ReuseCollectionCellProtocol {
     static func configureCell<T>(collectionView: UICollectionView, indexPath: IndexPath, object: T?) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! TagCollectionViewCell
-        guard let tag = object as? ProductTag else { return cell }
+        guard let variant = object as? ProductVariant else { return cell }
         
-        cell.tagLabel.text = tag.name
+        cell.tagLabel.text = variant.name
         return cell
     }
 }

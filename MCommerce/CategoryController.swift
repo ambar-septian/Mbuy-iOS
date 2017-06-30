@@ -28,7 +28,7 @@ class CategoryController {
             
             completion(categories)
         })
-
-        
     }
+    
+
 }

@@ -23,6 +23,10 @@
 /* Home */
 "home" = "Beranda";
 
+/* Product */
+"addToCart" = "Tambah ke keranjang";
+"quantity" = "Quantity";
+
 /* Search */
 "search" = "Cari";
 

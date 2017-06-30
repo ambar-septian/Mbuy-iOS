@@ -97,7 +97,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="fqV-Rh-v3a">
                                                 <rect key="frame" x="10" y="149" width="178" height="40"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pjl-2v-Iow">
+                                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pjl-2v-Iow">
                                                         <rect key="frame" x="0.0" y="0.0" width="178" height="40"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bat-Ut-6ci" customClass="RoundedLabel" customModule="MCommerce" customModuleProvider="target">
@@ -115,6 +115,9 @@
                                                                     <constraint firstAttribute="width" secondItem="H4A-az-UQX" secondAttribute="height" multiplier="1:1" id="eWV-DO-j1t"/>
                                                                 </constraints>
                                                                 <state key="normal" title="Button"/>
+                                                                <connections>
+                                                                    <action selector="cartAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="PdP-49-QOQ"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

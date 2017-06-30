@@ -57,7 +57,7 @@ class Product: FirebaseProtocol {
     static let jsonKeys:(name:String, category:String, imageURL: String, description : String, createdDate:String,  rating:String, price:String, variants: String, details: String) =
         (name:"name", category:"category", imageURL: "imageURL", description : "description",createdDate:"createdDate", rating:"rating", price:"price",variants: "variants", details: "details")
     
-    public init(name: String, category: Category, imageURL: String, stock: Int, description: String, price: Double, createdDate: Date, key:String = "") {
+    public init(name: String, category: Category?, imageURL: String, stock: Int, description: String, price: Double, createdDate: Date, key:String = "") {
         self.name = name
         self.category = category
         self.imageURLs.append(imageURL)

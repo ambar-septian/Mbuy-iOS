@@ -31,15 +31,20 @@ class ProductCollectionViewCell: UICollectionViewCell {
         didSet {
             cartButton.mainColor = Color.orange
             cartButton.icon = FontAwesomeIcon.shoppingCartIcon
-            cartButton.addTarget(self, action: #selector(self.cartButtonTapped(sender:)), for: .touchUpInside)
         }
     }
     
     @IBOutlet weak var constraintHeight: NSLayoutConstraint!
     
+    var currentVC: UIViewController?
+    
+    fileprivate var product: Product?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+
+    fileprivate var tapAction: ((ProductCollectionViewCell) -> Void)?
 
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
@@ -50,11 +55,20 @@ class ProductCollectionViewCell: UICollectionViewCell {
         
         constraintHeight.constant = attributes.imageHeight
     }
+    @IBAction func cartAction(_ sender: Any) {
+        guard currentVC != nil else { return }
+        guard product != nil else { return }
+        let confirmationVC = ProductConfirmationViewController.self
+        confirmationVC.showViewController(currentVC: currentVC!, product: product!)
+    }
 }
 
 extension ProductCollectionViewCell {
     func cartButtonTapped(sender: UIButton) {
-        print("button tapped")
+        guard currentVC != nil else { return }
+        guard product != nil else { return }
+        let confirmationVC = ProductConfirmationViewController.self
+        confirmationVC.showViewController(currentVC: currentVC!, product: product!)
     }
 }
 
@@ -62,6 +76,7 @@ extension ProductCollectionViewCell: ReuseCollectionCellProtocol {
     static func configureCell<T>(collectionView: UICollectionView, indexPath: IndexPath, object: T?) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! ProductCollectionViewCell
         guard let product = object as? Product else { return cell }
+        cell.product = product
         
         cell.imageView.setImage(urlString: product.coverURL) { (image) in
             if product.imageSize == nil {
@@ -77,6 +92,17 @@ extension ProductCollectionViewCell: ReuseCollectionCellProtocol {
         
         cell.stockLabel.mainColor = product.stock > 0 ? Color.green : Color.red
         cell.stockLabel.updateConstraints()
+        
+        cell.tapAction = {
+            (cell) in
+            guard cell.currentVC != nil else { return }
+            guard cell.product != nil else { return }
+            let confirmationVC = ProductConfirmationViewController.self
+            confirmationVC.showViewController(currentVC: cell.currentVC!, product: cell.product!)
+        }
+//        cell.cartButton.addTarget(self, action: #selector(self.cartButtonTapped(sender:)), for: .touchUpInside)
+        
+        
         return cell
     }
 }

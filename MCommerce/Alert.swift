@@ -9,7 +9,7 @@
 import UIKit
 
 class Alert {
-    class func showAlert(message:String,alertType: AlertType, header title:String?, viewController vc: UIViewController, handler: ((UIAlertAction) -> Void)? = nil){
+    class func showAlert(message:String,alertType: AlertType, header title:String? = nil, viewController vc: UIViewController, handler: ((UIAlertAction) -> Void)? = nil){
         
         let alert = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: handler))

@@ -60,6 +60,7 @@ class CircleImageButton: UIButton {
         view.layer.cornerRadius = self.bounds.width / 2
         view.layer.masksToBounds = true
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.isUserInteractionEnabled = false
         return view
     }()
     
@@ -106,6 +107,7 @@ extension CircleImageButton: BaseViewProtocol {
         layer.shadowColor = Color.grayShadow.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 2)
         layer.shadowRadius = 8
+        layer.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: self.bounds.width / 2).cgPath
 //        layer.shouldRasterize = true
 //        layer.rasterizationScale = UIScreen.main.scale
         layer.masksToBounds = true

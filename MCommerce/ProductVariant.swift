@@ -11,6 +11,7 @@ import Foundation
 class ProductVariant {
     var stock: Int
     var name:String
+    var isSelected: Bool = false
 
     static let jsonKeys:(variantName:String, stock:String) =
         (variantName:"variantName", stock:"stock")
@@ -23,7 +24,7 @@ class ProductVariant {
     init(object: [String: AnyObject]) {
         let jsonKeys = ProductVariant.jsonKeys
         self.name = object[jsonKeys.variantName] as? String  ?? ""
-//        self.stock = object[jsonKeys.stock] as? Int  ?? 0
-        self.stock = 0
+        self.stock = object[jsonKeys.stock] as? Int  ?? 0
+        
     }
 }
