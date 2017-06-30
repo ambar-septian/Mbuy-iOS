@@ -87,6 +87,16 @@
             </objects>
             <point key="canvasLocation" x="1218" y="408"/>
         </scene>
+        <!--Setting-->
+        <scene sceneID="AdU-Id-SUh">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Setting" id="ELb-s1-pg4" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="jL7-Re-iGS"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9lp-lu-Uhl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1254" y="547"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="rmr-70-qKl">
             <objects>
@@ -98,9 +108,10 @@
                     </tabBar>
                     <connections>
                         <segue destination="Ixf-A5-pfw" kind="relationship" relationship="viewControllers" id="jbn-fN-Mdw"/>
-                        <segue destination="Uoz-Y9-h7t" kind="relationship" relationship="viewControllers" id="y2u-OV-iG6"/>
-                        <segue destination="S41-Hz-ha3" kind="relationship" relationship="viewControllers" id="iIp-zZ-lUY"/>
-                        <segue destination="Omu-Na-cam" kind="relationship" relationship="viewControllers" id="d7n-4f-JGp"/>
+                        <segue destination="Uoz-Y9-h7t" kind="relationship" relationship="viewControllers" id="eKa-3o-0M8"/>
+                        <segue destination="S41-Hz-ha3" kind="relationship" relationship="viewControllers" id="Txw-tT-KjN"/>
+                        <segue destination="Omu-Na-cam" kind="relationship" relationship="viewControllers" id="mnG-N7-3Ij"/>
+                        <segue destination="ELb-s1-pg4" kind="relationship" relationship="viewControllers" id="7Hg-u0-oK6"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="imU-V8-J53" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -14,7 +14,7 @@
 "repeatPassword" = "Ulangi Kata sandi";
 "login" = "Masuk";
 "register" = "Daftar";
-"doesntHaveAccount" = "Tidak punya akun?";
+"dontHaveAccount" = "Tidak punya akun?";
 "forgetPassword" = "Lupa Kata Sandi";
 "submit" = "Kirim";
 "orSignInWith" = "Atau masuk dengan";
@@ -63,6 +63,8 @@
 
 /* Settings */
 "settings" = "Pengaturan";
+"changeLanguage" = "Ubah Bahasa";
+"logout" = "Keluar";
 
 /* Product Detail */
 "review" = "Ulasan";

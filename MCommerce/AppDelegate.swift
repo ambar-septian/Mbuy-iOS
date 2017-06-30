@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey(Constants.GMAP.mapKey)
         GMSPlacesClient.provideAPIKey(Constants.GMAP.placeKey)
         
-        
+        UIApplication.shared.statusBarStyle = .lightContent
        
 //        // Override point for customization after application launch.
 //        window = UIWindow(frame: UIScreen.main.bounds)

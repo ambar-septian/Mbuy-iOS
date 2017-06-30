@@ -16,7 +16,7 @@ class RoundedTextField: UITextField, RoundedBorderProtocol, TextFieldWithImage {
         }
     }
 
-    var borderColor: UIColor = UIColor.clear {
+    var borderColor: UIColor = UIColor.white {
         didSet {
             layer.borderColor = borderColor.cgColor
         }
@@ -37,7 +37,7 @@ class RoundedTextField: UITextField, RoundedBorderProtocol, TextFieldWithImage {
         }
     }
     
-    var mainColor:UIColor? {
+    var mainColor:UIColor? = .clear {
         didSet {
             backgroundColor = mainColor
         }
@@ -73,7 +73,7 @@ class RoundedTextField: UITextField, RoundedBorderProtocol, TextFieldWithImage {
     
     func setupTextField(){
         borderStyle = .none
-        backgroundColor = mainColor
+        backgroundColor = shadeColor
         textColor = borderColor
         
         layer.borderColor = borderColor.cgColor

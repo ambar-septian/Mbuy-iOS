@@ -12,65 +12,65 @@ import Anchorage
 import Hero
 
 class RegisterViewController: BaseViewController {
+   
     
-    lazy var registerButton:RoundedButton = {
-        let button = RoundedButton(backgroundColor: Color.clear, borderColor: Color.white, borderWidth: 2)
-        button.setTitle("register".localize, for: .normal)
-        button.heroID = Constants.heroID.registerButton
-        return button
-    }()
-    
-    
-    lazy var emailTextField: RoundedTextField = {
-        let size = CGSize(width: 20, height: 20)
-        let image = FontAwesomeIcon.envelopeIcon.image(ofSize: size, color: Color.white)
-        let textField = RoundedTextField(borderColor: Color.white, borderWidth: 1, mainColor: Color.orange.withAlphaComponent(0.5), imagePlaceholder: image)
-        textField.placeholder = "email".localize
-        textField.keyboardType = .emailAddress
-        textField.delegate = self
-        textField.tag = 2
-        textField.returnKeyType = .next
-        return textField
-    }()
+    @IBOutlet weak var emailTextField: RoundedTextField! {
+        didSet {
+            let size = CGSize(width: 20, height: 20)
+            let image = FontAwesomeIcon.envelopeIcon.image(ofSize: size, color: Color.white)
+             emailTextField.placeholder = "email".localize
+            emailTextField.imagePlaceholder = image
+           
+        }
+    }
     
     
-    
-    lazy var passwordTextField: RoundedTextField = {
-        let size = CGSize(width: 20, height: 20)
-        let image = FontAwesomeIcon.lockIcon.image(ofSize: size, color: Color.white)
-        let textField = RoundedTextField(borderColor: Color.white, borderWidth: 1, mainColor: Color.orange.withAlphaComponent(0.5), imagePlaceholder: image)
-        textField.placeholder = "password".localize
-        textField.isSecureTextEntry = true
-        textField.delegate = self
-        textField.tag = 3
-        textField.returnKeyType = .next
-        return textField
-    }()
-    
-    lazy var repeatPasswordTextField: RoundedTextField = {
-        let size = CGSize(width: 20, height: 20)
-        let image = FontAwesomeIcon.lockIcon.image(ofSize: size, color: Color.white)
-        let textField = RoundedTextField(borderColor: Color.white, borderWidth: 1, mainColor: Color.orange.withAlphaComponent(0.5), imagePlaceholder: image)
-        textField.placeholder = "repeatPassword".localize
-        textField.isSecureTextEntry = true
-        textField.delegate = self
-        textField.tag = 4
-        textField.returnKeyType = .done
-        return textField
-    }()
+    @IBOutlet weak var firstNameTextField: RoundedTextField! {
+        didSet {
+            let size = CGSize(width: 20, height: 20)
+            let image = FontAwesomeIcon.userIcon.image(ofSize: size, color: Color.white)
+            firstNameTextField.placeholder = "firstName".localize
+            firstNameTextField.imagePlaceholder = image
+            
+        }
+    }
     
     
-    lazy var scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.showsHorizontalScrollIndicator = false
-        return scrollView
-    }()
+    @IBOutlet weak var lastNameTextField: RoundedTextField! {
+        didSet {
+            let size = CGSize(width: 20, height: 20)
+            let image = FontAwesomeIcon.userIcon.image(ofSize: size, color: Color.white)
+           
+            lastNameTextField.placeholder = "lastName".localize
+             lastNameTextField.imagePlaceholder = image
+        }
+    }
     
-    lazy var contentView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-        return view
-    }()
+    
+    @IBOutlet weak var passwordTextField: RoundedTextField! {
+        didSet {
+            let size = CGSize(width: 20, height: 20)
+            let image = FontAwesomeIcon.lockIcon.image(ofSize: size, color: Color.white)
+            passwordTextField.placeholder = "password".localize
+            passwordTextField.imagePlaceholder = image
+        }
+    }
+    
+    @IBOutlet weak var repeatPasswordTextField: RoundedTextField! {
+        didSet {
+            let size = CGSize(width: 20, height: 20)
+            let image = FontAwesomeIcon.lockIcon.image(ofSize: size, color: Color.white)
+            repeatPasswordTextField.placeholder = "repeatPassword".localize
+            repeatPasswordTextField.imagePlaceholder = image
+        }
+    }
+    
+    @IBOutlet weak var registerButton: RoundedButton! {
+        didSet {
+            registerButton.setTitle("register".localize, for: .normal)
+            registerButton.heroID = Constants.heroID.registerButton
+        }
+    }
     
     lazy var backgroundView: UIView = {
         return BackgroundLoginView(frame: CGRect.zero)
@@ -81,6 +81,8 @@ class RegisterViewController: BaseViewController {
         super.viewDidLoad()
         
         setupSubviews()
+        addBackButton()
+        setNavigationControllerBackground(color: Color.clear, isTranslucent: true)
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -89,50 +91,18 @@ class RegisterViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
+        @IBAction func registerButtonTapped(_ sender: Any) {
+    }
 }
 
 extension RegisterViewController: BaseViewProtocol {
     func setupSubviews() {
-        view.addSubview(backgroundView)
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
-        contentView.addSubview(emailTextField)
-        contentView.addSubview(passwordTextField)
-        contentView.addSubview(repeatPasswordTextField)
-        contentView.addSubview(registerButton)
-        
+        view.insertSubview(backgroundView, at: 0)
         setupConstraints()
     }
     
     func setupConstraints(){
         backgroundView.edgeAnchors == view.edgeAnchors
-        
-        scrollView.horizontalAnchors == view.horizontalAnchors
-        scrollView.topAnchor == view.topAnchor + 40
-        scrollView.bottomAnchor == view.bottomAnchor
-        
-        contentView.edgeAnchors == scrollView.edgeAnchors
-        contentView.widthAnchor == scrollView.widthAnchor
-        
-        emailTextField.horizontalAnchors == contentView.horizontalAnchors + 30
-        emailTextField.topAnchor == contentView.topAnchor + 20
-        emailTextField.heightAnchor == 50
-        
-        passwordTextField.horizontalAnchors == emailTextField.horizontalAnchors
-        passwordTextField.topAnchor == emailTextField.bottomAnchor + 20
-        passwordTextField.heightAnchor == 50
-        
-        repeatPasswordTextField.horizontalAnchors == emailTextField.horizontalAnchors
-        repeatPasswordTextField.topAnchor == passwordTextField.bottomAnchor + 20
-        repeatPasswordTextField.heightAnchor == 50
-        
-        registerButton.horizontalAnchors == emailTextField.horizontalAnchors
-        registerButton.topAnchor == repeatPasswordTextField.bottomAnchor + 20
-        registerButton.bottomAnchor == contentView.bottomAnchor + 10
-        registerButton.heightAnchor == 50
-       
-        
     }
 }
 

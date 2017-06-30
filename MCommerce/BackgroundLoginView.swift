@@ -37,13 +37,13 @@ class BackgroundLoginView: UIView {
         view.backgroundColor = Color.orange.withAlphaComponent(0.7)
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(view)
+//
+//        let blurEffect = UIBlurEffect(style: .regular)
+//        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//        blurEffectView.frame = bounds
+//        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        let blurEffect = UIBlurEffect(style: .regular)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        addSubview(blurEffectView)
+//        addSubview(blurEffectView)
     }
 
 }

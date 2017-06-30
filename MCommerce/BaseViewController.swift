@@ -161,7 +161,7 @@ extension BaseViewController {
     }
     
     func setupTabBar(){
-        let size = CGSize(width: 25, height: 25)
+        let size = CGSize(width: 35, height: 25)
         guard let tabBars = self.tabBarController?.tabBar.items else { return }
 
         let homeIcon = FontAwesomeIcon.homeIcon

@@ -11,14 +11,14 @@ import UIKit
 class RoundedButton: UIButton, RoundedBorderProtocol {
 
    
-    var borderColor: UIColor = UIColor.clear {
+    var borderColor: UIColor = UIColor.white {
         didSet {
             layer.borderColor = borderColor.cgColor
         }
     }
     
     
-    var borderWidth: CGFloat = 10 {
+    var borderWidth: CGFloat = 2 {
         didSet {
             layer.borderWidth = borderWidth
         }
@@ -32,7 +32,7 @@ class RoundedButton: UIButton, RoundedBorderProtocol {
         }
     }
     
-    var mainColor:UIColor? {
+    var mainColor:UIColor? = Color.clear {
         didSet {
             backgroundColor = mainColor
         }
@@ -67,6 +67,7 @@ class RoundedButton: UIButton, RoundedBorderProtocol {
     
     func setupButton(){
         setRoundedLayer()
+        layer.cornerRadius = bounds.width / bounds.height * 3
         titleLabel?.font = Font.latoBold.withSize(17)
         setTitleColor(UIColor.white, for: .normal)
     }

@@ -14,7 +14,7 @@
 "repeatPassword" = "Repeat Password";
 "login" = "Login";
 "register" = "Register";
-"doesntHaveAccount" = "Doesn't have account?";
+"dontHaveAccount" = "Dont have account?";
 "forgetPassword" = "Forget password";
 "submit" = "Submit";
 "orSignInWith" = "Or sign in with";
@@ -63,6 +63,8 @@
 
 /* Settings */
 "settings" = "Settings";
+"changeLanguage" = "Change Language";
+"logout" = "Log Out";
 
 /* Product Detail */
 "review" = "Review";

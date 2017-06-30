@@ -13,66 +13,65 @@ import Hero
 
 class LoginViewController: BaseViewController {
     
-    lazy var loginButton:RoundedButton = {
-       let button = RoundedButton(backgroundColor: Color.clear, borderColor: Color.white, borderWidth: 2)
-        button.setTitle("login".localize, for: .normal)
-        return button
-    }()
+    @IBOutlet weak var loginButton: RoundedButton! {
+        didSet {
+           loginButton.setTitle("login".localize, for: .normal)
+        }
+    }
     
-    lazy var facebookButton:RoundedButton = {
-        let button = RoundedButton(backgroundColor: Color.facebook, borderColor: Color.facebook, borderWidth: 2)
-        let icon = FontAwesomeIcon.facebookIcon.attributedString(ofSize: 16, color: Color.white)
-        let attributeTitle = NSMutableAttributedString()
-        let title = NSAttributedString(string: " " + "Facebook", attributes: [NSForegroundColorAttributeName: Color.white])
-        attributeTitle.append(icon)
-        attributeTitle.append(title)
-        
-        button.setAttributedTitle(attributeTitle, for: .normal)
-        return button
-    }()
     
-    lazy var emailTextField: RoundedTextField = {
-        let size = CGSize(width: 20, height: 20)
-        let image = FontAwesomeIcon.envelopeIcon.image(ofSize: size, color: Color.white)
-        let textField = RoundedTextField(borderColor: Color.white, borderWidth: 1, mainColor: Color.orange.withAlphaComponent(0.7), imagePlaceholder: image)
-        textField.placeholder = "email".localize
-        textField.keyboardType = .emailAddress
-        textField.returnKeyType = .next
-        textField.delegate = self
-        textField.tag = 0
-        return textField
-    }()
+    @IBOutlet weak var facebookButton: RoundedButton! {
+        didSet {
+            let icon = FontAwesomeIcon.facebookIcon.attributedString(ofSize: 16, color: Color.white)
+            let attributeTitle = NSMutableAttributedString()
+            let title = NSAttributedString(string: " " + "Facebook", attributes: [NSForegroundColorAttributeName: Color.white])
+            attributeTitle.append(icon)
+            attributeTitle.append(title)
+            
+            facebookButton.setAttributedTitle(attributeTitle, for: .normal)
+            facebookButton.mainColor = Color.facebook
+            facebookButton.borderColor = Color.facebook
+        }
+    }
     
-    lazy var passwordTextField: RoundedTextField = {
-        let size = CGSize(width: 20, height: 20)
-        let image = FontAwesomeIcon.lockIcon.image(ofSize: size, color: Color.white)
-        let textField = RoundedTextField(borderColor: Color.white, borderWidth: 1, mainColor: Color.orange.withAlphaComponent(0.7), imagePlaceholder: image)
-        textField.placeholder = "password".localize
-        textField.isSecureTextEntry = true
-        textField.returnKeyType = .done
-        textField.delegate = self
-        textField.tag = 1
-        return textField
-    }()
+    @IBOutlet weak var emailTextField: RoundedTextField! {
+        didSet {
+            let size = CGSize(width: 20, height: 20)
+            let image = FontAwesomeIcon.envelopeIcon.image(ofSize: size, color: Color.white)
+            emailTextField.placeholder = "email".localize
+            emailTextField.imagePlaceholder = image
+        }
+    }
     
-    lazy var registerButton: BasicButton = {
-        let button = BasicButton(title: "doesntHaveAccount".localize, color: Color.white)
-        button.heroID = Constants.heroID.registerButton
-        button.addTarget(self, action: #selector(registerDidTapped(sender:)), for: .touchUpInside)
-        return button
-    }()
+    @IBOutlet weak var passwordTextField: RoundedTextField! {
+        didSet {
+            let size = CGSize(width: 20, height: 20)
+            let image = FontAwesomeIcon.lockIcon.image(ofSize: size, color: Color.white)
+            passwordTextField.imagePlaceholder = image
+            passwordTextField.placeholder = "password".localize
+        }
+    }
     
-    lazy var forgetPasswordButton: BasicButton = {
-        let button = BasicButton(title: "forgetPassword".localize, color: Color.white)
-        button.heroID = Constants.heroID.forgotPasswordButton
-        button.addTarget(self, action: #selector(forgotPasswordDidTapped(sender:)), for: .touchUpInside)
-        return button
-    }()
     
-    lazy var orSignLabel: BasicLabel = {
-        let label = BasicLabel(text: "orSignInWith".localize, color: Color.white)
-        return label
-    }()
+    @IBOutlet weak var registerButton: UIButton! {
+        didSet {
+        registerButton.setTitle("dontHaveAccount".localize, for: .normal)
+        registerButton.heroID = Constants.heroID.registerButton
+        }
+    }
+    
+    @IBOutlet weak var forgetPasswordButton: UIButton! {
+        didSet {
+            forgetPasswordButton.setTitle("forgetPassword".localize, for:.normal)
+            forgetPasswordButton.heroID = Constants.heroID.forgotPasswordButton
+        }
+    }
+
+    @IBOutlet weak var orSignLabel: UILabel! {
+        didSet {
+            orSignLabel.text = "orSignInWith".localize
+        }
+    }
     
     
     lazy var scrollView: UIScrollView = {
@@ -99,6 +98,7 @@ class LoginViewController: BaseViewController {
         setupSubviews()
         
         navigationController?.isHeroEnabled = true
+        
 //        setNavigationControllerBackground(color: Color.clear, isTranslucent: true)
         
     }
@@ -107,12 +107,22 @@ class LoginViewController: BaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
 }
 
 extension LoginViewController {
     func registerDidTapped(sender: UIButton){
         let vc = RegisterViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController? .pushViewController(vc, animated: true)
 //        pushNavigation(targetVC: vc)
     }
     
@@ -125,55 +135,12 @@ extension LoginViewController {
 
 extension LoginViewController: BaseViewProtocol {
     func setupSubviews() {
-        view.addSubview(backgroundView)
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
-        contentView.addSubview(emailTextField)
-        contentView.addSubview(passwordTextField)
-        contentView.addSubview(orSignLabel)
-        contentView.addSubview(loginButton)
-        contentView.addSubview(facebookButton)
-        contentView.addSubview(registerButton)
-        contentView.addSubview(forgetPasswordButton)
-        
+        view.insertSubview(backgroundView, at: 0)
         setupConstraints()
     }
     
     func setupConstraints(){
         backgroundView.edgeAnchors == view.edgeAnchors
-        scrollView.horizontalAnchors == view.horizontalAnchors
-        scrollView.topAnchor == view.topAnchor + 40
-        scrollView.bottomAnchor == view.bottomAnchor
-        
-        contentView.edgeAnchors == scrollView.edgeAnchors
-        contentView.widthAnchor == scrollView.widthAnchor
-        
-        emailTextField.horizontalAnchors == contentView.horizontalAnchors + 30
-        emailTextField.topAnchor == contentView.topAnchor + 20
-        emailTextField.heightAnchor == 50
-        
-        passwordTextField.horizontalAnchors == emailTextField.horizontalAnchors
-        passwordTextField.topAnchor == emailTextField.bottomAnchor + 20
-        passwordTextField.heightAnchor == 50
-        
-        loginButton.topAnchor == passwordTextField.bottomAnchor + 30
-        loginButton.horizontalAnchors == emailTextField.horizontalAnchors
-        loginButton.heightAnchor == 50
-        
-        orSignLabel.centerXAnchor == contentView.centerXAnchor
-        orSignLabel.topAnchor == loginButton.bottomAnchor + 20
-        
-        facebookButton.topAnchor == orSignLabel.bottomAnchor + 20
-        facebookButton.horizontalAnchors == emailTextField.horizontalAnchors
-        facebookButton.heightAnchor == 50
-    
-        registerButton.leadingAnchor == contentView.leadingAnchor + 10
-        registerButton.bottomAnchor == contentView.bottomAnchor + 10
-        registerButton.topAnchor == facebookButton.bottomAnchor + 40
-      
-        forgetPasswordButton.trailingAnchor == contentView.trailingAnchor - 10
-        forgetPasswordButton.topAnchor == registerButton.topAnchor
-        
     }
 }
 
