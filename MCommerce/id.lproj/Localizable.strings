@@ -36,6 +36,7 @@
 /* Product */
 "addToCart" = "Tambah ke keranjang";
 "quantity" = "Quantity";
+"addToCartSuccess" = "Produk berhasil ditambah ke keranjang";
 
 /* Search */
 "search" = "Cari";

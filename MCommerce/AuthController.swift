@@ -47,8 +47,6 @@ class AuthController {
             }
             
             guard !(result!.isCancelled) else {
-                print("facebook login cancel by user")
-                completion(false)
                 return
             }
             
@@ -71,18 +69,18 @@ class AuthController {
        
         
         guard let window = UIApplication.shared.keyWindow else { return }
-        UIView.transition(with: window, duration: 0.3, options: UIViewAnimationOptions.transitionFlipFromTop, animations: {
+        UIView.transition(with: window, duration: 0.3, options: UIViewAnimationOptions.curveEaseIn, animations: {
             window.rootViewController = tabBar
         }, completion: nil)
     }
     
     func dismissViewControllerToLogin(currentVC: UIViewController){
         let storyboard = UIStoryboard(name: Constants.storyboard.auth, bundle: nil)
-        guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.viewController.auth.login) as? UITabBarController else { return }
+        guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.viewController.auth.login) as? LoginViewController else { return }
         
         
         guard let window = UIApplication.shared.keyWindow else { return }
-        UIView.transition(with: window, duration: 0.3, options: UIViewAnimationOptions.transitionFlipFromTop, animations: {
+        UIView.transition(with: window, duration: 0.3, options: UIViewAnimationOptions.curveEaseIn, animations: {
             window.rootViewController = vc
         }, completion: nil)
     }

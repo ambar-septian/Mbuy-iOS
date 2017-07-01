@@ -79,6 +79,7 @@ class ProductConfirmationViewController: UIViewController {
         super.viewDidLoad()
 
         view.addGestureRecognizer(dismissGesture)
+        automaticallyAdjustsScrollViewInsets = true
         
         navigationController?.navigationBar.isUserInteractionEnabled = false
         loadProduct()
@@ -140,7 +141,22 @@ extension ProductConfirmationViewController {
 
 extension ProductConfirmationViewController {
     @IBAction func addToCartButtonTapped(_ sender: Any) {
-        
+        guard let product = passedProduct else { return }
+        let cartController = CartController()
+//        showProgressHUD()
+        DispatchQueue.global().async {
+            cartController.addToCart(product: product, quantity: self.stepper.counter, completion: { (completed) in
+                DispatchQueue.main.async {
+                    guard completed else { return }
+                    
+                    Alert.showAlert(message: "addToCartSuccess".localize, alertType: .okOnly, header: nil, viewController: self, handler: { (alert) in
+                        self.closeButtonTapped(self)
+                    })
+                    
+                }
+                
+            })
+        }
     }
     
     @IBAction func closeButtonTapped(_ sender: Any) {

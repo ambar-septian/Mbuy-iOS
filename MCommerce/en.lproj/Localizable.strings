@@ -37,6 +37,7 @@
 /* Product */
 "addToCart" = "Add to cart";
 "quantity" = "Quantity";
+"addToCartSuccess" = "Product was successfully added to the cart";
 
 /* Search */
 "search" = "Search";

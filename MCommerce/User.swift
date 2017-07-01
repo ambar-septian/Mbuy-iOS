@@ -12,6 +12,12 @@ import FirebaseAuth
 class User {
     fileprivate let firebaseUser = FIRAuth.auth()?.currentUser
     
+    var uid:String {
+        get {
+            return firebaseUser?.uid ?? ""
+        }
+    }
+    
     var email:String {
         get {
             return firebaseUser?.email ?? ""
@@ -29,9 +35,11 @@ class User {
         get {
             return firebaseUser?.photoURL?.absoluteString
         }
-        
     }
-
+    
+    
+    static let shared = User()
+    private init() {}
     
 
 //    var userType: UserType {
@@ -40,8 +48,7 @@ class User {
 //        }
 //    }
 
-//    static let shared = FIRAuth.auth()?.currentUser
-//    private init() {}
+
     
     
 }
