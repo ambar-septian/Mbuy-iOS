@@ -13,9 +13,11 @@ class SettingsViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var contents : [(title:String, icon:FontAwesomeIcon)] =
+    fileprivate var contents : [(title:String, icon:FontAwesomeIcon)] =
         [(title:"changeLanguage", icon:.globeIcon),
          (title:"logout", icon:.signoutIcon)]
+    
+    fileprivate let controller = AuthController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +34,29 @@ class SettingsViewController: BaseViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+}
+
+extension SettingsViewController {
+    func logout(){
+        self.showProgressHUD()
+        DispatchQueue.global().async {
+            self.controller.logout(completion: { (completed) in
+                DispatchQueue.main.async {
+                    self.hideProgressHUD()
+                    
+                    guard completed else { return }
+                    
+                    self.controller.dismissViewControllerToLogin(currentVC: self)
+                }
+            })
+        }
+    }
+    
+    func confirmationLogout(){
+        Alert.showAlert(message: "confirmationLogout".localize, alertType: .okCancel, header: nil, viewController: self) { (alert) in
+            self.logout()
+        }
     }
 }
 
@@ -56,5 +81,8 @@ extension SettingsViewController:UITableViewDataSource {
 extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.row == 1 {
+            confirmationLogout()
+        }
     }
 }

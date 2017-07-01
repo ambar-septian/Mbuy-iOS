@@ -164,15 +164,15 @@ extension ProductDetailViewController {
         
         productDetails = product.details
         productImageURLs = product.imageURLs
-        
-        let user = User(email: "", firstName: "Ponim", lastName: "Kirun", address: "Tomang", userType: .email, profileImagePath: "https://dummyimage.com/600x400/000/fff")
-        let user2 = User(email: "", firstName: "Riri", lastName: "Tamam", address: "Tebet", userType: .email, profileImagePath: "https://api.adorable.io/avatars/114/happy@adorable.io.png")
-        let user3 = User(email: "", firstName: "Ires", lastName: "Pitri", address: "Palmerah", userType: .email, profileImagePath: "https://dummyimage.com/600x400/000/fff")
-        let review = Review(reviewID: "1", title: "Good", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua", rating: 5, product: product, user: user, date: Date())
-        let review2 = Review(reviewID: "1", title: "Good", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua", rating: 4, product: product, user: user2, date: Date())
-        let review3 = Review(reviewID: "1", title: "Good", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua", rating: 3, product: product, user: user3, date: Date())
-        
-        reviews = [review, review2, review3]
+//        
+//        let user = User(email: "", firstName: "Ponim", lastName: "Kirun", address: "Tomang", userType: .email, profileImagePath: "https://dummyimage.com/600x400/000/fff")
+//        let user2 = User(email: "", firstName: "Riri", lastName: "Tamam", address: "Tebet", userType: .email, profileImagePath: "https://api.adorable.io/avatars/114/happy@adorable.io.png")
+//        let user3 = User(email: "", firstName: "Ires", lastName: "Pitri", address: "Palmerah", userType: .email, profileImagePath: "https://dummyimage.com/600x400/000/fff")
+//        let review = Review(reviewID: "1", title: "Good", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua", rating: 5, product: product, user: user, date: Date())
+//        let review2 = Review(reviewID: "1", title: "Good", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua", rating: 4, product: product, user: user2, date: Date())
+//        let review3 = Review(reviewID: "1", title: "Good", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua", rating: 3, product: product, user: user3, date: Date())
+//        
+//        reviews = [review, review2, review3]
     }
     
     fileprivate func loadRelatedProducts() {

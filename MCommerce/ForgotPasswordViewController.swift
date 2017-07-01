@@ -11,8 +11,6 @@ import Iconic
 import Anchorage
 
 class ForgotPasswordViewController: BaseViewController {
-    
-    
    
     @IBOutlet weak var emailTextField: RoundedTextField! {
         didSet {
@@ -40,6 +38,7 @@ class ForgotPasswordViewController: BaseViewController {
         return BackgroundLoginView(frame: CGRect.zero)
     }()
     
+    let controller = AuthController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,11 +47,60 @@ class ForgotPasswordViewController: BaseViewController {
         setNavigationControllerBackground(color: Color.clear, isTranslucent: true)
     }
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 }
+
+extension ForgotPasswordViewController {
+    @IBAction func forgotPassword(_ sender: Any) {
+        let validForm = validateForm()
+        guard validForm.isValid else {
+            Alert.showAlert(message: validForm.message ?? "", alertType: .okOnly, viewController: self)
+            return
+        }
+        resetPassword()
+    }
+}
+
+extension ForgotPasswordViewController {
+    func validateForm() -> (isValid:Bool, message:String?) {
+        let text = emailTextField.text
+        guard let wText = text, wText != "" else {
+            return (isValid: false, message: "validEmptyForm".localize)
+        }
+        
+        guard wText.isValidEmail else {
+            return (isValid: false, message: "validEmail".localize)
+        }
+        
+        return (isValid:true, message: nil)
+    }
+    
+    func resetPassword(){
+        showProgressHUD()
+        DispatchQueue.global().async {
+            self.controller.resetPassword(email: self.emailTextField.text!, completion: { (success) in
+                
+                DispatchQueue.main.async {
+                    self.hideProgressHUD()
+                    
+                    guard success else {
+                        Alert.showAlert(message: "failedResetPassword".localize, alertType: .okOnly, viewController: self)
+                        return
+                    }
+                    
+                    Alert.showAlert(message: "resetPasswordSuccess".localize, alertType: .okOnly, viewController: self)
+                }
+                
+            })
+        }
+    }
+
+}
+
 
 extension ForgotPasswordViewController: BaseViewProtocol {
     func setupSubviews() {

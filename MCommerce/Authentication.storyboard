@@ -19,7 +19,7 @@
         <!--Login View Controller-->
         <scene sceneID="Jdu-On-bVe">
             <objects>
-                <viewController id="XdW-AA-bUA" customClass="LoginViewController" customModule="MCommerce" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewControllerID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="XdW-AA-bUA" customClass="LoginViewController" customModule="MCommerce" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="M6x-aX-dHP"/>
                         <viewControllerLayoutGuide type="bottom" id="GsY-eT-fhI"/>
@@ -76,6 +76,9 @@
                                                             <constraint firstAttribute="width" secondItem="oFq-yu-wrF" secondAttribute="height" multiplier="6:1.2" id="cLh-qj-j3r"/>
                                                         </constraints>
                                                         <state key="normal" title="Login"/>
+                                                        <connections>
+                                                            <action selector="loginButtonTapped:" destination="XdW-AA-bUA" eventType="touchUpInside" id="Wbb-TD-fcP"/>
+                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or sign in with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8KU-xL-etb">
                                                         <rect key="frame" x="15" y="86" width="305" height="0.0"/>
@@ -89,6 +92,9 @@
                                                             <constraint firstAttribute="width" secondItem="Abf-zG-hY5" secondAttribute="height" multiplier="6:1.2" id="WgY-gt-3mX"/>
                                                         </constraints>
                                                         <state key="normal" title="Facebook"/>
+                                                        <connections>
+                                                            <action selector="facebookButtonTapped:" destination="XdW-AA-bUA" eventType="touchUpInside" id="JR0-pX-xJf"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <edgeInsets key="layoutMargins" top="0.0" left="15" bottom="0.0" right="15"/>
@@ -176,7 +182,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="tAn-6X-CYu">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="468"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="392.5"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cbp-ia-Xhf" customClass="RoundedTextField" customModule="MCommerce" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="20" width="305" height="51"/>
@@ -202,20 +208,8 @@
                                                     <outlet property="delegate" destination="2uz-BN-kLg" id="ltq-oa-vrC"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="r7h-rb-bzs" customClass="RoundedTextField" customModule="MCommerce" customModuleProvider="target">
+                                            <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pbP-Vt-oUk" customClass="RoundedTextField" customModule="MCommerce" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="171.5" width="305" height="51"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="r7h-rb-bzs" secondAttribute="height" multiplier="6:1" id="tSC-sI-Z9A"/>
-                                                </constraints>
-                                                <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="2uz-BN-kLg" id="IA8-lp-69f"/>
-                                                </connections>
-                                            </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pbP-Vt-oUk" customClass="RoundedTextField" customModule="MCommerce" customModuleProvider="target">
-                                                <rect key="frame" x="35" y="247.5" width="305" height="51"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="pbP-Vt-oUk" secondAttribute="height" multiplier="6:1" id="1Nv-iu-acY"/>
                                                 </constraints>
@@ -226,8 +220,8 @@
                                                     <outlet property="delegate" destination="2uz-BN-kLg" id="5qP-1s-LuJ"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iBd-Ku-HT5" customClass="RoundedTextField" customModule="MCommerce" customModuleProvider="target">
-                                                <rect key="frame" x="35" y="323.5" width="305" height="50.5"/>
+                                            <textField opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iBd-Ku-HT5" customClass="RoundedTextField" customModule="MCommerce" customModuleProvider="target">
+                                                <rect key="frame" x="35" y="247.5" width="305" height="51"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="iBd-Ku-HT5" secondAttribute="height" multiplier="6:1" id="3Mv-vo-BXR"/>
                                                 </constraints>
@@ -239,7 +233,7 @@
                                                 </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kWD-Oy-yXA" customClass="RoundedButton" customModule="MCommerce" customModuleProvider="target">
-                                                <rect key="frame" x="35" y="399" width="305" height="61"/>
+                                                <rect key="frame" x="35" y="323.5" width="305" height="61"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="kWD-Oy-yXA" secondAttribute="height" multiplier="6:1.2" id="KYe-XG-ZP5"/>
                                                 </constraints>
@@ -249,9 +243,6 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstItem="r7h-rb-bzs" firstAttribute="width" secondItem="r7h-rb-bzs" secondAttribute="height" multiplier="6:1" id="DDd-Ac-ZDs"/>
-                                        </constraints>
                                         <edgeInsets key="layoutMargins" top="20" left="35" bottom="8" right="35"/>
                                     </stackView>
                                 </subviews>
@@ -274,8 +265,7 @@
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="Cbp-ia-Xhf" id="cUn-oM-NhQ"/>
-                        <outlet property="firstNameTextField" destination="B8j-aC-n4X" id="qKu-NL-FaZ"/>
-                        <outlet property="lastNameTextField" destination="r7h-rb-bzs" id="tIy-OZ-3gi"/>
+                        <outlet property="nameTextField" destination="B8j-aC-n4X" id="OUK-bC-LAN"/>
                         <outlet property="passwordTextField" destination="pbP-Vt-oUk" id="SHz-1Q-hpj"/>
                         <outlet property="registerButton" destination="kWD-Oy-yXA" id="md7-de-0a6"/>
                         <outlet property="repeatPasswordTextField" destination="iBd-Ku-HT5" id="dhK-YC-Xaq"/>
@@ -327,6 +317,9 @@
                                                     <constraint firstAttribute="width" secondItem="6jY-e6-PIB" secondAttribute="height" multiplier="6:1.2" id="4El-mM-frB"/>
                                                 </constraints>
                                                 <state key="normal" title="Submit"/>
+                                                <connections>
+                                                    <action selector="forgotPassword:" destination="k0Y-e1-YyB" eventType="touchUpInside" id="NSe-Fb-0VQ"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <edgeInsets key="layoutMargins" top="8" left="35" bottom="8" right="35"/>

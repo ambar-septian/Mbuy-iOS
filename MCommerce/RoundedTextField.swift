@@ -31,9 +31,9 @@ class RoundedTextField: UITextField, RoundedBorderProtocol, TextFieldWithImage {
     
     var shadeColor: UIColor {
         if let backgroundColor = self.backgroundColor {
-            return backgroundColor.withAlphaComponent(0.4)
+            return backgroundColor.withAlphaComponent(0.3)
         } else {
-            return borderColor.withAlphaComponent(0.4)
+            return borderColor.withAlphaComponent(0.3)
         }
     }
     

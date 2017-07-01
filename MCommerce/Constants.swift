@@ -49,6 +49,8 @@ enum Constants {
         static let product = "Product"
         static let search = "Search"
         static let cart = "Cart"
+        static let home = "Home"
+        static let auth = "Authentication"
     }
     
     enum viewController {
@@ -73,6 +75,16 @@ enum Constants {
             static let address = "CheckOutAddressViewControllerID"
             static let summary = "CheckOutSummaryViewControllerID"
         }
+        
+        enum home {
+            static let main = "HomeViewControllerID"
+        }
+        
+        enum auth {
+            static let login = "LoginViewControllerID"
+        }
+        
+        static let mainTabBar = "MainTabBarControllerID"
     }
     
     enum notification {

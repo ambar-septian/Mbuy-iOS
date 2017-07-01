@@ -7,27 +7,42 @@
 //
 
 import Foundation
+import FirebaseAuth
 
 class User {
-    var email:String
-    var firstName:String
-    var lastName:String
-    var address:String
-    var userType: UserType
+    fileprivate let firebaseUser = FIRAuth.auth()?.currentUser
     
-    var fullName:String {
-        return firstName + " " + lastName
+    var email:String {
+        get {
+            return firebaseUser?.email ?? ""
+        }
     }
     
-    var profileImageURL: String?
-    
-    init(email:String, firstName:String, lastName:String, address:String, userType: UserType, profileImagePath:String?) {
-        self.email = email
-        self.firstName = firstName
-        self.lastName = lastName
-        self.address = address
-        self.userType = userType
-        self.profileImageURL = profileImagePath
+    var name:String {
+        get {
+            return firebaseUser?.displayName ?? ""
+        }
+      
     }
+    
+    var photoURL:String? {
+        get {
+            return firebaseUser?.photoURL?.absoluteString
+        }
+        
+    }
+
+    
+
+//    var userType: UserType {
+//        get {
+//            return firebaseUser?.displayName ?? ""
+//        }
+//    }
+
+//    static let shared = FIRAuth.auth()?.currentUser
+//    private init() {}
+    
+    
 }
 

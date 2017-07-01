@@ -11,6 +11,7 @@
 "password" = "Password";
 "firstName" = "First Name";
 "lastName" = "Last Name";
+"name" = "Name";
 "repeatPassword" = "Repeat Password";
 "login" = "Login";
 "register" = "Register";
@@ -19,6 +20,15 @@
 "submit" = "Submit";
 "orSignInWith" = "Or sign in with";
 "instructionForgotPassword" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua";
+"failedLogin" = "Oops.. there something wrong while login, Please try again";
+"failedRegister" = "Oops.. there something wrong while register account, Please try again";
+"failedForgetPassword" = "Oops.. there something wrong while send new password, Please try again";
+"successRegister" = "Congratulations!, you have successfully registered account";
+"passwordDoesntMatch" = "Password doesn't match";
+"passwordMinimumChar" = "Password minimum 6 characters length";
+"emailAlreadyTaken" = "Email already taken, please use another one";
+"resetPasswordSuccess" = "Reset password success, please check your inbox";
+"wrongPassword" = "Oops.. seems like your email or password is incorrect";
 
 
 /* Home */
@@ -65,6 +75,7 @@
 "settings" = "Settings";
 "changeLanguage" = "Change Language";
 "logout" = "Log Out";
+"confirmationLogout" = "Are you want log out from this account?";
 
 /* Product Detail */
 "review" = "Review";

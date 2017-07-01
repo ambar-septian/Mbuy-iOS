@@ -25,26 +25,17 @@ class RegisterViewController: BaseViewController {
     }
     
     
-    @IBOutlet weak var firstNameTextField: RoundedTextField! {
+    @IBOutlet weak var nameTextField: RoundedTextField! {
         didSet {
             let size = CGSize(width: 20, height: 20)
             let image = FontAwesomeIcon.userIcon.image(ofSize: size, color: Color.white)
-            firstNameTextField.placeholder = "firstName".localize
-            firstNameTextField.imagePlaceholder = image
+            nameTextField.placeholder = "firstName".localize
+            nameTextField.imagePlaceholder = image
             
         }
     }
     
     
-    @IBOutlet weak var lastNameTextField: RoundedTextField! {
-        didSet {
-            let size = CGSize(width: 20, height: 20)
-            let image = FontAwesomeIcon.userIcon.image(ofSize: size, color: Color.white)
-           
-            lastNameTextField.placeholder = "lastName".localize
-             lastNameTextField.imagePlaceholder = image
-        }
-    }
     
     
     @IBOutlet weak var passwordTextField: RoundedTextField! {
@@ -76,6 +67,7 @@ class RegisterViewController: BaseViewController {
         return BackgroundLoginView(frame: CGRect.zero)
     }()
     
+    fileprivate var controller = AuthController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,8 +83,87 @@ class RegisterViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
-        @IBAction func registerButtonTapped(_ sender: Any) {
+    
+}
+
+extension RegisterViewController {
+    @IBAction func registerButtonTapped(_ sender: Any) {
+        let validForm = validateForm()
+        
+        guard validForm.isValid else {
+            Alert.showAlert(message: validForm.message ?? "", alertType: .okOnly, viewController: self)
+            return
+        }
+        register()
+        
     }
+}
+
+extension RegisterViewController {
+    func validateForm() -> (isValid:Bool, message:String?) {
+        let email = emailTextField.text
+        let name = nameTextField.text
+        let password = passwordTextField.text
+        let repeatPassword = repeatPasswordTextField.text
+        let texts = [email, name, password, repeatPassword]
+        
+        for (index,text) in texts.enumerated() {
+            guard let wText = text, wText != "" else {
+                return (isValid: false, message: "validEmptyForm".localize)
+            }
+            
+            switch index {
+            case 0: // email
+                guard wText.isValidEmail else {
+                    return (isValid: false, message: "validEmail".localize)
+                }
+            case 2, 3: // password doesn't match
+                guard texts[2] ==  texts[3] else {
+                    return (isValid: false, message: "passwordDoesntMatch".localize)
+                }
+                
+                guard wText.characters.count >= 6  else {
+                    return (isValid: false, message: "passwordMinimumChar".localize)
+                }
+                
+            default:
+                break
+            }
+
+        }
+        
+        return (isValid:true, message: nil)
+    }
+    
+    fileprivate func register(){
+        showProgressHUD()
+        DispatchQueue.global().async {
+            self.controller.register(email: self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (completed, message) in
+                
+                DispatchQueue.main.async {
+                    self.hideProgressHUD()
+                    
+                    guard completed else {
+                        Alert.showAlert(message: message ?? "", alertType: .okOnly, viewController: self)
+                        return
+                    }
+                    
+                    self.setupUser()
+                
+                }
+                
+            })
+        }
+    }
+    
+    fileprivate func setupUser(){
+        self.controller.updateProfileUser(name: nameTextField.text ?? "") { (completed) in
+            guard completed else { return }
+            self.controller.dismissViewControllerToHome(currentVC: self)
+        }
+    }
+    
+
 }
 
 extension RegisterViewController: BaseViewProtocol {

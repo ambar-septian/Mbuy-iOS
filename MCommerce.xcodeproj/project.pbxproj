@@ -45,6 +45,8 @@
 		5D706CE01F06CC0B003EAECC /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D706CDF1F06CC0B003EAECC /* Setting.storyboard */; };
 		5D706CE21F06CD9E003EAECC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D706CE11F06CD9E003EAECC /* SettingsViewController.swift */; };
 		5D706CE41F06D6C9003EAECC /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D706CE31F06D6C9003EAECC /* Authentication.storyboard */; };
+		5D706CE61F06F851003EAECC /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D706CE51F06F851003EAECC /* AuthController.swift */; };
+		5D706CE81F07384A003EAECC /* ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D706CE71F07384A003EAECC /* ErrorCode.swift */; };
 		5D764EF21ED44E9700C30FBE /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D764EF11ED44E9700C30FBE /* ProductListViewController.swift */; };
 		5D7E783E1EF23799000598BE /* TagCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7E783D1EF23799000598BE /* TagCollectionView.swift */; };
 		5D7E78401EF23A31000598BE /* ProductTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7E783F1EF23A31000598BE /* ProductTag.swift */; };
@@ -179,6 +181,8 @@
 		5D706CDF1F06CC0B003EAECC /* Setting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
 		5D706CE11F06CD9E003EAECC /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		5D706CE31F06D6C9003EAECC /* Authentication.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
+		5D706CE51F06F851003EAECC /* AuthController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
+		5D706CE71F07384A003EAECC /* ErrorCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorCode.swift; sourceTree = "<group>"; };
 		5D764EF11ED44E9700C30FBE /* ProductListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductListViewController.swift; sourceTree = "<group>"; };
 		5D7E783D1EF23799000598BE /* TagCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCollectionView.swift; sourceTree = "<group>"; };
 		5D7E783F1EF23A31000598BE /* ProductTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTag.swift; sourceTree = "<group>"; };
@@ -605,6 +609,7 @@
 			isa = PBXGroup;
 			children = (
 				5D5490301F00531C00E8C878 /* SearchPlaceController.swift */,
+				5D706CE51F06F851003EAECC /* AuthController.swift */,
 				5DE9808F1F02455D007685F5 /* CategoryController.swift */,
 				5DE980911F02C4A6007685F5 /* ProductController.swift */,
 			);
@@ -638,6 +643,7 @@
 				5DF000721EFCCB7100764B33 /* OrderPayment.swift */,
 				5DA67F0D1F01374200C14203 /* SearchPlace.swift */,
 				5DE9808D1F02446A007685F5 /* FirebaseProtocol.swift */,
+				5D706CE71F07384A003EAECC /* ErrorCode.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -950,6 +956,7 @@
 				5D0CDA381EFA7C4D0004513F /* Order.swift in Sources */,
 				5DA67F0E1F01374200C14203 /* SearchPlace.swift in Sources */,
 				5D5875551EF6FD3600D31A9F /* SearchViewController.swift in Sources */,
+				5D706CE81F07384A003EAECC /* ErrorCode.swift in Sources */,
 				5D24EF3B1EC32A8D00B43A71 /* Product.swift in Sources */,
 				5DBE850E1EFEFFD400341A07 /* CheckOutSummaryViewController.swift in Sources */,
 				5DD8D7B91EC2FCD100978D68 /* BaseViewProtocol.swift in Sources */,
@@ -968,6 +975,7 @@
 				5DCC92DA1EEF9187001C6F42 /* SimpleProductCollectionViewCell.swift in Sources */,
 				5DBE85081EFEFF7800341A07 /* CheckOutPageViewController.swift in Sources */,
 				5D7E78421EF23D52000598BE /* TagViewController.swift in Sources */,
+				5D706CE61F06F851003EAECC /* AuthController.swift in Sources */,
 				5DE9808E1F02446A007685F5 /* FirebaseProtocol.swift in Sources */,
 				5DBE11ED1ED2E06300D133EF /* ForgotPasswordViewController.swift in Sources */,
 				5D682E351ED5851A007D628E /* DynamicColllectionViewLayout.swift in Sources */,

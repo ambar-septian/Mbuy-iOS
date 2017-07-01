@@ -11,6 +11,7 @@
 "password" = "Kata Sandi";
 "firstName" = "Nama Depan";
 "lastName" = "Nama Belakang";
+"name" = "Nama";
 "repeatPassword" = "Ulangi Kata sandi";
 "login" = "Masuk";
 "register" = "Daftar";
@@ -19,6 +20,15 @@
 "submit" = "Kirim";
 "orSignInWith" = "Atau masuk dengan";
 "instructionForgotPassword" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua";
+"failedLogin" = "Oops.. terdapat kesalahan saat login, Silahkan coba kembali";
+"failedRegister" = "Oops.. terdapat kesalahan saat mendaftar, Silahkan coba kembali";
+"failedForgetPassword" = "Oops.. terdapat kesalahan saat mengirim kata sandi, Silahkan coba kembali";
+"successRegister" = "Selamat!, Anda berhasil mendaftarkan akun";
+"passwordDoesntMatch" = "Kata sandi tidak cocok";
+"passwordMinimumChar" = "Kata sandi minimum 6 panjang karakter";
+"emailAlreadyTaken" = "Email sudah dipakai, silahkan gunakan email yang lain";
+"resetPasswordSuccess" = "Atur ulang kata sandi berhasil, silahkan cek kotak masuk e-mail anda";
+"wrongPassword" = "Oops.. sepertinya email atau kata sandi anda salah";
 
 /* Home */
 "home" = "Beranda";
@@ -65,6 +75,7 @@
 "settings" = "Pengaturan";
 "changeLanguage" = "Ubah Bahasa";
 "logout" = "Keluar";
+"confirmationLogout" = "Apa anda ingin keluar dari akun ini?";
 
 /* Product Detail */
 "review" = "Ulasan";

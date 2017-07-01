@@ -12,7 +12,7 @@
         <!--Home View Controller-->
         <scene sceneID="i6q-bZ-2MX">
             <objects>
-                <viewController id="kph-yk-twu" customClass="HomeViewController" customModule="MCommerce" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewControllerID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kph-yk-twu" customClass="HomeViewController" customModule="MCommerce" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YrA-oN-oe5"/>
                         <viewControllerLayoutGuide type="bottom" id="0U5-bT-cys"/>
@@ -100,7 +100,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="rmr-70-qKl">
             <objects>
-                <tabBarController id="Yaj-kE-aXi" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTabBarControllerID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Yaj-kE-aXi" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="lX3-8E-yYZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

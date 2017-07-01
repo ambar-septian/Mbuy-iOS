@@ -9,6 +9,8 @@
 import UIKit
 import Iconic
 import Firebase
+import FBSDKCoreKit
+import FacebookLogin
 import GoogleMaps
 import GooglePlaces
 
@@ -27,16 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSPlacesClient.provideAPIKey(Constants.GMAP.placeKey)
         
         UIApplication.shared.statusBarStyle = .lightContent
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
        
-//        // Override point for customization after application launch.
-//        window = UIWindow(frame: UIScreen.main.bounds)
-////        let loginVC = LoginViewController()
-////        let nav = UINavigationController(rootViewController: loginVC)
-//        
-//        let tabBar = ParantTabBarViewController()
-//        
-//        window?.rootViewController = tabBar
-//        window?.makeKeyAndVisible()
+        setRootViewController()
      
         (UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self])).tintColor = Color.white
         self.window?.tintColor = Color.orange
@@ -53,7 +48,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRDatabase.database().persistenceEnabled = true
         
     }
-
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -75,7 +74,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+}
 
-
+extension AppDelegate {
+    func setRootViewController() {
+        let vc: UIViewController
+        if let _ = FIRAuth.auth()?.currentUser {
+            let storyboard = UIStoryboard(name: Constants.storyboard.home, bundle: nil)
+            vc = storyboard.instantiateViewController(withIdentifier: Constants.viewController.mainTabBar)
+        } else {
+            let storyboard = UIStoryboard(name: Constants.storyboard.auth, bundle: nil)
+            vc = storyboard.instantiateViewController(withIdentifier: Constants.viewController.auth.login)
+        }
+        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = vc
+        self.window?.makeKeyAndVisible()
+    }
 }
 

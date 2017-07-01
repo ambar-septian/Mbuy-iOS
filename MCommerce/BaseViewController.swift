@@ -227,7 +227,7 @@ extension BaseViewController {
         }
         
         
-        hudView.backgroundColor = isTransparent ? Color.cream.withAlphaComponent(0.5): Color.cream
+        hudView.backgroundColor = isTransparent ? Color.cream.withAlphaComponent(0.3): Color.cream
         
         if !(view.subviews.contains(hudView)) {
             view.addSubview(hudView)
