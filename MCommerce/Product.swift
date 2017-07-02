@@ -48,6 +48,14 @@ class Product: FirebaseProtocol {
     
     var variants = [ProductVariant]()
     
+    var selectedVariant: ProductVariant {
+        guard let selectedVariant = variants.filter({ $0.isSelected }).first else {
+            return variants[0]
+        }
+        
+        return selectedVariant
+    }
+    
     var imageSize: CGSize?
     
     var key:String
@@ -67,7 +75,7 @@ class Product: FirebaseProtocol {
         self.key = key
     }
     
-    init(snapshot: FIRDataSnapshot) {
+    required init(snapshot: FIRDataSnapshot) {
         self.key = snapshot.key
         let jsonKeys = Product.jsonKeys
         

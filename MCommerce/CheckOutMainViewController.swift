@@ -76,8 +76,14 @@ class CheckOutMainViewController: BaseViewController {
     
     var profile = OrderProfile()
     
-    var currentDeliveryCost:Double = 0
+    fileprivate let orderController = OrderController()
     
+    fileprivate var order: Order? {
+        guard let pageVC = childViewControllers.first as? CheckOutPageViewController else { return nil }
+        guard let summaryVC = pageVC.childViewControllers.last as? CheckOutSummaryViewController else { return nil }
+        return summaryVC.order
+    }
+   
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -113,6 +119,9 @@ class CheckOutMainViewController: BaseViewController {
         if formValid.isValid {
             delegate?.updateOrderProfile()
             currentPage += 1
+            
+            guard currentPage == 3 else { return }
+            submitOrder()
         } else {
             guard let message = formValid.message else { return }
             Alert.showAlert(message: message, alertType: .okOnly, header: nil, viewController: self)
@@ -132,5 +141,27 @@ extension CheckOutMainViewController {
         vc.view.frame = childView.bounds
         childView.addSubview(vc.view)
         vc.didMove(toParentViewController: self)
+    }
+    
+    fileprivate func submitOrder(){
+        guard let order = self.order else { return }
+        showProgressHUD()
+        DispatchQueue.global().async {
+            self.orderController.submitOrder(order: order, completion: { (completed) in
+                DispatchQueue.main.async {
+                    self.hideProgressHUD()
+                    guard completed else { return }
+                    
+                    let cartController = CartController()
+                    cartController.deleteAllCarts()
+
+                    let storyboard = UIStoryboard(name: Constants.storyboard.order, bundle: nil)
+                    guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.viewController.order.note) as? OrderNoteViewController else { return }
+                    self.pushNavigation(targetVC: vc)
+                    
+                }
+            })
+        }
+        
     }
 }

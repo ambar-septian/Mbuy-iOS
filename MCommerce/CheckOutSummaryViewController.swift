@@ -11,22 +11,16 @@ import Iconic
 
 class CheckOutSummaryViewController: BaseViewController {
 
-    @IBOutlet weak var firstNameHeadingLabel: IconLabel! {
+    @IBOutlet weak var nameHeadingLabel: IconLabel! {
         didSet {
-            firstNameHeadingLabel.icon = FontAwesomeIcon.userIcon
+            nameHeadingLabel.text = "name".localize
+            nameHeadingLabel.icon = FontAwesomeIcon.userIcon
         }
     }
     
-    @IBOutlet weak var firstNameLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     
     
-    @IBOutlet weak var lastNameHeadingLabel: IconLabel! {
-        didSet {
-            lastNameHeadingLabel.icon = FontAwesomeIcon.userIcon
-        }
-    }
-    
-    @IBOutlet weak var lastNameLabel: UILabel!
     
     @IBOutlet weak var emailHeadingLabel: IconLabel! {
         didSet {
@@ -38,6 +32,7 @@ class CheckOutSummaryViewController: BaseViewController {
     
     @IBOutlet weak var phoneHeadingLabel: IconLabel! {
         didSet {
+            phoneHeadingLabel.text = "phone".localize
             phoneHeadingLabel.icon = FontAwesomeIcon.mobilePhoneIcon
         }
     }
@@ -46,6 +41,7 @@ class CheckOutSummaryViewController: BaseViewController {
     
     @IBOutlet weak var addressHeadingLabel: IconLabel! {
         didSet {
+            addressHeadingLabel.text = "address".localize
             addressHeadingLabel.icon = FontAwesomeIcon.homeIcon
         }
     }
@@ -54,6 +50,7 @@ class CheckOutSummaryViewController: BaseViewController {
     
     @IBOutlet weak var noteHeadingLabel: IconLabel! {
         didSet {
+            noteHeadingLabel.text = "orderNote".localize
             noteHeadingLabel.icon = FontAwesomeIcon.editIcon
         }
     }
@@ -73,7 +70,11 @@ class CheckOutSummaryViewController: BaseViewController {
     
     @IBOutlet weak var subtotalLabel: UILabel!
     
-    @IBOutlet weak var deliveryCostHeadingLabel: IconLabel!
+    @IBOutlet weak var deliveryCostHeadingLabel: IconLabel! {
+        didSet {
+            deliveryCostHeadingLabel.text = "deliveryCost".localize
+        }
+    }
     
     @IBOutlet weak var deliveryLabel: UILabel!
     
@@ -89,6 +90,19 @@ class CheckOutSummaryViewController: BaseViewController {
         
         return mainVC.passedCarts
     }()
+    
+    fileprivate lazy var profile: OrderProfile? = {
+        guard let pageVC = self.parent as? CheckOutPageViewController else { return nil }
+        guard let mainVC = pageVC.parent as? CheckOutMainViewController else { return nil }
+        
+        return mainVC.profile
+    }()
+    
+    var order: Order? {
+        didSet {
+            setupOrder()
+        }
+    }
     
     fileprivate var subTotal:Double = 0
     
@@ -110,27 +124,24 @@ class CheckOutSummaryViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupOrder()
+        guard let profile = self.profile else { return }
+        order = Order(profile: profile, carts: carts, key: "")
     }
 }
 
 extension CheckOutSummaryViewController {
     func setupOrder(){
+        guard let profile = self.profile else { return }
         tableViewConstraint.constant = tableView.contentSize.height
-        
-        guard let pageVC = parent as? CheckOutPageViewController else { return }
-        guard let mainVC = pageVC.parent as? CheckOutMainViewController else { return }
-        
-        let profile = mainVC.profile
-        firstNameLabel.text = profile.firstName
-        lastNameLabel.text = profile.lastName
+    
+        nameLabel.text = profile.name
         emailLabel.text = profile.email
         phoneLabel.text = profile.phone
         addressLabel.text = profile.address
         noteLabel.text = profile.note
         
         subTotal =  carts.reduce(0, { $0 + ($1.product.price * Double($1.quantity)) })
-        deliveryCost = mainVC.currentDeliveryCost
+        deliveryCost = profile.deliveryCost
         
         subtotalLabel.text = subTotal.formattedPrice
         deliveryLabel.text = deliveryCost.formattedPrice

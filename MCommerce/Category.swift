@@ -39,7 +39,7 @@ class Category: FirebaseProtocol {
         self.key = key
     }
     
-    init(snapshot: FIRDataSnapshot) {
+    required init(snapshot: FIRDataSnapshot) {
         self.key = snapshot.key
         let jsonKeys = Category.jsonKeys
         

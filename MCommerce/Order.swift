@@ -7,9 +7,12 @@
 //
 
 import Foundation
+import FirebaseDatabase
 
-class Order {
-    var orderID: String
+class Order: FirebaseProtocol {
+    var orderID: String {
+        return key
+    }
     var profile: OrderProfile
     var lastUpdateDate: Date? {
         return histories.last?.date
@@ -24,18 +27,44 @@ class Order {
         return carts.reduce(0, {$0 + $1.quantity })
     }
     
-    var cartTotal: Double {
+    var subTotal: Double {
         return carts.reduce(0, {$0 + ($1.price) }) * Double(cartQuantity)
     }
     
-    var cartFormattedPrice: String {
-        return cartTotal.formattedPrice
+    var formattedSubtotal: String {
+        return subTotal.formattedPrice
     }
     
     
-    init(orderID:String, profile:OrderProfile){
-        self.orderID = orderID
+    var total:Double {
+        return subTotal * profile.deliveryCost
+    }
+    
+    var formattedTotal:String {
+        return total.formattedPrice
+    }
+    
+    var key: String
+    
+    var ref: FIRDatabaseReference?
+    
+    var orderNumber: String?
+    
+    static let jsonKeys:(profile:String, carts:String, orderNumber: String, carts:String, histories: String) =
+        (profile: "profile", carts:"carts", orderNumber: "orderNumber", carts: "carts", histories: "histories")
+
+    
+    
+    init(profile:OrderProfile, carts: [Cart] = [Cart](), key:String = ""){
         self.profile = profile
+        self.carts = carts
+        self.key = key
+    }
+    
+    required init(snapshot: FIRDataSnapshot) {
+        self.key = snapshot as! String
+        self.profile = snapshot as! OrderProfile
+        self.carts = snapshot as! [Cart]
     }
     
 }

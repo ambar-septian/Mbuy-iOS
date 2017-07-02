@@ -52,6 +52,11 @@
 "deliveryAddress"= "Delivery Address";
 "summary" = "Summary";
 "phone" = "Phone Number";
+"deliveryAddressTooFar" = "Delivery Address too far, maximum %d Km";
+"deliveryCost" = "Delivery Cost";
+"address" = "Address";
+"orderNote" = "Order Note";
+
 
 /* Validation Form */
 "validEmptyForm" = "Please fill all field";

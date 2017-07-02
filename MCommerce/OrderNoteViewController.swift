@@ -40,7 +40,9 @@ class OrderNoteViewController: BaseViewController {
 
         collectionView.reloadData()
         
-        // Do any additional setup after loading the view.
+        guard tabBarController == nil else { return }
+        navigationItem.leftBarButtonItem = nil
+        addDismissBarButton()
     }
 
     

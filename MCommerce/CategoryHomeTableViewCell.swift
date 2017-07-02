@@ -63,6 +63,11 @@ class CategoryHomeTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        backgroundImageView.image = nil
+    }
 }
 
 extension CategoryHomeTableViewCell: BaseViewProtocol {

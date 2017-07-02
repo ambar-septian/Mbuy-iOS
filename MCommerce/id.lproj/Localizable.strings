@@ -51,6 +51,10 @@
 "deliveryAddress"= "Alamat Pengiriman";
 "summary" = "Ringkasan";
 "phone" = "Nomor Telepon";
+"deliveryAddressTooFar" = "Alamat pengiriman terlalu jauh, maksimum %d Km";
+"deliveryCost" = "Biaya Pengiriman";
+"address" = "Alamat";
+"orderNote" = "Catatan Pengiriman";
 
 /* Validation Form */
 "validEmptyForm" = "Harap semua field diisi";

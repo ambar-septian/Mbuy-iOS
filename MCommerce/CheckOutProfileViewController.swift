@@ -11,19 +11,13 @@ import Iconic
 
 class CheckOutProfileViewController: BaseViewController {
 
-    @IBOutlet weak var firstNameLabel: IconLabel! {
+    @IBOutlet weak var nameLabel: IconLabel! {
         didSet {
-            firstNameLabel.text = "firstName".localize
-            firstNameLabel.icon = FontAwesomeIcon.userIcon
+            nameLabel.text = "name".localize
+            nameLabel.icon = FontAwesomeIcon.userIcon
         }
     }
 
-    @IBOutlet weak var lastNameLabel: IconLabel!  {
-        didSet {
-            lastNameLabel.text = "lastName".localize
-            lastNameLabel.icon = FontAwesomeIcon.userIcon
-        }
-    }
     
     @IBOutlet weak var phoneLabel: IconLabel!  {
         didSet {
@@ -39,18 +33,12 @@ class CheckOutProfileViewController: BaseViewController {
         }
     }
     
-    @IBOutlet weak var firstNameTextField: BorderTextField!  {
+    @IBOutlet weak var nameTextField: BorderTextField!  {
         didSet {
-            firstNameTextField.placeholder = "firstName".localize
+            nameTextField.placeholder = "name".localize
         }
     }
     
-    
-    @IBOutlet weak var lastNameTextField: BorderTextField!  {
-        didSet {
-            lastNameTextField.placeholder = "lastName".localize
-        }
-    }
     
     @IBOutlet weak var phoneTextField: BorderTextField!  {
         didSet {
@@ -80,12 +68,11 @@ class CheckOutProfileViewController: BaseViewController {
 
 extension CheckOutProfileViewController {
     func validateForm() -> (isValid:Bool, message:String?) {
-        let firstName = firstNameTextField.text
-        let lastName = lastNameTextField.text
+        let firstName = nameTextField.text
         let email = emailTextField.text
         let phone = phoneTextField.text
         
-        let texts = [firstName, lastName, email, phone]
+        let texts = [firstName, email, phone]
       
         for (index,text) in texts.enumerated() {
             guard let wText = text, wText != "" else {
@@ -93,11 +80,11 @@ extension CheckOutProfileViewController {
             }
             
             switch index {
-            case 2: // email
+            case 1: // email
                 guard wText.isValidEmail else {
                    return (isValid: false, message: "validEmail".localize)
                 }
-            case 3: // phone
+            case 2: // phone
                 guard wText.isValidNumeric else {
                     return (isValid: false, message: "validPhone".localize)
                 }

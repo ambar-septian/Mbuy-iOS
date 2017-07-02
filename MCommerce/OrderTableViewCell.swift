@@ -47,11 +47,11 @@ extension OrderTableViewCell: ReuseTableCellProtocol {
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! OrderTableViewCell
         guard let order = object as? Order else { return cell }
         cell.orderIDLabel.text = "orderID".localize + order.orderID
-        cell.nameLabel.text = order.profile.fullName
+        cell.nameLabel.text = order.profile.name
         cell.addressLabel.text = order.profile.address
 
         cell.quantityLabel.text = "\(order.cartQuantity)"
-        cell.totalLabel.text = order.cartFormattedPrice
+        cell.totalLabel.text = order.formattedTotal
         
         if let status = order.lastStatus {
             cell.statusLabel.text = status.rawValue.localize

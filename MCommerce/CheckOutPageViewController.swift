@@ -142,21 +142,24 @@ extension CheckOutPageViewController: CheckOutParentProtocol {
     func updateOrderProfile() {
         guard let parent = parent as? CheckOutMainViewController else { return }
         let profile = parent.profile
-        
+       
         switch currentIndex {
         case 0:
             guard let vc = listViewControllers[currentIndex] as? CheckOutProfileViewController else { return }
             profile.email = vc.emailTextField.text ?? ""
-            profile.firstName = vc.firstNameTextField.text ?? ""
-            profile.lastName = vc.lastNameTextField.text ?? ""
+            profile.name = vc.nameTextField.text ?? ""
             profile.phone = vc.phoneTextField.text ?? ""
             
         case 1:
             guard let vc = listViewControllers[currentIndex] as? CheckOutAddressViewController else {  return }
             profile.address = vc.addressTextView.text
-            parent.currentDeliveryCost = vc.deliveryCost
+            profile.deliveryCost = vc.deliveryCost
+            profile.note = vc.noteTextView.text
             guard let place = vc.selectedPlace else { return }
             profile.coordinate = place.coordinate
+            
+      
+            
         default:
             break
         }

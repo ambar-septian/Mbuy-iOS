@@ -84,7 +84,8 @@ extension AppDelegate {
             vc = storyboard.instantiateViewController(withIdentifier: Constants.viewController.mainTabBar)
         } else {
             let storyboard = UIStoryboard(name: Constants.storyboard.auth, bundle: nil)
-            vc = storyboard.instantiateViewController(withIdentifier: Constants.viewController.auth.login)
+            let loginVC = storyboard.instantiateViewController(withIdentifier: Constants.viewController.auth.login)
+            vc = UINavigationController(rootViewController: loginVC)
         }
         
         self.window = UIWindow(frame: UIScreen.main.bounds)

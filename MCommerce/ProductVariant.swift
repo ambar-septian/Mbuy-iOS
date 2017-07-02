@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ProductVariant {
+class ProductVariant: Equatable {
     var stock: Int
     var name:String
     var isSelected: Bool = false
@@ -27,4 +27,11 @@ class ProductVariant {
         self.stock = object[jsonKeys.stock] as? Int  ?? 0
         
     }
+    
+    
+    static func ==(lhs:ProductVariant, rhs:ProductVariant) -> Bool{
+        return lhs.name == rhs.name
+    }
+
 }
+

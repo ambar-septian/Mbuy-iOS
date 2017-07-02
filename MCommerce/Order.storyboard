@@ -22,7 +22,7 @@
         <!--Order Note View Controller-->
         <scene sceneID="qRH-8Y-Ijd">
             <objects>
-                <viewController id="U5Z-Wq-GsD" customClass="OrderNoteViewController" customModule="MCommerce" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OrderNoteViewControllerID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="U5Z-Wq-GsD" customClass="OrderNoteViewController" customModule="MCommerce" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oOk-jA-ZZp"/>
                         <viewControllerLayoutGuide type="bottom" id="KLd-Bo-eZd"/>
@@ -552,7 +552,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kGk-jo-nxi" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="o0D-at-9Pq">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="o0D-at-9Pq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

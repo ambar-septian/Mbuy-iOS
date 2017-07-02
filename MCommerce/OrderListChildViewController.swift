@@ -32,7 +32,7 @@ class OrderListChildViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let profile = OrderProfile(firstName: "Ambuy", lastName: "Septian", address: "Jl. Letjen Sparaman No.3 Jakarta Selatan", coordinate: CLLocationCoordinate2DMake(-6, 102), phone: "032423423", email: "asdfds@gmail.com", note: "")
+        let profile = OrderProfile(name: "Ambuy Septian", address: "Jl. Letjen Sparaman No.3 Jakarta Selatan", coordinate: CLLocationCoordinate2DMake(-6, 102), phone: "032423423", email: "asdfds@gmail.com", note: "", deliveryCost: 5000)
         
         let category = Category(nameID: "1", nameEN: "a", imageURL: "", orderNumber: 0)
         let product1 = Product(name: "Sepatu Nike", category: category, imageURL: "https://images-eu.ssl-images-amazon.com/images/G/31/img15/Shoes/CatNav/k._V293117556_.jpg", stock: 30, description: "In a storyboard-based application, you will often want to do a", price: 50000, createdDate: Date())
@@ -40,22 +40,23 @@ class OrderListChildViewController: BaseViewController {
         let cart2 = Cart(product: product1, price: product1.price, quantity: 20)
         let cart3 = Cart(product: product1, price: product1.price, quantity: 10)
         
-        let cancel = OrderHistory(date: Date(), status: .cancel)
-        let completed = OrderHistory(date: Date(), status: .complete)
-        let waitingPayment = OrderHistory(date: Date(), status: .waitingPayment)
-        let onDelivery = OrderHistory(date: Date(), status: .onDelivery)
+        let cancel = OrderHistory(date: Date(), status: .cancel, sortNumber: 0)
+        let completed = OrderHistory(date: Date(), status: .complete, sortNumber: 1)
+        let waitingPayment = OrderHistory(date: Date(), status: .waitingPayment, sortNumber: 2)
+        let onDelivery = OrderHistory(date: Date(), status: .onDelivery , sortNumber: 3)
         
-        let order1 = Order(orderID: "001", profile: profile)
+        let carts1 = [cart1, cart2]
+        let order1 = Order(profile: profile, carts: carts1)
         order1.histories = [waitingPayment, onDelivery]
-        order1.carts = [cart1, cart2]
         
-        let order2 = Order(orderID: "001", profile: profile)
+        let carts2 = [cart2, cart3]
+        let order2 = Order(profile: profile, carts: carts2)
         order2.histories = [waitingPayment, onDelivery, completed]
-        order2.carts = [cart2, cart3]
         
-        let order3 = Order(orderID: "001", profile: profile)
+        let carts3 = [cart1, cart2]
+        let order3 = Order(profile: profile, carts: carts3)
         order3.histories = [waitingPayment]
-        order3.carts = [cart1, cart2]
+       
         
         orders = [order1, order2, order3]
        

@@ -17,10 +17,16 @@ class OrderHistory {
         return status.rawValue.localize
     }
     
-    init(date: Date, status: OrderStatus) {
+    var sortNumber:Int
+    
+    init(date: Date, status: OrderStatus, sortNumber:Int) {
         self.date = date
         self.status = status
+        self.sortNumber = sortNumber
     }
+    
+    static let jsonKeys:(date:String, status:String, sortNumber:String) =
+        (date:"date", status:"status", sortNumber:"sortNumber")
 }
 
 enum OrderStatus: String {

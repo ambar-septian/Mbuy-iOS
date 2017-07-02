@@ -15,18 +15,21 @@ class CheckOutAddressViewController: BaseViewController {
     
     @IBOutlet weak var addressLabel: IconLabel! {
         didSet {
+            addressLabel.text = "address".localize
             addressLabel.icon = FontAwesomeIcon.homeIcon
         }
     }
 
     @IBOutlet weak var noteLabel: IconLabel! {
         didSet {
+            noteLabel.text = "orderNote".localize
             noteLabel.icon = FontAwesomeIcon.editIcon
         }
     }
     
     @IBOutlet weak var deliveryCostHeadingLabel:  IconLabel! {
         didSet {
+            deliveryCostHeadingLabel.text = "deliveryCost".localize
             deliveryCostHeadingLabel.icon = FontAwesomeIcon.truckIcon
         }
     }
@@ -116,11 +119,18 @@ class CheckOutAddressViewController: BaseViewController {
             DispatchQueue.global().async {
                 self.controller.getDetailPlace(place: self.selectedPlace!) { (newPlace) in
                     guard newPlace != nil else { return }
+                    guard let coordinate = newPlace!.coordinate  else { return }
+                    
+                    let distance = self.controller.distanceFromCoordinate(coordinate: coordinate)
+                    guard distance <= self.controller.maximumDistance else {
+                        let message = String(format: "deliveryAddressTooFar".localize, self.controller.maximumDistance)
+                        Alert.showAlert(message: message, alertType: .okOnly, viewController: self)
+                        return
+                    }
                     
                     self.selectedPlace  = newPlace!
-                    guard self.selectedPlace!.coordinate != nil else { return }
-                    
-                    self.deliveryCost = self.controller.calculateDeliveryCost(coorindate: self.selectedPlace!.coordinate!)
+                   
+                    self.deliveryCost = self.controller.calculateDeliveryCost(distance: distance)
                     self.addressTextView.text = self.selectedPlace!.name
                     
                     let camera = GMSCameraPosition.camera(withTarget: self.selectedPlace!.coordinate!, zoom: 16)
@@ -216,6 +226,7 @@ extension CheckOutAddressViewController: UITextViewDelegate {
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        guard textView == addressTextView else { return true }
         guard let textViewText = textView.text else { return false }
         
         selectedPlace = nil

@@ -77,11 +77,11 @@ extension OrderDetailViewController {
     func loadOrder(){
         guard let order = passedOrder else { return }
         orderIDLabel.text = "orderID".localize + order.orderID
-        nameLabel.text = order.profile.fullName
+        nameLabel.text = order.profile.name
         addressLabel.text = order.profile.address
         
         quantityLabel.text = "\(order.cartQuantity)"
-        totalLabel.text = order.cartFormattedPrice
+        totalLabel.text = order.formattedTotal
         
         if let status = order.lastStatus {
             statusLabel.text = status.rawValue.localize

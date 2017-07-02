@@ -60,6 +60,7 @@ extension CartTableViewCell: ReuseTableCellProtocol {
         cell.priceLabel.text = (cart.price * Double(cart.quantity)).formattedPrice
         cell.stepper.counter = cart.quantity
         cell.quantityLabel.text = cell.quantityString
+        cell.variantLabel.text = cart.variant?.name ?? ""
         return cell
     }
 }
@@ -70,6 +71,10 @@ extension CartTableViewCell:RoundedStepperDelegate {
         cart.quantity = value
         quantityLabel.text = quantityString
         priceLabel.text = (cart.price * Double(cart.quantity)).formattedPrice
+        
+        let controller = CartController()
+        controller.updateCartList(cart: cart, quantity: value)
+        
         NotificationCenter.default.post(name: Constants.notification.updateStepper, object: nil, userInfo: nil)
     }
 }

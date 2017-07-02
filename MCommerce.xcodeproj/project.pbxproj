@@ -117,6 +117,7 @@
 		5DE980921F02C4A6007685F5 /* ProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE980911F02C4A6007685F5 /* ProductController.swift */; };
 		5DE980941F02C996007685F5 /* ProductVariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE980931F02C996007685F5 /* ProductVariant.swift */; };
 		5DEB04FA1F07B1CA00C190B6 /* CartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DEB04F91F07B1CA00C190B6 /* CartController.swift */; };
+		5DEB04FC1F08325A00C190B6 /* OrderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DEB04FB1F08325A00C190B6 /* OrderController.swift */; };
 		5DF000711EFCBDE700764B33 /* ImageTableViewRowAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF000701EFCBDE700764B33 /* ImageTableViewRowAction.swift */; };
 		5DF000731EFCCB7100764B33 /* OrderPayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF000721EFCCB7100764B33 /* OrderPayment.swift */; };
 		5DF000751EFCCE4000764B33 /* OrderNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF000741EFCCE4000764B33 /* OrderNoteViewController.swift */; };
@@ -261,6 +262,7 @@
 		5DE980911F02C4A6007685F5 /* ProductController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductController.swift; sourceTree = "<group>"; };
 		5DE980931F02C996007685F5 /* ProductVariant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductVariant.swift; sourceTree = "<group>"; };
 		5DEB04F91F07B1CA00C190B6 /* CartController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartController.swift; sourceTree = "<group>"; };
+		5DEB04FB1F08325A00C190B6 /* OrderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderController.swift; sourceTree = "<group>"; };
 		5DF000701EFCBDE700764B33 /* ImageTableViewRowAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTableViewRowAction.swift; sourceTree = "<group>"; };
 		5DF000721EFCCB7100764B33 /* OrderPayment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderPayment.swift; sourceTree = "<group>"; };
 		5DF000741EFCCE4000764B33 /* OrderNoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderNoteViewController.swift; sourceTree = "<group>"; };
@@ -614,6 +616,7 @@
 				5DEB04F91F07B1CA00C190B6 /* CartController.swift */,
 				5D706CE51F06F851003EAECC /* AuthController.swift */,
 				5DE9808F1F02455D007685F5 /* CategoryController.swift */,
+				5DEB04FB1F08325A00C190B6 /* OrderController.swift */,
 				5DE980911F02C4A6007685F5 /* ProductController.swift */,
 			);
 			name = GeneralController;
@@ -1018,6 +1021,7 @@
 				5D7E783E1EF23799000598BE /* TagCollectionView.swift in Sources */,
 				5DA4409A1ED6F7BC0093437A /* Double+Extension.swift in Sources */,
 				5DF000711EFCBDE700764B33 /* ImageTableViewRowAction.swift in Sources */,
+				5DEB04FC1F08325A00C190B6 /* OrderController.swift in Sources */,
 				5DBFBAAD1EC19CCB0061FE35 /* RoundedTextField.swift in Sources */,
 				5DE5FE3E1EFFD67A0089BE25 /* BorderTextField.swift in Sources */,
 				5D764EF21ED44E9700C30FBE /* ProductListViewController.swift in Sources */,

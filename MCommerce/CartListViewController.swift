@@ -51,18 +51,14 @@ class CartListViewController: BaseViewController {
     
     fileprivate let heightCell:CGFloat = 120
     
+    fileprivate let controller = CartController()
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let category = Category(nameID: "1", nameEN: "a", imageURL: "", orderNumber: 0)
-        let product1 = Product(name: "Sepatu Nike", category: category, imageURL: "https://images-eu.ssl-images-amazon.com/images/G/31/img15/Shoes/CatNav/k._V293117556_.jpg", stock: 30, description: "In a storyboard-based application, you will often want to do a", price: 50000, createdDate: Date())
-        let cart1 = Cart(product: product1, price: product1.price, quantity: 4)
-        let cart2 = Cart(product: product1, price: product1.price, quantity: 20)
-        let cart3 = Cart(product: product1, price: product1.price, quantity: 10)
-        
-        carts = [cart1, cart2, cart3]
         NotificationCenter.default.addObserver(self, selector: #selector(updateFooterLabel), name: Constants.notification.updateStepper, object: nil)
-    
+        
+        loadCartList()
     }
 
     override func didReceiveMemoryWarning() {
@@ -73,6 +69,8 @@ class CartListViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         title = "cart".localize
+        
+        loadCartList()
     }
     
     deinit {
@@ -86,9 +84,26 @@ class CartListViewController: BaseViewController {
             vc.passedCarts = carts
         }
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        controller.removeHandlerCartList()
+    }
 }
 
 extension CartListViewController {
+    func loadCartList(){
+        showProgressHUD()
+        DispatchQueue.global().async {
+            self.controller.getListCarts(completion: { (carts) in
+                DispatchQueue.main.async {
+                    self.hideProgressHUD()
+                    self.carts = carts
+                }
+            })
+        }
+    }
+    
     func updateFooterLabel(){
         quantityLabel.text = "\(quantity)"
         subtotalLabel.text = subtotal.formattedPrice
@@ -149,7 +164,15 @@ extension CartListViewController: UITableViewDelegate {
         let imageSize = CGSize(width:size, height: size)
         let icon = FontAwesomeIcon.trashIcon.image(ofSize: imageSize, color: Color.white)
         let deleteButton = BGTableViewRowActionWithImage.rowAction(with: .default, title: "delete".localize, backgroundColor: Color.red, image: icon, forCellHeight: UInt(heightCell), andFittedWidth: true) { (action, indexPath) in
-            //
+            guard let wIndexPath = indexPath else { return }
+            let index = wIndexPath.row
+            
+            self.controller.deleteCart(cart: self.carts[index])
+            
+            self.tableView.beginUpdates()
+            self.carts.remove(at: index)
+            self.tableView.deleteRows(at: [wIndexPath], with: .left)
+            self.tableView.endUpdates()
         }
         
         guard deleteButton != nil else { return nil }

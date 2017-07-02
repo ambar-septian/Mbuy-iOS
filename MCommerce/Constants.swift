@@ -51,6 +51,7 @@ enum Constants {
         static let cart = "Cart"
         static let home = "Home"
         static let auth = "Authentication"
+        static let order = "Order"
     }
     
     enum viewController {
@@ -66,6 +67,7 @@ enum Constants {
             static let page = "OrderPageViewControllerID"
             static let child = "OrderListChildViewControllerID"
             static let history = "OrderHistoryViewControllerID"
+            static let note = "OrderNoteViewControllerID"
         }
         
         enum checkout {
