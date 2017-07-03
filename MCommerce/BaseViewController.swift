@@ -57,7 +57,7 @@ extension BaseViewController {
     }
     
     func addDismissBarButton(rightPosition: Bool = true){
-        let size = CGSize(width: iconNavHeight, height: iconNavHeight)
+        let size = CGSize(width: iconNavHeight / 2, height: iconNavHeight / 2)
         let image = FontAwesomeIcon.removeIcon.image(ofSize: size, color: Color.white).withRenderingMode(.alwaysOriginal)
         let barButton =  UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(self.dismissVC))
         
@@ -180,10 +180,12 @@ extension BaseViewController {
             
             tabBar.selectedImage = selectedImage
             tabBar.image = image
+            tabBar.badgeColor = Color.red
         }
         
 
         setupTitleTabBar()
+        TabBarBadge.shared.tabBarController = tabBarController
     }
     
     func setupTitleTabBar(){

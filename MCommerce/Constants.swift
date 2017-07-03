@@ -36,6 +36,11 @@ enum Constants {
     
     enum userDefaultsKey {
         static let localize = "AppleLanguages"
+        
+        enum tabBarBadge {
+            static let cart = "CartTabBarBadge"
+            static let order = "OrderTabBarBadge"
+        }
     }
     
     enum heroID {

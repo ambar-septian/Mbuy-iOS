@@ -46,7 +46,7 @@ extension OrderTableViewCell: ReuseTableCellProtocol {
     static func configureCell<T>(tableView: UITableView, indexPath: IndexPath, object: T?) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! OrderTableViewCell
         guard let order = object as? Order else { return cell }
-        cell.orderIDLabel.text = "orderID".localize + order.orderID
+        cell.orderIDLabel.text = "orderNo".localize + (order.orderNumber ?? "")
         cell.nameLabel.text = order.profile.name
         cell.addressLabel.text = order.profile.address
 

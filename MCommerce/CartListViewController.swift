@@ -70,6 +70,7 @@ class CartListViewController: BaseViewController {
         super.viewWillAppear(animated)
         title = "cart".localize
         
+        TabBarBadge.shared.cartCount = 0
         loadCartList()
     }
     
@@ -135,6 +136,7 @@ extension CartListViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let storyboard = UIStoryboard(name: Constants.storyboard.product, bundle: nil)
         guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.viewController.product.detail) as? ProductDetailViewController else { return }
+        vc.passedProduct = carts[indexPath.row].product
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -171,7 +173,7 @@ extension CartListViewController: UITableViewDelegate {
             
             self.tableView.beginUpdates()
             self.carts.remove(at: index)
-            self.tableView.deleteRows(at: [wIndexPath], with: .left)
+            self.tableView.deleteRows(at: [wIndexPath], with: .automatic)
             self.tableView.endUpdates()
         }
         

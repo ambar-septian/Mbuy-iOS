@@ -37,7 +37,7 @@ class Order: FirebaseProtocol {
     
     
     var total:Double {
-        return subTotal * profile.deliveryCost
+        return subTotal + profile.deliveryCost
     }
     
     var formattedTotal:String {
@@ -50,21 +50,27 @@ class Order: FirebaseProtocol {
     
     var orderNumber: String?
     
-    static let jsonKeys:(profile:String, carts:String, orderNumber: String, carts:String, histories: String) =
-        (profile: "profile", carts:"carts", orderNumber: "orderNumber", carts: "carts", histories: "histories")
+    static let jsonKeys:(profile:String, carts:String, orderNumber: String, histories: String) =
+        (profile: "profile", carts:"carts", orderNumber: "orderNumber", histories: "histories")
 
     
     
-    init(profile:OrderProfile, carts: [Cart] = [Cart](), key:String = ""){
+    init(profile:OrderProfile, carts: [Cart] = [Cart](), key:String = "", orderNumber: String?){
         self.profile = profile
         self.carts = carts
         self.key = key
+        self.orderNumber = orderNumber
     }
     
-    required init(snapshot: FIRDataSnapshot) {
-        self.key = snapshot as! String
-        self.profile = snapshot as! OrderProfile
-        self.carts = snapshot as! [Cart]
+    required init(snapshot: FIRDataSnapshot,profile: OrderProfile, carts: [Cart]) {
+        self.key = snapshot.key
+        let jsonKeys = Order.jsonKeys
+        let value = snapshot.value as? [String:AnyObject]
+        ref = snapshot.ref
+        
+        self.carts = carts
+        self.profile = profile
+        self.orderNumber = value?[jsonKeys.orderNumber] as? String
     }
     
 }

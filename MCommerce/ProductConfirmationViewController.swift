@@ -149,6 +149,7 @@ extension ProductConfirmationViewController {
                 DispatchQueue.main.async {
                     guard completed else { return }
                     
+                    TabBarBadge.shared.cartCount += 1
                     Alert.showAlert(message: "addToCartSuccess".localize, alertType: .okOnly, header: nil, viewController: self, handler: { (alert) in
                         self.closeButtonTapped(self)
                     })

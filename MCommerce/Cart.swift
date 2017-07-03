@@ -54,7 +54,7 @@ class Cart: FirebaseProtocol {
     init(product:Product, snapshot: FIRDataSnapshot) {
         self.key = snapshot.key
         let jsonKeys = Cart.jsonKeys
-         ref = snapshot.ref
+        ref = snapshot.ref
         
         let snapshotValue = snapshot.value as! [String: AnyObject]
         self.product  = product
@@ -64,6 +64,19 @@ class Cart: FirebaseProtocol {
         guard let variantName = snapshotValue[jsonKeys.variant] as? String else { return }
         self.variant = product.variants.filter({ $0.name == variantName }).first
        
+    }
+    
+    init(dictionary: [String: Any], product: Product, index:Int) {
+        let jsonKeys = Cart.jsonKeys
+        self.price  = dictionary[jsonKeys.price] as? Double ?? 0
+        self.createdDate = dictionary[jsonKeys.createdDate] as? Date ?? Date()
+        self.quantity = dictionary[jsonKeys.quantity] as? Int ?? 0
+        self.key = String(index)
+        self.product = product
+        
+        guard let variantName = dictionary[jsonKeys.variant] as? String else { return }
+        self.variant = product.variants.filter({ $0.name == variantName }).first
+        
     }
     
 }

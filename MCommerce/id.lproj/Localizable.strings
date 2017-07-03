@@ -54,7 +54,7 @@
 "deliveryAddressTooFar" = "Alamat pengiriman terlalu jauh, maksimum %d Km";
 "deliveryCost" = "Biaya Pengiriman";
 "address" = "Alamat";
-"orderNote" = "Catatan Pengiriman";
+"deliveryNote" = "Catatan Pengiriman";
 
 /* Validation Form */
 "validEmptyForm" = "Harap semua field diisi";
@@ -64,7 +64,7 @@
 
 /* Orders */
 "orders" = "Pesanan";
-"orderID" = "ID Pesanan : ";
+"orderID" = "No. Pesanan : ";
 "cancel" = "Batal";
 "history" = "Riwayat";
 "note" = "Nota";

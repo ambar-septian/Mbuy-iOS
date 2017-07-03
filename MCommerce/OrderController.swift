@@ -11,11 +11,15 @@ import FirebaseDatabase
 
 typealias newOrderNumberCompletion = ((_ orderNumber: String) -> Void)
 typealias statusNumberCompletion = ((_ statusNumber: Int) -> Void)
+typealias ordersCompletion = ((_ orders: [Order]) -> Void)
 
 class OrderController {
     fileprivate let orderRef = FIRDatabase.database().reference(withPath: "orders")
     fileprivate let cartRef = FIRDatabase.database().reference(withPath: "carts")
     fileprivate let productRef = FIRDatabase.database().reference(withPath: "products")
+    
+    fileprivate var orderListRef: FIRDatabaseReference?
+    fileprivate var orderListHander: UInt?
     
     fileprivate let user = User.shared
     
@@ -65,7 +69,7 @@ class OrderController {
             
             self.getLastStatusNumber(completion: { (statusNumber) in
                 history[historyKey.sortNumber] = statusNumber
-                orderDict[orderKey.histories] = history
+                orderDict[orderKey.histories] = [history]
                 self.orderRef.childByAutoId().setValue(orderDict)
                 completion(true)
             })
@@ -81,7 +85,78 @@ class OrderController {
     
     fileprivate func getLastStatusNumber(completion: @escaping statusNumberCompletion) {
         orderRef.observeSingleEvent(of: .value, with: { (snapshot) in
-            completion(Int(snapshot.childrenCount) + 1)
+            completion(Int(snapshot.childrenCount))
         })
     }
+    
+    func listOrders(completion: @escaping ordersCompletion){
+        orderListRef = orderRef
+        let orderKey = Order.jsonKeys.self
+        
+        orderListHander = orderListRef?.queryOrderedByKey().observe(.value, with: { (snapshots) in
+            var orders = [Order]()
+            for (index,snapshot) in snapshots.children.enumerated() {
+                guard let wSnapshot = snapshot as? FIRDataSnapshot else { continue }
+                guard let value = wSnapshot.value as? [String: Any] else { continue }
+                guard let cartsDictionary = value[orderKey.carts] as? [[String: Any]] else { continue }
+                guard let orderNumber = value[orderKey.orderNumber] as? String else { return }
+                
+                self.listCartsOfOrder(cartsDictionary: cartsDictionary, completion: { (carts) in
+                    let profile = OrderProfile(snapshot: wSnapshot)
+                    let order = Order(profile: profile, carts: carts, key: wSnapshot.key, orderNumber: orderNumber)
+                
+                    if let historyDict = value[orderKey.histories] as? [[String: Any]] {
+                        let histories = self.listHistoriesOfOrder(historiesDict: historyDict)
+                        order.histories = histories
+                    }
+                    
+                    orders.append(order)
+                    
+                    if (Int(snapshots.childrenCount) - 1 == index) {
+                         completion(orders)
+                    }
+                })
+            }
+            
+           
+        })
+    }
+    
+    fileprivate func listCartsOfOrder(cartsDictionary: [[String:Any]], completion: @escaping cartsCompletion){
+        var carts = [Cart]()
+        let cartKey = Cart.jsonKeys.self
+    
+        for (index,cartDictionary) in cartsDictionary.enumerated() {
+            guard let productID = cartDictionary[cartKey.product] as? String else { continue }
+            
+            productRef.child(productID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
+                let product = Product(snapshot: dataSnapshot)
+                let cart = Cart(dictionary: cartDictionary, product: product, index: index)
+                carts.append(cart)
+                
+                if index == cartsDictionary.count - 1 {
+                    completion(carts)
+
+                }
+            })
+        }
+        
+        
+    }
+    
+    fileprivate func listHistoriesOfOrder(historiesDict:  [[String:Any]]) -> [OrderHistory] {
+        var histories = [OrderHistory]()
+        for dict in historiesDict {
+           let history = OrderHistory(dictionary: dict)
+            histories.append(history)
+        }
+        
+        return histories
+    }
+    
+    func removeOrderListHandler(){
+        guard let handler = orderListHander else { return }
+        orderListRef?.removeObserver(withHandle: handler)
+    }
+    
 }

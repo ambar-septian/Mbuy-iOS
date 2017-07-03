@@ -12,10 +12,16 @@ import BGTableViewRowActionWithImage
 import Iconic
 
 class OrderListChildViewController: BaseViewController {
-    
-    var orders = [Order]() {
-        didSet {
-            tableView.reloadData()
+   
+    fileprivate var orders: [Order] {
+        let orders = [Order]()
+        guard let pageVC = self.parent as? OrderPageViewController else { return orders }
+        guard let orderVC = pageVC.parent as? OrderListViewController else { return orders }
+        
+        if currentPage == 0 {
+            return orderVC.orders.filter({ $0.lastStatus == .waitingPayment || $0.lastStatus == .onDelivery })
+        } else {
+            return orderVC.orders.filter({ $0.lastStatus == .complete || $0.lastStatus == .cancel })
         }
     }
 
@@ -26,40 +32,14 @@ class OrderListChildViewController: BaseViewController {
         }
     }
     
+    @IBOutlet weak var tableViewConstraint: NSLayoutConstraint!
+    
     fileprivate var isViewAlreadyLoaded = false
     fileprivate let heightCell:CGFloat = 250
+    var currentPage = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let profile = OrderProfile(name: "Ambuy Septian", address: "Jl. Letjen Sparaman No.3 Jakarta Selatan", coordinate: CLLocationCoordinate2DMake(-6, 102), phone: "032423423", email: "asdfds@gmail.com", note: "", deliveryCost: 5000)
-        
-        let category = Category(nameID: "1", nameEN: "a", imageURL: "", orderNumber: 0)
-        let product1 = Product(name: "Sepatu Nike", category: category, imageURL: "https://images-eu.ssl-images-amazon.com/images/G/31/img15/Shoes/CatNav/k._V293117556_.jpg", stock: 30, description: "In a storyboard-based application, you will often want to do a", price: 50000, createdDate: Date())
-        let cart1 = Cart(product: product1, price: product1.price, quantity: 4)
-        let cart2 = Cart(product: product1, price: product1.price, quantity: 20)
-        let cart3 = Cart(product: product1, price: product1.price, quantity: 10)
-        
-        let cancel = OrderHistory(date: Date(), status: .cancel, sortNumber: 0)
-        let completed = OrderHistory(date: Date(), status: .complete, sortNumber: 1)
-        let waitingPayment = OrderHistory(date: Date(), status: .waitingPayment, sortNumber: 2)
-        let onDelivery = OrderHistory(date: Date(), status: .onDelivery , sortNumber: 3)
-        
-        let carts1 = [cart1, cart2]
-        let order1 = Order(profile: profile, carts: carts1)
-        order1.histories = [waitingPayment, onDelivery]
-        
-        let carts2 = [cart2, cart3]
-        let order2 = Order(profile: profile, carts: carts2)
-        order2.histories = [waitingPayment, onDelivery, completed]
-        
-        let carts3 = [cart1, cart2]
-        let order3 = Order(profile: profile, carts: carts3)
-        order3.histories = [waitingPayment]
-       
-        
-        orders = [order1, order2, order3]
-       
         
     }
 
@@ -70,16 +50,20 @@ class OrderListChildViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        guard !(isViewAlreadyLoaded) else {
-            return
-        }
+        
         
         tableView.reloadData()
         isViewAlreadyLoaded = true
+        tableViewConstraint.constant = tableView.contentSize.height
 
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        guard !(isViewAlreadyLoaded) else {
+//            return
+//        }
+       
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

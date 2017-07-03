@@ -50,7 +50,7 @@ class CheckOutSummaryViewController: BaseViewController {
     
     @IBOutlet weak var noteHeadingLabel: IconLabel! {
         didSet {
-            noteHeadingLabel.text = "orderNote".localize
+            noteHeadingLabel.text = "deliveryNote".localize
             noteHeadingLabel.icon = FontAwesomeIcon.editIcon
         }
     }
@@ -125,7 +125,7 @@ class CheckOutSummaryViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         guard let profile = self.profile else { return }
-        order = Order(profile: profile, carts: carts, key: "")
+        order = Order(profile: profile, carts: carts, key: "", orderNumber: nil)
     }
 }
 

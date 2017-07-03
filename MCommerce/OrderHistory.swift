@@ -25,6 +25,13 @@ class OrderHistory {
         self.sortNumber = sortNumber
     }
     
+    init(dictionary: [String:Any]) {
+        let historyKey = OrderHistory.jsonKeys
+        self.date = Date(timeIntervalSince1970: dictionary[historyKey.date] as? Double ?? 0)
+        self.sortNumber = dictionary[historyKey.sortNumber]  as? Int ?? 0
+        self.status = OrderStatus(rawValue: dictionary[historyKey.status] as! String)!
+    }
+    
     static let jsonKeys:(date:String, status:String, sortNumber:String) =
         (date:"date", status:"status", sortNumber:"sortNumber")
 }

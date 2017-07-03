@@ -12,6 +12,4 @@ import FirebaseDatabase
 protocol FirebaseProtocol: class {
     var key: String { get }
     var ref: FIRDatabaseReference? { get set }
-
-    init(snapshot: FIRDataSnapshot)
 }

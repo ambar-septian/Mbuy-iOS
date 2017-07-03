@@ -11,28 +11,34 @@ import UIKit
 class OrderPageViewController: UIPageViewController {
     
     lazy var listViewControllers: [UIViewController] = {
-        return [
-           
-            self.storyboard?.instantiateViewController(withIdentifier: Constants.viewController.order.child),
-            self.storyboard?.instantiateViewController(withIdentifier: Constants.viewController.order.child)
-        ]
-    }() as! [UIViewController]
+        let onProcessVC =
+            self.storyboard?.instantiateViewController(withIdentifier: Constants.viewController.order.child) as! OrderListChildViewController
+        onProcessVC.currentPage = 0
+        
+        let completedVC =
+            self.storyboard?.instantiateViewController(withIdentifier: Constants.viewController.order.child) as! OrderListChildViewController
+        completedVC.currentPage = 1
+        
+        return [onProcessVC, completedVC]
+        
+    }()
+    
+    fileprivate var parentVC:OrderListViewController? {
+        return parent as? OrderListViewController
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
     
         self.dataSource = self
+        self.delegate = self
         
         if let initialVC = listViewControllers.first {
             setViewControllers([initialVC], direction: .forward, animated: false, completion: nil)
         }
-    
-        if let scrollView = view.subviews.filter({ $0.isKind(of: UIScrollView.self)}).first as? UIScrollView {
-            scrollView.isScrollEnabled = false
-        }
-        
-        guard let parent = parent as? OrderListViewController else { return }
-        parent.delegate = self
+
+      
+        parentVC?.delegate = self
 
     }
 
@@ -56,6 +62,7 @@ extension OrderPageViewController: UIPageViewControllerDataSource{
             return nil
         }
         
+        parentVC?.activePageIndex = previousIndex
         return listViewControllers[previousIndex]
     }
     
@@ -70,7 +77,16 @@ extension OrderPageViewController: UIPageViewControllerDataSource{
             return nil
         }
         
+        parentVC?.activePageIndex = nextIndex
         return listViewControllers[nextIndex]
+    }
+}
+
+extension OrderPageViewController: UIPageViewControllerDelegate {
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        guard finished else { return }
+        guard let index = parentVC?.activePageIndex else { return }
+        parentVC?.didChangeChildPage(row: index, withChangePage: false)
     }
 }
 
@@ -81,7 +97,12 @@ extension OrderPageViewController: OrderParentProtocol {
         }else{
             setViewControllers([listViewControllers[index]], direction: .reverse, animated: true, completion: nil)
         }
-
+    }
+    
+    func didOrderFinishLoad(index: Int) {
+        guard let vc = listViewControllers[index] as? OrderListChildViewController else { return }
+        vc.tableView.reloadData()
+        vc.tableViewConstraint.constant = vc.tableView.contentSize.height
     }
 }
 

@@ -709,22 +709,22 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wQy-ox-QB4" customClass="RoundedView" customModule="MCommerce" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="450"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="9OX-ah-Nds">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="9OX-ah-Nds">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="450"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="tKx-np-HGK">
-                                                        <rect key="frame" x="30" y="20" width="315" height="140"/>
+                                                        <rect key="frame" x="30" y="20" width="315" height="116.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aG7-gN-DHX" customClass="IconLabel" customModule="MCommerce" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="315" height="65"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="315" height="53.5"/>
                                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                                 <color key="textColor" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <textField opaque="NO" clipsSubviews="YES" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rZE-Rc-Dow" customClass="BorderTextField" customModule="MCommerce" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="75" width="315" height="65"/>
+                                                                <rect key="frame" x="0.0" y="63.5" width="315" height="53"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
@@ -732,16 +732,16 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gkk-sI-3jG">
-                                                        <rect key="frame" x="30" y="180" width="315" height="140"/>
+                                                        <rect key="frame" x="30" y="166.5" width="315" height="117"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iBy-3q-jBI" customClass="IconLabel" customModule="MCommerce" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="315" height="65"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="315" height="53.5"/>
                                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                                 <color key="textColor" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <textField opaque="NO" clipsSubviews="YES" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="okz-4w-ZQY" customClass="BorderTextField" customModule="MCommerce" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="75" width="315" height="65"/>
+                                                                <rect key="frame" x="0.0" y="63.5" width="315" height="53.5"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="next"/>
@@ -752,16 +752,16 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="JJH-dL-Sn0">
-                                                        <rect key="frame" x="30" y="340" width="315" height="140"/>
+                                                        <rect key="frame" x="30" y="313.5" width="315" height="116.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E-mail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3TG-Pm-zbb" customClass="IconLabel" customModule="MCommerce" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="315" height="65"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="315" height="53"/>
                                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                                 <color key="textColor" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <textField opaque="NO" clipsSubviews="YES" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gza-Ls-TWC" customClass="BorderTextField" customModule="MCommerce" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="75" width="315" height="65"/>
+                                                                <rect key="frame" x="0.0" y="63" width="315" height="53.5"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done"/>

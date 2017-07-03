@@ -11,6 +11,7 @@ import Anchorage
 
 protocol OrderParentProtocol: class {
     func didChildPageChange(index:Int)
+    func didOrderFinishLoad(index: Int)
 }
 
 class OrderListViewController: BaseViewController {
@@ -31,7 +32,11 @@ class OrderListViewController: BaseViewController {
     
     weak var delegate: OrderParentProtocol?
     
-    fileprivate var activePageIndex = 0
+    var activePageIndex = 0
+    
+    fileprivate var controller = OrderController()
+    
+    var orders = [Order]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +52,12 @@ class OrderListViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         title = "orders".localize
+        loadOrders()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        controller.removeOrderListHandler()
     }
     
 }
@@ -60,6 +71,20 @@ extension OrderListViewController {
 }
 
 extension OrderListViewController {
+    fileprivate func loadOrders(){
+        showProgressHUD()
+        DispatchQueue.global().async {
+            self.controller.listOrders(completion: { (orders) in
+                DispatchQueue.main.async {
+                    self.hideProgressHUD()
+                    self.orders = orders
+                    self.delegate?.didOrderFinishLoad(index: self.activePageIndex)
+                }
+                
+            })
+        }
+    }
+    
     fileprivate func setupChildView(){
         guard let vc = storyboard?.instantiateViewController(withIdentifier: Constants.viewController.order.page) as? OrderPageViewController else { return }
 //        vc.childDelegate = self
@@ -69,7 +94,7 @@ extension OrderListViewController {
         vc.didMove(toParentViewController: self)
     }
     
-    func didChangeChildPage(row:Int){
+    func didChangeChildPage(row:Int, withChangePage:Bool = true){
         let tabButtons = [processButton, completeButton]
         for (index, button) in tabButtons.enumerated() {
             if index == row  {
@@ -81,8 +106,10 @@ extension OrderListViewController {
                     self.view.layoutIfNeeded()
                     
                 }, completion: nil)
-                delegate?.didChildPageChange(index: index)
                 activePageIndex = index
+                if withChangePage {
+                    delegate?.didChildPageChange(index: index)
+                }
             } else {
                 button?.setTitleColor(Color.lightGray, for: .normal)
             }

@@ -44,6 +44,7 @@ class ForgotPasswordViewController: BaseViewController {
         super.viewDidLoad()
         
         setupSubviews()
+        addBackButton()
         setNavigationControllerBackground(color: Color.clear, isTranslucent: true)
     }
 

@@ -55,7 +55,7 @@
 "deliveryAddressTooFar" = "Delivery Address too far, maximum %d Km";
 "deliveryCost" = "Delivery Cost";
 "address" = "Address";
-"orderNote" = "Order Note";
+"deliveryNote" = "Delivery Note";
 
 
 /* Validation Form */
@@ -66,7 +66,7 @@
 
 /* Orders */
 "orders" = "Orders";
-"orderID" = "Order ID : ";
+"orderNo" = "Order No. : ";
 "cancel" = "Cancel";
 "history" = "History";
 "note" = "Note";
@@ -86,3 +86,9 @@
 /* Product Detail */
 "review" = "Review";
 "stock" = "Stock";
+
+/* Empty Data */
+"emptyProductCategory" = "Oops... there are no products on this category yet";
+"emptyReviews" = "There are no reviews on this product yet";
+"emptyCarts" = "Oops.. you have not yet added the product to the shopping cart";
+"emptySearchResults" =  "Oops.. unfortunately there is no one product found with criteria you searched";
