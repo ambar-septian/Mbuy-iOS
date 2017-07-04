@@ -15,6 +15,7 @@ class SearchPlace {
     var name: String
     var descriptionPlace: String
     
+    
     init(placeID:String, name:String, descriptionPlace:String, coordinate:CLLocationCoordinate2D?) {
         self.placeID = placeID
         self.name = name

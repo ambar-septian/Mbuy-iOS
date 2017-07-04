@@ -23,16 +23,30 @@ class ProductListViewController: BaseViewController {
     var products = [Product]() {
         didSet {
             collectionView.reloadData()
+            let willHide = products.count > 0 ? true: false
+            emptyView.toggleHide(willHide: willHide)
+
 //            collectionView.collectionViewLayout.invalidateLayout()
         }
     }
     
     fileprivate let controller = ProductController()
     
+    fileprivate lazy var emptyView: EmptyDataView =  {
+        let view = EmptyDataView(frame: self.view.bounds)
+        view.image = #imageLiteral(resourceName: "bag")
+        view.title = "emptyProductCategory".localize
+        
+        return view
+    }()
+    
+    
     var passedCategory: Category?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupSubviews()
         
         loadProducts()
     }
@@ -72,8 +86,17 @@ extension ProductListViewController {
             })
         }
     }
+}
+
+extension ProductListViewController:BaseViewProtocol {
+    func setupSubviews() {
+        view.addSubview(emptyView)
+        setupConstraints()
+    }
     
-  
+    func setupConstraints() {
+         emptyView.edgeAnchors == self.view.edgeAnchors
+    }
 }
 
 extension ProductListViewController: UICollectionViewDataSource {

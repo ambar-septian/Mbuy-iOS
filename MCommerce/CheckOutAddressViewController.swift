@@ -22,7 +22,7 @@ class CheckOutAddressViewController: BaseViewController {
 
     @IBOutlet weak var noteLabel: IconLabel! {
         didSet {
-            noteLabel.text = "orderNote".localize
+            noteLabel.text = "deliveryNote".localize
             noteLabel.icon = FontAwesomeIcon.editIcon
         }
     }

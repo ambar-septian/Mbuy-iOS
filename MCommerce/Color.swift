@@ -26,6 +26,11 @@ class Color {
         return Color.rgbColor(r: 245, g: 240, b: 236, a: 1)
     }
     
+    static var darkCream:UIColor {
+        return Color.rgbColor(r: 236, g: 220, b: 206, a: 1)
+    }
+
+    
     static var green:UIColor {
         return Color.rgbColor(r: 0, g: 163, b: 136, a: 1)
     }

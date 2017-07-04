@@ -88,7 +88,10 @@
 "stock" = "Stock";
 
 /* Empty Data */
+"emptySearch" = "Find your favorite products";
+"emptyCart" = "Your cart is currently empty";
 "emptyProductCategory" = "Oops... there are no products on this category yet";
+
 "emptyReviews" = "There are no reviews on this product yet";
 "emptyCarts" = "Oops.. you have not yet added the product to the shopping cart";
 "emptySearchResults" =  "Oops.. unfortunately there is no one product found with criteria you searched";

@@ -23,7 +23,7 @@ class EmptyDataView: UIView {
     var iconImage: FontAwesomeIcon? {
         didSet {
             guard let icon = iconImage else { return }
-            let image = icon.image(ofSize: self.bounds.size, color: Color.orange)
+            let image = icon.image(ofSize: self.bounds.size, color: Color.darkCream)
             imageView.image = image
         }
     }
@@ -60,17 +60,17 @@ class EmptyDataView: UIView {
     
     fileprivate lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = Font.latoBold
+        label.font = Font.latoRegular.withSize(18)
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.textColor = Color.orange
+        label.textColor = Color.lightGray
         
         return label
     }()
     
     fileprivate lazy var detailLabel:UILabel = {
         let label = UILabel()
-        label.font = Font.latoRegular.withSize(14)
+        label.font = Font.latoRegular
         label.textAlignment = .center
         label.numberOfLines = 0
         label.textColor = Color.lightGray
@@ -91,22 +91,50 @@ class EmptyDataView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupView()
+        setupSubviews()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setupView()
+        setupSubviews()
     }
 }
 
 extension EmptyDataView {
-    fileprivate func setupView(){
-        backgroundColor = .clear
-        addSubview(stackView)
-        stackView.edgeAnchors == self.edgeAnchors
-        stackView.addArrangedSubview(imageView)
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(detailLabel)
+    func toggleHide(willHide isHidden:Bool){
+        guard self.isHidden != isHidden else { return }
+        
+        let alpha:CGFloat = isHidden ? 0 : 1
+        UIView.animate(withDuration: 0.3, animations: { 
+            self.alpha = alpha
+        }) { (completed) in
+            guard completed else { return }
+            self.isHidden = isHidden
+        }
+    }
+}
+
+extension EmptyDataView: BaseViewProtocol {
+    func setupSubviews() {
+        backgroundColor = Color.cream
+        
+        addSubview(imageView)
+        addSubview(titleLabel)
+        addSubview(detailLabel)
+        
+        setupConstraints()
+    }
+    
+    func setupConstraints() {
+        imageView.widthAnchor == self.widthAnchor * 0.4
+        imageView.heightAnchor == imageView.widthAnchor
+        imageView.topAnchor == self.topAnchor + 20
+        imageView.centerXAnchor == self.centerXAnchor
+        
+        titleLabel.leadingAnchor == self.leadingAnchor + 40
+        titleLabel.trailingAnchor == self.trailingAnchor - 40
+        titleLabel.topAnchor == imageView.bottomAnchor + 20
+        detailLabel.centerXAnchor == imageView.centerXAnchor
+        detailLabel.topAnchor == titleLabel.bottomAnchor + 10
     }
 }

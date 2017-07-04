@@ -43,7 +43,7 @@ class ProductDetailViewController: BaseViewController {
     
     @IBOutlet weak var addToCartButton: CircleImageButton! {
         didSet {
-            addToCartButton.icon = .shoppingCartIcon
+            addToCartButton.icon = ._616Icon
             addToCartButton.mainColor = Color.orange
         }
     }
@@ -141,6 +141,9 @@ class ProductDetailViewController: BaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    
     @IBAction func addToCartButtonTapped(_ sender: Any) {
         guard let product = self.passedProduct else { return }
         let confirmationVC = ProductConfirmationViewController.self

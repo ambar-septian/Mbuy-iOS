@@ -7,123 +7,140 @@
 //
 
 import UIKit
+import Iconic
+import Anchorage
 
 class SearchViewController: BaseViewController {
-    
-    @IBOutlet weak var trendingTableView: UITableView! {
+
+    @IBOutlet weak var searchTableView: UITableView! {
         didSet {
-            trendingTableView.backgroundColor = Color.cream
+            let cell = SearchTableViewCell.self
+            searchTableView.register(cell.nib, forCellReuseIdentifier: cell.identifier)
         }
     }
-    
-    @IBOutlet weak var searchTableView: UITableView!
     
     fileprivate lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
-        searchController.dimsBackgroundDuringPresentation = true
         searchController.hidesNavigationBarDuringPresentation = false
-        
-        self.definesPresentationContext = true
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.searchBarStyle = .prominent
+//        self.definesPresentationContext = true
         
         return searchController
     }()
     
-    fileprivate var childController: ProductListViewController? {
-        return self.childViewControllers.first as? ProductListViewController
-    }
     
     fileprivate var isSearchActive : Bool {
         return searchController.isActive && searchController.searchBar.text != ""
     }
     
-    fileprivate var searchResults = [String]()
+    fileprivate var searchResults:[Product] {
+        return controller.products
+    }
     
-    fileprivate var trendingResults = [String]()
+    fileprivate lazy var controller : SearchController = {
+        let controller = SearchController()
+        controller.delegate = self
     
-    fileprivate let searchCellID = "SearchCellID"
+        return controller
+    }()
     
-    fileprivate let trendingCellID = "TrendingCell"
+    fileprivate lazy var emptyView: EmptyDataView =  {
+        let view = EmptyDataView(frame: self.view.bounds)
+        view.image = #imageLiteral(resourceName: "search")
+        view.title = "emptySearch".localize
+       
+        return view
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        setupSubviews()
         
+        loadSearchList()
         navigationItem.titleView = searchController.searchBar
-        setupChildView()
-        
-        trendingResults = ["Jaket", "Tas", "Jam Tangan"]
-        
+       
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+         self.extendedLayoutIncludesOpaqueBars = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        automaticallyAdjustsScrollViewInsets = false
+    }
+}
+
+extension SearchViewController {
+    func loadSearchList(){
+        showProgressHUD()
+        DispatchQueue.global().async {
+            self.controller.getSearchList(completion: { (completed) in
+                DispatchQueue.main.async {
+                    self.hideProgressHUD()
+                }
+            })
+        }
+    }
+}
+
+extension SearchViewController: BaseViewProtocol {
+    func setupSubviews() {
+         view.addSubview(emptyView)
+    }
+    
+    func setupConstraints() {
+        emptyView.edgeAnchors == self.edgeAnchors
+    }
 }
 
 
 extension SearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == searchTableView {
-            return searchResults.count
-        } else {
-            return trendingResults.count
-        }
+        return searchResults.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if tableView == searchTableView {
-            let cell = tableView.dequeueReusableCell(withIdentifier: searchCellID, for: indexPath)
-            cell.textLabel?.font = Font.latoRegular.withSize(15)
-            cell.textLabel?.textColor = Color.darkGray
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: trendingCellID, for: indexPath)
-            cell.textLabel?.font = Font.latoRegular.withSize(15)
-            cell.textLabel?.textColor = Color.darkGray
-            cell.textLabel?.textAlignment = .center
-            cell.textLabel?.text = trendingResults[indexPath.row]
-            return cell
-        }
+        let product = searchResults[indexPath.row]
+        return SearchTableViewCell.configureCell(tableView: tableView, indexPath: indexPath, object: product)
     }
 }
 
 extension SearchViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard tableView == trendingTableView else {
-            return nil
-        }
-        
-        let view = UIView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: tableView.bounds.width, height: 100)))
-        view.backgroundColor = Color.clear
-        let label = UILabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: tableView.bounds.width, height: 50)))
-        label.textColor = Color.orange
-        label.font = Font.latoBold.withSize(18)
-        label.textAlignment = .center
-        label.center = view.center
-        label.text = "Trending"
-        view.addSubview(label)
-        
-        return label
-        
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.1
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 100
+        return 0.1
     }
     
-}
-
-extension SearchViewController {
-    func setupChildView(){
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let product = searchResults[indexPath.row]
+        
         let storyboard = UIStoryboard(name: Constants.storyboard.product, bundle: nil)
-        guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.viewController.product.list) as? ProductListViewController else { return }
-        addChildViewController(vc)
-        vc.view.frame = view.bounds
-        view.addSubview(vc.view)
-        vc.didMove(toParentViewController: self)
-        vc.view.isHidden = true
+        guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.viewController.product.detail) as? ProductDetailViewController else { return }
+        vc.passedProduct = product
+        pushNavigation(targetVC: vc)
     }
 }
 
@@ -133,6 +150,26 @@ extension SearchViewController: UISearchBarDelegate {
 
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
+        guard let keyword = searchController.searchBar.text else {
+            emptyView.toggleHide(willHide: false)
+            return }
+        guard keyword.characters.count > 2 else {
+            emptyView.toggleHide(willHide: false)
+            return
+        }
+        controller.keyword = keyword
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        controller.keyword = nil
+        emptyView.toggleHide(willHide: false)
+    }
+}
+
+extension SearchViewController: SearchProductDelegate {
+    func refreshFilterProduct() {
+        searchTableView.reloadData()
+        let willHidden = controller.products.count == 0 ? false : true
+        emptyView.toggleHide(willHide: willHidden)
         
     }
 

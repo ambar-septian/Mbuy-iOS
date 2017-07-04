@@ -86,3 +86,8 @@
 "review" = "Ulasan";
 "stock" = "Stok";
 
+/* Empty Data */
+"emptySearch" = "Cari produk favorit anda";
+"emptyCart" = "Keranjang anda saat ini kosong";
+"emptyProductCategory" = "Oops... sepertinya belum ada produk dalam kategori ini";
+

@@ -9,6 +9,7 @@
 import UIKit
 import BGTableViewRowActionWithImage
 import Iconic
+import Anchorage
 
 class CartListViewController: BaseViewController {
 
@@ -38,6 +39,8 @@ class CartListViewController: BaseViewController {
             
             quantityLabel.text = "\(quantity)"
             subtotalLabel.text = subtotal.formattedPrice
+            let willHide = carts.count > 0 ? true: false
+            emptyView.toggleHide(willHide: willHide)
         }
     }
     
@@ -52,6 +55,14 @@ class CartListViewController: BaseViewController {
     fileprivate let heightCell:CGFloat = 120
     
     fileprivate let controller = CartController()
+    
+    fileprivate lazy var emptyView: EmptyDataView =  {
+        let view = EmptyDataView(frame: self.view.bounds)
+        view.image = #imageLiteral(resourceName: "basket")
+        view.title = "emptyCart".localize
+        
+        return view
+    }()
     
 
     override func viewDidLoad() {
@@ -72,6 +83,8 @@ class CartListViewController: BaseViewController {
         
         TabBarBadge.shared.cartCount = 0
         loadCartList()
+        
+        setupSubviews()
     }
     
     deinit {
@@ -108,6 +121,17 @@ extension CartListViewController {
     func updateFooterLabel(){
         quantityLabel.text = "\(quantity)"
         subtotalLabel.text = subtotal.formattedPrice
+    }
+}
+
+extension CartListViewController: BaseViewProtocol {
+    func setupSubviews() {
+        view.addSubview(emptyView)
+        setupConstraints()
+    }
+    
+    func setupConstraints() {
+        emptyView.edgeAnchors == view.edgeAnchors
     }
 }
 

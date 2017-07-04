@@ -30,7 +30,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var cartButton: CircleImageButton! {
         didSet {
             cartButton.mainColor = Color.orange
-            cartButton.icon = FontAwesomeIcon.shoppingCartIcon
+            cartButton.icon = FontAwesomeIcon._616Icon
         }
     }
     

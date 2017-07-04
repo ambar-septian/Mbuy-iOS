@@ -21,61 +21,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="udy-Ps-pzJ">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchCell" id="qTb-7x-d4K">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qTb-7x-d4K" id="1ov-Wr-VpG">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="lBP-VK-zhL" id="H7H-vK-nih"/>
-                                    <outlet property="delegate" destination="lBP-VK-zhL" id="xx3-yX-Q0U"/>
-                                </connections>
-                            </tableView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Q2y-fr-CFd">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TrendingCell" id="OQi-DK-VvL">
-                                        <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OQi-DK-VvL" id="pfW-m0-TLY">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </tableViewCellContentView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Uty-zH-DcC">
+                                <rect key="frame" x="10" y="64" width="355" height="603"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="udy-Ps-pzJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="603"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="lBP-VK-zhL" id="Qoq-yh-BBK"/>
-                                    <outlet property="delegate" destination="lBP-VK-zhL" id="BcD-dy-Omy"/>
-                                </connections>
-                            </tableView>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchCell" id="qTb-7x-d4K">
+                                                <rect key="frame" x="0.0" y="28" width="355" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qTb-7x-d4K" id="1ov-Wr-VpG">
+                                                    <rect key="frame" x="0.0" y="0.0" width="355" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="lBP-VK-zhL" id="H7H-vK-nih"/>
+                                            <outlet property="delegate" destination="lBP-VK-zhL" id="xx3-yX-Q0U"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Q2y-fr-CFd" secondAttribute="trailing" id="DLS-pO-Qd3"/>
-                            <constraint firstItem="VXV-rP-bd7" firstAttribute="top" secondItem="Q2y-fr-CFd" secondAttribute="bottom" id="Gwz-5c-in1"/>
-                            <constraint firstItem="VXV-rP-bd7" firstAttribute="top" secondItem="udy-Ps-pzJ" secondAttribute="bottom" id="JcI-Dd-ezM"/>
-                            <constraint firstItem="udy-Ps-pzJ" firstAttribute="top" secondItem="DBk-0U-pVy" secondAttribute="bottom" id="Lak-q9-9Qr"/>
-                            <constraint firstItem="Q2y-fr-CFd" firstAttribute="top" secondItem="DBk-0U-pVy" secondAttribute="bottom" id="OL7-xQ-7e6"/>
-                            <constraint firstItem="Q2y-fr-CFd" firstAttribute="leading" secondItem="Czi-gj-7Nv" secondAttribute="leading" id="SQi-OU-Z4L"/>
-                            <constraint firstAttribute="trailing" secondItem="udy-Ps-pzJ" secondAttribute="trailing" id="ZyF-aX-hDw"/>
-                            <constraint firstItem="udy-Ps-pzJ" firstAttribute="leading" secondItem="Czi-gj-7Nv" secondAttribute="leading" id="ins-Yb-DV1"/>
+                            <constraint firstItem="VXV-rP-bd7" firstAttribute="top" secondItem="Uty-zH-DcC" secondAttribute="bottom" id="LZz-xv-dhL"/>
+                            <constraint firstAttribute="trailing" secondItem="Uty-zH-DcC" secondAttribute="trailing" constant="10" id="f2A-7R-l8s"/>
+                            <constraint firstItem="Uty-zH-DcC" firstAttribute="top" secondItem="DBk-0U-pVy" secondAttribute="bottom" id="fpx-6z-41d"/>
+                            <constraint firstItem="Uty-zH-DcC" firstAttribute="leading" secondItem="Czi-gj-7Nv" secondAttribute="leading" constant="10" id="lMg-FX-Gak"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="tec-cU-WtJ"/>
                     <connections>
                         <outlet property="searchTableView" destination="udy-Ps-pzJ" id="FoD-y1-eFh"/>
-                        <outlet property="trendingTableView" destination="Q2y-fr-CFd" id="Vlj-j1-gFB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7pk-SX-epv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -85,9 +65,9 @@
         <!--Navigation Controller-->
         <scene sceneID="x6m-TR-oiw">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Zi4-ET-Na2" sceneMemberID="viewController">
+                <navigationController id="Zi4-ET-Na2" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="DGY-aF-Esr">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DGY-aF-Esr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

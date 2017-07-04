@@ -164,9 +164,9 @@ extension BaseViewController {
         let size = CGSize(width: 35, height: 25)
         guard let tabBars = self.tabBarController?.tabBar.items else { return }
 
-        let homeIcon = FontAwesomeIcon.homeIcon
+        let homeIcon = FontAwesomeIcon._615Icon
         let searchIcon = FontAwesomeIcon.searchIcon
-        let cartIcon = FontAwesomeIcon.shoppingCartIcon
+        let cartIcon = FontAwesomeIcon._616Icon
         let orderIcon = FontAwesomeIcon.truckIcon
         let settingIcon = FontAwesomeIcon.cogsIcon
         
