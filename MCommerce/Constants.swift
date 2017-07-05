@@ -20,6 +20,12 @@ enum Constants {
             static let detail = "orderDetail"
         }
         
+        enum setting {
+            static let changeLanguage = "changeLanguage"
+            static let changePassword = "changePassword"
+            static let editProfile = "editProfile"
+        }
+        
         enum checkout {
             static let main = "checkOutMain"
         }

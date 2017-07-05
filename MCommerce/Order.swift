@@ -48,14 +48,14 @@ class Order: FirebaseProtocol {
     
     var ref: FIRDatabaseReference?
     
-    var orderNumber: String?
+    var orderNumber: Int
     
     static let jsonKeys:(profile:String, carts:String, orderNumber: String, histories: String) =
         (profile: "profile", carts:"carts", orderNumber: "orderNumber", histories: "histories")
 
     
     
-    init(profile:OrderProfile, carts: [Cart] = [Cart](), key:String = "", orderNumber: String?){
+    init(profile:OrderProfile, carts: [Cart] = [Cart](), key:String = "", orderNumber: Int = 0){
         self.profile = profile
         self.carts = carts
         self.key = key
@@ -70,7 +70,7 @@ class Order: FirebaseProtocol {
         
         self.carts = carts
         self.profile = profile
-        self.orderNumber = value?[jsonKeys.orderNumber] as? String
+        self.orderNumber = value?[jsonKeys.orderNumber] as? Int ?? 0
     }
     
 }

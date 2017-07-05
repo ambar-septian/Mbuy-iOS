@@ -82,6 +82,19 @@
 "changeLanguage" = "Change Language";
 "logout" = "Log Out";
 "confirmationLogout" = "Are you want log out from this account?";
+"changePassword" = "Change Password";
+"userProfile" = "User Profile";
+"save" = "Save";
+"oldPassword" = "Old Password";
+"newPassword" = "New Password";
+"repeatPassword" = "Repeat Password";
+"changePasswordSuccess" = "Change password success";
+"oldPasswordWrong" = "Old password wrong";
+"updatePasswordFailed" = "Oops.. update password failed, please try again later";
+"editProfile" = "Edit Profile";
+"takePhoto" = "Take Photo";
+"selectPhoto" = "Select Photo";
+"changePhotoProfile" = "Change Photo Profile";
 
 /* Product Detail */
 "review" = "Review";
@@ -94,4 +107,5 @@
 
 "emptyReviews" = "There are no reviews on this product yet";
 "emptyCarts" = "Oops.. you have not yet added the product to the shopping cart";
+"emptyOrders" = "Your order list is currently empty";
 "emptySearchResults" =  "Oops.. unfortunately there is no one product found with criteria you searched";

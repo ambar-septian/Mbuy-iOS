@@ -156,7 +156,7 @@ extension RegisterViewController {
     }
     
     fileprivate func setupUser(){
-        self.controller.updateProfileUser(name: nameTextField.text ?? "") { (completed) in
+        self.controller.updateUserProfile(name: nameTextField.text ?? "", photoURL: nil) { (completed) in
             guard completed else { return }
             self.controller.dismissViewControllerToHome(currentVC: self)
         }

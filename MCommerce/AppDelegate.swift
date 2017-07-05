@@ -33,9 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        
         setRootViewController()
      
-        (UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self])).tintColor = Color.white
+        
         self.window?.tintColor = Color.orange
         BaseViewController.adjustNavigationBar()
+        BaseViewController.adjustBarButtonItem()
         
         
         return true

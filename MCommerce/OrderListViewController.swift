@@ -77,7 +77,7 @@ extension OrderListViewController {
             self.controller.listOrders(completion: { (orders) in
                 DispatchQueue.main.async {
                     self.hideProgressHUD()
-                    self.orders = orders
+                    self.orders = orders.sorted(by: { $0.orderNumber < $1.orderNumber })
                     self.delegate?.didOrderFinishLoad(index: self.activePageIndex)
                 }
                 

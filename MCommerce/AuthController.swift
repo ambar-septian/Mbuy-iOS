@@ -10,10 +10,13 @@ import UIKit
 import FirebaseAuth
 import Hero
 import FBSDKLoginKit
+import FirebaseDatabase
 
 typealias finishCompletion = ((_ isFinish: Bool) -> Void)
 typealias finishMessageCompletion = ((_ isFinish: Bool, _ message:String?) -> Void)
 class AuthController {
+    fileprivate let userRef = FIRDatabase.database().reference(withPath: "users")
+    
     func register(email:String, password:String, completion: @escaping finishMessageCompletion){
         FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
             guard error == nil else {
@@ -21,6 +24,9 @@ class AuthController {
                 completion(false, message.localize)
                 return
             }
+            let uid = User.shared.uid
+            let userData = ["userType" : UserType.email.rawValue]
+            self.userRef.child(uid).setValue(userData)
             completion(true, nil)
         })
     }
@@ -32,6 +38,7 @@ class AuthController {
                 completion(false, message.localize)
                 return
             }
+            self.getUserProfile()
             completion(true, nil)
         })
     }
@@ -58,6 +65,17 @@ class AuthController {
                     completion(false)
                     return
                 }
+                
+                
+//                if let photoURL = User.shared.photoURL {
+//                    User.shared.photoURL = photoURL + "?type=large"
+//                }
+//
+                
+                let uid = User.shared.uid
+                let userData = ["userType" : UserType.facebook.rawValue]
+                self.userRef.child(uid).setValue(userData)
+                self.getUserProfile()
                 completion(true)
             })
         }
@@ -77,17 +95,21 @@ class AuthController {
     func dismissViewControllerToLogin(currentVC: UIViewController){
         let storyboard = UIStoryboard(name: Constants.storyboard.auth, bundle: nil)
         guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.viewController.auth.login) as? LoginViewController else { return }
-        
+        let nav = UINavigationController(rootViewController: vc)
         
         guard let window = UIApplication.shared.keyWindow else { return }
         UIView.transition(with: window, duration: 0.3, options: UIViewAnimationOptions.curveEaseIn, animations: {
-            window.rootViewController = vc
+            window.rootViewController = nav
         }, completion: nil)
     }
     
-    func updateProfileUser(name:String, completion: @escaping finishCompletion){
+    func updateUserProfile(name:String?,photoURL:String?,  completion: @escaping finishCompletion){
         let changeRequest = FIRAuth.auth()?.currentUser?.profileChangeRequest()
         changeRequest?.displayName = name
+        if let wPhotoURL = photoURL{
+            changeRequest?.photoURL = URL(string: wPhotoURL)
+        }
+        
         changeRequest?.commitChanges(completion: { (error) in
             guard error == nil else {
                 completion(false)
@@ -115,6 +137,44 @@ class AuthController {
         } catch let error {
             print("error logout \(error)")
             completion(false)
+        }
+    }
+    
+    func reAuthenticate(oldPassword: String, completion: @escaping finishCompletion){
+        guard let firUser = FIRAuth.auth()?.currentUser else { return }
+        
+        let crediential = FIREmailPasswordAuthProvider.credential(withEmail: User.shared.email, password: oldPassword)
+        firUser.reauthenticate(with: crediential) { (error) in
+            guard error == nil else {
+                completion(false)
+                return
+            }
+            
+            completion(true)
+        }
+    }
+    
+    func updatePassword(password:String, completion: @escaping finishCompletion) {
+        guard let firUser = FIRAuth.auth()?.currentUser else { return }
+        firUser.updatePassword(password) { (error) in
+            guard error == nil else {
+                completion(false)
+                return
+            }
+            
+            completion(true)
+
+        }
+    }
+    
+    func getUserProfile(){
+        DispatchQueue.global().async {
+            self.userRef.child(User.shared.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                guard let value = snapshot.value as? [String:Any] else { return }
+                guard let userType = value["userType"] as? String else { return }
+                User.shared.userType = UserType(rawValue: userType) ?? .email
+            })
+
         }
     }
 }

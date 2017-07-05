@@ -112,8 +112,9 @@ class ProductDetailViewController: BaseViewController {
     fileprivate var reviews = [Review]() {
         didSet {
             reviewTableView.reloadData()
-            reviewEmptyLabel.isHidden = !(reviews.isEmpty)
-            constraintReviewTableView.constant = reviewTableView.contentSize.height
+//            reviewEmptyLabel.isHidden = !(reviews.isEmpty)
+//            constraintReviewTableView.constant = reviewTableView.contentSize.height
+            constraintReviewTableView.constant = 0
         }
     }
     
@@ -184,7 +185,7 @@ extension ProductDetailViewController {
         DispatchQueue.global().async {
             self.controller.loadProductByCategory(categoryID: category.categoryID, completion: { (products) in
                 DispatchQueue.main.async {
-                    self.relatedProducts = products
+                    self.relatedProducts = products.filter({ $0.productID != product.productID })
                 }
             })
         }

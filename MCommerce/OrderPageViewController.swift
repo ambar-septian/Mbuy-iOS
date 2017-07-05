@@ -37,7 +37,10 @@ class OrderPageViewController: UIPageViewController {
             setViewControllers([initialVC], direction: .forward, animated: false, completion: nil)
         }
 
-      
+        if let scrollView = view.subviews.filter({ $0.isKind(of: UIScrollView.self)}).first as? UIScrollView {
+            scrollView.isScrollEnabled = false
+        }
+        
         parentVC?.delegate = self
 
     }

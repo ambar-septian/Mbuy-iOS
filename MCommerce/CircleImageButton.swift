@@ -27,7 +27,7 @@ class CircleImageButton: UIButton {
     
     var iconImage: UIImage {
         guard let wIcon = icon else { return UIImage() }
-        return wIcon.image(ofSize: CGSize(width: 30, height:30), color: iconColor)
+        return wIcon.image(ofSize: CGSize(width: 20, height:20), color: iconColor)
     }
     
     var mainColor: UIColor = UIColor.clear {

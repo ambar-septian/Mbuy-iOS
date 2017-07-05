@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 import BGTableViewRowActionWithImage
 import Iconic
+import Anchorage
 
 class OrderListChildViewController: BaseViewController {
    
@@ -38,9 +39,17 @@ class OrderListChildViewController: BaseViewController {
     fileprivate let heightCell:CGFloat = 250
     var currentPage = 0
     
+    fileprivate lazy var emptyView: EmptyDataView =  {
+        let view = EmptyDataView(frame: self.view.bounds)
+        view.image = #imageLiteral(resourceName: "order")
+        view.title = "emptyCart".localize
+        
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupSubviews()
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,8 +64,9 @@ class OrderListChildViewController: BaseViewController {
         tableView.reloadData()
         isViewAlreadyLoaded = true
         tableViewConstraint.constant = tableView.contentSize.height
-
         
+        let willHide = orders.count > 0 ? true: false
+        emptyView.toggleHide(willHide: willHide)
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -83,6 +93,17 @@ class OrderListChildViewController: BaseViewController {
             vc.passedOrder = order
 
         }
+    }
+}
+
+extension OrderListChildViewController: BaseViewProtocol {
+    func setupSubviews() {
+        view.addSubview(emptyView)
+        setupConstraints()
+    }
+    
+    func setupConstraints() {
+        emptyView.edgeAnchors == self.edgeAnchors
     }
 }
 

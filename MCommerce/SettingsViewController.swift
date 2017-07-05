@@ -14,15 +14,25 @@ class SettingsViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     
     fileprivate var contents : [(title:String, icon:FontAwesomeIcon)] =
-        [(title:"changeLanguage", icon:.globeIcon),
+        [
+        (title:"changePassword", icon:.lockIcon),
+        (title:"changeLanguage", icon:.globeIcon),
          (title:"logout", icon:.signoutIcon)]
     
+    fileprivate let sections: [(title:String, count:Int)] = [
+        (title:"userProfile", count: 2),
+        (title:"settings", count: 2)
+    ]
+    
+ 
     fileprivate let controller = AuthController()
+   
+    fileprivate let user = User.shared
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,28 +71,104 @@ extension SettingsViewController {
 }
 
 extension SettingsViewController:UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contents.count
+        return sections[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.accessoryType = indexPath.row == 0 ? .disclosureIndicator : .none
-        guard let label = cell.contentView.viewWithTag(10) as? IconLabel else { return cell }
-        
-        let content = contents[indexPath.row]
-        label.text = content.title.localize
-        label.icon = content.icon
-        label.textColor = indexPath.row == contents.count - 1 ? Color.red : Color.darkGray
-        return cell
+     
+        if indexPath.section == 0 && indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath)
+            let contentView = cell.contentView
+            cell.layoutIfNeeded()
+            
+            if let imageView = contentView.viewWithTag(10) as? UIImageView {
+                imageView.layer.masksToBounds = true
+                let size = min(imageView.bounds.width, imageView.bounds.height)
+                imageView.frame.size = CGSize(width: size, height: size)
+                imageView.layer.cornerRadius = size / 2
+                imageView.setImage(urlString: user.photoURL ?? "")
+            }
+            
+            if let nameLabel = contentView.viewWithTag(11) as? UILabel {
+                nameLabel.text = user.name
+            }
+            
+            if let emailLabel = contentView.viewWithTag(12) as? UILabel {
+                emailLabel.text = user.email
+            }
+            
+            return cell
+            
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "BasicCell", for: indexPath)
+            guard let label = cell.contentView.viewWithTag(10) as? IconLabel else { return cell }
+            
+            let row = indexPath.section == 0 ? 0 : indexPath.row
+            let contentIndex = indexPath.section + row
+            let content = contents[contentIndex]
+            label.text = content.title.localize
+            label.icon = content.icon
+            label.textColor = row == contents.count - 1 ? Color.red : Color.darkGray
+            cell.accessoryType = row == contents.count - 1 ? .disclosureIndicator : .none
+            return cell
+
+        }
     }
 }
 
 extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.row == 1 {
-            confirmationLogout()
+        let row = indexPath.section == 1 ? indexPath.row + 1 : indexPath.row
+        let contentIndex = indexPath.section + row
+        
+        switch contentIndex {
+        case 0: // user profile
+            performSegue(withIdentifier: Constants.segueID.setting.editProfile, sender: nil)
+        case 1: // change password
+            performSegue(withIdentifier: Constants.segueID.setting.changePassword, sender: nil)
+        case 2:
+            performSegue(withIdentifier: Constants.segueID.setting.changeLanguage, sender: nil)
+        case 3: // logout
+            self.confirmationLogout()
+        default:
+            break
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 && indexPath.row == 0 {
+            return 100
+        } else {
+            return 60
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view =  UILabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: tableView.bounds.width, height: 30)))
+        view.backgroundColor = Color.clear
+
+        let label = UILabel(frame: view.bounds)
+        label.frame.origin.x += 10
+        label.font = Font.latoBold.withSize(14)
+        label.textColor = Color.lightGray
+        label.text = sections[section].title.localize
+        
+        view.addSubview(label)
+        
+        return view
+    }
+    
+//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return 0.1
+//    }
+//    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
     }
 }

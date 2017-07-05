@@ -10,7 +10,9 @@ import Foundation
 import FirebaseAuth
 
 class User {
-    fileprivate let firebaseUser = FIRAuth.auth()?.currentUser
+    fileprivate var firebaseUser:FIRUser? {
+        return FIRAuth.auth()?.currentUser
+    }
     
     var uid:String {
         get {
@@ -36,6 +38,8 @@ class User {
             return firebaseUser?.photoURL?.absoluteString
         }
     }
+    
+    var userType:UserType = .email
     
     
     static let shared = User()

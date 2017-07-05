@@ -49,6 +49,10 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app need your location for calculating delivery cost</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app need access your camera to take picture</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app need access your photo library to take picture</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Lato-Bold.ttf</string>

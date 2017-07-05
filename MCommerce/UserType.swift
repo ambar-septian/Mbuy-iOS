@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum UserType {
-    case email
-    case facebook
+enum UserType: String {
+    case email = "email"
+    case facebook = "facebook"
 }

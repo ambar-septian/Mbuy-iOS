@@ -35,6 +35,16 @@ class OrderDetailViewController: BaseViewController {
     
     @IBOutlet weak var totalHeadingLabel: UILabel!
     
+    @IBOutlet weak var subtotalHeadingLabel: UILabel!
+    @IBOutlet weak var subtotalLabel: UILabel!
+
+    @IBOutlet weak var deliveryCostHeadingLabel: UILabel! {
+        didSet {
+            deliveryCostHeadingLabel.text  = "deliveryCost".localize
+        }
+    }
+    
+    @IBOutlet weak var deliveryCostLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     
     @IBOutlet weak var statusLabel: RoundedLabel!
@@ -57,7 +67,6 @@ class OrderDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         loadOrder()
         tableView.reloadData()
     }
@@ -76,9 +85,14 @@ class OrderDetailViewController: BaseViewController {
 extension OrderDetailViewController {
     func loadOrder(){
         guard let order = passedOrder else { return }
-        orderIDLabel.text = "orderID".localize + order.orderID
+        let orderNo = "orderNo".localize + String(order.orderNumber )
+        orderIDLabel.text = orderNo
+        navigationItem.title = orderNo
         nameLabel.text = order.profile.name
         addressLabel.text = order.profile.address
+        subtotalLabel.text = order.formattedSubtotal
+        deliveryCostLabel.text = order.profile.deliveryCost.formattedPrice
+        
         
         quantityLabel.text = "\(order.cartQuantity)"
         totalLabel.text = order.formattedTotal
@@ -108,8 +122,15 @@ extension OrderDetailViewController: UITableViewDataSource {
         return cell
     }
 }
-
 extension OrderDetailViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let storyboard = UIStoryboard(name: Constants.storyboard.product, bundle: nil)
+        guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.viewController.product.detail) as? ProductDetailViewController else { return }
+        vc.passedProduct = orderCarts[indexPath.row].product
+        pushNavigation(targetVC: vc)
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
     }

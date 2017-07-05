@@ -64,7 +64,7 @@
 
 /* Orders */
 "orders" = "Pesanan";
-"orderID" = "No. Pesanan : ";
+"orderNo" = "No. Pesanan : ";
 "cancel" = "Batal";
 "history" = "Riwayat";
 "note" = "Nota";
@@ -81,6 +81,21 @@
 "changeLanguage" = "Ubah Bahasa";
 "logout" = "Keluar";
 "confirmationLogout" = "Apa anda ingin keluar dari akun ini?";
+"changePassword" = "Ubah Kata Sandi";
+"userProfile" = "Profil Pengguna";
+"oldPassword" = "Kata Sandi Lama";
+"newPassword" = "Kata Sandi Baru";
+"repeatPassword" = "Ulangi Kata Sandi";
+"changePasswordSuccess" = "Ubah kata sandi sukses";
+"oldPasswordWrong" = "Kata sandi lama salah";
+"updatePasswordFailed" = "Oops.. ubah kata sandi gagal, silahkan coba kembali";
+"editProfile" = "Ubah Profil";
+"takePhoto" = "Ambil Foto";
+"selectPhoto" = "Pilih Foto";
+"changePhotoProfile" = "Ubah Foto Profil";
+
+
+"save" = "Simpan";
 
 /* Product Detail */
 "review" = "Ulasan";

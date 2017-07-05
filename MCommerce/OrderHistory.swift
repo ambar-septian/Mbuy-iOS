@@ -45,7 +45,7 @@ enum OrderStatus: String {
     var color:UIColor {
         switch self {
         case .waitingPayment:
-            return Color.darkGray
+            return Color.lightGray
         case .complete:
             return Color.green
         case .onDelivery:

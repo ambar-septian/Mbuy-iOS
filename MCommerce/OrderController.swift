@@ -99,7 +99,7 @@ class OrderController {
                 guard let wSnapshot = snapshot as? FIRDataSnapshot else { continue }
                 guard let value = wSnapshot.value as? [String: Any] else { continue }
                 guard let cartsDictionary = value[orderKey.carts] as? [[String: Any]] else { continue }
-                guard let orderNumber = value[orderKey.orderNumber] as? String else { return }
+                guard let orderNumber = value[orderKey.orderNumber] as? Int else { return }
                 
                 self.listCartsOfOrder(cartsDictionary: cartsDictionary, completion: { (carts) in
                     let profile = OrderProfile(snapshot: wSnapshot)

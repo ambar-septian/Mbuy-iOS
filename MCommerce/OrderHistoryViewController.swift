@@ -36,17 +36,18 @@ class OrderHistoryViewController: BaseViewController {
         super.viewDidLoad()
         
         tableView.reloadData()
-//        passedOrder = Order(orderID: "1")
-//        let history1 = OrderHistory(date: Date(), status: .complete)
-//        let history2 = OrderHistory(date: Date(), status: .complete)
-//        let history3 = OrderHistory(date: Date(), status: .complete)
-//        passedOrder?.histories = [history1, history2, history3]
-        // Do any additional setup after loading the view.
+        navigationItem.title = "history".localize
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+        tableViewConstraint.constant = tableView.contentSize.height
     }
 }
 

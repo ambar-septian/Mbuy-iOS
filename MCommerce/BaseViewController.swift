@@ -160,6 +160,16 @@ extension BaseViewController {
         UIApplication.shared.statusBarStyle = .lightContent
     }
     
+    static func adjustBarButtonItem(){
+        UIBarButtonItem.appearance().setTitleTextAttributes(
+            [
+                NSFontAttributeName : Font.latoBold.withSize(17),
+                NSForegroundColorAttributeName : Color.white
+            ],
+            for: .normal)
+        (UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self])).tintColor = Color.white
+    }
+    
     func setupTabBar(){
         let size = CGSize(width: 35, height: 25)
         guard let tabBars = self.tabBarController?.tabBar.items else { return }

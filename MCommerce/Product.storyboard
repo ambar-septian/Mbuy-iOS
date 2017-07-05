@@ -89,7 +89,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="1480"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="XEz-aa-a83">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="2214.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="2215.5"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="44H-yu-fWw">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
@@ -116,19 +116,19 @@
                                                 </connections>
                                             </collectionView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="C7d-3O-ykW">
-                                                <rect key="frame" x="0.0" y="600" width="375" height="1614.5"/>
+                                                <rect key="frame" x="0.0" y="600" width="375" height="1615.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WgA-oT-5yQ" customClass="RoundedView" customModule="MCommerce" customModuleProvider="target">
-                                                        <rect key="frame" x="10" y="0.0" width="355" height="919"/>
+                                                        <rect key="frame" x="10" y="0.0" width="355" height="920"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zZ1-oO-QhK">
-                                                                <rect key="frame" x="0.0" y="0.0" width="355" height="919"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="355" height="920"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qSP-YM-jAI">
-                                                                        <rect key="frame" x="20" y="20" width="315" height="582.5"/>
+                                                                        <rect key="frame" x="20" y="20" width="315" height="583.5"/>
                                                                         <subviews>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="fC4-C5-gAQ">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="189" height="582.5"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="189" height="583.5"/>
                                                                                 <subviews>
                                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="VSF-TB-gVO">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="189" height="198.5"/>
@@ -154,19 +154,19 @@
                                                                                 </subviews>
                                                                             </stackView>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="iLD-qg-lkZ">
-                                                                                <rect key="frame" x="199" y="0.0" width="116" height="582.5"/>
+                                                                                <rect key="frame" x="199" y="0.0" width="116" height="583.5"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="29 Desember 2017" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VqH-ZO-QCy">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="116" height="155"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="116" height="155.5"/>
                                                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="12"/>
                                                                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oPw-r3-olC">
-                                                                                        <rect key="frame" x="0.0" y="175" width="116" height="407.5"/>
+                                                                                        <rect key="frame" x="0.0" y="175.5" width="116" height="408"/>
                                                                                         <subviews>
                                                                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S4M-9C-HMO" customClass="CircleImageButton" customModule="MCommerce" customModuleProvider="target">
-                                                                                                <rect key="frame" x="-44" y="101.5" width="204.5" height="204.5"/>
+                                                                                                <rect key="frame" x="-43.5" y="102" width="203.5" height="204"/>
                                                                                                 <constraints>
                                                                                                     <constraint firstAttribute="width" secondItem="S4M-9C-HMO" secondAttribute="height" multiplier="1:1" id="XZU-2D-SLQ"/>
                                                                                                 </constraints>
@@ -194,7 +194,7 @@
                                                                         </constraints>
                                                                     </stackView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="5Ux-XY-qZj">
-                                                                        <rect key="frame" x="20" y="612.5" width="315" height="58.5"/>
+                                                                        <rect key="frame" x="20" y="613.5" width="315" height="58.5"/>
                                                                         <subviews>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="3kl-mt-zWn">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="315" height="42.5"/>
@@ -239,7 +239,7 @@
                                                                         </subviews>
                                                                     </stackView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xNK-lu-59e">
-                                                                        <rect key="frame" x="20" y="681" width="315" height="60"/>
+                                                                        <rect key="frame" x="20" y="682" width="315" height="60"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yiA-jn-dxG">
                                                                                 <rect key="frame" x="0.0" y="15" width="315" height="20.5"/>
@@ -257,7 +257,7 @@
                                                                         <edgeInsets key="layoutMargins" top="15" left="0.0" bottom="0.0" right="0.0"/>
                                                                     </stackView>
                                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="6gR-y9-BxK">
-                                                                        <rect key="frame" x="20" y="751" width="315" height="128"/>
+                                                                        <rect key="frame" x="20" y="752" width="315" height="128"/>
                                                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="128" id="q46-BW-XgF"/>
@@ -281,8 +281,8 @@
                                                             <constraint firstAttribute="bottom" secondItem="zZ1-oO-QhK" secondAttribute="bottom" id="nCL-Zw-52n"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9hQ-nV-hS3" customClass="RoundedView" customModule="MCommerce" customModuleProvider="target">
-                                                        <rect key="frame" x="10" y="934" width="355" height="241.5"/>
+                                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9hQ-nV-hS3" customClass="RoundedView" customModule="MCommerce" customModuleProvider="target">
+                                                        <rect key="frame" x="10" y="935" width="355" height="241.5"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="doo-59-huT">
                                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="241.5"/>
@@ -321,11 +321,12 @@
                                                             <constraint firstAttribute="trailing" secondItem="doo-59-huT" secondAttribute="trailing" id="5Hi-yc-5tN"/>
                                                             <constraint firstItem="doo-59-huT" firstAttribute="top" secondItem="9hQ-nV-hS3" secondAttribute="top" id="bfr-Vy-qoE"/>
                                                             <constraint firstItem="doo-59-huT" firstAttribute="leading" secondItem="9hQ-nV-hS3" secondAttribute="leading" id="hQY-hc-m5g"/>
+                                                            <constraint firstAttribute="height" constant="241.5" id="mb6-jz-KrG"/>
                                                             <constraint firstAttribute="bottom" secondItem="doo-59-huT" secondAttribute="bottom" id="oi7-3L-IQh"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9nl-ti-h6m" customClass="RoundedView" customModule="MCommerce" customModuleProvider="target">
-                                                        <rect key="frame" x="10" y="1190.5" width="355" height="199"/>
+                                                        <rect key="frame" x="10" y="1191.5" width="355" height="199"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="svv-JK-f7W">
                                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="199"/>
@@ -349,7 +350,7 @@
                                                         </constraints>
                                                     </view>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="beG-KX-lnO">
-                                                        <rect key="frame" x="10" y="1404.5" width="355" height="200"/>
+                                                        <rect key="frame" x="10" y="1405.5" width="355" height="200"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="200" id="KM5-zr-TOD"/>
@@ -401,7 +402,7 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXm-Tp-FIa">
-                                        <rect key="frame" x="30" y="1584.5" width="315" height="128"/>
+                                        <rect key="frame" x="30" y="1585.5" width="315" height="128"/>
                                         <string key="text">Oops, This product does not have any reviews yet
 </string>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
@@ -540,7 +541,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EJP-Bi-abU" customClass="RoundedView" customModule="MCommerce" customModuleProvider="target">
-                                <rect key="frame" x="37.5" y="115.5" width="300" height="437.5"/>
+                                <rect key="frame" x="37.5" y="115" width="300" height="437.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="pS5-IW-ZJ8">
                                         <rect key="frame" x="10.5" y="10" width="280" height="417.5"/>
