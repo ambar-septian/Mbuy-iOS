@@ -91,7 +91,7 @@ extension SettingsViewController:UITableViewDataSource {
                 let size = min(imageView.bounds.width, imageView.bounds.height)
                 imageView.frame.size = CGSize(width: size, height: size)
                 imageView.layer.cornerRadius = size / 2
-                imageView.setImage(urlString: user.photoURL ?? "")
+                imageView.setImage(urlString: user.photoURL ?? "user", placeholder: .user)
             }
             
             if let nameLabel = contentView.viewWithTag(11) as? UILabel {
@@ -115,6 +115,14 @@ extension SettingsViewController:UITableViewDataSource {
             label.icon = content.icon
             label.textColor = row == contents.count - 1 ? Color.red : Color.darkGray
             cell.accessoryType = row == contents.count - 1 ? .disclosureIndicator : .none
+            
+            
+            if indexPath.section == 0 && indexPath.row == 1 && user.userType == .facebook {
+                cell.isUserInteractionEnabled = false
+                label.textColor = Color.lightGray
+            }
+            
+            
             return cell
 
         }
