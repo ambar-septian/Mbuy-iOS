@@ -57,7 +57,7 @@ extension BaseViewController {
     }
     
     func addDismissBarButton(rightPosition: Bool = true){
-        let size = CGSize(width: iconNavHeight / 2, height: iconNavHeight / 2)
+        let size = CGSize(width: iconNavHeight / 1.5, height: iconNavHeight / 1.5)
         let image = FontAwesomeIcon.removeIcon.image(ofSize: size, color: Color.white).withRenderingMode(.alwaysOriginal)
         let barButton =  UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(self.dismissVC))
         
@@ -167,6 +167,12 @@ extension BaseViewController {
                 NSForegroundColorAttributeName : Color.white
             ],
             for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes(
+            [
+                NSFontAttributeName : Font.latoBold.withSize(17),
+                NSForegroundColorAttributeName : Color.white.withAlphaComponent(0.4)
+            ],
+            for: .disabled)
         (UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self])).tintColor = Color.white
     }
     
@@ -239,7 +245,7 @@ extension BaseViewController {
         }
         
         
-        hudView.backgroundColor = isTransparent ? Color.cream.withAlphaComponent(0.3): Color.cream
+        hudView.backgroundColor = isTransparent ? Color.lightGray.withAlphaComponent(0.5): Color.cream
         
         if !(view.subviews.contains(hudView)) {
             view.addSubview(hudView)
