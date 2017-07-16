@@ -41,8 +41,6 @@ class CheckOutMainViewController: BaseViewController {
     
     weak var delegate: CheckOutParentProtocol?
     
-    @IBOutlet weak var headingLabel: UILabel!
-    
     @IBOutlet weak var headerView: UIView!
     
     var currentPage: Int = 0 {
@@ -65,7 +63,9 @@ class CheckOutMainViewController: BaseViewController {
                 break
             
             }
-            headingLabel.text =  title
+            subtitleLabel.text =  title
+            subtitleLabel.sizeToFit()
+            customTitleView.frame.size.width = subtitleLabel.frame.width
             timelineView.moveActiveCircleView(index: currentPage)
             delegate?.didChildPageChange(index: currentPage)
             
@@ -83,15 +83,57 @@ class CheckOutMainViewController: BaseViewController {
         guard let summaryVC = pageVC.childViewControllers.last as? CheckOutSummaryViewController else { return nil }
         return summaryVC.order
     }
+    
+    fileprivate lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Checkout"
+        label.textAlignment = .center
+        label.textColor = Color.white
+        label.font = Font.latoBold
+        label.sizeToFit()
+        
+        return label
+    }()
+    
+    fileprivate lazy var subtitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "customerProfile".localize
+        label.textAlignment = .center
+        label.textColor = Color.white
+        label.font = Font.latoRegular.withSize(15)
+        label.sizeToFit()
+        
+        return label
+    }()
+    
+    
+    fileprivate lazy var customTitleView: UIView = {
+        let stackView = UIStackView()
+        stackView.alignment = .fill
+        stackView.axis = .vertical
+        stackView.distribution = .equalCentering
+        
+        stackView.addArrangedSubview(self.titleLabel)
+        stackView.addArrangedSubview(self.subtitleLabel)
+        stackView.spacing = 5
+       
+        let width = max(self.titleLabel.frame.width, self.subtitleLabel.frame.width)
+        stackView.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: 35))
+        
+        
+        return stackView
+    }()
+    
+    
    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         addDismissBarButton()
-        headingLabel.text = "customerProfile".localize
-        title = "Checkout"
+        subtitleLabel.text = "customerProfile".localize
       
         setupChildView()
+        title = "Checkout"
         // Do any additional setup after loading the view.
     }
 
@@ -101,9 +143,16 @@ class CheckOutMainViewController: BaseViewController {
      
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.titleView = customTitleView
+        
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         timelineView.moveActiveCircleView(index: 0, withAnimation: false)
+        self.timelineView.layoutSubviews()
     }
     
     @IBAction func previousButtonTapped(_ sender: Any) {
@@ -116,16 +165,23 @@ class CheckOutMainViewController: BaseViewController {
         guard delegate != nil else { return }
         
         let formValid = delegate!.didFormIsValid()
-        if formValid.isValid {
-            delegate?.updateOrderProfile()
-            currentPage += 1
-            
-            guard currentPage == 3 else { return }
-            submitOrder()
-        } else {
-            guard let message = formValid.message else { return }
-            Alert.showAlert(message: message, alertType: .okOnly, header: nil, viewController: self)
-        }
+        
+        delegate?.updateOrderProfile()
+        currentPage += 1
+        
+        guard currentPage == 3 else { return }
+        submitOrder()
+
+//        if formValid.isValid {
+//            delegate?.updateOrderProfile()
+//            currentPage += 1
+//            
+//            guard currentPage == 3 else { return }
+//            submitOrder()
+//        } else {
+//            guard let message = formValid.message else { return }
+//            Alert.showAlert(message: message, alertType: .okOnly, header: nil, viewController: self)
+//        }
         
 
     }

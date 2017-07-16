@@ -13,7 +13,7 @@ class CategoryHomeTableViewCell: UITableViewCell {
     
     lazy var backgroundImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -54,6 +54,7 @@ class CategoryHomeTableViewCell: UITableViewCell {
     }
     
     
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -92,7 +93,9 @@ extension CategoryHomeTableViewCell: ReuseTableCellProtocol {
         CategoryHomeTableViewCell
         guard let category = object as? Category else { return cell }
        
-        cell.backgroundImageView.setImage(urlString: category.imageURL)
+        cell.backgroundImageView.setImage(urlString: category.imageURL, placeholder: .base) { (image) in
+            cell.backgroundImageView.contentMode = .scaleAspectFill
+        }
         cell.titleLabel.text = category.name
         return cell
         
