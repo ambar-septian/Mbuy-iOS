@@ -23,8 +23,6 @@ class ProductListViewController: BaseViewController {
     var products = [Product]() {
         didSet {
             collectionView.reloadData()
-            let willHide = products.count > 0 ? true: false
-            emptyView.toggleHide(willHide: willHide)
 
 //            collectionView.collectionViewLayout.invalidateLayout()
         }
@@ -82,6 +80,10 @@ extension ProductListViewController {
                 DispatchQueue.main.async {
                     self.hideProgressHUD()
                     self.products = products
+                    
+                    let willHide = products.count > 0 ? true: false
+                    self.emptyView.toggleHide(willHide: willHide)
+
                 }
             })
         }

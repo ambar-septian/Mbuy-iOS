@@ -166,7 +166,7 @@
                                                                                         <rect key="frame" x="0.0" y="175.5" width="116" height="408"/>
                                                                                         <subviews>
                                                                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S4M-9C-HMO" customClass="CircleImageButton" customModule="MCommerce" customModuleProvider="target">
-                                                                                                <rect key="frame" x="-43.5" y="102" width="203.5" height="204"/>
+                                                                                                <rect key="frame" x="-84.5" y="61" width="285.5" height="286"/>
                                                                                                 <constraints>
                                                                                                     <constraint firstAttribute="width" secondItem="S4M-9C-HMO" secondAttribute="height" multiplier="1:1" id="XZU-2D-SLQ"/>
                                                                                                 </constraints>
@@ -178,7 +178,7 @@
                                                                                         </subviews>
                                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                         <constraints>
-                                                                                            <constraint firstItem="S4M-9C-HMO" firstAttribute="height" secondItem="oPw-r3-olC" secondAttribute="height" multiplier="0.5" id="8s9-mf-mI9"/>
+                                                                                            <constraint firstItem="S4M-9C-HMO" firstAttribute="height" secondItem="oPw-r3-olC" secondAttribute="height" multiplier="0.7" id="8s9-mf-mI9"/>
                                                                                             <constraint firstItem="S4M-9C-HMO" firstAttribute="centerX" secondItem="oPw-r3-olC" secondAttribute="centerX" id="G1U-vz-mSC"/>
                                                                                             <constraint firstItem="S4M-9C-HMO" firstAttribute="centerY" secondItem="oPw-r3-olC" secondAttribute="centerY" id="vHp-h4-Djh"/>
                                                                                         </constraints>
@@ -199,23 +199,8 @@
                                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="3kl-mt-zWn">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="315" height="42.5"/>
                                                                                 <subviews>
-                                                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="R0o-gJ-hNf">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="157.5" height="42.5"/>
-                                                                                        <subviews>
-                                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5U9-1T-HGw" customClass="RatingStarsView" customModule="MCommerce" customModuleProvider="target">
-                                                                                                <rect key="frame" x="0.0" y="0.0" width="135" height="42.5"/>
-                                                                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                                                            </view>
-                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(150)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S7o-3w-pRA">
-                                                                                                <rect key="frame" x="145" y="0.0" width="12.5" height="42.5"/>
-                                                                                                <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="15"/>
-                                                                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                                                                <nil key="highlightedColor"/>
-                                                                                            </label>
-                                                                                        </subviews>
-                                                                                    </stackView>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AHx-D7-VI2" customClass="RoundedLabel" customModule="MCommerce" customModuleProvider="target">
-                                                                                        <rect key="frame" x="187.5" y="0.0" width="127.5" height="42.5"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="127.5" height="42.5"/>
                                                                                         <constraints>
                                                                                             <constraint firstAttribute="width" secondItem="AHx-D7-VI2" secondAttribute="height" multiplier="3:1" id="vVd-uU-fmG"/>
                                                                                         </constraints>
@@ -223,6 +208,21 @@
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
+                                                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="R0o-gJ-hNf">
+                                                                                        <rect key="frame" x="157.5" y="0.0" width="157.5" height="42.5"/>
+                                                                                        <subviews>
+                                                                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5U9-1T-HGw" customClass="RatingStarsView" customModule="MCommerce" customModuleProvider="target">
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="135" height="42.5"/>
+                                                                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                            </view>
+                                                                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(150)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S7o-3w-pRA">
+                                                                                                <rect key="frame" x="145" y="0.0" width="12.5" height="42.5"/>
+                                                                                                <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="15"/>
+                                                                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                                <nil key="highlightedColor"/>
+                                                                                            </label>
+                                                                                        </subviews>
+                                                                                    </stackView>
                                                                                 </subviews>
                                                                                 <constraints>
                                                                                     <constraint firstItem="R0o-gJ-hNf" firstAttribute="width" secondItem="3kl-mt-zWn" secondAttribute="width" multiplier="0.5" id="qgf-65-8MS"/>

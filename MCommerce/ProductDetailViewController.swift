@@ -43,7 +43,7 @@ class ProductDetailViewController: BaseViewController {
     
     @IBOutlet weak var addToCartButton: CircleImageButton! {
         didSet {
-            addToCartButton.icon = ._616Icon
+            addToCartButton.icon = .shoppingCartIcon
             addToCartButton.mainColor = Color.orange
         }
     }
@@ -68,7 +68,11 @@ class ProductDetailViewController: BaseViewController {
     
     @IBOutlet weak var priceLabel: UILabel!
     
-    @IBOutlet weak var reviewEmptyLabel: UILabel!
+    @IBOutlet weak var reviewEmptyLabel: UILabel! {
+        didSet {
+            reviewEmptyLabel.isHidden = true
+        }
+    }
     
     @IBOutlet weak var ratingView: RatingStarsView!
     
@@ -274,6 +278,7 @@ extension ProductDetailViewController: UICollectionViewDelegate {
             present(vc, animated: true, completion: nil)
         } else {
             guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.viewController.product.detail) as? ProductDetailViewController else { return }
+            vc.passedProduct = relatedProducts[indexPath.row]
             pushNavigation(targetVC: vc)
         }
     }

@@ -30,7 +30,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var cartButton: CircleImageButton! {
         didSet {
             cartButton.mainColor = Color.orange
-            cartButton.icon = FontAwesomeIcon._616Icon
+            cartButton.icon = FontAwesomeIcon.shoppingCartIcon
         }
     }
     
@@ -78,7 +78,7 @@ extension ProductCollectionViewCell: ReuseCollectionCellProtocol {
         guard let product = object as? Product else { return cell }
         cell.product = product
         
-        cell.imageView.setImage(urlString: product.coverURL) { (image) in
+        cell.imageView.setImage(urlString: product.coverURL, placeholder: .base) { (image) in
             if product.imageSize == nil {
                 product.imageSize = image.size
                 collectionView.collectionViewLayout.invalidateLayout()
@@ -88,7 +88,7 @@ extension ProductCollectionViewCell: ReuseCollectionCellProtocol {
         cell.nameLabel.text = product.name
         cell.priceLabel.text = product.formattedPrice
         cell.stockLabel.text = product.formattedStock
-        cell.ratingView.numberOfStars = product.rating
+//        cell.ratingView.numberOfStars = product.rating
         
         cell.stockLabel.mainColor = product.stock > 0 ? Color.green : Color.red
         cell.stockLabel.updateConstraints()
