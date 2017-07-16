@@ -32,7 +32,7 @@ extension SearchPlaceTableViewCell: ReuseTableCellProtocol {
         let cell = tableView.dequeueReusableCell(withIdentifier: self.identifier, for: indexPath) as! SearchPlaceTableViewCell
         guard let place = object as? SearchPlace else { return cell }
         cell.nameLabel.text = place.name
-        cell.detailLabel.text = place.descriptionPlace
+        cell.detailLabel.text = place.descriptionPlace ?? ""
         return cell
     }
 }

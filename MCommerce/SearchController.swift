@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseDatabase
+import GoogleMaps
 
 typealias searchResultsCompletion = ((_ searchResults: [SearchResult]) -> Void)
 
@@ -90,6 +91,8 @@ class SearchController {
             print(error.localizedDescription)
             completion(false)
         }
+        
+        
     }
 
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import GooglePlaces
+import GoogleMaps
 
 typealias searchPlaceResults = ((_ searchResults: [SearchPlace]) -> Void)
 typealias searchCompletePlace = ((_ searchPlace: SearchPlace?) -> Void)
@@ -46,11 +47,30 @@ class SearchPlaceController  {
             
             completion(places)
         }
+    }
+    
+    func getPlaceByCoordinate(coordinate: CLLocationCoordinate2D, completion: @escaping searchCompletePlace){
+        let geocoder = GMSGeocoder()
+        geocoder.reverseGeocodeCoordinate(coordinate) { (response, error) in
         
+            guard let result = response?.firstResult() else {
+                completion(nil)
+                return
+            }
+            
+            guard let name = result.thoroughfare else {
+                completion(nil)
+                return
+            }
+            
+            let searchPlace = SearchPlace(placeID: nil, name: name, descriptionPlace: result.subLocality, coordinate: result.coordinate)
+            completion(searchPlace)
+        }
     }
     
     func getDetailPlace(place: SearchPlace, completion: @escaping searchCompletePlace){
-        placesClient.lookUpPlaceID(place.placeID) { (gmsPlace, error) in
+        guard let placeID = place.placeID else { return }
+        placesClient.lookUpPlaceID(placeID) { (gmsPlace, error) in
             if let error = error {
                 print("Error Google Maps \(error)")
                 completion(nil)
@@ -77,6 +97,6 @@ class SearchPlaceController  {
     }
     
     func calculateDeliveryCost(distance: Double) -> Double {
-       return distance * Constants.deliveryPrice
+       return max(Constants.deliveryPrice,distance * Constants.deliveryPrice)
     }
 }
