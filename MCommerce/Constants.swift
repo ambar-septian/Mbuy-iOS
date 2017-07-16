@@ -37,6 +37,7 @@ enum Constants {
     
     enum viewTag {
         static let scrollView = 99
+        static let snapshotView = 91
     }
     
     
@@ -121,5 +122,16 @@ enum DateFormat {
     case dateLong
     case timeMedium
     case dateTime
+}
+
+enum ImagePlaceHolder:String {
+    case user = "user"
+    case base = "basePlaceholder"
+}
+
+enum FacebookLoginResult {
+    case success
+    case failed
+    case cancel
 }
 

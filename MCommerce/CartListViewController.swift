@@ -32,6 +32,11 @@ class CartListViewController: BaseViewController {
     
     @IBOutlet weak var tableViewConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var checkoutBarButton: UIBarButtonItem! {
+        didSet {
+            checkoutBarButton.isEnabled = false
+        }
+    }
     fileprivate var carts = [Cart]() {
         didSet {
             tableView.reloadData()
@@ -41,6 +46,8 @@ class CartListViewController: BaseViewController {
             subtotalLabel.text = subtotal.formattedPrice
             let willHide = carts.count > 0 ? true: false
             emptyView.toggleHide(willHide: willHide)
+            checkoutBarButton.isEnabled = willHide
+
         }
     }
     
@@ -64,12 +71,12 @@ class CartListViewController: BaseViewController {
         return view
     }()
     
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(updateFooterLabel), name: Constants.notification.updateStepper, object: nil)
         
-        loadCartList()
     }
 
     override func didReceiveMemoryWarning() {
@@ -80,7 +87,7 @@ class CartListViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         title = "cart".localize
-        
+      
         TabBarBadge.shared.cartCount = 0
         loadCartList()
         
@@ -103,6 +110,7 @@ class CartListViewController: BaseViewController {
         super.viewDidDisappear(animated)
         controller.removeHandlerCartList()
     }
+   
 }
 
 extension CartListViewController {

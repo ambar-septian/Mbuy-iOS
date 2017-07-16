@@ -13,7 +13,7 @@ class DynamicCollectionViewLayout: UICollectionViewLayout {
     
     var numberOfColumns = 2
     
-    var cellPadding:CGFloat =  5
+    var cellPadding:CGFloat =  2
     
     private var cache = [DynamicCollectionLayoutAttributes]()
     
@@ -27,7 +27,7 @@ class DynamicCollectionViewLayout: UICollectionViewLayout {
     override func prepare(){
         guard cache.isEmpty else { return }
         
-        let columnWidth = contentWidth / CGFloat(numberOfColumns)
+        let columnWidth = contentWidth / CGFloat(numberOfColumns) + cellPadding
         var xOffset = [CGFloat]()
         
         for column in 0 ..< numberOfColumns {

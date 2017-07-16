@@ -19,7 +19,7 @@
 "forgetPassword" = "Lupa Kata Sandi";
 "submit" = "Kirim";
 "orSignInWith" = "Atau masuk dengan";
-"instructionForgotPassword" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua";
+"instructionForgotPassword" = "Silahkan cek email anda dan ikuti petunjuknya untuk mendapatkan kata sandi baru";
 "failedLogin" = "Oops.. terdapat kesalahan saat login, Silahkan coba kembali";
 "failedRegister" = "Oops.. terdapat kesalahan saat mendaftar, Silahkan coba kembali";
 "failedForgetPassword" = "Oops.. terdapat kesalahan saat mengirim kata sandi, Silahkan coba kembali";
@@ -44,7 +44,7 @@
 /* Cart */
 "cart" = "Keranjang";
 "delete" = "Hapus";
-"next"  = "Selanjutnya";
+"next"  = "Lanjut";
 "back" = "Kembali";
 "finish" = "Selesai";
 "customerProfile" = "Profil Pemesan";
@@ -105,4 +105,5 @@
 "emptySearch" = "Cari produk favorit anda";
 "emptyCart" = "Keranjang anda saat ini kosong";
 "emptyProductCategory" = "Oops... sepertinya belum ada produk dalam kategori ini";
+"emptyOrders" = "Tidak ada pesanan saat ini";
 

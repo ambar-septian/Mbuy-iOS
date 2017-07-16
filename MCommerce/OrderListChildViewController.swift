@@ -42,7 +42,7 @@ class OrderListChildViewController: BaseViewController {
     fileprivate lazy var emptyView: EmptyDataView =  {
         let view = EmptyDataView(frame: self.view.bounds)
         view.image = #imageLiteral(resourceName: "order")
-        view.title = "emptyCart".localize
+        view.title = "emptyOrders".localize
         
         return view
     }()
@@ -65,8 +65,7 @@ class OrderListChildViewController: BaseViewController {
         isViewAlreadyLoaded = true
         tableViewConstraint.constant = tableView.contentSize.height
         
-        let willHide = orders.count > 0 ? true: false
-        emptyView.toggleHide(willHide: willHide)
+        toggleHideEmptyView()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -104,6 +103,11 @@ extension OrderListChildViewController: BaseViewProtocol {
     
     func setupConstraints() {
         emptyView.edgeAnchors == self.edgeAnchors
+    }
+    
+    func toggleHideEmptyView(){
+        let willHide = orders.count > 0 ? true: false
+        emptyView.toggleHide(willHide: willHide)
     }
 }
 

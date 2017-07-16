@@ -9,12 +9,15 @@
 import Foundation
 import FirebaseDatabase
 
-typealias newOrderNumberCompletion = ((_ orderNumber: String) -> Void)
+typealias newOrderNumberCompletion = ((_ orderNumber: Int) -> Void)
 typealias statusNumberCompletion = ((_ statusNumber: Int) -> Void)
 typealias ordersCompletion = ((_ orders: [Order]) -> Void)
 
 class OrderController {
-    fileprivate let orderRef = FIRDatabase.database().reference(withPath: "orders")
+    fileprivate lazy var orderRef: FIRDatabaseReference = {
+        return FIRDatabase.database().reference(withPath: "orders").child(self.user.uid)
+    }()
+    
     fileprivate let cartRef = FIRDatabase.database().reference(withPath: "carts")
     fileprivate let productRef = FIRDatabase.database().reference(withPath: "products")
     
@@ -79,7 +82,7 @@ class OrderController {
     
     fileprivate func getLastOrder(completion: @escaping newOrderNumberCompletion) {
         orderRef.observeSingleEvent(of: .value, with: { (snapshot) in
-            completion(String(snapshot.childrenCount + 1))
+            completion(Int(snapshot.childrenCount) + 1)
         })
     }
     
@@ -95,11 +98,16 @@ class OrderController {
         
         orderListHander = orderListRef?.queryOrderedByKey().observe(.value, with: { (snapshots) in
             var orders = [Order]()
+            guard snapshots.childrenCount > 0 else {
+                completion(orders)
+                return
+            }
+            
             for (index,snapshot) in snapshots.children.enumerated() {
                 guard let wSnapshot = snapshot as? FIRDataSnapshot else { continue }
                 guard let value = wSnapshot.value as? [String: Any] else { continue }
                 guard let cartsDictionary = value[orderKey.carts] as? [[String: Any]] else { continue }
-                guard let orderNumber = value[orderKey.orderNumber] as? Int else { return }
+                guard let orderNumber = value[orderKey.orderNumber] as? Int else { continue }
                 
                 self.listCartsOfOrder(cartsDictionary: cartsDictionary, completion: { (carts) in
                     let profile = OrderProfile(snapshot: wSnapshot)
@@ -113,7 +121,8 @@ class OrderController {
                     orders.append(order)
                     
                     if (Int(snapshots.childrenCount) - 1 == index) {
-                         completion(orders)
+                        orders.sort(by: { $0.orderNumber > $1.orderNumber })
+                        completion(orders)
                     }
                 })
             }
@@ -158,5 +167,6 @@ class OrderController {
         guard let handler = orderListHander else { return }
         orderListRef?.removeObserver(withHandle: handler)
     }
+    
     
 }

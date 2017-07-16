@@ -13,7 +13,7 @@ class EditProfileViewController: BaseViewController {
 
     @IBOutlet weak var profileImageView: UIImageView! {
         didSet {
-            profileImageView.setImage(urlString: user.photoURL ?? "")
+            profileImageView.setImage(urlString: user.photoURL ?? "user", placeholder: .user)
             profileImageView.addGestureRecognizer(profileGesture)
             profileImageView.isUserInteractionEnabled = true
         }
@@ -66,8 +66,14 @@ class EditProfileViewController: BaseViewController {
             self.present(self.imagePicker, animated: true, completion: nil)
         }
         
+        let cancelButton = UIAlertAction(title: "cancel".localize, style: .destructive) { (alert) in
+            self.imagePicker.dismiss(animated: true, completion: nil)
+        }
+        
+
         actionSheet.addAction(cameraButton)
         actionSheet.addAction(selectButton)
+        actionSheet.addAction(cancelButton)
         
         return actionSheet
     }()

@@ -14,7 +14,7 @@ protocol HorizontalTimelineViewDelegate: class {
 }
 class HorizontalTimelineView: UIView {
     
-    var stepCount =  3
+    var stepCount = 3
     
     fileprivate var circleViews = [UIView]()
     
@@ -60,13 +60,17 @@ extension HorizontalTimelineView {
             
             
             circleView.centerYAnchor == self.centerYAnchor
-            circleView.heightAnchor == self.heightAnchor * 0.5
+            circleView.heightAnchor == self.heightAnchor  * 0.3
             circleView.widthAnchor == circleView.heightAnchor
             
             if i == 0 {
                 circleView.leadingAnchor == self.leadingAnchor
             } else {
                 circleView.leadingAnchor == circleViews[i - 1].trailingAnchor + spacing
+                
+//                if i == stepCount - 1{
+//                     circleView.trailingAnchor == self.trailingAnchor
+//                }
             }
             
             circleView.layer.borderColor = Color.green.cgColor
@@ -81,7 +85,7 @@ extension HorizontalTimelineView {
         
         addSubview(activeCircleView)
         activeCircleView.centerXAnchor == self.circleViews[0].centerXAnchor
-        activeCircleView.widthAnchor == self.heightAnchor * 0.7
+        activeCircleView.widthAnchor == self.heightAnchor * 0.4
         activeCircleView.heightAnchor == activeCircleView.widthAnchor
         activeCircleView.centerYAnchor == self.centerYAnchor
         
@@ -96,6 +100,7 @@ extension HorizontalTimelineView {
         
         
         backgroundColor = Color.clear
+        
         
     }
     
@@ -114,7 +119,6 @@ extension HorizontalTimelineView {
         } else {
             self.activeCircleView.center.x = centerX
         }
-        
         
         
     }

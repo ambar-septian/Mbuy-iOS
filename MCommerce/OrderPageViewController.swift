@@ -106,6 +106,7 @@ extension OrderPageViewController: OrderParentProtocol {
         guard let vc = listViewControllers[index] as? OrderListChildViewController else { return }
         vc.tableView.reloadData()
         vc.tableViewConstraint.constant = vc.tableView.contentSize.height
+        vc.toggleHideEmptyView()
     }
 }
 

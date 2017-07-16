@@ -16,10 +16,10 @@
 "login" = "Login";
 "register" = "Register";
 "dontHaveAccount" = "Dont have account?";
-"forgetPassword" = "Forget password";
+"forgetPassword" = "Forgot password";
 "submit" = "Submit";
 "orSignInWith" = "Or sign in with";
-"instructionForgotPassword" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua";
+"instructionForgotPassword" = "Please check email and follow the instructions to completely reset your password";
 "failedLogin" = "Oops.. there something wrong while login, Please try again";
 "failedRegister" = "Oops.. there something wrong while register account, Please try again";
 "failedForgetPassword" = "Oops.. there something wrong while send new password, Please try again";
