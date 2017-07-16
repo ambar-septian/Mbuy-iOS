@@ -13,7 +13,9 @@ import FBSDKLoginKit
 import FirebaseDatabase
 
 typealias finishCompletion = ((_ isFinish: Bool) -> Void)
+typealias facebookLoginCompletion = ((_ loginResult: FacebookLoginResult) -> Void)
 typealias finishMessageCompletion = ((_ isFinish: Bool, _ message:String?) -> Void)
+
 class AuthController {
     fileprivate let userRef = FIRDatabase.database().reference(withPath: "users")
     
@@ -25,7 +27,7 @@ class AuthController {
                 return
             }
             let uid = User.shared.uid
-            let userData = ["userType" : UserType.email.rawValue]
+            let userData = ["userType" : UserType.email.rawValue, "photoURL" : ""]
             self.userRef.child(uid).setValue(userData)
             completion(true, nil)
         })
@@ -43,17 +45,18 @@ class AuthController {
         })
     }
     
-    func loginWithFacebook(currentVC: UIViewController, completion: @escaping finishCompletion){
+    func loginWithFacebook(currentVC: UIViewController, completion: @escaping facebookLoginCompletion){
         let fbLogin = FBSDKLoginManager()
         let permission = ["public_profile", "email"]
         fbLogin.logIn(withReadPermissions: permission, from: currentVC) { (result, error) in
             guard error == nil, result != nil else {
                 print("error \(error.debugDescription)")
-                completion(false)
+                completion(.failed)
                 return
             }
             
             guard !(result!.isCancelled) else {
+                completion(.cancel)
                 return
             }
             
@@ -62,21 +65,34 @@ class AuthController {
             
             FIRAuth.auth()?.signIn(with: credintial, completion: { (user, error) in
                 guard error == nil else {
-                    completion(false)
+                    completion(.failed)
                     return
                 }
                 
                 
-//                if let photoURL = User.shared.photoURL {
-//                    User.shared.photoURL = photoURL + "?type=large"
-//                }
-//
-                
-                let uid = User.shared.uid
-                let userData = ["userType" : UserType.facebook.rawValue]
-                self.userRef.child(uid).setValue(userData)
-                self.getUserProfile()
-                completion(true)
+                var photoURL = ""
+                if let fbPhotoURL = user?.photoURL {
+                    photoURL = fbPhotoURL.absoluteString + "?type=large"
+                }
+
+    
+                self.userRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                    guard !(snapshot.exists()) else {
+                        // user facebook exist
+                        completion(.success)
+                        return
+                    }
+                    
+                    let uid = User.shared.uid
+                    let userData = ["userType" : UserType.facebook.rawValue, "photoURL" : photoURL]
+                    self.userRef.child(uid).setValue(userData)
+                    self.getUserProfile()
+                    
+                     completion(.success)
+                    
+                })
+           
+               
             })
         }
     }
@@ -87,9 +103,17 @@ class AuthController {
        
         
         guard let window = UIApplication.shared.keyWindow else { return }
-        UIView.transition(with: window, duration: 0.3, options: UIViewAnimationOptions.curveEaseIn, animations: {
-            window.rootViewController = tabBar
-        }, completion: nil)
+        let snapShot = window.snapshotView(afterScreenUpdates: true)
+        window.rootViewController = tabBar
+        
+        UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseInOut, animations: {
+            snapShot?.layer.opacity = 0
+
+        }) { (completed) in
+            guard completed else { return }
+            snapShot?.removeFromSuperview()
+
+        }
     }
     
     func dismissViewControllerToLogin(currentVC: UIViewController){
@@ -98,9 +122,17 @@ class AuthController {
         let nav = UINavigationController(rootViewController: vc)
         
         guard let window = UIApplication.shared.keyWindow else { return }
-        UIView.transition(with: window, duration: 0.3, options: UIViewAnimationOptions.curveEaseIn, animations: {
-            window.rootViewController = nav
-        }, completion: nil)
+        let snapShot = window.snapshotView(afterScreenUpdates: true)
+        window.rootViewController = nav
+        
+        UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseInOut, animations: {
+            snapShot?.layer.opacity = 0
+            
+        }) { (completed) in
+            guard completed else { return }
+            snapShot?.removeFromSuperview()
+            
+        }
     }
     
     func updateUserProfile(name:String?,photoURL:String?,  completion: @escaping finishCompletion){
@@ -176,5 +208,9 @@ class AuthController {
             })
 
         }
+    }
+    
+    func uploadUserProfile(){
+        
     }
 }

@@ -180,13 +180,20 @@ extension LoginViewController {
     }
     
     @IBAction func facebookButtonTapped(_ sender: Any) {
-        controller.loginWithFacebook(currentVC: self) { (completed) in
-            guard completed else {
+        showProgressHUD()
+        controller.loginWithFacebook(currentVC: self) { (result) in
+            self.hideProgressHUD()
+            
+            switch result {
+            case .success:
+                self.controller.dismissViewControllerToHome(currentVC: self)
+            case .failed:
                 Alert.showAlert(message: "failedLogin".localize, alertType: .okOnly, viewController: self)
-                return
+            default:
+                break
             }
             
-            self.controller.dismissViewControllerToHome(currentVC: self)
+            
         }
     }
 }
