@@ -14,13 +14,13 @@ class OrderHistoryViewController: BaseViewController {
     
     var orderHistories: [OrderHistory] {
         get {
-            return passedOrder?.histories ?? [OrderHistory]()
+            let histories = passedOrder?.histories ?? [OrderHistory]()
+            return histories.sorted(by: { $0.sortNumber > $1.sortNumber })
         }
         
         set {
-            passedOrder?.histories = newValue.sorted(by: { $0.date < $1.date })
+            passedOrder?.histories = newValue
             tableView.reloadData()
-            tableViewConstraint.constant = tableView.contentSize.height
         }
     }
     
@@ -46,8 +46,8 @@ class OrderHistoryViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
         tableViewConstraint.constant = tableView.contentSize.height
+        tableView.layoutIfNeeded()
     }
 }
 

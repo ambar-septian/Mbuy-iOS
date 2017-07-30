@@ -11,12 +11,19 @@ import FirebaseDatabase
 
 typealias newOrderNumberCompletion = ((_ orderNumber: Int) -> Void)
 typealias statusNumberCompletion = ((_ statusNumber: Int) -> Void)
+typealias finishWithOrderRefCompletion = ((_ orderID: FIRDatabaseReference?) -> Void)
 typealias ordersCompletion = ((_ orders: [Order]) -> Void)
 
 class OrderController {
     fileprivate lazy var orderRef: FIRDatabaseReference = {
         return FIRDatabase.database().reference(withPath: "orders").child(self.user.uid)
     }()
+    
+    fileprivate lazy var orderLastNumberRef: FIRDatabaseReference = {
+        return FIRDatabase.database().reference(withPath: "orders").child("lastNumber")
+    }()
+    
+
     
     fileprivate let cartRef = FIRDatabase.database().reference(withPath: "carts")
     fileprivate let productRef = FIRDatabase.database().reference(withPath: "products")
@@ -27,10 +34,10 @@ class OrderController {
     fileprivate let user = User.shared
     
     
-    func submitOrder(order: Order, completion: @escaping finishCompletion){
+    func submitOrder(order: Order, completion: @escaping finishWithOrderRefCompletion){
         let profile = order.profile
         guard let coordinate = profile.coordinate else {
-            completion(false)
+            completion(nil)
             return
         }
         let profileKey = OrderProfile.jsonKeys.self
@@ -73,22 +80,33 @@ class OrderController {
             self.getLastStatusNumber(completion: { (statusNumber) in
                 history[historyKey.sortNumber] = statusNumber
                 orderDict[orderKey.histories] = [history]
-                self.orderRef.childByAutoId().setValue(orderDict)
-                completion(true)
+                let newOrder = self.orderRef.childByAutoId()
+                newOrder.setValue(orderDict)
+                self.updateLastOrderNumber()
+                
+                completion(newOrder)
             })
         }
         
     }
     
     fileprivate func getLastOrder(completion: @escaping newOrderNumberCompletion) {
-        orderRef.observeSingleEvent(of: .value, with: { (snapshot) in
-            completion(Int(snapshot.childrenCount) + 1)
+        orderLastNumberRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? Int ?? 0
+            completion(value + 1)
         })
     }
     
     fileprivate func getLastStatusNumber(completion: @escaping statusNumberCompletion) {
         orderRef.observeSingleEvent(of: .value, with: { (snapshot) in
             completion(Int(snapshot.childrenCount))
+        })
+    }
+    
+    fileprivate func updateLastOrderNumber(){
+        orderLastNumberRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? Int ?? 0
+            self.orderLastNumberRef.setValue(value)
         })
     }
     
@@ -111,7 +129,7 @@ class OrderController {
                 
                 self.listCartsOfOrder(cartsDictionary: cartsDictionary, completion: { (carts) in
                     let profile = OrderProfile(snapshot: wSnapshot)
-                    let order = Order(profile: profile, carts: carts, key: wSnapshot.key, orderNumber: orderNumber)
+                    let order = Order(profile: profile, carts: carts, key: wSnapshot.key, orderNumber: orderNumber, ref: wSnapshot.ref)
                 
                     if let historyDict = value[orderKey.histories] as? [[String: Any]] {
                         let histories = self.listHistoriesOfOrder(historiesDict: historyDict)
@@ -168,5 +186,55 @@ class OrderController {
         orderListRef?.removeObserver(withHandle: handler)
     }
     
+    func cancelOrder(order: Order) {
+        order.ref?.removeValue()
+    }
+    
+    func postOrderConfirmation(ref:FIRDatabaseReference, accountName:String, accountNumber:String, transferAmount: Double ){
+        let paymentDict: [String:Any] = ["accountName": accountName, "accountNumber": accountNumber, "transferAmount" : transferAmount]
+        ref.child("payment").setValue(paymentDict)
+        
+        ref.child("histories").observeSingleEvent(of: .value, with: { (snapshot) in
+            let lastNumber = Int(snapshot.childrenCount)
+            let historyKey = OrderHistory.jsonKeys
+            
+            let historyDict = [historyKey.date : Date().timeIntervalSince1970, historyKey.sortNumber : lastNumber, historyKey.status: OrderStatus.validatingPayment.rawValue] as [String : Any]
+            
+            ref.child("histories/\(lastNumber)").updateChildValues(historyDict)
+            
+            let savedUserProfile = SavedOrderProfile.shared.self
+            savedUserProfile.accountName = accountName
+            savedUserProfile.accountNumber = accountNumber
+            
+        })
+    }
+    
+    
+    func postCompleteOrer(ref:FIRDatabaseReference){
+        ref.child("histories").observeSingleEvent(of: .value, with: { (snapshot) in
+            let lastNumber = Int(snapshot.childrenCount)
+            let historyKey = OrderHistory.jsonKeys
+            
+            let historyDict = [historyKey.date : Date().timeIntervalSince1970, historyKey.sortNumber : lastNumber, historyKey.status: OrderStatus.completed.rawValue] as [String : Any]
+            
+            ref.child("histories/\(lastNumber)").updateChildValues(historyDict)
+        })
+
+    }
+    
+    func finishSubmitOrder(order: Order){
+        // empty cart
+        let cartController = CartController()
+        cartController.deleteAllCarts()
+
+        let savedUserProfile = SavedOrderProfile.shared.self
+        let orderProfile = order.profile
+        savedUserProfile.name = orderProfile.name
+        savedUserProfile.email = orderProfile.email
+        savedUserProfile.phone = orderProfile.phone
+        
+    }
+  
+
     
 }

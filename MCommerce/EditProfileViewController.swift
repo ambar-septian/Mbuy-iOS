@@ -13,7 +13,11 @@ class EditProfileViewController: BaseViewController {
 
     @IBOutlet weak var profileImageView: UIImageView! {
         didSet {
-            profileImageView.setImage(urlString: user.photoURL ?? "user", placeholder: .user)
+            if let photoURL = user.photoURL {
+                profileImageView.setImage(urlString: photoURL, placeholder: .user)
+            } else {
+                profileImageView.image = #imageLiteral(resourceName: "user")
+            }
             profileImageView.addGestureRecognizer(profileGesture)
             profileImageView.isUserInteractionEnabled = true
         }
@@ -80,6 +84,12 @@ class EditProfileViewController: BaseViewController {
     
     fileprivate let user = User.shared
     
+    fileprivate let controller = AuthController()
+    
+    fileprivate var isImageUpdate = false
+    
+    weak var delegate:UpdateProfileDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -95,20 +105,69 @@ class EditProfileViewController: BaseViewController {
         super.viewDidLayoutSubviews()
         profileImageView.layer.cornerRadius = profileImageView.bounds.width / 2
         profileImageView.layer.masksToBounds = true
-
     }
-
+  
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     @IBAction func saveButtonTapped(_ sender: Any) {
+        showProgressHUD()
+        DispatchQueue.global().async {
+            if self.isImageUpdate {
+                guard let image = self.profileImageView.image else {
+                    DispatchQueue.main.async {
+                        self.hideProgressHUD()
+                         self.failedUpdateProfile()
+                    }
+                    
+                    return }
+                self.controller.uploadUserProfile(image: image, completion: { (url) in
+                    guard let wUrl = url else {
+                        DispatchQueue.main.async {
+                            self.hideProgressHUD()
+                            self.failedUpdateProfile()
+                        }
+
+                        return
+                    }
+                    
+                    self.delegate?.didUpdateProfile(image: image)
+                    self.updateUserProfile(photoURL: wUrl.absoluteString)
+
+                })
+            } else {
+                self.updateUserProfile(photoURL: nil)
+            }
+        }
+        
     }
 }
 
 extension EditProfileViewController {
+    func updateUserProfile(photoURL:String?){
+        controller.updateUserProfile(name: nameTextField.text, photoURL: photoURL) { (completed) in
+            DispatchQueue.main.async {
+               self.hideProgressHUD()
+                guard completed else {
+                   self.failedUpdateProfile()
+                    return }
+            
+                Alert.showAlert(message: "Update profile success", alertType: .okOnly, header: nil, viewController: self, handler: { (alert) in
+                    let _ = self.navigationController?.popViewController(animated: true)
+                })
+            }
+        }
+    }
+    
+    
     func showImagePicker(){
         present(actionSheet, animated: true, completion: nil)
+    }
+    
+    func failedUpdateProfile(){
+         Alert.showAlert(message: "Oopss.. update profile failed, please try again", alertType: .okOnly, viewController: self)
     }
 }
 
@@ -116,6 +175,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
             profileImageView.image = pickedImage
+            isImageUpdate = true
         }
         
         dismiss(animated: true, completion: nil)

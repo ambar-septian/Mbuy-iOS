@@ -56,18 +56,27 @@
                     <navigationItem key="navigationItem" id="tec-cU-WtJ"/>
                     <connections>
                         <outlet property="searchTableView" destination="udy-Ps-pzJ" id="FoD-y1-eFh"/>
+                        <segue destination="WrE-kU-9Uv" kind="show" identifier="ShowProductDetail" id="AVP-Cy-MjY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7pk-SX-epv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="740" y="-107.49625187406298"/>
         </scene>
+        <!--ProductDetailViewControllerID-->
+        <scene sceneID="eDw-Lu-2zm">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Product" referencedIdentifier="ProductDetailViewControllerID" id="WrE-kU-9Uv" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tte-dS-ind" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1227" y="-190"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="x6m-TR-oiw">
             <objects>
                 <navigationController id="Zi4-ET-Na2" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DGY-aF-Esr">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="DGY-aF-Esr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

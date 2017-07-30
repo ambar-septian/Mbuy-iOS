@@ -11,10 +11,12 @@ import FirebaseAuth
 import Hero
 import FBSDKLoginKit
 import FirebaseDatabase
+import FirebaseStorage
 
 typealias finishCompletion = ((_ isFinish: Bool) -> Void)
 typealias facebookLoginCompletion = ((_ loginResult: FacebookLoginResult) -> Void)
 typealias finishMessageCompletion = ((_ isFinish: Bool, _ message:String?) -> Void)
+typealias downloadURLCompletion = ((_ downloadURL: URL?) -> Void)
 
 class AuthController {
     fileprivate let userRef = FIRDatabase.database().reference(withPath: "users")
@@ -36,7 +38,8 @@ class AuthController {
     func login(email:String, password:String, completion: @escaping finishMessageCompletion){
         FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
             guard error == nil else {
-                let message = (error as NSError?)?.code == ErrorCode.wrongPassword.rawValue ? "wrongPassword" : "failedLogin"
+                let errorCode = (error as NSError?)?.code
+                let message =  errorCode == ErrorCode.wrongPassword.rawValue || errorCode == ErrorCode.userDoesntExist.rawValue ? "wrongPassword" : "failedLogin"
                 completion(false, message.localize)
                 return
             }
@@ -69,13 +72,11 @@ class AuthController {
                     return
                 }
                 
-                
                 var photoURL = ""
                 if let fbPhotoURL = user?.photoURL {
                     photoURL = fbPhotoURL.absoluteString + "?type=large"
                 }
 
-    
                 self.userRef.observeSingleEvent(of: .value, with: { (snapshot) in
                     guard !(snapshot.exists()) else {
                         // user facebook exist
@@ -86,10 +87,13 @@ class AuthController {
                     let uid = User.shared.uid
                     let userData = ["userType" : UserType.facebook.rawValue, "photoURL" : photoURL]
                     self.userRef.child(uid).setValue(userData)
-                    self.getUserProfile()
-                    
-                     completion(.success)
-                    
+                
+                    self.updateUserProfile(name: nil, photoURL: photoURL, completion: { (completed) in
+                        guard completed else { return }
+                        self.getUserProfile()
+                        
+                        completion(.success)
+                    })
                 })
            
                
@@ -101,19 +105,26 @@ class AuthController {
         let storyboard = UIStoryboard(name: Constants.storyboard.home, bundle: nil)
         guard let tabBar = storyboard.instantiateViewController(withIdentifier: Constants.viewController.mainTabBar) as? UITabBarController else { return }
        
-        
         guard let window = UIApplication.shared.keyWindow else { return }
-        let snapShot = window.snapshotView(afterScreenUpdates: true)
-        window.rootViewController = tabBar
+        guard let rootViewController = window.rootViewController else { return }
         
-        UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseInOut, animations: {
-            snapShot?.layer.opacity = 0
-
-        }) { (completed) in
-            guard completed else { return }
-            snapShot?.removeFromSuperview()
-
-        }
+        tabBar.view.frame = rootViewController.view.frame
+        tabBar.view.layoutIfNeeded()
+//        let snapShot = window.snapshotView(afterScreenUpdates: true)
+       
+        UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: { 
+            window.rootViewController = tabBar
+            
+        }, completion: nil)
+//        
+//        UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseInOut, animations: {
+//            snapShot?.layer.opacity = 0
+//
+//        }) { (completed) in
+//            guard completed else { return }
+//            snapShot?.removeFromSuperview()
+//
+//        }
     }
     
     func dismissViewControllerToLogin(currentVC: UIViewController){
@@ -210,7 +221,29 @@ class AuthController {
         }
     }
     
-    func uploadUserProfile(){
-        
+    func uploadUserProfile(image:UIImage, completion: @escaping downloadURLCompletion){
+        guard let data = UIImageJPEGRepresentation(image, 0.5) else {
+             completion(nil)
+            return
+        }
+      
+        let storageRef = FIRStorage.storage().reference().child("userimages/\(User.shared.uid).jpg")
+        let metadata = FIRStorageMetadata()
+        metadata.contentType = "image/jpeg"
+        storageRef.put(data, metadata: metadata) { (metadata, error) in
+           
+            guard error == nil else {
+                completion(nil)
+                return
+            }
+            
+            guard let downloadURL = metadata?.downloadURL() else {
+                 completion(nil)
+                return
+            }
+            
+             completion(downloadURL)
+        }
     }
+    
 }

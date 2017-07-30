@@ -9,6 +9,10 @@
 import UIKit
 import Iconic
 
+protocol UpdateProfileDelegate:class {
+    func didUpdateProfile(image: UIImage)
+}
+
 class SettingsViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
@@ -44,6 +48,12 @@ class SettingsViewController: BaseViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == Constants.segueID.setting.editProfile else { return }
+        guard let vc = segue.destination as? EditProfileViewController else { return }
+        vc.delegate = self
     }
 }
 
@@ -91,7 +101,11 @@ extension SettingsViewController:UITableViewDataSource {
                 let size = min(imageView.bounds.width, imageView.bounds.height)
                 imageView.frame.size = CGSize(width: size, height: size)
                 imageView.layer.cornerRadius = size / 2
-                imageView.setImage(urlString: user.photoURL ?? "user", placeholder: .user)
+                
+                if let photoURL = user.photoURL, imageView.image == nil {
+                    imageView.setImage(urlString: photoURL, placeholder: .user)
+                }
+                
             }
             
             if let nameLabel = contentView.viewWithTag(11) as? UILabel {
@@ -178,5 +192,14 @@ extension SettingsViewController: UITableViewDelegate {
 //    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30
+    }
+}
+
+extension SettingsViewController: UpdateProfileDelegate {
+    func didUpdateProfile(image: UIImage) {
+        let indexPath = IndexPath(row: 0, section: 0)
+        let cell = tableView(tableView, cellForRowAt: indexPath)
+        guard let imageView = cell.contentView.viewWithTag(10) as? UIImageView else { return }
+        imageView.image = image
     }
 }

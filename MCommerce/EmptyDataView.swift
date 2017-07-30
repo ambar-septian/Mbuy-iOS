@@ -101,12 +101,17 @@ class EmptyDataView: UIView {
 }
 
 extension EmptyDataView {
-    func toggleHide(willHide isHidden:Bool){
+    func toggleHide(willHide isHidden:Bool, replaceTitle:String? = nil){
+        if let title = replaceTitle, title != self.titleLabel.text {
+            self.titleLabel.text = title
+        }
+        
         guard self.isHidden != isHidden else { return }
         
         let alpha:CGFloat = isHidden ? 0 : 1
         UIView.animate(withDuration: 0.3, animations: { 
             self.alpha = alpha
+           
         }) { (completed) in
             guard completed else { return }
             self.isHidden = isHidden

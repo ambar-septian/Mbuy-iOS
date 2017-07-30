@@ -19,7 +19,7 @@ class Color {
     }
     
     static var yellow:UIColor {
-        return Color.rgbColor(r: 255, g: 130, b: 204, a: 1)
+        return Color.rgbColor(r: 255, g: 164, b: 35, a: 1)
     }
     
     static var cream:UIColor {
@@ -33,6 +33,10 @@ class Color {
     
     static var green:UIColor {
         return Color.rgbColor(r: 0, g: 163, b: 136, a: 1)
+    }
+    
+    static var lightGreen:UIColor {
+        return Color.rgbColor(r: 126, g: 211, b: 33, a: 1)
     }
     
     static var red:UIColor {

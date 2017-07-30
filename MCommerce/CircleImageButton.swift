@@ -104,13 +104,14 @@ class CircleImageButton: UIButton {
 
 extension CircleImageButton: BaseViewProtocol {
     func setupSubviews() {
-        layer.shadowColor = Color.grayShadow.cgColor
+        layer.shadowColor = Color.lightGray.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 2)
-        layer.shadowRadius = 8
-        layer.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: self.bounds.width / 2).cgPath
+        layer.shadowOpacity = 0.5
+        layer.shadowRadius = 5
+//        layer.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: self.bounds.width / 2).cgPath
 //        layer.shouldRasterize = true
 //        layer.rasterizationScale = UIScreen.main.scale
-        layer.masksToBounds = true
+//        layer.masksToBounds = true
         
         addSubview(circleView)
         circleView.addSubview(iconImageView)

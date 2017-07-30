@@ -13,7 +13,7 @@ class SearchResult:FirebaseProtocol {
     var name:String
     var key:String
     var ref: FIRDatabaseReference?
-    
+
     static let jsonKey:String = "name"
     
     init(snapshot: FIRDataSnapshot) {
@@ -24,3 +24,16 @@ class SearchResult:FirebaseProtocol {
         ref = snapshot.ref
     }
 }
+
+extension SearchResult: Hashable {
+    var hashValue:Int {
+        return Int(key) ?? 0
+    }
+}
+
+extension SearchResult: Equatable {
+    static func ==(lhs:SearchResult, rhs:SearchResult) -> Bool{
+        return lhs.key == rhs.key
+    }
+}
+

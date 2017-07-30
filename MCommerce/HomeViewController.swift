@@ -28,11 +28,6 @@ class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        categories.append(Category(categoryID: "1", name: "Shoes", imageURL: "https://cdn.techinasia.com/wp-content/uploads/2016/04/shopping-and-ecommerce-750x500.jpg"))
-//        categories.append(Category(categoryID: "2", name: "Jacket", imageURL: "https://cdn.techinasia.com/wp-content/uploads/2016/04/shopping-and-ecommerce-750x500.jpg"))
-//        categories.append(Category(categoryID: "3", name: "Watch", imageURL: "https://cdn.techinasia.com/wp-content/uploads/2016/04/shopping-and-ecommerce-750x500.jpg"))
-//        
         setupTabBar()
         
         loadCategories()

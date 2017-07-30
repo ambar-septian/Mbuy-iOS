@@ -28,6 +28,7 @@ class SearchController {
     
     weak var delegate: SearchProductDelegate?
     
+    
     var keyword:String? {
         didSet {
             guard let wKeyword = keyword else {
@@ -38,6 +39,7 @@ class SearchController {
                 removeProducts()
                 return }
             filterResults = searchResults.filter({ $0.name.lowercased().contains(wKeyword.lowercased()) })
+            filterResults = Array(Set<SearchResult>(filterResults))
             guard filterResults.count > 0 else {
                 removeProducts()
                 return
@@ -54,7 +56,10 @@ class SearchController {
         
         productRef.child(productID).observeSingleEvent(of: .value, with: { (snapshot) in
             let product = Product(snapshot: snapshot)
-            self.products.append(product)
+            if !(self.products.contains(product)) {
+                self.products.append(product)
+            }
+            
             
             if indexFilter == self.filterResults.count - 1 {
                 self.delegate?.refreshFilterProduct()

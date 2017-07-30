@@ -202,7 +202,7 @@ extension CheckOutAddressViewController {
             return (isValid: true, message: nil)
             
         } else {
-            return (isValid: false, message: "Address must not empty")
+            return (isValid: false, message: "validAddress".localize)
 
         }
     }
@@ -270,9 +270,7 @@ extension CheckOutAddressViewController: UITextViewDelegate {
             fullString = textViewText
             fullString.remove(at: fullString.index(before: fullString.endIndex))
         }
-        if fullString.characters.count == 0 {
-//            self.clearDataSource()
-        }
+       
         guard fullString.characters.count > 2 else {
             searchResults.removeAll()
             return true
@@ -286,7 +284,7 @@ extension CheckOutAddressViewController: UITextViewDelegate {
         }
         
         let userInfo = ["keyword": fullString]
-        searchTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector:#selector(beginSearch(timer:)), userInfo: userInfo, repeats: false)
+        searchTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector:#selector(beginSearch(timer:)), userInfo: userInfo, repeats: false)
         
         return true
     }

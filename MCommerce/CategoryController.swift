@@ -18,7 +18,7 @@ class CategoryController {
     fileprivate let ref = FIRDatabase.database().reference(withPath: "categories")
     
     func loadCategories(completion: @escaping categoriesCompletion){
-        ref.queryOrdered(byChild: Category.jsonKeys.orderNumber).observeSingleEvent(of: .value, with: { snapshot in
+        ref.observeSingleEvent(of: .value, with: { snapshot in
             var categories: [Category] = []
             
             for item in snapshot.children {

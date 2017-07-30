@@ -23,7 +23,6 @@ class ProductListViewController: BaseViewController {
     var products = [Product]() {
         didSet {
             collectionView.reloadData()
-
 //            collectionView.collectionViewLayout.invalidateLayout()
         }
     }

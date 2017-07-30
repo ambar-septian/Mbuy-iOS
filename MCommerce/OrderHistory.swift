@@ -38,18 +38,24 @@ class OrderHistory {
 
 enum OrderStatus: String {
     case onDelivery = "onDelivery"
-    case complete = "complete"
+    case completed = "completed"
     case waitingPayment = "waitingPayment"
+    case validatingPayment = "validatingPayment"
     case cancel = "cancel"
+    case prepareOrder = "prepareOrder"
     
     var color:UIColor {
         switch self {
         case .waitingPayment:
             return Color.lightGray
-        case .complete:
+        case .completed:
             return Color.green
         case .onDelivery:
             return Color.orange
+        case .validatingPayment:
+            return Color.yellow
+        case .prepareOrder:
+            return Color.lightGreen
         case .cancel:
             return Color.red
         }

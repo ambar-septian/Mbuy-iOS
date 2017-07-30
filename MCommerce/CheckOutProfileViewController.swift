@@ -36,6 +36,7 @@ class CheckOutProfileViewController: BaseViewController {
     @IBOutlet weak var nameTextField: BorderTextField!  {
         didSet {
             nameTextField.placeholder = "name".localize
+//            nameTextField.text = savedUserProfile.name
         }
     }
     
@@ -43,16 +44,20 @@ class CheckOutProfileViewController: BaseViewController {
     @IBOutlet weak var phoneTextField: BorderTextField!  {
         didSet {
             phoneTextField.placeholder = "phone".localize
+//            phoneTextField.text = savedUserProfile.phone
         }
     }
     
     @IBOutlet weak var emailTextField: BorderTextField! {
         didSet {
             emailTextField.placeholder = "E-mail"
+//            emailTextField.text = savedUserProfile.email
         }
     }
     
     weak var childDelegate: CheckOutChildProtocol?
+    
+//    fileprivate let savedUserProfile = SavedOrderProfile.shared.self
 
     
     override func viewDidLoad() {

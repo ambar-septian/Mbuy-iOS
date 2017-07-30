@@ -16,15 +16,19 @@ class OrderListChildViewController: BaseViewController {
    
     fileprivate var orders: [Order] {
         let orders = [Order]()
-        guard let pageVC = self.parent as? OrderPageViewController else { return orders }
-        guard let orderVC = pageVC.parent as? OrderListViewController else { return orders }
+        guard let orderVC = orderParentVC else { return orders }
         
         if currentPage == 0 {
-            return orderVC.orders.filter({ $0.lastStatus == .waitingPayment || $0.lastStatus == .onDelivery })
+            return orderVC.orders.filter({ $0.lastStatus == .waitingPayment || $0.lastStatus == .onDelivery || $0.lastStatus == .validatingPayment || $0.lastStatus == .prepareOrder  })
         } else {
-            return orderVC.orders.filter({ $0.lastStatus == .complete || $0.lastStatus == .cancel })
+            return orderVC.orders.filter({ $0.lastStatus == .completed || $0.lastStatus == .cancel })
         }
     }
+    
+    fileprivate lazy var orderParentVC: OrderListViewController? = {
+        guard let pageVC = self.parent as? OrderPageViewController else { return nil }
+        return pageVC.parent as? OrderListViewController
+    }()
 
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -154,7 +158,9 @@ extension OrderListChildViewController: UITableViewDelegate {
         let noteIcon = FontAwesomeIcon.fileTextIcon.image(ofSize: imageSize, color: Color.white)
         let historyIcon = FontAwesomeIcon.timeIcon.image(ofSize: imageSize, color: Color.white)
         let cancelIcon = FontAwesomeIcon.removeIcon.image(ofSize: imageSize, color: Color.white)
+        let completeIcon = FontAwesomeIcon.checkIcon.image(ofSize: imageSize, color: Color.white)
         let index = indexPath.row
+        let order = self.orders[index]
         
         
         let historyButton = BGTableViewRowActionWithImage.rowAction(with: .default, title: "history".localize, backgroundColor: Color.green, image: historyIcon, forCellHeight: UInt(heightCell), andFittedWidth: true) { (action, indexPath) in
@@ -167,6 +173,36 @@ extension OrderListChildViewController: UITableViewDelegate {
         
         let cancelButton = BGTableViewRowActionWithImage.rowAction(with: .default, title: "cancel".localize, backgroundColor: Color.red, image: cancelIcon, forCellHeight: UInt(heightCell), andFittedWidth: true) { (action, indexPath) in
             
+            guard let wIndexPath = indexPath else { return }
+          
+            Alert.showAlert(message: "Apa anda ingin membatalkan pesanan ini?", alertType: .okCancel, header: nil, viewController: self, handler: { (alert) in
+                
+                guard let orderIndex = self.orderParentVC?.orders.index(where: { $0.orderID == order.orderID}) else {
+                    return
+                }
+                
+                self.orderParentVC?.controller.cancelOrder(order: order)
+                
+                self.tableView.beginUpdates()
+                self.orderParentVC?.orders.remove(at: orderIndex)
+                self.tableView.deleteRows(at: [wIndexPath], with: .automatic)
+                self.tableView.endUpdates()
+                
+                guard self.orders.count == 0 else { return }
+                self.toggleHideEmptyView()
+                
+            })
+        }
+        
+        let completeButton = BGTableViewRowActionWithImage.rowAction(with: .default, title: "complete".localize, backgroundColor: Color.lightGreen, image: completeIcon, forCellHeight: UInt(heightCell)) { (action, indexPath) in
+            guard let ref = order.ref else { return }
+            
+            
+            Alert.showAlert(message: "Apa anda ingin mengkonfirmasi bahwa pesanan sudah diterima?", alertType: .okCancel, header: nil, viewController: self, handler: { (alert) in
+                
+                self.orderParentVC?.controller.postCompleteOrer(ref: ref)
+                
+            })
         }
         
         guard orders.count - 1 >= indexPath.row else { return nil }
@@ -176,9 +212,11 @@ extension OrderListChildViewController: UITableViewDelegate {
         switch status {
         case .waitingPayment:
             return [cancelButton!, historyButton!, noteButton!]
-        case .onDelivery:
+        case .validatingPayment, .prepareOrder:
             return [historyButton!, noteButton!]
-        case .cancel, .complete:
+        case .onDelivery:
+            return [historyButton!, noteButton!, completeButton!]
+        case .cancel, .completed:
             return [historyButton!]
         }
     }

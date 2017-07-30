@@ -125,7 +125,7 @@ class CheckOutSummaryViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         guard let profile = self.profile else { return }
-        order = Order(profile: profile, carts: carts, key: "", orderNumber: 0)
+        order = Order(profile: profile, carts: carts, key: "", orderNumber: 0, ref: nil)
     }
 }
 

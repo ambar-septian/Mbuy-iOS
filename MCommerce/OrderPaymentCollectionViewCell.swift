@@ -12,7 +12,10 @@ class OrderPaymentCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var imageView: UIImageView!
     
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var bankNameLabel: UILabel!
+    
+    @IBOutlet weak var accountNameLabel: UILabel!
+    
     
     @IBOutlet weak var accountNumberLabel: UILabel!
     
@@ -26,9 +29,10 @@ class OrderPaymentCollectionViewCell: UICollectionViewCell {
 extension OrderPaymentCollectionViewCell: ReuseCollectionCellProtocol {
     static func configureCell<T>(collectionView: UICollectionView, indexPath: IndexPath, object: T?) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! OrderPaymentCollectionViewCell
-        guard let payment = object as? OrderPayment else { return cell }
+        guard let payment = object as? BankPayment else { return cell }
         cell.accountNumberLabel.text = payment.accountNumber
-        cell.nameLabel.text = payment.name
+        cell.bankNameLabel.text = payment.bankName
+        cell.accountNameLabel.text = payment.accountName
         cell.imageView.image = payment.image
 
         return cell

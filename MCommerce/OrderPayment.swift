@@ -9,12 +9,14 @@
 import UIKit
 
 class OrderPayment {
-    var name: String
+    var bankName: String
     var accountNumber:String
+    var accountName:String
     var image: UIImage?
     
-    init(name:String, accountNumber:String, image:UIImage?) {
-        self.name = name
+    init(bankName:String, accountNumber:String, accountName:String, image:UIImage?) {
+        self.bankName = bankName
+        self.accountName = accountName
         self.accountNumber = accountNumber
         self.image = image
     }

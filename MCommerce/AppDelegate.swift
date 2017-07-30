@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         super.init()
         // Configure Firebase
         FIRApp.configure()
-        FIRDatabase.database().persistenceEnabled = true
+//        FIRDatabase.database().persistenceEnabled = true
         
     }
     

@@ -18,6 +18,7 @@ enum Constants {
             static let note = "orderNote"
             static let history = "orderHistory"
             static let detail = "orderDetail"
+            static let confirmation = "orderConfirmation"
         }
         
         enum setting {
@@ -48,6 +49,15 @@ enum Constants {
             static let cart = "CartTabBarBadge"
             static let order = "OrderTabBarBadge"
         }
+        
+        enum orderProfile {
+            static let name = "orderProfileName"
+            static let email = "orderProfileEmail"
+            static let phone = "orderProfilePhone"
+            static let accountNumber = "orderProfileAccountNumber"
+            static let accountName = "orderProfileAccountName"
+        }
+        
     }
     
     enum heroID {
@@ -126,7 +136,7 @@ enum DateFormat {
 
 enum ImagePlaceHolder:String {
     case user = "user"
-    case base = "basePlaceholder"
+    case base = "logo-white-small"
 }
 
 enum FacebookLoginResult {

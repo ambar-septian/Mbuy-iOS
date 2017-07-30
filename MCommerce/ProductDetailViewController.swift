@@ -290,7 +290,7 @@ extension ProductDetailViewController: UICollectionViewDelegateFlowLayout {
             return collectionView.bounds.size
         } else {
             let padding = collectionView.bounds.width * 0.15
-            let size = CGSize(width: collectionView.bounds.width / 2 - padding, height: collectionView.bounds.height)
+            let size = CGSize(width: collectionView.bounds.width / 1.7 - padding, height: collectionView.bounds.height)
             return size
         }
     }

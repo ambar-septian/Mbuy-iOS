@@ -117,6 +117,11 @@ class Product: FirebaseProtocol {
         
         self.ref = snapshot.ref
     }
-
     
+}
+
+extension Product: Equatable {
+    static func ==(lhs:Product, rhs:Product) -> Bool{
+        return lhs.key == rhs.key
+    }
 }

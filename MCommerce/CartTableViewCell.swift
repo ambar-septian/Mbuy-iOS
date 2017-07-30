@@ -47,6 +47,11 @@ class CartTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        productImageView.image = nil
+    }
 }
 
 extension CartTableViewCell: ReuseTableCellProtocol {

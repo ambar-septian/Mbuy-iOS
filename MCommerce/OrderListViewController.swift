@@ -34,7 +34,7 @@ class OrderListViewController: BaseViewController {
     
     var activePageIndex = 0
     
-    fileprivate var controller = OrderController()
+    var controller = OrderController()
     
     var orders = [Order]()
     

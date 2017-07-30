@@ -77,6 +77,8 @@ class CartListViewController: BaseViewController {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(updateFooterLabel), name: Constants.notification.updateStepper, object: nil)
         
+        setupSubviews()
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -87,11 +89,9 @@ class CartListViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         title = "cart".localize
-      
+        
         TabBarBadge.shared.cartCount = 0
         loadCartList()
-        
-        setupSubviews()
     }
     
     deinit {
@@ -198,6 +198,7 @@ extension CartListViewController: UITableViewDelegate {
         let imageSize = CGSize(width:size, height: size)
         let icon = FontAwesomeIcon.trashIcon.image(ofSize: imageSize, color: Color.white)
         let deleteButton = BGTableViewRowActionWithImage.rowAction(with: .default, title: "delete".localize, backgroundColor: Color.red, image: icon, forCellHeight: UInt(heightCell), andFittedWidth: true) { (action, indexPath) in
+            
             guard let wIndexPath = indexPath else { return }
             let index = wIndexPath.row
             

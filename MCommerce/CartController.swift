@@ -31,14 +31,15 @@ class CartController {
             }
             let cartKey = self.cartKey
             let productRef = cartRef.child("\(product.productID)")
+            let variantName = product.selectedVariant.name
             self.isProductExist(product: product, cartRef: productRef, completion: { (isExist, previousQuantity) in
                 if isExist {
                     let newQuantity = quantity + previousQuantity
-                    productRef.child(self.cartKey.quantity).setValue(newQuantity)
+                    productRef.child(variantName + "/" + self.cartKey.quantity).setValue(newQuantity)
                 } else {
                     
                     let cart = [cartKey.price: product.price, cartKey.createdDate : Date().timeIntervalSince1970, cartKey.quantity: quantity, cartKey.variant : product.selectedVariant.name] as [String : Any]
-                    productRef.setValue(cart)
+                    productRef.child(variantName).setValue(cart)
                 }
             })
             
@@ -54,7 +55,7 @@ class CartController {
     
     func isProductExist(product: Product, cartRef: FIRDatabaseReference, completion: @escaping isCartExistCompletion){
         
-        cartRef.observeSingleEvent(of: .value, with: { (snapshot) in
+        cartRef.child(product.selectedVariant.name).observeSingleEvent(of: .value, with: { (snapshot) in
             if snapshot.exists() {
                 guard let value = snapshot.value as? [String : Any] else {
                     completion(false, 0)
@@ -90,26 +91,42 @@ class CartController {
                 return
             }
             
+            var itemCount = 0
             for snapshot in snapshots.children {
+                
                 guard let wSnapshot = snapshot as? FIRDataSnapshot else { continue }
-                let productID = wSnapshot.key
-            
-                self.productRef.child(productID).observeSingleEvent(of:.value, with: { (productSnapshot) in
-                    guard productSnapshot.value != nil else {
+                itemCount += max(1, Int(wSnapshot.childrenCount))
+                
+                
+                for variantSnapshot in wSnapshot.children {
+                    guard let wVariantSnapshot = variantSnapshot as? FIRDataSnapshot else { continue }
+                    
+                    let productID = wSnapshot.key
+                    
+                    self.productRef.child(productID).observeSingleEvent(of:.value, with: { (productSnapshot) in
+                        guard productSnapshot.value != nil else {
+                            completion(carts)
+                            return
+                        }
+                        
+                    
+                        let product = Product(snapshot: productSnapshot)
+//                        product.variants =
+                        
+                        let cart = Cart(product: product, snapshot: wVariantSnapshot)
+                        carts.append(cart)
+                        
+                        guard carts.count == itemCount else { return }
                         completion(carts)
-                        return
+                        
+                    }) { (error) in
+                        print(error.localizedDescription)
+                        completion(carts)
+                        
                     }
-                    let product = Product(snapshot: productSnapshot)
-                  
-                    let cart = Cart(product: product, snapshot: wSnapshot)
-                    carts.append(cart)
-                    
-                    completion(carts)
-                }) { (error) in
-                    print(error.localizedDescription)
-                    completion(carts)
-                    
+
                 }
+            
             }
         })
     }

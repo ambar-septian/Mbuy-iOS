@@ -55,11 +55,12 @@ class Order: FirebaseProtocol {
 
     
     
-    init(profile:OrderProfile, carts: [Cart] = [Cart](), key:String = "", orderNumber: Int = 0){
+    init(profile:OrderProfile, carts: [Cart] = [Cart](), key:String = "", orderNumber: Int = 0, ref: FIRDatabaseReference?){
         self.profile = profile
         self.carts = carts
         self.key = key
         self.orderNumber = orderNumber
+        self.ref = ref
     }
     
     required init(snapshot: FIRDataSnapshot,profile: OrderProfile, carts: [Cart]) {

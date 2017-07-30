@@ -28,17 +28,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="99" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GrF-uA-Ntw">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="99" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GrF-uA-Ntw">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="pM2-hd-Bw8">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                        <rect key="frame" x="0.0" y="20" width="375" height="603"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_bsi" translatesAutoresizingMaskIntoConstraints="NO" id="q93-w1-bl6">
-                                                <rect key="frame" x="20" y="8" width="335" height="167"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-white" translatesAutoresizingMaskIntoConstraints="NO" id="q93-w1-bl6">
+                                                <rect key="frame" x="20" y="8" width="335" height="100"/>
                                             </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="M'Buy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vaI-ou-Bgl">
+                                                <rect key="frame" x="20" y="128" width="335" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="UmR-Uq-ZFb"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="30"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="sgN-Xn-inl">
-                                                <rect key="frame" x="20" y="195" width="335" height="121.5"/>
+                                                <rect key="frame" x="20" y="178" width="335" height="121.5"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rGh-m2-gcU" customClass="RoundedTextField" customModule="MCommerce" customModuleProvider="target">
                                                         <rect key="frame" x="15" y="0.0" width="305" height="51"/>
@@ -68,7 +77,7 @@
                                                 <edgeInsets key="layoutMargins" top="0.0" left="15" bottom="0.0" right="15"/>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="35O-VM-qJ2">
-                                                <rect key="frame" x="20" y="336.5" width="335" height="172"/>
+                                                <rect key="frame" x="20" y="319.5" width="335" height="188"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oFq-yu-wrF" customClass="RoundedButton" customModule="MCommerce" customModuleProvider="target">
                                                         <rect key="frame" x="15" y="0.0" width="305" height="61"/>
@@ -81,13 +90,13 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or sign in with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8KU-xL-etb">
-                                                        <rect key="frame" x="15" y="86" width="305" height="0.0"/>
+                                                        <rect key="frame" x="15" y="86" width="305" height="16"/>
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Abf-zG-hY5" customClass="RoundedButton" customModule="MCommerce" customModuleProvider="target">
-                                                        <rect key="frame" x="15" y="111" width="305" height="61"/>
+                                                        <rect key="frame" x="15" y="127" width="305" height="61"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="Abf-zG-hY5" secondAttribute="height" multiplier="6:1.2" id="WgY-gt-3mX"/>
                                                         </constraints>
@@ -99,31 +108,27 @@
                                                 </subviews>
                                                 <edgeInsets key="layoutMargins" top="0.0" left="15" bottom="0.0" right="15"/>
                                             </stackView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OnK-Eq-g0f">
-                                                <rect key="frame" x="20" y="528.5" width="335" height="46.5"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="qAd-6j-3yI">
-                                                <rect key="frame" x="20" y="595" width="335" height="0.0"/>
+                                                <rect key="frame" x="20" y="527.5" width="335" height="67.5"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7nf-Ef-RUc">
-                                                        <rect key="frame" x="0.0" y="0.0" width="123" height="0.0"/>
-                                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
-                                                        <state key="normal" title="Don't Have Account">
-                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </state>
-                                                        <connections>
-                                                            <segue destination="2uz-BN-kLg" kind="show" id="gN0-wd-dus"/>
-                                                        </connections>
-                                                    </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yTY-aH-eGi">
-                                                        <rect key="frame" x="232" y="0.0" width="103" height="0.0"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="103" height="67.5"/>
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
                                                         <state key="normal" title="Forget Password">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
                                                         <connections>
                                                             <segue destination="k0Y-e1-YyB" kind="show" id="9zR-5P-NA3"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7nf-Ef-RUc">
+                                                        <rect key="frame" x="212" y="0.0" width="123" height="67.5"/>
+                                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
+                                                        <state key="normal" title="Don't Have Account">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <connections>
+                                                            <segue destination="2uz-BN-kLg" kind="show" id="gN0-wd-dus"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -134,7 +139,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="pM2-hd-Bw8" firstAttribute="height" secondItem="GrF-uA-Ntw" secondAttribute="height" id="DF6-tQ-Gws"/>
-                                    <constraint firstItem="pM2-hd-Bw8" firstAttribute="top" secondItem="GrF-uA-Ntw" secondAttribute="top" id="KUr-UO-cgB"/>
+                                    <constraint firstItem="pM2-hd-Bw8" firstAttribute="top" secondItem="GrF-uA-Ntw" secondAttribute="top" constant="20" id="KUr-UO-cgB"/>
                                     <constraint firstItem="pM2-hd-Bw8" firstAttribute="leading" secondItem="GrF-uA-Ntw" secondAttribute="leading" id="Lgg-es-coH"/>
                                     <constraint firstAttribute="trailing" secondItem="pM2-hd-Bw8" secondAttribute="trailing" constant="20" id="Sxk-NJ-fn7"/>
                                     <constraint firstItem="pM2-hd-Bw8" firstAttribute="width" secondItem="GrF-uA-Ntw" secondAttribute="width" id="nyG-E4-VyJ"/>
@@ -144,7 +149,7 @@
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="q93-w1-bl6" firstAttribute="height" secondItem="I9p-lw-4qB" secondAttribute="height" multiplier="0.25" id="1ph-mn-0ey"/>
+                            <constraint firstItem="q93-w1-bl6" firstAttribute="height" secondItem="I9p-lw-4qB" secondAttribute="height" multiplier="0.15" id="1ph-mn-0ey"/>
                             <constraint firstItem="GrF-uA-Ntw" firstAttribute="top" secondItem="M6x-aX-dHP" secondAttribute="bottom" id="MAf-cx-lCe"/>
                             <constraint firstItem="GrF-uA-Ntw" firstAttribute="leading" secondItem="I9p-lw-4qB" secondAttribute="leading" id="f19-OZ-W8U"/>
                             <constraint firstAttribute="trailing" secondItem="GrF-uA-Ntw" secondAttribute="trailing" id="geU-Df-5yC"/>
@@ -357,7 +362,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8x8-SV-HqE" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="6Qr-Pq-R2g">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6Qr-Pq-R2g">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -372,6 +377,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="logo_bsi" width="849" height="849"/>
+        <image name="logo-white" width="1200" height="987"/>
     </resources>
 </document>

@@ -31,6 +31,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         didSet {
             cartButton.mainColor = Color.orange
             cartButton.icon = FontAwesomeIcon.shoppingCartIcon
+            
         }
     }
     
@@ -61,14 +62,25 @@ class ProductCollectionViewCell: UICollectionViewCell {
         let confirmationVC = ProductConfirmationViewController.self
         confirmationVC.showViewController(currentVC: currentVC!, product: product!)
     }
-}
-
-extension ProductCollectionViewCell {
-    func cartButtonTapped(sender: UIButton) {
-        guard currentVC != nil else { return }
-        guard product != nil else { return }
-        let confirmationVC = ProductConfirmationViewController.self
-        confirmationVC.showViewController(currentVC: currentVC!, product: product!)
+    
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let convertPoint = cartButton.convert(point, from: self)
+        let view = cartButton.hitTest(convertPoint, with: event)
+        guard view != nil else {
+            return super.hitTest(point, with: event)
+        }
+        
+        return view
+    }
+    
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        guard super.point(inside: point, with: event) else {
+            let convertPoint = cartButton.convert(point, from: self)
+            let pointInside = cartButton.point(inside:convertPoint, with: event)
+            return !cartButton.isHidden && pointInside
+        }
+        
+        return true
     }
 }
 
@@ -92,14 +104,6 @@ extension ProductCollectionViewCell: ReuseCollectionCellProtocol {
         
         cell.stockLabel.mainColor = product.stock > 0 ? Color.green : Color.red
         cell.stockLabel.updateConstraints()
-        
-        cell.tapAction = {
-            (cell) in
-            guard cell.currentVC != nil else { return }
-            guard cell.product != nil else { return }
-            let confirmationVC = ProductConfirmationViewController.self
-            confirmationVC.showViewController(currentVC: cell.currentVC!, product: cell.product!)
-        }
 //        cell.cartButton.addTarget(self, action: #selector(self.cartButtonTapped(sender:)), for: .touchUpInside)
         
         

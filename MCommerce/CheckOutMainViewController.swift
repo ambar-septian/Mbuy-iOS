@@ -23,20 +23,19 @@ class CheckOutMainViewController: BaseViewController {
     
     @IBOutlet weak var childView: UIView!
     
-    @IBOutlet weak var previousButton: BasicButton! {
+  
+    @IBOutlet weak var backBarButton: UIBarButtonItem! {
         didSet {
-            previousButton.setTitle("back".localize, for: .normal)
-            previousButton.isHidden = true
+            backBarButton.title = "cancel".localize
         }
     }
     
-    @IBOutlet weak var nextButton: BasicButton! {
+    
+    @IBOutlet weak var nextBarButton: UIBarButtonItem! {
         didSet {
-            nextButton.setTitle("next".localize, for: .normal)
-            nextButton.titleLabel?.adjustsFontSizeToFitWidth = true
+            nextBarButton.title = "next".localize
         }
     }
-    
     @IBOutlet weak var timelineView: HorizontalTimelineView!
     
     weak var delegate: CheckOutParentProtocol?
@@ -45,19 +44,17 @@ class CheckOutMainViewController: BaseViewController {
     
     var currentPage: Int = 0 {
         didSet {
-                        var title = "";
+            var title = "";
             switch currentPage {
             case 0:
-                previousButton.isHidden = true
+                backBarButton.title = "cancel".localize
                 title = "customerProfile".localize
             case 1:
-                previousButton.isHidden = false
-                previousButton.setTitle("back".localize, for: .normal)
-                nextButton.setTitle("next".localize, for: .normal)
+                backBarButton.title = "back".localize
+                nextBarButton.title = "next".localize
                  title = "deliveryAddress".localize
             case 2:
-                nextButton.setTitle("finish".localize, for: .normal)
-                nextButton.setNeedsLayout()
+                nextBarButton.title = "finish".localize
                 title = "summary".localize
             default:
                 break
@@ -100,7 +97,7 @@ class CheckOutMainViewController: BaseViewController {
         label.text = "customerProfile".localize
         label.textAlignment = .center
         label.textColor = Color.white
-        label.font = Font.latoRegular.withSize(15)
+        label.font = Font.latoRegular.withSize(14)
         label.sizeToFit()
         
         return label
@@ -115,7 +112,7 @@ class CheckOutMainViewController: BaseViewController {
         
         stackView.addArrangedSubview(self.titleLabel)
         stackView.addArrangedSubview(self.subtitleLabel)
-        stackView.spacing = 5
+        stackView.spacing = 2
        
         let width = max(self.titleLabel.frame.width, self.subtitleLabel.frame.width)
         stackView.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: 35))
@@ -129,7 +126,7 @@ class CheckOutMainViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        addDismissBarButton()
+        
         subtitleLabel.text = "customerProfile".localize
       
         setupChildView()
@@ -160,29 +157,34 @@ class CheckOutMainViewController: BaseViewController {
         currentPage -= 1
     }
     
+ 
+    @IBAction func backButtonTapped(_ sender: Any) {
+        view.endEditing(true)
+        guard currentPage != 0 else {
+            dismiss(animated: true, completion: nil)
+            return
+        }
+        currentPage -= 1
+    }
+    
     @IBAction func nextButtonTapped(_ sender: Any) {
+        view.endEditing(true)
+        
         guard currentPage < 3 else { return }
         guard delegate != nil else { return }
         
-        let formValid = delegate!.didFormIsValid()
+        guard let formValid = delegate?.didFormIsValid() else { return }
         
-        delegate?.updateOrderProfile()
-        currentPage += 1
-        
-        guard currentPage == 3 else { return }
-        submitOrder()
+        if formValid.isValid {
+            delegate?.updateOrderProfile()
+            currentPage += 1
 
-//        if formValid.isValid {
-//            delegate?.updateOrderProfile()
-//            currentPage += 1
-//            
-//            guard currentPage == 3 else { return }
-//            submitOrder()
-//        } else {
-//            guard let message = formValid.message else { return }
-//            Alert.showAlert(message: message, alertType: .okOnly, header: nil, viewController: self)
-//        }
-        
+            guard currentPage == 3 else { return }
+            submitOrder()
+        } else {
+            guard let message = formValid.message else { return }
+            Alert.showAlert(message: message, alertType: .okOnly, header: nil, viewController: self)
+        }
 
     }
     
@@ -203,16 +205,17 @@ extension CheckOutMainViewController {
         guard let order = self.order else { return }
         showProgressHUD()
         DispatchQueue.global().async {
-            self.orderController.submitOrder(order: order, completion: { (completed) in
+            self.orderController.submitOrder(order: order, completion: { (newOrderRef) in
                 DispatchQueue.main.async {
                     self.hideProgressHUD()
-                    guard completed else { return }
+                    guard let wNewOrderRef = newOrderRef else { return }
                     
-                    let cartController = CartController()
-                    cartController.deleteAllCarts()
-
+                    order.ref = wNewOrderRef
+                    self.orderController.finishSubmitOrder(order: order)
+                    
                     let storyboard = UIStoryboard(name: Constants.storyboard.order, bundle: nil)
                     guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.viewController.order.note) as? OrderNoteViewController else { return }
+                    vc.passedOrder = order
                     self.pushNavigation(targetVC: vc)
                     
                 }

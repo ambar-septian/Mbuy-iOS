@@ -42,6 +42,7 @@ class ProductConfirmationViewController: UIViewController {
     
     @IBOutlet weak var addToCartButton: BasicButton! {
         didSet {
+            addToCartButton.setTitle("addToCart".localize, for: .normal)
             addToCartButton.setTitleColor(Color.lightGray, for: .disabled)
             addToCartButton.setTitleColor(Color.orange, for: .normal)
         }
@@ -70,6 +71,7 @@ class ProductConfirmationViewController: UIViewController {
         didSet {
             guard currentSelectedIndex != oldValue else { return }
             updateStockLabel()
+            passedProduct?.variants[currentSelectedIndex].isSelected = true
         }
     }
     

@@ -26,7 +26,8 @@ class SearchViewController: BaseViewController {
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.searchBarStyle = .prominent
-//        self.definesPresentationContext = true
+        searchController.searchBar.addSubview(self.activityIndicator)
+        self.definesPresentationContext = true
         
         return searchController
     }()
@@ -50,10 +51,31 @@ class SearchViewController: BaseViewController {
     fileprivate lazy var emptyView: EmptyDataView =  {
         let view = EmptyDataView(frame: self.view.bounds)
         view.image = #imageLiteral(resourceName: "search")
-        view.title = "emptySearch".localize
+        view.title = self.defaultEmptyViewTitle
        
         return view
     }()
+
+    fileprivate var defaultEmptyViewTitle:String {
+        return "emptySearch".localize
+    }
+    
+    fileprivate var searchNotFoundTitle:String {
+        guard let keyword = controller.keyword else { return "" }
+        return String(format:"emptySearchResults".localize, keyword)
+    }
+
+    
+    fileprivate var searchTimer: Timer?
+    
+    fileprivate lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+        activityIndicator.color = Color.green
+        activityIndicator.hidesWhenStopped = true
+        
+        return activityIndicator
+    }()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +84,8 @@ class SearchViewController: BaseViewController {
         
         loadSearchList()
         navigationItem.titleView = searchController.searchBar
+        
+       adjustActivityIndicator()
        
     }
 
@@ -72,16 +96,19 @@ class SearchViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        navigationController?.navigationBar.isTranslucent = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-         self.extendedLayoutIncludesOpaqueBars = false
+        self.extendedLayoutIncludesOpaqueBars = false
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         automaticallyAdjustsScrollViewInsets = false
+        navigationController?.navigationBar.isTranslucent = true
     }
 }
 
@@ -96,6 +123,24 @@ extension SearchViewController {
             })
         }
     }
+    
+    
+    func beginSearchWithTimer(timer: Timer) {
+        guard let userInfo = timer.userInfo as? Dictionary<String, AnyObject> else { return }
+        guard let keyword = userInfo["keyword"] as? String else { return }
+        
+        activityIndicator.startAnimating()
+        controller.keyword = keyword
+        
+    }
+    
+    func adjustActivityIndicator(){
+        let bounds = searchController.searchBar.bounds
+        let origin = CGPoint(x:bounds.width * 0.6 - self.activityIndicator.bounds.width , y: bounds.origin.y + self.activityIndicator.bounds.height / 2)
+        self.activityIndicator.frame.origin = origin
+        
+    }
+
 }
 
 extension SearchViewController: BaseViewProtocol {
@@ -116,7 +161,9 @@ extension SearchViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let product = searchResults[indexPath.row]
-        return SearchTableViewCell.configureCell(tableView: tableView, indexPath: indexPath, object: product)
+        let cell = SearchTableViewCell.configureCell(tableView: tableView, indexPath: indexPath, object: product) as! SearchTableViewCell
+        cell.currentVC = searchController
+        return cell
     }
 }
 
@@ -151,25 +198,35 @@ extension SearchViewController: UISearchBarDelegate {
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let keyword = searchController.searchBar.text else {
-            emptyView.toggleHide(willHide: false)
+            emptyView.toggleHide(willHide: false, replaceTitle: defaultEmptyViewTitle)
             return }
         guard keyword.characters.count > 2 else {
-            emptyView.toggleHide(willHide: false)
+            emptyView.toggleHide(willHide: false, replaceTitle: defaultEmptyViewTitle)
             return
         }
-        controller.keyword = keyword
+        
+        if let timer = searchTimer {
+            if timer.isValid {
+                searchTimer?.invalidate()
+            }
+        }
+        
+        let userInfo = ["keyword": keyword]
+        searchTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector:#selector(beginSearchWithTimer(timer:)), userInfo: userInfo, repeats: false)
+        
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         controller.keyword = nil
-        emptyView.toggleHide(willHide: false)
+        emptyView.toggleHide(willHide: false, replaceTitle: defaultEmptyViewTitle)
     }
 }
 
 extension SearchViewController: SearchProductDelegate {
     func refreshFilterProduct() {
         searchTableView.reloadData()
+        activityIndicator.stopAnimating()
         let willHidden = controller.products.count == 0 ? false : true
-        emptyView.toggleHide(willHide: willHidden)
+        emptyView.toggleHide(willHide: willHidden, replaceTitle: searchNotFoundTitle)
         
     }
 

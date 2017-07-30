@@ -234,7 +234,7 @@ extension BaseViewController {
             padding =  max(self.view.frame.width / 3.8, self.view.frame.height  / 3.8)
         }
         print("hud padding:\(padding)")
-        hudView = NVActivityIndicatorView(frame: self.view.frame, type: .ballClipRotate, color: Color.orange, padding: padding)
+        hudView = NVActivityIndicatorView(frame: self.view.bounds, type: .ballClipRotate, color: Color.orange, padding: padding)
         hudView.backgroundColor  = Color.cream
     }
     
@@ -255,6 +255,7 @@ extension BaseViewController {
     }
     
     func hideProgressHUD(){
+        guard hudView != nil else { return }
         guard view.subviews.contains(hudView) else { return }
         
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {

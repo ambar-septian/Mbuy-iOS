@@ -62,7 +62,14 @@ class Cart: FirebaseProtocol {
         self.createdDate = snapshotValue[jsonKeys.createdDate] as? Date ?? Date()
         self.quantity = snapshotValue[jsonKeys.quantity] as? Int ?? 0
         guard let variantName = snapshotValue[jsonKeys.variant] as? String else { return }
-        self.variant = product.variants.filter({ $0.name == variantName }).first
+        
+        if let productVariant = product.variants.filter({ $0.name == variantName }).first {
+             self.variant = productVariant
+        } else {
+            let productVariant = ProductVariant(name: variantName, stock: 0)
+            self.variant = productVariant
+        }
+       
        
     }
     

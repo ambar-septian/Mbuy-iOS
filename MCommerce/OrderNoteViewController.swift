@@ -18,31 +18,61 @@ class OrderNoteViewController: BaseViewController {
         }
     }
     
-    @IBOutlet weak var greetingLabel: UILabel!
     
-    @IBOutlet weak var instructionLabel: UILabel!
+    @IBOutlet weak var thankYouLabel: UILabel!
+    
+    @IBOutlet weak var greetingLabel: UILabel! {
+        didSet {
+            guard let order = passedOrder else { return }
+            let hiString = NSAttributedString(string: "Hi, ", attributes: [NSFontAttributeName: Font.latoRegular.withSize(16), NSForegroundColorAttributeName: Color.darkGray])
+            let nameString = NSAttributedString(string: order.profile.name, attributes: [NSFontAttributeName: Font.latoBold.withSize(16), NSForegroundColorAttributeName: Color.darkGray])
+            let mutableString = NSMutableAttributedString()
+            mutableString.append(hiString)
+            mutableString.append(nameString)
+            
+            greetingLabel.attributedText = mutableString
+        }
+    }
+    
+    @IBOutlet weak var instructionLabel: UILabel! {
+        didSet {
+            guard let order = passedOrder else { return }
+            let instructionFirstString = NSAttributedString(string: "orderInstructionFirst".localize, attributes: [NSFontAttributeName: Font.latoRegular.withSize(16), NSForegroundColorAttributeName: Color.darkGray])
+            let amountString = NSAttributedString(string: order.formattedTotal, attributes: [NSFontAttributeName: Font.latoBold.withSize(16), NSForegroundColorAttributeName: Color.orange])
+            let instructionLastString = NSAttributedString(string: "orderInstructionLast".localize, attributes: [NSFontAttributeName: Font.latoRegular.withSize(16), NSForegroundColorAttributeName: Color.darkGray])
+            
+            let mutableString = NSMutableAttributedString()
+            mutableString.append(instructionFirstString)
+            mutableString.append(amountString)
+            mutableString.append(instructionLastString)
+            
+            instructionLabel.attributedText = mutableString
+        }
+    }
     
     @IBOutlet weak var collectionViewConstraint: NSLayoutConstraint!
     
+    fileprivate var margin:CGFloat {
+        return collectionView.bounds.width * 0.01
+    }
     
-    fileprivate var payments: [OrderPayment] = [
-        OrderPayment(name: "BCA", accountNumber: "4500 000 000", image: #imageLiteral(resourceName: "bank_bca")),
-        OrderPayment(name: "BNI", accountNumber: "4500 000 000", image: #imageLiteral(resourceName: "bank_bni")),
-        OrderPayment(name: "BRI", accountNumber: "4500 000 000", image: #imageLiteral(resourceName: "bank_bri")),
-        OrderPayment(name: "Mandiri", accountNumber: "4500 000 000", image: #imageLiteral(resourceName: "bank_mandiri")),
-        ]
+    fileprivate var collectionViewInset:UIEdgeInsets {
+        return  UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+    }
+
     
+    
+    fileprivate var payments : [BankPayment] = [.bca, .bni, .bri, .mandiri]
     
     var passedOrder: Order?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        collectionView.reloadData()
         
-        guard tabBarController == nil else { return }
-        navigationItem.leftBarButtonItem = nil
-        addDismissBarButton()
+        setupBarButton()
+
+        navigationItem.title = "note".localize
+        collectionView.reloadData()
     }
 
     
@@ -54,6 +84,22 @@ class OrderNoteViewController: BaseViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == Constants.segueID.order.confirmation else { return }
+        guard let index = sender as? Int else { return }
+        guard let vc = segue.destination as? OrderConfirmationViewController else { return }
+        vc.accountPayment = payments[index]
+        vc.passedOrder = passedOrder
+    }
+}
+
+extension OrderNoteViewController {
+    func setupBarButton(){
+        guard tabBarController == nil else { return }
+        navigationItem.hidesBackButton = true
+        addDismissBarButton(rightPosition: false)
     }
 }
 
@@ -68,19 +114,29 @@ extension OrderNoteViewController: UICollectionViewDataSource {
     }
 }
 
+extension OrderNoteViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        performSegue(withIdentifier: Constants.segueID.order.confirmation, sender: indexPath.row)
+    }
+}
+
 extension OrderNoteViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.bounds.width / 2.3
-        let size = CGSize(width: width, height: width)
+        let size = CGSize(width: collectionView.bounds.width, height: collectionView.bounds.width / 3.5)
         return size
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 1
+        return margin
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 1
+        return 0.1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return collectionViewInset
     }
     
 }

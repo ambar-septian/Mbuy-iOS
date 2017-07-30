@@ -11,4 +11,5 @@ import Foundation
 enum ErrorCode: Int {
     case wrongPassword = 17009
     case emailAlreadyExist = 17001
+    case userDoesntExist = 17011
 }

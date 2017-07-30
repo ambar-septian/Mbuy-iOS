@@ -27,15 +27,16 @@
 "passwordDoesntMatch" = "Kata sandi tidak cocok";
 "passwordMinimumChar" = "Kata sandi minimum 6 panjang karakter";
 "emailAlreadyTaken" = "Email sudah dipakai, silahkan gunakan email yang lain";
-"resetPasswordSuccess" = "Atur ulang kata sandi berhasil, silahkan cek kotak masuk e-mail anda";
+"resetPasswordSuccess" = "Atur ulang kata sandi berhasil, silahkan cek kotak masuk email anda";
 "wrongPassword" = "Oops.. sepertinya email atau kata sandi anda salah";
+"failedResetPassword" = "Oops.. Email ini belum terdaftar";
 
 /* Home */
 "home" = "Beranda";
 
 /* Product */
 "addToCart" = "Tambah ke keranjang";
-"quantity" = "Quantity";
+"quantity" = "Kuantiti";
 "addToCartSuccess" = "Produk berhasil ditambah ke keranjang";
 
 /* Search */
@@ -61,6 +62,9 @@
 "validEmail" = "Email yang diisi tidak valid";
 "validPhone" = "Nomor Telepon harus menggunakan angka";
 "validAddress" = "Alamat tidak boleh kosong";
+"validAmountString" = "Jumalah transfer harus berupa angka";
+"validAccountNumber" = "Nomor rekening harus berupa angka";
+"validZeroAmount" = "Jumlah transfer tidak boleh nol";
 
 /* Orders */
 "orders" = "Pesanan";
@@ -68,11 +72,20 @@
 "cancel" = "Batal";
 "history" = "Riwayat";
 "note" = "Nota";
+"confirmationPayment" = "Konfirmasi";
+"accountName" = "Nama Rekening";
+"accountNumber" = "Nomor Rekening";
+"transferAmount" = "Jumlah Transfer";
+"confirmationPaymentSuccess" = "Konfirmasi pembayaran sukses, kami akan memverifikasi pembayaran anda untuk memproses pesanan anda";
+"orderInstructionFirst" = "Mohon lakukan pembayaran sejumlah ";
+"orderInstructionLast" = " pada salah satu rekening bank dibawah ini.\n\nSetelah lakukan pembayaran, mohon lakukan konfirmasi dengan mengisi form konfirmasi pembayaran dengan memilih rekening tujuan";
 
 /* Order Status */
 "onDelivery" = "Sedang Dalam Pengiriman";
 "complete" = "Selesai";
 "waitingPayment" = "Menunggu Pembayaran";
+"validatingPayment" = "Memvalidasi Pembayaran";
+"prepareOrder" = "Menyiapkan Pesanan";
 "cancel" = "Batal";
 
 
@@ -106,4 +119,5 @@
 "emptyCart" = "Keranjang anda saat ini kosong";
 "emptyProductCategory" = "Oops... sepertinya belum ada produk dalam kategori ini";
 "emptyOrders" = "Tidak ada pesanan saat ini";
+"emptySearchResults" =  "Tidak ada hasil untuk \"%@\"";
 

@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>M'buy</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -47,10 +49,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This app need your location for calculating delivery cost</string>
 	<key>NSCameraUsageDescription</key>
 	<string>This app need access your camera to take picture</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app need your location for calculating delivery cost</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app need access your photo library to take picture</string>
 	<key>UIAppFonts</key>

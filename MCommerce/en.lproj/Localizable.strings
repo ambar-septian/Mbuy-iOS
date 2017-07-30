@@ -29,7 +29,7 @@
 "emailAlreadyTaken" = "Email already taken, please use another one";
 "resetPasswordSuccess" = "Reset password success, please check your inbox";
 "wrongPassword" = "Oops.. seems like your email or password is incorrect";
-
+"failedResetPassword" = "Oops.. This email has not been registered yet";
 
 /* Home */
 "home" = "Home";
@@ -63,6 +63,9 @@
 "validEmail" = "Email is not valid";
 "validPhone" = "Phone number must not contain non numeric character";
 "validAddress" = "Address must not empty";
+"validAmountString" = "Transfer amount must be a number";
+"validAccountNumber" = "Account number must be a number";
+"validZeroAmount" = "Transfer amount couldn't be zero";
 
 /* Orders */
 "orders" = "Orders";
@@ -70,11 +73,21 @@
 "cancel" = "Cancel";
 "history" = "History";
 "note" = "Note";
+"confirmationPayment" = "Confirmation";
+"accountName" = "Account Name";
+"accountNumber" = "Account Number";
+"transferAmount" = "Transfer Amount";
+"confirmationPaymentSuccess" = "Confirmation payment success, we will verify your payment to process your order";
+"orderInstructionFirst" = "Please make a payment of ";
+"orderInstructionLast" = " in one of the following bank accounts.\n\nAfter payment, please confirm by filling out the payment confirmation form by choosing the destination account.";
+
 
 /* Order Status */
 "onDelivery" = "On Delivery";
 "complete" = "Complete";
 "waitingPayment" = "Waiting Payment";
+"validatingPayment" = "Validating Payment";
+"prepareOrder" = "Prepare Order";
 "cancel" = "Cancel";
 
 /* Settings */
@@ -108,4 +121,4 @@
 "emptyReviews" = "There are no reviews on this product yet";
 "emptyCarts" = "Oops.. you have not yet added the product to the shopping cart";
 "emptyOrders" = "Your order list is currently empty";
-"emptySearchResults" =  "Oops.. unfortunately there is no one product found with criteria you searched";
+"emptySearchResults" =  "No results for \"%@\"";
