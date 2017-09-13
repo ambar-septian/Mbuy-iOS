@@ -10,6 +10,12 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
+  - CHTCollectionViewWaterfallLayout (0.9.5):
+    - CHTCollectionViewWaterfallLayout/ObjC (= 0.9.5)
+  - CHTCollectionViewWaterfallLayout/ObjC (0.9.5)
+  - Crashlytics (3.8.4):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.11)
   - FacebookCore (0.2.0):
     - Bolts (~> 1.8)
     - FBSDKCoreKit (~> 4.15)
@@ -81,6 +87,7 @@ PODS:
   - NVActivityIndicatorView (3.6.1)
   - SwiftDate (4.1.1)
   - SwiftyJSON (3.1.4)
+  - UIImageViewAlignedSwift (0.4.1)
 
 DEPENDENCIES:
   - Alamofire
@@ -88,6 +95,9 @@ DEPENDENCIES:
   - Anchorage
   - BGTableViewRowActionWithImage
   - Bolts
+  - CHTCollectionViewWaterfallLayout
+  - Crashlytics
+  - Fabric
   - FacebookCore
   - FacebookLogin
   - FacebookShare
@@ -102,6 +112,7 @@ DEPENDENCIES:
   - NVActivityIndicatorView
   - SwiftDate (~> 4.0)
   - SwiftyJSON
+  - UIImageViewAlignedSwift
 
 EXTERNAL SOURCES:
   Iconic:
@@ -119,6 +130,9 @@ SPEC CHECKSUMS:
   Anchorage: 1444bbd32c4495b32d41c0be9f66efcb0862fe8a
   BGTableViewRowActionWithImage: 6a0731a84662735f5ec28dc253e3fba6a73ebc5b
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  CHTCollectionViewWaterfallLayout: 775ff73f48cfc13859b62d8bceb96e772e4a0318
+  Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
+  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
   FacebookLogin: c9d606504735780a9e3002465a615512e0a691a5
   FacebookShare: 8e9ee8ea06505e6a1d3d719b0cc63e840fb8aaeb
@@ -141,7 +155,8 @@ SPEC CHECKSUMS:
   NVActivityIndicatorView: 9f52a7f84bf5c6a798722c450fe3c198e01c56ed
   SwiftDate: ae615078806a322183e5f64e02e80ca8d939bf48
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  UIImageViewAlignedSwift: e72ef2a85a75a01d19b4509ac92a3bdb872cd73c
 
-PODFILE CHECKSUM: d131b7b6f988e7295eaace40774f2b54a1b802fb
+PODFILE CHECKSUM: 87bf68e4ab41ea761eaa7c1adbd135b37b6e0509
 
 COCOAPODS: 1.2.1

@@ -149,12 +149,13 @@ extension CheckOutPageViewController: CheckOutParentProtocol {
             profile.email = vc.emailTextField.text ?? ""
             profile.name = vc.nameTextField.text ?? ""
             profile.phone = vc.phoneTextField.text ?? ""
+            profile.note = vc.noteTextView.text
             
         case 1:
             guard let vc = listViewControllers[currentIndex] as? CheckOutAddressViewController else {  return }
             profile.address = vc.addressTextView.text
             profile.deliveryCost = vc.deliveryCost
-            profile.note = vc.noteTextView.text
+            
             guard let place = vc.selectedPlace else { return }
             profile.coordinate = place.coordinate
             

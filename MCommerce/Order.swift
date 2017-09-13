@@ -50,8 +50,10 @@ class Order: FirebaseProtocol {
     
     var orderNumber: Int
     
-    static let jsonKeys:(profile:String, carts:String, orderNumber: String, histories: String) =
-        (profile: "profile", carts:"carts", orderNumber: "orderNumber", histories: "histories")
+    var confirmation: OrderConfirmation?
+    
+    static let jsonKeys:(profile:String, carts:String, orderNumber: String, histories: String, confirmation: String) =
+        (profile: "profile", carts:"carts", orderNumber: "orderNumber", histories: "histories", confirmation: "confirmation")
 
     
     
@@ -63,7 +65,7 @@ class Order: FirebaseProtocol {
         self.ref = ref
     }
     
-    required init(snapshot: FIRDataSnapshot,profile: OrderProfile, carts: [Cart]) {
+    required init(snapshot: FIRDataSnapshot,profile: OrderProfile, carts: [Cart], confirmation: OrderConfirmation?) {
         self.key = snapshot.key
         let jsonKeys = Order.jsonKeys
         let value = snapshot.value as? [String:AnyObject]
@@ -72,6 +74,7 @@ class Order: FirebaseProtocol {
         self.carts = carts
         self.profile = profile
         self.orderNumber = value?[jsonKeys.orderNumber] as? Int ?? 0
+        self.confirmation = confirmation
     }
     
 }

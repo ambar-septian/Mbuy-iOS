@@ -38,6 +38,8 @@
 "addToCart" = "Tambah ke keranjang";
 "quantity" = "Kuantiti";
 "addToCartSuccess" = "Produk berhasil ditambah ke keranjang";
+"continueShopping" = "Lanjut Belanja";
+"finishShopping" = "Selesai Belanja";
 
 /* Search */
 "search" = "Cari";
@@ -65,6 +67,7 @@
 "validAmountString" = "Jumalah transfer harus berupa angka";
 "validAccountNumber" = "Nomor rekening harus berupa angka";
 "validZeroAmount" = "Jumlah transfer tidak boleh nol";
+"validTransferAmount" = "Jumlah transfer kurang dari total pembayaran";
 
 /* Orders */
 "orders" = "Pesanan";
@@ -79,6 +82,10 @@
 "confirmationPaymentSuccess" = "Konfirmasi pembayaran sukses, kami akan memverifikasi pembayaran anda untuk memproses pesanan anda";
 "orderInstructionFirst" = "Mohon lakukan pembayaran sejumlah ";
 "orderInstructionLast" = " pada salah satu rekening bank dibawah ini.\n\nSetelah lakukan pembayaran, mohon lakukan konfirmasi dengan mengisi form konfirmasi pembayaran dengan memilih rekening tujuan";
+"alreadyConfirmation" = "Anda telah mengkonfirmasi pembayaran dengan rincian sebagai berikut";
+"confirmation" = "Konfirmasi";
+"confirmationAlert" = "Apa anda ingin mengkonfirmasi bahwa pesanan ini sudah diterima?";
+"cancelAlert" = "Apa anda ingin membatalkan pesanan ini?";
 
 /* Order Status */
 "onDelivery" = "Sedang Dalam Pengiriman";
@@ -87,7 +94,8 @@
 "validatingPayment" = "Memvalidasi Pembayaran";
 "prepareOrder" = "Menyiapkan Pesanan";
 "cancel" = "Batal";
-
+"canceled" = "Dibatalkan";
+"completed" = "Selesai";
 
 /* Settings */
 "settings" = "Pengaturan";
@@ -106,7 +114,7 @@
 "takePhoto" = "Ambil Foto";
 "selectPhoto" = "Pilih Foto";
 "changePhotoProfile" = "Ubah Foto Profil";
-
+"updateProfileSuccess" = "Ubah Profil Sukses";
 
 "save" = "Simpan";
 

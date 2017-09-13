@@ -61,6 +61,8 @@ class ProductConfirmationViewController: UIViewController {
     
     var passedProduct: Product?
     
+    var sizingCell: TagCollectionViewCell  = TagCollectionViewCell.nib.instantiate(withOwner: nil, options: nil).first as! TagCollectionViewCell
+    
     fileprivate var variants: [ProductVariant] {
         return passedProduct?.variants ?? [ProductVariant]()
     }
@@ -81,6 +83,7 @@ class ProductConfirmationViewController: UIViewController {
         super.viewDidLoad()
 
         view.addGestureRecognizer(dismissGesture)
+        view.tag = gestureTag
         automaticallyAdjustsScrollViewInsets = true
         
         navigationController?.navigationBar.isUserInteractionEnabled = false
@@ -152,9 +155,7 @@ extension ProductConfirmationViewController {
                     guard completed else { return }
                     
                     TabBarBadge.shared.cartCount += 1
-                    Alert.showAlert(message: "addToCartSuccess".localize, alertType: .okOnly, header: nil, viewController: self, handler: { (alert) in
-                        self.closeButtonTapped(self)
-                    })
+                    self.showAlertConfirmation()
                     
                 }
                 
@@ -176,9 +177,30 @@ extension ProductConfirmationViewController {
         confirmationVC.modalTransitionStyle = .crossDissolve
         confirmationVC.modalPresentationStyle = .overCurrentContext
         confirmationVC.view.backgroundColor = Color.darkGray.withAlphaComponent(0.7)
-        currentVC.navigationController?.navigationBar.isUserInteractionEnabled = false
-//        let navigationController = UINavigationController(rootViewController: confirmationVC)
+    
+
         currentVC.present(confirmationVC, animated: true, completion: nil)
+    }
+    
+    func showAlertConfirmation(){
+        let alert = UIAlertController.init(title: nil, message: "addToCartSuccess".localize, preferredStyle: .alert)
+        let continueAction = UIAlertAction(title: "continueShopping".localize, style: .default) { (alert) in
+            self.closeButtonTapped(self)
+        }
+        
+        let finishAction = UIAlertAction(title: "finishShopping".localize, style: .default) { (alert) in
+            self.presentingViewController?.navigationController?.navigationBar.isUserInteractionEnabled = true
+            self.presentingViewController?.tabBarController?.selectedIndex = 2
+            self.dismiss(animated: true, completion: {
+                // change to cart
+                self.tabBarController?.selectedIndex = 2
+            })
+        }
+        
+        alert.addAction(continueAction)
+        alert.addAction(finishAction)
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
@@ -213,6 +235,16 @@ extension ProductConfirmationViewController: UICollectionViewDelegate {
         activeCell.setAppreanceCell(isActive: true)
     }
 }
+
+
+extension ProductConfirmationViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let variant = variants[indexPath.row]
+        sizingCell.tagLabel.text = variant.name
+        return sizingCell.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+    }
+}
+
 
 extension ProductConfirmationViewController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {

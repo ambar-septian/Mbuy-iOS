@@ -9,58 +9,65 @@
 import UIKit
 import Iconic
 
-class ProductPreviewViewController: UIViewController {
+class ProductPreviewViewController: BaseViewController {
 
-    @IBOutlet weak var scrollView: UIScrollView!
-    
-    @IBOutlet weak var imageView: UIImageView! {
-        didSet {
-            imageView.image = nil
-            imageView.contentMode = .scaleAspectFit
-            //imageView.heroID = Constants.heroID.productPreview
-        }
-    }
-    
-    
     @IBOutlet weak var closeButton: BasicButton! {
         didSet {
             let iconString = FontAwesomeIcon.removeIcon.attributedString(ofSize: 25 , color: Color.orange)
             closeButton.setAttributedTitle(iconString, for: .normal)
         }
     }
-    @IBOutlet weak var leadingConstraint: NSLayoutConstraint!
+  
+    @IBOutlet weak var collectionView: UICollectionView! {
+        didSet {
+            let cell = ProductPreviewCollectionViewCell.self
+            collectionView.register(cell.nib, forCellWithReuseIdentifier: cell.identifier)
+        }
+    }
     
-    
-    @IBOutlet weak var topConstraint: NSLayoutConstraint!
-    
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-    
-    @IBOutlet weak var trailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var pageControl: UIPageControl! {
+        didSet {
+            pageControl.numberOfPages = passedImageURLs.count
+        }
+    }
     
     fileprivate var presentingNavigationController: UINavigationController? {
         return presentingViewController?.navigationController
     }
     
-    var passedImage: UIImage?
+    var passedImageURLs =  [String]()
     
+    var passedSelectedIndex: Int?
+  
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        imageView.image = passedImage
         view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+    
+        collectionView.reloadData()
+        title = ""
+        setNavigationControllerBackground(color: UIColor.clear)
+        
+        addDismissBarButton()
     }
     
  
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        updateMinZoomScaleForSize(size: view.bounds.size)
+    
+        guard let index = passedSelectedIndex else { return }
+        let indexPath = IndexPath(item: index, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: .right, animated: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presentingNavigationController?.setNavigationBarHidden(true, animated: true)
-        presentingNavigationController?.navigationBar.isUserInteractionEnabled = false
+//        presentingNavigationController?.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+//        presentingNavigationController?.setNavigationBarHidden(true, animated: true)
+//        presentingNavigationController?.navigationBar.isUserInteractionEnabled = false
+       
+        
 
     }
     
@@ -71,56 +78,70 @@ class ProductPreviewViewController: UIViewController {
     }
     
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+//        presentingNavigationController?.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+//        presentingNavigationController?.setNavigationBarHidden(false, animated: true)
+//        presentingNavigationController?.navigationBar.isUserInteractionEnabled = true
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 }
 
-extension ProductPreviewViewController {
-    
-    fileprivate func updateConstraintsForSize(size: CGSize) {
-        let yOffset = max(0, (size.height - imageView.frame.height) / 2)
-        topConstraint.constant = yOffset
-        bottomConstraint.constant = yOffset
-        let xOffset = max(0, (size.width - imageView.frame.width) / 2)
-        leadingConstraint.constant = xOffset
-        trailingConstraint.constant = xOffset
-        
-        view.layoutIfNeeded()
-    }
-    
-    fileprivate func updateMinZoomScaleForSize(size: CGSize) {
-        let widthScale = size.width / imageView.bounds.width
-        let heightScale = size.height / imageView.bounds.height
-        let minScale = min(widthScale, heightScale)
-        
-        UIView.animate(withDuration: 0.3) { 
-            self.scrollView.minimumZoomScale = minScale
-            self.scrollView.zoomScale = minScale
-        }
-        
-    }
-}
+
 
 extension ProductPreviewViewController {
-    @IBAction func closeButtonTapped(_ sender: Any) {
-        presentingNavigationController?.setNavigationBarHidden(false, animated: true)
-        presentingNavigationController?.navigationBar.isUserInteractionEnabled = true
-        dismiss(animated: true, completion: nil)
-    }
+
 
 }
 
-extension ProductPreviewViewController: UIScrollViewDelegate {
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return imageView
+
+extension ProductPreviewViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return passedImageURLs.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let imageURL = passedImageURLs[indexPath.item]
+        let cell = ProductPreviewCollectionViewCell.configureCell(collectionView: collectionView, indexPath: indexPath, object: imageURL) as! ProductPreviewCollectionViewCell
+//        cell.updateConstraintsForSize(size: view.bounds.size)
+        return cell
     }
     
     
-    func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        updateConstraintsForSize(size: view.bounds.size)
-    }
     
 }
+
+extension ProductPreviewViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return view.bounds.size
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? ProductPreviewCollectionViewCell else { return }
+        
+    }
+}
+
+
+extension ProductPreviewViewController {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        guard scrollView == collectionView else { return }
+        let index = Int(round(collectionView.contentOffset.x / collectionView.frame.width))
+        pageControl.currentPage = index
+    }
+}
+
+
 

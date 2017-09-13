@@ -13,7 +13,7 @@ class CheckOutProfileViewController: BaseViewController {
 
     @IBOutlet weak var nameLabel: IconLabel! {
         didSet {
-            nameLabel.text = "name".localize
+            nameLabel.text = "name".localize  + "*"
             nameLabel.icon = FontAwesomeIcon.userIcon
         }
     }
@@ -21,14 +21,14 @@ class CheckOutProfileViewController: BaseViewController {
     
     @IBOutlet weak var phoneLabel: IconLabel!  {
         didSet {
-            phoneLabel.text = "phone".localize
+            phoneLabel.text = "phone".localize  + "*"
             phoneLabel.icon = FontAwesomeIcon.mobilePhoneIcon
         }
     }
     
     @IBOutlet weak var emailLabel: IconLabel!  {
         didSet {
-            emailLabel.text = "E-mail"
+            emailLabel.text = "E-mail"  + "*"
             emailLabel.icon = FontAwesomeIcon.envelopeIcon
         }
     }
@@ -36,7 +36,7 @@ class CheckOutProfileViewController: BaseViewController {
     @IBOutlet weak var nameTextField: BorderTextField!  {
         didSet {
             nameTextField.placeholder = "name".localize
-//            nameTextField.text = savedUserProfile.name
+            nameTextField.text = savedUserProfile.name
         }
     }
     
@@ -44,20 +44,31 @@ class CheckOutProfileViewController: BaseViewController {
     @IBOutlet weak var phoneTextField: BorderTextField!  {
         didSet {
             phoneTextField.placeholder = "phone".localize
-//            phoneTextField.text = savedUserProfile.phone
+           phoneTextField.text = savedUserProfile.phone
         }
     }
     
     @IBOutlet weak var emailTextField: BorderTextField! {
         didSet {
             emailTextField.placeholder = "E-mail"
-//            emailTextField.text = savedUserProfile.email
+            emailTextField.text = savedUserProfile.email
         }
     }
     
+    @IBOutlet weak var noteLabel: IconLabel! {
+        didSet {
+            noteLabel.text = "deliveryNote".localize
+            noteLabel.icon = FontAwesomeIcon.editIcon
+        }
+    }
+    
+    
+    @IBOutlet weak var noteTextView: BorderTextView!
+    
+    
     weak var childDelegate: CheckOutChildProtocol?
     
-//    fileprivate let savedUserProfile = SavedOrderProfile.shared.self
+    fileprivate let savedUserProfile = SavedOrderProfile.shared.self
 
     
     override func viewDidLoad() {

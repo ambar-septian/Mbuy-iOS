@@ -80,6 +80,7 @@ class AuthController {
                 self.userRef.observeSingleEvent(of: .value, with: { (snapshot) in
                     guard !(snapshot.exists()) else {
                         // user facebook exist
+                        self.getUserProfile()
                         completion(.success)
                         return
                     }
@@ -175,12 +176,21 @@ class AuthController {
     func logout(completion: @escaping finishCompletion){
         do {
             try FIRAuth.auth()?.signOut()
+            
+            clearSavedProfile()
             completion(true)
             
         } catch let error {
             print("error logout \(error)")
             completion(false)
         }
+    }
+    
+    func clearSavedProfile(){
+        let savedUserProfile = SavedOrderProfile.shared.self
+        savedUserProfile.name = ""
+        savedUserProfile.email = ""
+        savedUserProfile.phone = ""
     }
     
     func reAuthenticate(oldPassword: String, completion: @escaping finishCompletion){

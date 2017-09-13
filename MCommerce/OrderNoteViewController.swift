@@ -87,9 +87,9 @@ class OrderNoteViewController: BaseViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == Constants.segueID.order.confirmation else { return }
+        guard segue.identifier == Constants.segueID.order.payment else { return }
         guard let index = sender as? Int else { return }
-        guard let vc = segue.destination as? OrderConfirmationViewController else { return }
+        guard let vc = segue.destination as? OrderPaymentViewController else { return }
         vc.accountPayment = payments[index]
         vc.passedOrder = passedOrder
     }
@@ -117,7 +117,7 @@ extension OrderNoteViewController: UICollectionViewDataSource {
 extension OrderNoteViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        performSegue(withIdentifier: Constants.segueID.order.confirmation, sender: indexPath.row)
+        performSegue(withIdentifier: Constants.segueID.order.payment, sender: indexPath.row)
     }
 }
 

@@ -41,7 +41,7 @@ enum OrderStatus: String {
     case completed = "completed"
     case waitingPayment = "waitingPayment"
     case validatingPayment = "validatingPayment"
-    case cancel = "cancel"
+    case canceled = "canceled"
     case prepareOrder = "prepareOrder"
     
     var color:UIColor {
@@ -56,7 +56,7 @@ enum OrderStatus: String {
             return Color.yellow
         case .prepareOrder:
             return Color.lightGreen
-        case .cancel:
+        case .canceled:
             return Color.red
         }
     }

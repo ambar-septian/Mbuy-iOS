@@ -15,7 +15,7 @@ typealias searchCompletePlace = ((_ searchPlace: SearchPlace?) -> Void)
 class SearchPlaceController  {
     
     fileprivate let placesClient = GMSPlacesClient()
-    let maximumDistance:Double = 30
+    let maximumDistance:Double = 50
     
     func searchPlace(keyword:String, completion: @escaping searchPlaceResults) {
         let gmapConst = Constants.GMAP.self
@@ -91,7 +91,7 @@ class SearchPlaceController  {
         let defaultCoordinate = Constants.GMAP.defaultCoordinate
         let defaultLocation = CLLocation(latitude: defaultCoordinate.latitude, longitude: defaultCoordinate.longitude)
         let targetLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-        let result = ((defaultLocation.distance(from: targetLocation) / 1000) / 3)
+        let result = ((defaultLocation.distance(from: targetLocation) / 1000))
         
         return result.rounded(.toNearestOrEven)
     }

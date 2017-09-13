@@ -56,17 +56,17 @@ extension ReviewTableViewCell: ReuseTableCellProtocol {
     static func configureCell<T>(tableView: UITableView, indexPath: IndexPath, object: T?) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as!
         ReviewTableViewCell
-        guard let review = object as? Review else { return cell }
-        cell.nameLabel.text = review.user.name
-        cell.titleLabel.text = review.title
-        cell.dateLabel.text = review.formattedDate
-        cell.descriptionLabel.text = review.description
-        cell.ratingView.numberOfStars = review.rating
-        cell.userImageView.circleImageView()
-        
-        guard let imageURL = review.user.photoURL else { return cell }
-        cell.userImageView.setImage(urlString:imageURL)
-        
+//        guard let review = object as? Review else { return cell }
+//        cell.nameLabel.text = review.user.name
+//        cell.titleLabel.text = review.title
+//        cell.dateLabel.text = review.formattedDate
+//        cell.descriptionLabel.text = review.description
+//        cell.ratingView.numberOfStars = review.rating
+//        cell.userImageView.circleImageView()
+//        
+//        guard let imageURL = review.user.photoURL else { return cell }
+//        cell.userImageView.setImage(urlString:imageURL)
+//        
         
         return cell
         

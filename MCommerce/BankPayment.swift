@@ -16,6 +16,22 @@ enum BankPayment {
 }
 
 extension BankPayment {
+    init?(rawValue:String) {
+        switch rawValue.lowercased() {
+        case "bca":
+            self = .bni
+        case "bni":
+            self = .bni
+        case "bri":
+            self = .bri
+        case "mandiri":
+            self = .mandiri
+        default:
+            return nil
+        }
+    }
+    
+    
     var bankName:String {
         switch self {
         case .bca:

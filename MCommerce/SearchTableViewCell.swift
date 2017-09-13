@@ -51,6 +51,10 @@ class SearchTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        productImageView.image = nil
+    }
     
     @IBAction func cartButtonTapped(_ sender: Any) {
         guard currentVC != nil else { return }

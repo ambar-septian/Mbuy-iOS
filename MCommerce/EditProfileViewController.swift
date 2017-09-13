@@ -113,6 +113,11 @@ class EditProfileViewController: BaseViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
+        guard let name = nameTextField.text, name != "" else {
+            Alert.showAlert(message: "validEmptyForm".localize, alertType: .okOnly, viewController: self)
+            return
+        }
+        
         showProgressHUD()
         DispatchQueue.global().async {
             if self.isImageUpdate {
@@ -154,7 +159,7 @@ extension EditProfileViewController {
                    self.failedUpdateProfile()
                     return }
             
-                Alert.showAlert(message: "Update profile success", alertType: .okOnly, header: nil, viewController: self, handler: { (alert) in
+                Alert.showAlert(message: "updateProfileSuccess".localize, alertType: .okOnly, header: nil, viewController: self, handler: { (alert) in
                     let _ = self.navigationController?.popViewController(animated: true)
                 })
             }

@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import Anchorage
+import CHTCollectionViewWaterfallLayout
 
 class ProductListViewController: BaseViewController {
     @IBOutlet weak var collectionView: UICollectionView! {
@@ -17,13 +18,28 @@ class ProductListViewController: BaseViewController {
             collectionView.register(cell.nib, forCellWithReuseIdentifier: cell.identifier)
             guard let layout = collectionView.collectionViewLayout as? DynamicCollectionViewLayout else { return }
             layout.delegate = self
+            
+            
+//            let layout = CHTCollectionViewWaterfallLayout()
+//            
+//            // Change individual layout attributes for the spacing between cells
+//            layout.minimumColumnSpacing = 1.0
+//            layout.minimumInteritemSpacing = 1.0
+//            
+//            // Collection view attributes
+//            self.collectionView.autoresizingMask = [UIViewAutoresizing.flexibleHeight, UIViewAutoresizing.flexibleWidth]
+//            self.collectionView.alwaysBounceVertical = true
+//            
+//            // Add the waterfall layout to your collection view
+//            self.collectionView.collectionViewLayout = layout
         }
     }
     
     var products = [Product]() {
         didSet {
             collectionView.reloadData()
-//            collectionView.collectionViewLayout.invalidateLayout()
+            collectionView.collectionViewLayout.invalidateLayout()
+
         }
     }
     
@@ -46,6 +62,12 @@ class ProductListViewController: BaseViewController {
         setupSubviews()
         
         loadProducts()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        collectionView.collectionViewLayout.invalidateLayout()
+//        collectionView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -148,6 +170,21 @@ extension ProductListViewController: DynamicCollectionViewLayoutDelegate {
         
         return nameHeight + priceHeight + padding
     }
-    
+}
+
+extension ProductListViewController: CHTCollectionViewDelegateWaterfallLayout {
+    func collectionView(_ collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, sizeForItemAt indexPath: IndexPath!) -> CGSize {
+//        guard let cell = collectionView.cellForItem(at: indexPath) as? ProductCollectionViewCell else { return CGSize.zero
+//        }
+//        
+        guard let imageSize =  products[indexPath.item].imageSize else {
+            return collectionView.bounds.size
+        }
+        
+        let boundingRect = CGRect(origin: CGPoint.zero, size: CGSize(width: imageSize.width, height: CGFloat.greatestFiniteMagnitude))
+        let rect = AVMakeRect(aspectRatio: imageSize, insideRect: boundingRect)
+        
+        return rect.size
+    }
 }
 

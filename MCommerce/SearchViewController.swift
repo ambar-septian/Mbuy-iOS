@@ -68,6 +68,8 @@ class SearchViewController: BaseViewController {
     
     fileprivate var searchTimer: Timer?
     
+    fileprivate var keyboardHeight:CGFloat = 0
+    
     fileprivate lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
         activityIndicator.color = Color.green
@@ -85,7 +87,9 @@ class SearchViewController: BaseViewController {
         loadSearchList()
         navigationItem.titleView = searchController.searchBar
         
-       adjustActivityIndicator()
+        adjustActivityIndicator()
+        
+        NotificationCenter.default.addObserver(self, selector:#selector(self.keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
        
     }
 
@@ -102,13 +106,18 @@ class SearchViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.extendedLayoutIncludesOpaqueBars = false
-        
+        searchTableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         automaticallyAdjustsScrollViewInsets = false
         navigationController?.navigationBar.isTranslucent = true
+        
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
     }
 }
 
@@ -140,6 +149,15 @@ extension SearchViewController {
         self.activityIndicator.frame.origin = origin
         
     }
+    
+    
+    func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            keyboardHeight = keyboardRectangle.height
+        }
+    }
+
 
 }
 
@@ -224,6 +242,8 @@ extension SearchViewController: UISearchResultsUpdating {
 extension SearchViewController: SearchProductDelegate {
     func refreshFilterProduct() {
         searchTableView.reloadData()
+        searchTableView.contentSize.height += keyboardHeight + 20
+        
         activityIndicator.stopAnimating()
         let willHidden = controller.products.count == 0 ? false : true
         emptyView.toggleHide(willHide: willHidden, replaceTitle: searchNotFoundTitle)

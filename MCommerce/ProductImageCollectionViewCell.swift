@@ -8,11 +8,12 @@
 
 import UIKit
 import Anchorage
+import UIImageViewAlignedSwift
 
 class ProductImageCollectionViewCell: UICollectionViewCell {
     
-    lazy var productImageView:UIImageView = {
-        let imageView = UIImageView()
+    lazy var productImageView:UIImageViewAligned = {
+        let imageView = UIImageViewAligned()
         imageView.contentMode = .scaleAspectFill
         imageView.heroID = Constants.heroID.productPreview
         
@@ -61,7 +62,8 @@ extension ProductImageCollectionViewCell: ReuseCollectionCellProtocol {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! ProductImageCollectionViewCell
         guard let imageURL = object as? String else { return cell }
        
-        cell.productImageView.setImage(urlString: imageURL)
+        cell.productImageView.setImage(urlString: imageURL, placeholder: .base)
+        
         return cell
     }
 }

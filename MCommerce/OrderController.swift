@@ -105,7 +105,8 @@ class OrderController {
     
     fileprivate func updateLastOrderNumber(){
         orderLastNumberRef.observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? Int ?? 0
+            var value = snapshot.value as? Int ?? 0
+            value += 1
             self.orderLastNumberRef.setValue(value)
         })
     }
@@ -121,7 +122,7 @@ class OrderController {
                 return
             }
             
-            for (index,snapshot) in snapshots.children.enumerated() {
+            for (_,snapshot) in snapshots.children.enumerated() {
                 guard let wSnapshot = snapshot as? FIRDataSnapshot else { continue }
                 guard let value = wSnapshot.value as? [String: Any] else { continue }
                 guard let cartsDictionary = value[orderKey.carts] as? [[String: Any]] else { continue }
@@ -136,9 +137,14 @@ class OrderController {
                         order.histories = histories
                     }
                     
+                    if let confirmationDict = value[orderKey.confirmation] as? [String: Any] {
+                        let confirmation = OrderConfirmation(dictionary: confirmationDict)
+                        order.confirmation = confirmation
+                    }
+                    
                     orders.append(order)
                     
-                    if (Int(snapshots.childrenCount) - 1 == index) {
+                    if (Int(snapshots.childrenCount) == orders.count) {
                         orders.sort(by: { $0.orderNumber > $1.orderNumber })
                         completion(orders)
                     }
@@ -181,18 +187,37 @@ class OrderController {
         return histories
     }
     
+    
+    
     func removeOrderListHandler(){
         guard let handler = orderListHander else { return }
         orderListRef?.removeObserver(withHandle: handler)
     }
     
     func cancelOrder(order: Order) {
-        order.ref?.removeValue()
+        guard let cancelStatus = OrderStatus(rawValue: "cancel") else { return }
+        let history = OrderHistory(date: Date(), status: cancelStatus, sortNumber: 0)
+        order.histories.append(history)
+        
+        var historyDict = [String:Any]()
+        let historyKey = OrderHistory.jsonKeys
+        historyDict[historyKey.status] = OrderStatus.canceled.rawValue
+        historyDict[historyKey.date] = history.date.timeIntervalSince1970
+        historyDict[historyKey.sortNumber] = history.sortNumber
+        
+        order.ref?.child("histories").observeSingleEvent(of: .value, with: { (snapshot) in
+            let lastNumber = Int(snapshot.childrenCount)
+            
+            order.ref?.child("histories/\(lastNumber)").updateChildValues(historyDict)
+        })
+
+        
     }
     
-    func postOrderConfirmation(ref:FIRDatabaseReference, accountName:String, accountNumber:String, transferAmount: Double ){
-        let paymentDict: [String:Any] = ["accountName": accountName, "accountNumber": accountNumber, "transferAmount" : transferAmount]
-        ref.child("payment").setValue(paymentDict)
+    func postOrderConfirmation(ref:FIRDatabaseReference, confirmation: OrderConfirmation){
+        guard let bankName = confirmation.accountBank?.bankName else { return }
+        let paymentDict: [String:Any] = ["bankName": bankName, "accountName" : confirmation.accountName, "accountNumber": confirmation.accountNumber, "transferAmount" : confirmation.transferAmount]
+        ref.child("confirmation").setValue(paymentDict)
         
         ref.child("histories").observeSingleEvent(of: .value, with: { (snapshot) in
             let lastNumber = Int(snapshot.childrenCount)
@@ -203,8 +228,8 @@ class OrderController {
             ref.child("histories/\(lastNumber)").updateChildValues(historyDict)
             
             let savedUserProfile = SavedOrderProfile.shared.self
-            savedUserProfile.accountName = accountName
-            savedUserProfile.accountNumber = accountNumber
+            savedUserProfile.accountName = confirmation.accountName
+            savedUserProfile.accountNumber = confirmation.accountNumber
             
         })
     }

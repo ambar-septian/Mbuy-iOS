@@ -23,6 +23,9 @@ pod 'Iconic', :git => 'https://github.com/dzenbot/Iconic.git', :tag => '1.3'
 pod 'SwiftDate', '~> 4.0'
 pod 'BGTableViewRowActionWithImage'
 pod 'NVActivityIndicatorView'
-
+pod 'UIImageViewAlignedSwift'
+pod 'Fabric'
+pod 'Crashlytics'
+pod 'CHTCollectionViewWaterfallLayout'
 
 end

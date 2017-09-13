@@ -15,10 +15,11 @@ enum Constants {
     enum segueID {
         static let showProductDetail = "ShowProductDetail"
         enum order {
-            static let note = "orderNote"
+            static let payment = "orderPayment"
             static let history = "orderHistory"
             static let detail = "orderDetail"
             static let confirmation = "orderConfirmation"
+            static let note = "orderNote"
         }
         
         enum setting {

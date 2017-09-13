@@ -60,7 +60,7 @@ extension CartTableViewCell: ReuseTableCellProtocol {
         guard let cart = object as? Cart else { return cell }
         
         cell.cart = cart
-        cell.productImageView.setImage(urlString: cart.product.coverURL)
+        cell.productImageView.setImage(urlString: cart.product.coverURL, placeholder: .base)
         cell.nameLabel.text = cart.product.name
         cell.priceLabel.text = (cart.price * Double(cart.quantity)).formattedPrice
         cell.stepper.counter = cart.quantity

@@ -56,6 +56,13 @@ class ProductCollectionViewCell: UICollectionViewCell {
         
         constraintHeight.constant = attributes.imageHeight
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+    }
+    
+    
     @IBAction func cartAction(_ sender: Any) {
         guard currentVC != nil else { return }
         guard product != nil else { return }
@@ -93,6 +100,7 @@ extension ProductCollectionViewCell: ReuseCollectionCellProtocol {
         cell.imageView.setImage(urlString: product.coverURL, placeholder: .base) { (image) in
             if product.imageSize == nil {
                 product.imageSize = image.size
+//                collectionView.reloadData()
                 collectionView.collectionViewLayout.invalidateLayout()
             }
             

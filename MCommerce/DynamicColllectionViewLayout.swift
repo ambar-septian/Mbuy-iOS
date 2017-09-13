@@ -75,7 +75,7 @@ class DynamicCollectionViewLayout: UICollectionViewLayout {
     }
     
     override func invalidateLayout() {
-        cache.removeAll()
+        //cache.removeAll()
         super.invalidateLayout()
         
     }
@@ -89,6 +89,7 @@ class DynamicCollectionViewLayout: UICollectionViewLayout {
         }
         
         return layoutAttributes
+        
     }
 }
 

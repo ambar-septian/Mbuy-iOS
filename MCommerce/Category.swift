@@ -26,10 +26,12 @@ class Category: FirebaseProtocol {
     
     fileprivate var nameEN:String
     
+    var isClothing: Bool = false
+    
     var orderNumber: Int
     
-    static let jsonKeys:(nameEN:String, nameID:String, imageURL: String, orderNumber : String) =
-        (nameEN: "nameEN", nameID:"nameID", imageURL: "imageURL", orderNumber : "orderNumber")
+    static let jsonKeys:(nameEN:String, nameID:String, imageURL: String, orderNumber : String, isClothing: String) =
+        (nameEN: "nameEN", nameID:"nameID", imageURL: "imageURL", orderNumber : "orderNumber", isClothing: "isClothing")
     
     public init(nameID: String, nameEN:String, imageURL: String, orderNumber:Int,key:String = "") {
         self.nameID = nameID
@@ -48,6 +50,7 @@ class Category: FirebaseProtocol {
         self.nameID  = snapshotValue[jsonKeys.nameID] as? String ?? ""
         self.imageURL = snapshotValue[jsonKeys.imageURL] as? String ?? ""
         self.orderNumber = snapshotValue[jsonKeys.orderNumber] as? Int ?? 0
+        self.isClothing = snapshotValue[jsonKeys.isClothing] as? Bool ?? false
         ref = snapshot.ref
     }
     

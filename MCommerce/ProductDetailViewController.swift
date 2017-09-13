@@ -32,15 +32,7 @@ class ProductDetailViewController: BaseViewController {
             detailTableView.register(cell.nib, forCellReuseIdentifier: cell.identifier)
         }
     }
-    
-    @IBOutlet weak var reviewTableView: UITableView!{
-        didSet {
-            let cell = ReviewTableViewCell.self
-            reviewTableView.register(cell.nib, forCellReuseIdentifier: cell.identifier)
-            
-        }
-    }
-    
+  
     @IBOutlet weak var addToCartButton: CircleImageButton! {
         didSet {
             addToCartButton.icon = .shoppingCartIcon
@@ -80,7 +72,6 @@ class ProductDetailViewController: BaseViewController {
     
     @IBOutlet weak var constraintDetailTableView: NSLayoutConstraint!
     
-    @IBOutlet weak var constraintReviewTableView: NSLayoutConstraint!
     
     
     var passedProduct: Product?
@@ -113,14 +104,7 @@ class ProductDetailViewController: BaseViewController {
     }
     
     
-    fileprivate var reviews = [Review]() {
-        didSet {
-            reviewTableView.reloadData()
-//            reviewEmptyLabel.isHidden = !(reviews.isEmpty)
-//            constraintReviewTableView.constant = reviewTableView.contentSize.height
-            constraintReviewTableView.constant = 0
-        }
-    }
+
     
     fileprivate var relatedProducts = [Product]() {
         didSet {
@@ -172,15 +156,7 @@ extension ProductDetailViewController {
         
         productDetails = product.details
         productImageURLs = product.imageURLs
-//        
-//        let user = User(email: "", firstName: "Ponim", lastName: "Kirun", address: "Tomang", userType: .email, profileImagePath: "https://dummyimage.com/600x400/000/fff")
-//        let user2 = User(email: "", firstName: "Riri", lastName: "Tamam", address: "Tebet", userType: .email, profileImagePath: "https://api.adorable.io/avatars/114/happy@adorable.io.png")
-//        let user3 = User(email: "", firstName: "Ires", lastName: "Pitri", address: "Palmerah", userType: .email, profileImagePath: "https://dummyimage.com/600x400/000/fff")
-//        let review = Review(reviewID: "1", title: "Good", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua", rating: 5, product: product, user: user, date: Date())
-//        let review2 = Review(reviewID: "1", title: "Good", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua", rating: 4, product: product, user: user2, date: Date())
-//        let review3 = Review(reviewID: "1", title: "Good", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua", rating: 3, product: product, user: user3, date: Date())
-//        
-//        reviews = [review, review2, review3]
+
     }
     
     fileprivate func loadRelatedProducts() {
@@ -199,21 +175,12 @@ extension ProductDetailViewController {
 
 extension ProductDetailViewController : UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == detailTableView {
-            return productDetails.count
-        } else {
-            return reviews.count
-        }
+        return productDetails.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if tableView == detailTableView {
-            let productDetail = productDetails[indexPath.row]
-            return ProductDetailTableViewCell.configureCell(tableView: tableView, indexPath: indexPath, object: productDetail)
-        } else {
-            let review = reviews[indexPath.row]
-            return ReviewTableViewCell.configureCell(tableView: tableView, indexPath: indexPath, object: review)
-        }
+        let productDetail = productDetails[indexPath.row]
+        return ProductDetailTableViewCell.configureCell(tableView: tableView, indexPath: indexPath, object: productDetail)
     }
 }
 
@@ -257,12 +224,17 @@ extension ProductDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == productsCollectionView {
             let productImage = productImageURLs[indexPath.item]
-            return ProductImageCollectionViewCell.configureCell(collectionView: collectionView, indexPath: indexPath, object: productImage)
+            let cell = ProductImageCollectionViewCell.configureCell(collectionView: collectionView, indexPath: indexPath, object: productImage) as! ProductImageCollectionViewCell
+            cell.productImageView.alignTop = (passedProduct?.category?.isClothing ?? false) ? true : false
+            return cell
         } else {
             let product = relatedProducts[indexPath.item]
             return SimpleProductCollectionViewCell.configureCell(collectionView: collectionView, indexPath: indexPath, object: product)
         }
     }
+    
+    
+    
 }
 
 extension ProductDetailViewController: UICollectionViewDelegate {
@@ -270,12 +242,12 @@ extension ProductDetailViewController: UICollectionViewDelegate {
         let storyboard = UIStoryboard(name: Constants.storyboard.product, bundle: nil)
         if collectionView == productsCollectionView {
             guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.viewController.product.preview) as? ProductPreviewViewController else { return }
-            guard let cell = collectionView.cellForItem(at: indexPath) as? ProductImageCollectionViewCell else { return }
-            vc.passedImage = cell.productImageView.image
-            vc.modalTransitionStyle = .crossDissolve
-            vc.modalPresentationStyle = .overCurrentContext
+            vc.passedImageURLs = productImageURLs
+            vc.passedSelectedIndex = indexPath.row
             vc.view.backgroundColor = Color.darkGray.withAlphaComponent(0.7)
-            present(vc, animated: true, completion: nil)
+            vc.modalTransitionStyle = .crossDissolve
+            let nav = UINavigationController(rootViewController: vc)
+            present(nav, animated: true, completion: nil)
         } else {
             guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.viewController.product.detail) as? ProductDetailViewController else { return }
             vc.passedProduct = relatedProducts[indexPath.row]
@@ -287,7 +259,7 @@ extension ProductDetailViewController: UICollectionViewDelegate {
 extension ProductDetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == productsCollectionView {
-            return collectionView.bounds.size
+            return CGSize(width: view.bounds.width, height: collectionView.bounds.height)
         } else {
             let padding = collectionView.bounds.width * 0.15
             let size = CGSize(width: collectionView.bounds.width / 1.7 - padding, height: collectionView.bounds.height)
@@ -310,9 +282,14 @@ extension ProductDetailViewController: UICollectionViewDelegateFlowLayout {
             return 1
         }
     }
-    
-    
-    
+}
+
+extension ProductDetailViewController {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        guard scrollView == productsCollectionView else { return }
+        let index = Int(round(productsCollectionView.contentOffset.x / productsCollectionView.frame.width))
+        pageControl.currentPage = index
+    }
 }
 
 

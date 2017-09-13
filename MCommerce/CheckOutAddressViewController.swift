@@ -15,17 +15,12 @@ class CheckOutAddressViewController: BaseViewController {
     
     @IBOutlet weak var addressLabel: IconLabel! {
         didSet {
-            addressLabel.text = "address".localize
+            addressLabel.text = "address".localize + "*"
             addressLabel.icon = FontAwesomeIcon.homeIcon
         }
     }
 
-    @IBOutlet weak var noteLabel: IconLabel! {
-        didSet {
-            noteLabel.text = "deliveryNote".localize
-            noteLabel.icon = FontAwesomeIcon.editIcon
-        }
-    }
+
     
     @IBOutlet weak var deliveryLabel: UILabel! {
         didSet {
@@ -42,9 +37,7 @@ class CheckOutAddressViewController: BaseViewController {
     }
     
     @IBOutlet weak var addressTextView: BorderTextView!
-    
-    @IBOutlet weak var noteTextView: BorderTextView!
-    
+   
     @IBOutlet weak var containerMapView: UIView!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -60,6 +53,8 @@ class CheckOutAddressViewController: BaseViewController {
         let mapView = GMSMapView.map(withFrame: self.containerMapView.bounds, camera: camera)
         mapView.delegate = self
         mapView.isMyLocationEnabled = true
+        mapView.settings.myLocationButton = true
+        mapView.settings.compassButton = true
      
         return mapView
     }()
@@ -84,6 +79,8 @@ class CheckOutAddressViewController: BaseViewController {
 
     
     fileprivate var deliveryCoordinate: CLLocationCoordinate2D?
+    
+    fileprivate var directionPath: GMSPolyline?
     
     var deliveryCost: Double = 0 {
         didSet {
@@ -230,12 +227,29 @@ extension CheckOutAddressViewController {
     }
     
     fileprivate func setActiveMarker(coordinate: CLLocationCoordinate2D){
-        let camera = GMSCameraPosition.camera(withTarget: coordinate, zoom: 16)
-       
+        let bounds = GMSCoordinateBounds(coordinate: coordinate, coordinate: marker.position)
+        let camera =  GMSCameraUpdate.fit(bounds)
+        
         self.deliveryMarker.position = coordinate
         self.deliveryMarker.map = self.mapView
         self.mapView.selectedMarker = self.deliveryMarker
-        self.mapView.animate(to: camera)
+        self.mapView.animate(with: camera)
+        
+        self.setMapRoute(targetCoordinate: coordinate)
+    }
+    
+    fileprivate func setMapRoute(targetCoordinate: CLLocationCoordinate2D){
+        directionPath?.map = nil
+        
+        let path = GMSMutablePath()
+        path.add(marker.position)
+        path.add(targetCoordinate)
+        
+        directionPath = GMSPolyline(path: path)
+        directionPath?.strokeWidth = 2
+        directionPath?.map = mapView
+        
+        
     }
     
     
@@ -327,13 +341,10 @@ extension CheckOutAddressViewController: GMSMapViewDelegate {
         deliveryMarker.snippet = nil
         setActiveMarker(coordinate: coordinate)
         
-        DispatchQueue.global().async {
-            self.controller.getPlaceByCoordinate(coordinate: coordinate, completion: { (searchPlace) in
-                DispatchQueue.main.async {
-                    self.selectedPlace = searchPlace
-                }
-            })
-        }
+        self.controller.getPlaceByCoordinate(coordinate: coordinate, completion: { (searchPlace) in
+                 self.selectedPlace = searchPlace
+            
+        })
     }
     
     
