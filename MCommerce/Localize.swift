@@ -15,11 +15,11 @@ class Localize {
     var language: Language {
         get {
             guard let localizes = UserDefaults.standard.value(forKey: Constants.userDefaultsKey.localize) as? [String] else {
-                return .EN
+                return .ID
             }
             
             guard let rawValue = localizes.first else {
-                return .EN
+                return .ID
             }
             
             switch(rawValue) {
