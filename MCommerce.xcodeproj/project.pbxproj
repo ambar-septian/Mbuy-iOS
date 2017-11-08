@@ -176,6 +176,7 @@
 		5D0CDA391EFA7DFE0004513F /* OrderHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderHistoryViewController.swift; sourceTree = "<group>"; };
 		5D1079861F017BD200176591 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		5D1622881EF5C3EA005D1546 /* ProductPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductPreviewViewController.swift; sourceTree = "<group>"; };
+		5D17CCDF1F55C2D100EABAE8 /* MCommerce.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MCommerce.entitlements; sourceTree = "<group>"; };
 		5D1A220C1F0A5CD700F58DA4 /* TabBarBadge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarBadge.swift; sourceTree = "<group>"; };
 		5D24EF361EC32A6E00B43A71 /* CategoryHomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryHomeTableViewCell.swift; sourceTree = "<group>"; };
 		5D24EF381EC32A8500B43A71 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -641,6 +642,7 @@
 		5DBFBA641EC17B930061FE35 /* MCommerce */ = {
 			isa = PBXGroup;
 			children = (
+				5D17CCDF1F55C2D100EABAE8 /* MCommerce.entitlements */,
 				5DBFBA941EC17C7D0061FE35 /* ViewController */,
 				5DBFBA951EC17C9B0061FE35 /* GeneralController */,
 				5DBFBA971EC17CCA0061FE35 /* Model */,
@@ -908,6 +910,11 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = Q3EM23MFA9;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					5DBFBA751EC17B930061FE35 = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -1328,6 +1335,7 @@
 			baseConfigurationReference = BB69502731F32516E696A287 /* Pods-MCommerce.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MCommerce/MCommerce.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = Q3EM23MFA9;
@@ -1348,6 +1356,7 @@
 			baseConfigurationReference = A7C8A45735443D9941C8C2A1 /* Pods-MCommerce.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MCommerce/MCommerce.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = Q3EM23MFA9;
 				ENABLE_BITCODE = NO;

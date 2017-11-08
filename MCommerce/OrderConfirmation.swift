@@ -14,19 +14,21 @@ class OrderConfirmation: FirebaseProtocol {
     var accountBank: BankPayment?
     var accountNumber: String
     var transferAmount: Double
+    var transferImageURL: String
     
     var key: String
     var ref: FIRDatabaseReference?
     
     
-    static let jsonKeys:(accountName:String, bankName:String, accountNumber:String, transferAmount:String) =
-        (accountName:"accountName", bankName:"bankName", accountNumber: "accountNumber", transferAmount:"transferAmount")
+    static let jsonKeys:(accountName:String, bankName:String, accountNumber:String, transferAmount:String, transferImageURL:String) =
+        (accountName:"accountName", bankName:"bankName", accountNumber: "accountNumber", transferAmount:"transferAmount", transferImageURL:"transferImageURL")
     
-    init(accountName: String, accountBank:BankPayment?, accountNumber: String, transferAmount:Double) {
+    init(accountName: String, accountBank:BankPayment?, accountNumber: String, transferAmount:Double, transferImageURL:String) {
         self.accountName = accountName
         self.accountBank = accountBank
         self.accountNumber = accountNumber
         self.transferAmount = transferAmount
+        self.transferImageURL = transferImageURL
         self.key = ""
     }
     
@@ -39,6 +41,8 @@ class OrderConfirmation: FirebaseProtocol {
         self.accountName = snapshotValue[jsonKeys.accountName] as? String ?? ""
         self.accountNumber = snapshotValue[jsonKeys.accountNumber] as? String ?? ""
         self.transferAmount = snapshotValue[jsonKeys.transferAmount] as? Double ?? 0
+        self.transferImageURL = snapshotValue[jsonKeys.accountNumber] as? String ?? ""
+
         
         guard let accountBank = snapshotValue[jsonKeys.bankName] as? String else { return }
         self.accountBank = BankPayment(rawValue: accountBank)
@@ -50,8 +54,9 @@ class OrderConfirmation: FirebaseProtocol {
         let accountName = dictionary[jsonKeys.accountName] as? String ?? ""
         let accountNumber = dictionary[jsonKeys.accountNumber] as? String ?? ""
         let transferAmount = dictionary[jsonKeys.transferAmount] as? Double ?? 0
+        let transferImageURL = dictionary[jsonKeys.transferImageURL] as? String ?? ""
         
-        self.init(accountName: accountName, accountBank: nil, accountNumber: accountNumber, transferAmount: transferAmount)
+        self.init(accountName: accountName, accountBank: nil, accountNumber: accountNumber, transferAmount: transferAmount, transferImageURL:transferImageURL)
         
         guard let bankName = dictionary[jsonKeys.bankName] as? String else { return }
         self.accountBank = BankPayment(rawValue: bankName)

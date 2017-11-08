@@ -51,6 +51,23 @@ class OrderConfirmationViewController: BaseViewController {
     
     @IBOutlet weak var transferAmountLabel: UILabel!
     
+    
+    @IBOutlet weak var proofTransferLabel: IconLabel! {
+        didSet {
+            proofTransferLabel.text = "proofBankTransfer".localize
+            proofTransferLabel.icon = FontAwesomeIcon.cameraIcon
+        }
+    }
+    
+    
+    @IBOutlet weak var historyBarButton: UIBarButtonItem! {
+        didSet {
+            historyBarButton.title = "history".localize
+        }
+    }
+    
+    @IBOutlet weak var transferImageview: UIImageView!
+    
     var passedOrder: Order?
     
     
@@ -86,9 +103,11 @@ extension OrderConfirmationViewController {
         accountNameLabel.text = confirmation.accountName
         accountNumberLabel.text = confirmation.accountNumber
         transferAmountLabel.text = confirmation.transferAmount.formattedPrice
+        transferImageview.setImage(urlString: confirmation.transferImageURL, placeholder: .base, completion: nil)
         
         bankNameLabel.text = confirmation.accountBank?.bankName ?? ""
         bankImageView.image = confirmation.accountBank?.image
+        
         
     }
 }

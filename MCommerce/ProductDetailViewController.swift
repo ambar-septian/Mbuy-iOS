@@ -46,9 +46,18 @@ class ProductDetailViewController: BaseViewController {
     
     @IBOutlet weak var reviewLabel: UILabel!
     
-    @IBOutlet weak var relatedItemsLabel: UILabel!
+    @IBOutlet weak var relatedItemsLabel: UILabel! {
+        didSet {
+            relatedItemsLabel.text = "relatedProducts".localize
+        }
+    }
     
-    @IBOutlet weak var descriptionHeadingLabel: UILabel!
+    @IBOutlet weak var descriptionHeadingLabel: UILabel! {
+        didSet {
+            descriptionHeadingLabel.text = "description".localize
+        }
+    }
+    
     
     @IBOutlet weak var descriptionLabel: UILabel!
     

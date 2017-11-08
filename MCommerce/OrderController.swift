@@ -6,8 +6,9 @@
 //  Copyright © 2017 Ambar Septian. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import FirebaseDatabase
+import FirebaseStorage
 
 typealias newOrderNumberCompletion = ((_ orderNumber: Int) -> Void)
 typealias statusNumberCompletion = ((_ statusNumber: Int) -> Void)
@@ -214,24 +215,57 @@ class OrderController {
         
     }
     
-    func postOrderConfirmation(ref:FIRDatabaseReference, confirmation: OrderConfirmation){
+    func postOrderConfirmation(ref:FIRDatabaseReference, confirmation: OrderConfirmation, transferImage: UIImage){
         guard let bankName = confirmation.accountBank?.bankName else { return }
-        let paymentDict: [String:Any] = ["bankName": bankName, "accountName" : confirmation.accountName, "accountNumber": confirmation.accountNumber, "transferAmount" : confirmation.transferAmount]
-        ref.child("confirmation").setValue(paymentDict)
         
-        ref.child("histories").observeSingleEvent(of: .value, with: { (snapshot) in
-            let lastNumber = Int(snapshot.childrenCount)
-            let historyKey = OrderHistory.jsonKeys
+        uploadTransferImage(image: transferImage, orderID: ref.key) { (downloadURL) in
+            guard let url = downloadURL else { return }
+        
+            let paymentDict: [String:Any] = ["bankName": bankName, "accountName" : confirmation.accountName, "accountNumber": confirmation.accountNumber, "transferAmount" : confirmation.transferAmount, "transferImageURL": url.absoluteString]
+            ref.child("confirmation").setValue(paymentDict)
             
-            let historyDict = [historyKey.date : Date().timeIntervalSince1970, historyKey.sortNumber : lastNumber, historyKey.status: OrderStatus.validatingPayment.rawValue] as [String : Any]
+            ref.child("histories").observeSingleEvent(of: .value, with: { (snapshot) in
+                let lastNumber = Int(snapshot.childrenCount)
+                let historyKey = OrderHistory.jsonKeys
+                
+                let historyDict = [historyKey.date : Date().timeIntervalSince1970, historyKey.sortNumber : lastNumber, historyKey.status: OrderStatus.validatingPayment.rawValue] as [String : Any]
+                
+                ref.child("histories/\(lastNumber)").updateChildValues(historyDict)
+                
+                let savedUserProfile = SavedOrderProfile.shared.self
+                savedUserProfile.accountName = confirmation.accountName
+                savedUserProfile.accountNumber = confirmation.accountNumber
+                
+            })
+        }
+        
+    }
+    
+    
+    func uploadTransferImage(image: UIImage, orderID:String, completion: @escaping downloadURLCompletion){
+        guard let data = UIImageJPEGRepresentation(image, 0.5) else {
+            completion(nil)
+            return
+        }
+        
+        let storageRef = FIRStorage.storage().reference().child("confirmationimages/\(orderID).jpg")
+        let metadata = FIRStorageMetadata()
+        metadata.contentType = "image/jpeg"
+        storageRef.put(data, metadata: metadata) { (metadata, error) in
             
-            ref.child("histories/\(lastNumber)").updateChildValues(historyDict)
+            guard error == nil else {
+                completion(nil)
+                return
+            }
             
-            let savedUserProfile = SavedOrderProfile.shared.self
-            savedUserProfile.accountName = confirmation.accountName
-            savedUserProfile.accountNumber = confirmation.accountNumber
+            guard let downloadURL = metadata?.downloadURL() else {
+                completion(nil)
+                return
+            }
             
-        })
+            completion(downloadURL)
+        }
+
     }
     
     

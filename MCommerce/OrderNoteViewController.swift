@@ -19,7 +19,11 @@ class OrderNoteViewController: BaseViewController {
     }
     
     
-    @IBOutlet weak var thankYouLabel: UILabel!
+    @IBOutlet weak var thankYouLabel: UILabel! {
+        didSet {
+            thankYouLabel.text = "thankYouShoppingWithUs".localize
+        }
+    }
     
     @IBOutlet weak var greetingLabel: UILabel! {
         didSet {

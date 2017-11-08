@@ -20,12 +20,11 @@ class SettingsViewController: BaseViewController {
     fileprivate var contents : [(title:String, icon:FontAwesomeIcon)] =
         [
         (title:"changePassword", icon:.lockIcon),
-        (title:"changeLanguage", icon:.globeIcon),
          (title:"logout", icon:.signoutIcon)]
     
     fileprivate let sections: [(title:String, count:Int)] = [
         (title:"userProfile", count: 2),
-        (title:"settings", count: 2)
+        (title:"settings", count: 1)
     ]
     
  
@@ -154,9 +153,9 @@ extension SettingsViewController: UITableViewDelegate {
             performSegue(withIdentifier: Constants.segueID.setting.editProfile, sender: nil)
         case 1: // change password
             performSegue(withIdentifier: Constants.segueID.setting.changePassword, sender: nil)
-        case 2:
-            performSegue(withIdentifier: Constants.segueID.setting.changeLanguage, sender: nil)
-        case 3: // logout
+//        case 2:
+//            performSegue(withIdentifier: Constants.segueID.setting.changeLanguage, sender: nil)
+        case 2: // logout
             self.confirmationLogout()
         default:
             break

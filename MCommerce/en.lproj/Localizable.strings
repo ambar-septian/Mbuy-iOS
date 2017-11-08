@@ -40,6 +40,8 @@
 "addToCartSuccess" = "Product was successfully added to the cart";
 "continueShopping" = "Continue Shopping";
 "finishShopping" = "Finish Shopping";
+"relatedProducts" = "Related Products";
+"description" = "Description";
 
 /* Search */
 "search" = "Search";
@@ -68,7 +70,8 @@
 "validAmountString" = "Transfer amount must be a number";
 "validAccountNumber" = "Account number must be a number";
 "validZeroAmount" = "Transfer amount couldn't be zero";
-"validTransferAmount" = "The transfer amount is less than the total payment ";
+"validTransferAmount" = "The transfer amount is less than the total payment";
+"validTranferImage" = "Proof of payment must be given";
 
 /* Orders */
 "orders" = "Orders";
@@ -87,6 +90,11 @@
 "confirmation" = "Confirmation";
 "confirmationAlert" = "Do you want to confirm this order has been received?";
 "cancelAlert" = "Do you want to cancel this order?";
+"thankYouShoppingWithUs" = "Thank you to shopping with us";
+"onProcess" = "On Process";
+"complete" = "Complete";
+"addPhoto" = "Add Photo";
+"proofBankTransfer" = "Proof of Bank Transfer";
 
 /* Order Status */
 "onDelivery" = "On Delivery";

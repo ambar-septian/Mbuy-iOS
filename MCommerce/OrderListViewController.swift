@@ -16,9 +16,18 @@ protocol OrderParentProtocol: class {
 
 class OrderListViewController: BaseViewController {
 
-    @IBOutlet weak var processButton: BasicButton!
+    @IBOutlet weak var processButton: BasicButton! {
+        didSet {
+            processButton.setTitle("onProcess".localize, for: .normal)
+        }
+    }
     
-    @IBOutlet weak var completeButton: BasicButton!
+    
+    @IBOutlet weak var completeButton: BasicButton! {
+        didSet {
+            completeButton.setTitle("complete".localize, for: .normal)
+        }
+    }
     
     @IBOutlet weak var tabView: UIView!
     

@@ -124,7 +124,7 @@ enum Constants {
         static let indonesiaFarRightCoordinate = CLLocationCoordinate2D(latitude: 5.88969, longitude: 140.71813)
     }
     
-    static let deliveryPrice:Double = 5000
+    static let deliveryPrice:Double = 1000
 }
 
 

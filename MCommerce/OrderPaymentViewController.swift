@@ -9,7 +9,7 @@
 import UIKit
 import Iconic
 
-class OrderConfirmationViewController: BaseViewController {
+class OrderPaymentViewController: BaseViewController {
 
     
     @IBOutlet weak var paymentImageView: UIImageView!
@@ -25,6 +25,7 @@ class OrderConfirmationViewController: BaseViewController {
         didSet {
             accountNumberLabel.text = "accountNumber".localize
             accountNumberLabel.icon = FontAwesomeIcon.creditCardIcon
+            
         }
     }
     
@@ -36,6 +37,8 @@ class OrderConfirmationViewController: BaseViewController {
             accountNameLabel.icon = FontAwesomeIcon.userIcon
         }
     }
+    
+    @IBOutlet weak var totalTransferLabel: UILabel!
     
     @IBOutlet weak var accountNameTextField: BorderTextField!
     
@@ -55,6 +58,33 @@ class OrderConfirmationViewController: BaseViewController {
         }
     }
     
+    @IBOutlet weak var addPhotoButton: CircleImageButton! {
+        didSet {
+            addPhotoButton.icon = .cameraIcon
+            addPhotoButton.mainColor = Color.orange
+        }
+    }
+    
+    @IBOutlet weak var photoTransferImageView: UIImageView! {
+        didSet {
+            photoTransferImageView.isUserInteractionEnabled = true
+            photoTransferImageView.addGestureRecognizer(addPhotoGesture)
+        }
+    }
+    
+    @IBOutlet weak var addPhotoLabel: UILabel! {
+        didSet {
+            addPhotoLabel.text = "addPhoto".localize
+            
+        }
+    }
+    
+    @IBOutlet weak var proofTransferLabel: IconLabel! {
+        didSet {
+            proofTransferLabel.text = "proofBankTransfer".localize
+            proofTransferLabel.icon = FontAwesomeIcon.cameraIcon
+        }
+    }
     fileprivate let controller = OrderController()
     
     fileprivate var amountNumber:Double {
@@ -73,6 +103,14 @@ class OrderConfirmationViewController: BaseViewController {
     
     fileprivate var currencySymbol = "Rp. "
     
+    fileprivate var transferImage: UIImage? {
+        didSet{
+            photoTransferImageView.image = transferImage
+            addPhotoButton.isHidden = true
+            addPhotoLabel.isHidden = true
+        }
+    }
+    
     lazy var formatter: NumberFormatter = {
         let formatter = NumberFormatter()
        
@@ -80,6 +118,46 @@ class OrderConfirmationViewController: BaseViewController {
         formatter.numberStyle = .decimal
         
         return formatter
+    }()
+    
+    
+    lazy var imagePicker: UIImagePickerController = {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        
+        return imagePicker
+    }()
+    
+    lazy var addPhotoGesture: UITapGestureRecognizer = {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(self.addPhotoTapped(_:)))
+        return gesture
+    }()
+    
+    lazy var actionSheet: UIAlertController = {
+        let actionSheet = UIAlertController(title: nil, message: "addPhoto".localize, preferredStyle: .actionSheet)
+        
+        let cameraButton = UIAlertAction(title: "takePhoto".localize, style: .default) { (alert) in
+            let source:UIImagePickerControllerSourceType = UIImagePickerController.isSourceTypeAvailable(.camera) ? .camera : .photoLibrary
+            self.imagePicker.sourceType = source
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }
+        
+        let selectButton = UIAlertAction(title: "selectPhoto".localize, style: .default) { (alert) in
+            self.imagePicker.sourceType = .photoLibrary
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }
+        
+        let cancelButton = UIAlertAction(title: "cancel".localize, style: .destructive) { (alert) in
+            self.imagePicker.dismiss(animated: true, completion: nil)
+        }
+        
+        
+        actionSheet.addAction(cameraButton)
+        actionSheet.addAction(selectButton)
+        actionSheet.addAction(cancelButton)
+        
+        return actionSheet
     }()
     
     override func viewDidLoad() {
@@ -95,24 +173,31 @@ class OrderConfirmationViewController: BaseViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        addPhotoButton.setNeedsDisplay()
+    }
+    
+    @IBAction func addPhotoTapped(_ sender: Any) {
+        present(actionSheet, animated: true, completion: nil)
+    }
 
     @IBAction func confirmButtonTapped(_ sender: Any) {
         guard let order = passedOrder else { return }
         guard let ref = order.ref else { return }
-        guard var payment = accountPayment else { return }
-        
+
         let formValid = validateForm()
         
         if formValid.isValid {
             // submit order
-            controller.postOrderConfirmation(ref: ref, accountName: accountNameTextField.text ?? "", accountNumber: accountNumberTextField.text ?? "", transferAmount: amountNumber )
             
-            // save number to user defaults
-            payment.userAccountName = accountNameTextField.text ?? ""
-            payment.userAccountNumber = accountNumberTextField.text ?? ""
+            let confirmation = OrderConfirmation(accountName: accountNameTextField.text ?? "", accountBank: accountPayment, accountNumber: accountNumberTextField.text ?? "", transferAmount: amountNumber, transferImageURL: "")
+            controller.postOrderConfirmation(ref: ref, confirmation: confirmation, transferImage: transferImage!)
             
+
             // show alert
             Alert.showAlert(message:"" , alertType: .okOnly, header: "confirmationPaymentSuccess".localize, viewController: self, handler: {  alert in
                 guard let rootViewController = self.navigationController?.viewControllers.first else {
@@ -136,9 +221,15 @@ class OrderConfirmationViewController: BaseViewController {
     }
 }
 
-extension OrderConfirmationViewController {
+extension OrderPaymentViewController {
     func setupAccountPayment(){
         guard let payment = accountPayment else { return }
+        guard let order = passedOrder else {
+            return
+        }
+    
+        totalTransferLabel.text = order.formattedTotal
+    
         paymentImageView.image = payment.image
         paymentNameLabel.text = payment.accountName
         paymentAccountNumberLabel.text = payment.accountNumber
@@ -149,6 +240,10 @@ extension OrderConfirmationViewController {
     }
     
     func validateForm() -> (isValid:Bool, message:String?) {
+        guard let order = passedOrder else {
+            return (isValid: false, message: "validEmptyForm".localize)
+        }
+        
         let accountNumber = accountNumberTextField.text
         let accountName = accountNameTextField.text
         let amount = accountAmountTextField.text
@@ -163,23 +258,32 @@ extension OrderConfirmationViewController {
             switch index {
             case 0: // account number
                 guard wText.isValidNumeric else {
-                    return (isValid: false, message: "validAmountString".localize)
+                    return (isValid: false, message: "validAccountNumber".localize)
                 }
             case 2:
                 guard amountNumber > 0 else {
                     return (isValid: false, message: "validZeroAmount".localize)
                 }
+                
+                guard amountNumber >= order.total else {
+                    return (isValid: false, message: "validTransferAmount".localize)
+                }
+                
 
             default:
                 break
             }
         }
         
+        guard transferImage != nil else {
+            return (isValid: false, message: "validTranferImage".localize)
+        }
+        
         return (isValid: true, message: nil)
     }
 }
 
-extension OrderConfirmationViewController: UITextFieldDelegate {
+extension OrderPaymentViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard textField == accountAmountTextField else { return true}
         
@@ -206,5 +310,19 @@ extension OrderConfirmationViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return handleTextFieldShouldReturn(textField)
+    }
+}
+
+extension OrderPaymentViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            transferImage = pickedImage
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
 }

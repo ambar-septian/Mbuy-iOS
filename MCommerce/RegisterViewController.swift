@@ -29,7 +29,7 @@ class RegisterViewController: BaseViewController {
         didSet {
             let size = CGSize(width: 20, height: 20)
             let image = FontAwesomeIcon.userIcon.image(ofSize: size, color: Color.white)
-            nameTextField.placeholder = "firstName".localize
+            nameTextField.placeholder = "name".localize
             nameTextField.imagePlaceholder = image
             
         }

@@ -40,6 +40,8 @@
 "addToCartSuccess" = "Produk berhasil ditambah ke keranjang";
 "continueShopping" = "Lanjut Belanja";
 "finishShopping" = "Selesai Belanja";
+"relatedProducts" = "Produk yang berhubungan";
+"description" = "Deskripsi";
 
 /* Search */
 "search" = "Cari";
@@ -68,6 +70,7 @@
 "validAccountNumber" = "Nomor rekening harus berupa angka";
 "validZeroAmount" = "Jumlah transfer tidak boleh nol";
 "validTransferAmount" = "Jumlah transfer kurang dari total pembayaran";
+"validTranferImage" = "Bukti bayar harus disediakan";
 
 /* Orders */
 "orders" = "Pesanan";
@@ -86,6 +89,12 @@
 "confirmation" = "Konfirmasi";
 "confirmationAlert" = "Apa anda ingin mengkonfirmasi bahwa pesanan ini sudah diterima?";
 "cancelAlert" = "Apa anda ingin membatalkan pesanan ini?";
+"thankYouShoppingWithUs" = "Terima kasih telah berbelanja dengan kami";
+"onProcess" = "Sedang Diproses";
+"complete" = "Selesai";
+"addPhoto" = "Tambah Foto";
+"proofBankTransfer" = "Bukti Transfer Bank";
+
 
 /* Order Status */
 "onDelivery" = "Sedang Dalam Pengiriman";
