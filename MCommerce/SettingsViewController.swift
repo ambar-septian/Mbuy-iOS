@@ -20,11 +20,12 @@ class SettingsViewController: BaseViewController {
     fileprivate var contents : [(title:String, icon:FontAwesomeIcon)] =
         [
         (title:"changePassword", icon:.lockIcon),
+        (title:"changeLanguage", icon:.globeIcon),
          (title:"logout", icon:.signoutIcon)]
     
     fileprivate let sections: [(title:String, count:Int)] = [
         (title:"userProfile", count: 2),
-        (title:"settings", count: 1)
+        (title:"settings", count: 2)
     ]
     
  
@@ -153,9 +154,9 @@ extension SettingsViewController: UITableViewDelegate {
             performSegue(withIdentifier: Constants.segueID.setting.editProfile, sender: nil)
         case 1: // change password
             performSegue(withIdentifier: Constants.segueID.setting.changePassword, sender: nil)
-//        case 2:
-//            performSegue(withIdentifier: Constants.segueID.setting.changeLanguage, sender: nil)
-        case 2: // logout
+        case 2:
+            performSegue(withIdentifier: Constants.segueID.setting.changeLanguage, sender: nil)
+        case 3: // logout
             self.confirmationLogout()
         default:
             break
@@ -185,10 +186,7 @@ extension SettingsViewController: UITableViewDelegate {
         return view
     }
     
-//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        return 0.1
-//    }
-//    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30
     }
